@@ -187,8 +187,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="dot-语法总结"><a href="#dot-语法总结" class="headerlink" title="dot 语法总结"></a>dot 语法总结</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p>dot是开源工具包<a href="http://graphviz.org/" target="_blank" rel="noopener">Graphviz</a>上用来画图的一门脚本语言。通过布局引擎解析脚本得到图像，然后可以将图像导出为各种格式以满足需求。主要用于编写脚本来画各种结构示意图和流程图。</p>
-<p>Graphviz的文件后缀名是<code>.gv</code>。每个<code>.gv</code>文件代表一个图，可以通过<code>dot -Tpng example.dot -o example.png</code>命令生成图像，或者使用Graphviz提供的工具gvedit来编辑和运行脚本。</p>
+        <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p>dot是开源工具包<a href="http://graphviz.org/" target="_blank" rel="noopener">Graphviz</a>上用来画图的一门脚本语言。通过布局引擎解析脚本得到图像，然后可以将图像导出为各种格式以满足需求。主要用于编写脚本来画各种结构示意图和流程图。</p>
+<p>Graphviz的文件后缀名是<code>.gv</code>。每个<code>.gv</code>文件代表一个图，可以通过<code>dot -Tpng example.gv -o example.png</code>命令生成图像，或者使用Graphviz提供的工具gvedit来编辑和运行脚本。</p>
 <p>dot脚本的语法特别简单，官方doc只有8页。下面简单介绍下dot脚本的一些语法。</p>
 <h2 id="2-图的声明"><a href="#2-图的声明" class="headerlink" title="2.图的声明"></a>2.图的声明</h2><p>使用<code>digraph graphName</code>可以申明一个图，具体实现代码用一对花括号包裹起来。</p>
 <figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">digraph graph1 &#123;</span><br><span class="line">  <span class="comment">// statement</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
