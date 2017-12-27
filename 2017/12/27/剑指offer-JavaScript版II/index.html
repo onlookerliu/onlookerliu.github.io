@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="onlookerliu.github.io">
-  <title>Archives: 2017/12 | ReCode</title>
+  <title>剑指offer--JavaScript版II | ReCode</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life is beautiful!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ReCode">
-<meta property="og:url" content="onlookerliu.github.io/archives/2017/12/index.html">
+  <meta name="description" content="26.输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。 1234567891011121314151617181920212223242526272829function Convert(pRootOfTree) &amp;#123;    if (!pRootOfTree) &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer--JavaScript版II">
+<meta property="og:url" content="onlookerliu.github.io/2017/12/27/剑指offer-JavaScript版II/index.html">
 <meta property="og:site_name" content="ReCode">
-<meta property="og:description" content="Life is beautiful!">
+<meta property="og:description" content="26.输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。 1234567891011121314151617181920212223242526272829function Convert(pRootOfTree) &amp;#123;    if (!pRootOfTree) &amp;#">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-27T15:54:46.721Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ReCode">
-<meta name="twitter:description" content="Life is beautiful!">
+<meta name="twitter:title" content="剑指offer--JavaScript版II">
+<meta name="twitter:description" content="26.输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。 1234567891011121314151617181920212223242526272829function Convert(pRootOfTree) &amp;#123;    if (!pRootOfTree) &amp;#">
   
     <link rel="alternative" href="/atom.xml" title="ReCode" type="application/atom+xml">
   
@@ -161,130 +162,212 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-剑指offer-JavaScript版II" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/27/剑指offer-JavaScript版III/" class="archive-article-date">
-  	<time datetime="2017-12-27T15:55:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/27/剑指offer-JavaScript版III/">剑指offer--JavaScript版III</a>
+    <h1 class="article-title" itemprop="name">
+      剑指offer--JavaScript版II
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/27/剑指offer-JavaScript版II/" class="archive-article-date">
+        
+        <a href="/2017/12/27/剑指offer-JavaScript版II/" class="archive-article-date">
   	<time datetime="2017-12-27T15:54:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/27/剑指offer-JavaScript版II/">剑指offer--JavaScript版II</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>26.<br>输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Convert</span>(<span class="params">pRootOfTree</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!pRootOfTree) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> lastNode = <span class="literal">null</span>;</span><br><span class="line">    lastNode = ConvertNode(pRootOfTree);</span><br><span class="line">    <span class="keyword">var</span> head = lastNode;</span><br><span class="line">    <span class="keyword">while</span> (head &amp;&amp; head.left) &#123;</span><br><span class="line">        head = head.left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ConvertNode</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!node) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.left) &#123;</span><br><span class="line">            lastNode = ConvertNode(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">        node.left = lastNode;</span><br><span class="line">        <span class="keyword">if</span> (lastNode) &#123;</span><br><span class="line">            lastNode.right = node;</span><br><span class="line">        &#125;</span><br><span class="line">        lastNode = node;</span><br><span class="line">        <span class="keyword">if</span> (node.right) &#123;</span><br><span class="line">            lastNode = ConvertNode(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> lastNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>27.<br>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MoreThanHalfNum_Solution</span>(<span class="params">numbers</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!numbers || numbers.length === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> arr = [];</span><br><span class="line">    <span class="keyword">var</span> len = numbers.length, index;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> index = numbers[i];</span><br><span class="line">        arr[index] !== <span class="literal">undefined</span> ? arr[index]++ : arr[index] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> index = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">var</span> arrLen = arr.length;</span><br><span class="line">    <span class="keyword">var</span> max = -<span class="literal">Infinity</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arrLen; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!arr[i]) <span class="keyword">continue</span>;</span><br><span class="line">        max = arr[i] &gt; max ? (index = i, arr[i]) : max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max &gt; len / <span class="number">2</span> ? index : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>28.<br>输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">GetLeastNumbers_Solution</span>(<span class="params">input, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!input || input.length &lt; k) &#123;</span><br><span class="line">        <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> input.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a - b;</span><br><span class="line">    &#125;).slice(<span class="number">0</span>, k);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>29.<br>HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。你会不会被他忽悠住？(子向量的长度至少是1)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindGreatestSumOfSubArray</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (array.length &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> sum = array[<span class="number">0</span>],</span><br><span class="line">        tempsum = array[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">        tempsum = tempsum &lt; <span class="number">0</span> ? array[i] : tempsum + array[i];</span><br><span class="line">        sum = tempsum &gt; sum ? tempsum : sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>30.<br>求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？为此他特别数了一下1~13中包含1的数字有1、10、11、12、13因此共出现6次,但是对于后面问题他就没辙了。ACMer希望你们帮帮他,并把问题更加普遍化,可以很快的求出任意非负整数区间中1出现的次数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">NumberOf1Between1AndN</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> ones = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> arr = [];</span><br><span class="line">    <span class="keyword">while</span> (n) &#123;</span><br><span class="line">        arr.push(n);</span><br><span class="line">        n--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr.join(<span class="string">''</span>).replace(<span class="regexp">/[^1]+/g</span>, <span class="string">''</span>).length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>31.<br>输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PrintMinNumber</span>(<span class="params">numbers</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!numbers || numbers.length === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">    <span class="keyword">var</span> temp = <span class="string">''</span>;</span><br><span class="line">    ordering(numbers);</span><br><span class="line">    result = result.map(<span class="built_in">Number</span>).reduce(<span class="function"><span class="keyword">function</span>(<span class="params">min, a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> min &lt; a ? min : a;</span><br><span class="line">    &#125;, <span class="literal">Infinity</span>);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ordering</span>(<span class="params">tempArr</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> innerLen = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (tempArr.length === <span class="number">0</span>) &#123;</span><br><span class="line">            result.push(temp);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tempArr.length; i++) &#123;</span><br><span class="line">            innerLen = tempArr[i].toString().length;</span><br><span class="line">            temp += tempArr[i];</span><br><span class="line">            insideArr = tempArr.concat();</span><br><span class="line">            insideArr.splice(i, <span class="number">1</span>);</span><br><span class="line">            ordering(insideArr);</span><br><span class="line">            temp = temp.substring(<span class="number">0</span>, temp.length - innerLen);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>32.<br>把只包含因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">GetUglyNumber</span>(<span class="params">index</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (index === <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> uglyNum = [<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">var</span> factor2 = <span class="number">0</span>, factor3 = <span class="number">0</span>, factor5 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; index; i++) &#123;</span><br><span class="line">        uglyNum[i] = <span class="built_in">Math</span>.min(uglyNum[factor2] * <span class="number">2</span>, uglyNum[factor3] * <span class="number">3</span>, uglyNum[factor5] * <span class="number">5</span>);</span><br><span class="line">        <span class="keyword">if</span> (uglyNum[i] === uglyNum[factor2] * <span class="number">2</span>) factor2++;</span><br><span class="line">        <span class="keyword">if</span> (uglyNum[i] === uglyNum[factor3] * <span class="number">3</span>) factor3++;</span><br><span class="line">        <span class="keyword">if</span> (uglyNum[i] === uglyNum[factor5] * <span class="number">5</span>) factor5++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> uglyNum[index - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>33.<br>在一个字符串(1&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FirstNotRepeatingChar</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!str || !str.length) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> hash = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> tempArr = str.split(<span class="string">''</span>);</span><br><span class="line">    <span class="keyword">var</span> unique = [];</span><br><span class="line">    <span class="keyword">var</span> len = str.length, temp;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        temp = tempArr[i];</span><br><span class="line">        <span class="keyword">if</span> (hash[temp]) &#123;</span><br><span class="line">            hash[temp].push(i);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            hash[temp] = [i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> hash) &#123;</span><br><span class="line">        <span class="keyword">if</span> (hash.hasOwnProperty(key)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[key].length === <span class="number">1</span>) &#123;</span><br><span class="line">                unique.push(hash[key].pop());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min.apply(<span class="literal">null</span>, unique);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>35.<br>输入两个链表，找出它们的第一个公共结点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindFirstCommonNode</span>(<span class="params">pHead1, pHead2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!pHead1 || !pHead2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> len1 = getLength(pHead1);</span><br><span class="line">    <span class="keyword">var</span> len2 = getLength(pHead2);</span><br><span class="line">    <span class="keyword">var</span> lenDiff = len1 - len2;</span><br><span class="line">    <span class="keyword">var</span> curr1 = pHead1;</span><br><span class="line">    <span class="keyword">var</span> curr2 = pHead2;</span><br><span class="line">    <span class="keyword">if</span> (len2 &gt; len1) &#123;</span><br><span class="line">        curr1 = pHead2;</span><br><span class="line">        curr2 = pHead1;</span><br><span class="line">        lenDiff = len2 - len1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lenDiff; ++i)</span><br><span class="line">        curr1 = curr1.next;</span><br><span class="line">    <span class="keyword">while</span> (curr1 &amp;&amp; curr2 &amp;&amp; curr1 != curr2) &#123;</span><br><span class="line">        curr1 = curr1.next;</span><br><span class="line">        curr2 = curr2.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> curr1;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getLength</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> len = <span class="number">0</span>;</span><br><span class="line">        curr = node;</span><br><span class="line">        <span class="keyword">while</span> (curr) &#123;</span><br><span class="line">            len++;</span><br><span class="line">            curr = curr.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>36.<br>统计一个数字在排序数组中出现的次数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">GetNumberofK</span>(<span class="params">data, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> data.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">count, a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a === k ? count+<span class="number">1</span> : count;</span><br><span class="line">    &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>37.<br>输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TreeDepth</span>(<span class="params">pRoot</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!pRoot) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> depth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> currDepth = <span class="number">0</span>;</span><br><span class="line">    dfs(pRoot);</span><br><span class="line">    <span class="keyword">return</span> depth;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!node) &#123;</span><br><span class="line">            depth = depth &gt; currDepth ? depth : currDepth;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        currDepth++;</span><br><span class="line">        dfs(node.left);</span><br><span class="line">        dfs(node.right);</span><br><span class="line">        currDepth--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>38.<br>输入一棵二叉树，判断该二叉树是否是平衡二叉树。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">IsBalanced</span>(<span class="params">pRoot</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!pRoot) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> left = TreeDepth(pRoot.left);</span><br><span class="line">    <span class="keyword">var</span> right = TreeDepth(pRoot.right);</span><br><span class="line">    <span class="keyword">var</span> diff = left - right;</span><br><span class="line">    <span class="keyword">if</span> (diff &gt; <span class="number">1</span> || diff &lt; <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> IsBalanced(pRoot.left) &amp;&amp; IsBalanced(pRoot.right);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">TreeDepth</span>(<span class="params">pRoot</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!pRoot) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> depth = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> currDepth = <span class="number">0</span>;</span><br><span class="line">        dfs(pRoot);</span><br><span class="line">        <span class="keyword">return</span> depth;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!node) &#123;</span><br><span class="line">                depth = depth &gt; currDepth ? depth : currDepth;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            currDepth++;</span><br><span class="line">            dfs(node.left);</span><br><span class="line">            dfs(node.right);</span><br><span class="line">            currDepth--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>39.<br>一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindNumsAppearOnce</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!array || array.length &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">return</span> array.sort().join(<span class="string">','</span>).replace(<span class="regexp">/(\d+),\1/g</span>, <span class="string">""</span>).replace(<span class="regexp">/,+/g</span>, <span class="string">','</span>).replace(<span class="regexp">/^,|,$/</span>,<span class="string">''</span>).split(<span class="string">','</span>).map(<span class="built_in">Number</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>40.<br>小明很喜欢数学,有一天他在做数学作业时,要求计算出9~16的和,他马上就写出了正确答案是100。但是他并不满足于此,他在想究竟有多少种连续的正数序列的和为100(至少包括两个数)。没多久,他就得到另一组连续正数和为100的序列:18,19,20,21,22。现在把问题交给你,你能不能也很快的找出所有和为S的连续正数序列? Good Luck!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindContinuousSequence</span>(<span class="params">sum</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sum &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> small = <span class="number">1</span>, big = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">var</span> mid = (<span class="number">1</span> + sum) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">var</span> curr = small + big;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">    <span class="keyword">while</span> (small &lt; mid) &#123;</span><br><span class="line">        <span class="keyword">if</span> (curr === sum) &#123;</span><br><span class="line">            pushSeq(small, big);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (curr &gt; sum &amp;&amp; small &lt; mid) &#123;</span><br><span class="line">            curr -= small;</span><br><span class="line">            small++;</span><br><span class="line">            <span class="keyword">if</span> (curr === sum) &#123;</span><br><span class="line">                pushSeq(small, big);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        big++;</span><br><span class="line">        curr += big;</span><br><span class="line">    &#125;</span><br><span class="line">    result.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;<span class="keyword">return</span> a[<span class="number">0</span>] - b[<span class="number">0</span>];&#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">pushSeq</span>(<span class="params">small, big</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> temp = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = small; i &lt;= big; i++) &#123;</span><br><span class="line">            temp.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        result.push(temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>41.<br>输入一个递增排序的数组和一个数字S，在数组中查找两个数，是的他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindNumbersWith</span>(<span class="params">array, sum</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!array || !array.length) &#123;</span><br><span class="line">        <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">    <span class="keyword">var</span> product = [];</span><br><span class="line">    <span class="keyword">var</span> head = <span class="number">0</span>, tail = array.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (head &lt; tail) &#123;</span><br><span class="line">        <span class="keyword">var</span> curr = array[head] + array[tail];</span><br><span class="line">        <span class="keyword">if</span> (curr === sum) &#123;</span><br><span class="line">            result.push([array[head], array[tail]]);</span><br><span class="line">            product.push(array[head] * array[tail]);</span><br><span class="line">            tail--;</span><br><span class="line">            head++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (curr &gt; sum) &#123;</span><br><span class="line">            tail--;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            head++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (result.length === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> min = <span class="built_in">Math</span>.min.apply(<span class="literal">null</span>, product);</span><br><span class="line">    <span class="keyword">var</span> index = product.indexOf(min);</span><br><span class="line">    <span class="keyword">return</span> result[index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>42.<br>汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">LeftRotateString</span>(<span class="params">str, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!str) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> len = str.length;</span><br><span class="line">    n = n % len;</span><br><span class="line">    <span class="keyword">var</span> left = str.slice(<span class="number">0</span>, n);</span><br><span class="line">    <span class="keyword">var</span> right = str.slice(n);</span><br><span class="line">    <span class="keyword">return</span> right + left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>43.<br>牛客最近来了一个新员工Fish，每天早晨总是会拿着一本英文杂志，写些句子在本子上。同事Cat对Fish写的内容颇感兴趣，有一天他向Fish借来翻看，但却读不懂它的意思。例如，“student. a am I”。后来才意识到，这家伙原来把句子单词的顺序翻转了，正确的句子应该是“I am a student.”。Cat对一一的翻转这些单词顺序可不在行，你能帮助他么？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ReverseSentence</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.split(<span class="string">' '</span>).reverse().join(<span class="string">' '</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>44.<br>LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2个大王,2个小王(一副牌原本是54张^_^)…他随机从中抽出了5张牌,想测测自己的手气,看看能不能抽到顺子,如果抽到的话,他决定去买体育彩票,嘿嘿！！“红心A,黑桃3,小王,大王,方片5”,“Oh My God!”不是顺子…..LL不高兴了,他想了想,决定大\小 王可以看成任何数字,并且A看作1,J为11,Q为12,K为13。上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4),“So Lucky!”。LL决定去买体育彩票啦。 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何。为了方便起见,你可以认为大小王是0。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">IsContinuous</span>(<span class="params">numbers</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!numbers || numbers.length &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> len = numbers.length;</span><br><span class="line">    numbers.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;<span class="keyword">return</span> a - b;&#125;);</span><br><span class="line">    <span class="keyword">var</span> zeros = <span class="number">0</span>, gaps = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len &amp;&amp; numbers[i] == <span class="number">0</span>; i++) &#123;</span><br><span class="line">        zeros++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> small = zeros, big = small + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (big &lt; len) &#123;</span><br><span class="line">        <span class="keyword">if</span> (numbers[small] == numbers[big]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        gaps += numbers[big] - numbers[small] - <span class="number">1</span>;</span><br><span class="line">        small = big++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> gaps &lt;= zeros;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>45.<br>每年六一儿童节,牛客都会准备一些小礼物去看望孤儿院的小朋友,今年亦是如此。HF作为牛客的资深元老,自然也准备了一些小游戏。其中,有个游戏是这样的:首先,让小朋友们围成一个大圈。然后,他随机指定一个数m,让编号为0的小朋友开始报数。每次喊到m-1的那个小朋友要出列唱首歌,然后可以在礼品箱中任意的挑选礼物,并且不再回到圈中,从他的下一个小朋友开始,继续0…m-1报数….这样下去….直到剩下最后一个小朋友,可以不用表演,并且拿到牛客名贵的“名侦探柯南”典藏版(名额有限哦!!^_^)。请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">LastRemaining</span>(<span class="params">n, m</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">1</span> || m &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> last = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        last = (last + m) % i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> last;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>46.<br>求1+2+3+…+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sum</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">    plus(n);</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">plus</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">        sum += num;</span><br><span class="line">        num &gt; <span class="number">0</span> &amp;&amp; plus(--num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>47.<br>写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Add</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sum, carry;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        sum = num1 ^ num2;</span><br><span class="line">        carry = (num1 &amp; num2) &lt;&lt; <span class="number">1</span>;</span><br><span class="line">        num1 = sum;</span><br><span class="line">        num2 = carry;</span><br><span class="line">    &#125; <span class="keyword">while</span> (num2 != <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> num1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>48.<br>在一个长度为n的数组里的所有数字都在0到n-1的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是第一个重复的数字2。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">duplicate</span>(<span class="params">numbers, duplication</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!numbers || !numbers.length) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> len = numbers.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> curr = numbers[i];</span><br><span class="line">        <span class="keyword">if</span> (numbers.indexOf(curr) !== i) &#123;</span><br><span class="line">            duplication[<span class="number">0</span>] = curr;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>49.<br>给定一个数组A[0,1,…,n-1],请构建一个数组B[0,1,…,n-1],其中B中的元素B[i]=A[0]A[1]…A[i-1]A[i+1]…A[n-1]。不能使用除法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiply</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!array || !array.length) &#123;</span><br><span class="line">        <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">    <span class="keyword">var</span> len1 = array.length;</span><br><span class="line">    result[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; len1; i++) &#123;</span><br><span class="line">        result[i] = array[i - <span class="number">1</span>] * result[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> temp = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = len1 - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        temp *= array[i + <span class="number">1</span>];</span><br><span class="line">        result[i] *= temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>50.<br>请实现一个函数用来匹配包括’.’和’’的正则表达式。模式中的字符’.’表示任意一个字符，而’’表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串”aaa”与模式”a.a”和”abaca”匹配，但是与”aa.a”和”ab*a”均不匹配</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">match</span>(<span class="params">s, pattern</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s === <span class="string">""</span> &amp;&amp; pattern === <span class="string">""</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!pattern || pattern.length === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'^'</span> + pattern + <span class="string">'$'</span>);</span><br><span class="line">    <span class="keyword">return</span> reg.test(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:onlookerliu.github.io/2017/12/27/剑指offer-JavaScript版II/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/27/剑指offer-JavaScript版I/" class="archive-article-date">
-  	<time datetime="2017-12-27T15:47:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/12/27/剑指offer-JavaScript版III/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          剑指offer--JavaScript版III
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/27/剑指offer-JavaScript版I/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">剑指offer--JavaScript版I</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/27/剑指offer-JavaScript版I/">剑指offer--JavaScript版I</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/25/30-seconds-of-code/" class="archive-article-date">
-  	<time datetime="2017-12-25T15:24:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/25/30-seconds-of-code/">30 seconds of code</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -307,8 +390,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
