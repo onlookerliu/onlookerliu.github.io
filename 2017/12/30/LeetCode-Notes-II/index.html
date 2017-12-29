@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="onlookerliu.github.io">
-  <title>Archives: 2017 | Code@浮生记</title>
+  <title>LeetCode Notes II | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life is beautiful!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Code@浮生记">
-<meta property="og:url" content="onlookerliu.github.io/archives/2017/page/2/index.html">
+  <meta name="description" content="Add BinaryGiven two binary strings, return their sum (also a binary string). For example,a = “11”b = “1”Return “100”. 123456789101112131415161718192021222324252627/** * @param &amp;#123;string&amp;#125; a * @">
+<meta name="keywords" content="javascript, leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Notes II">
+<meta property="og:url" content="onlookerliu.github.io/2017/12/30/LeetCode-Notes-II/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="Life is beautiful!">
+<meta property="og:description" content="Add BinaryGiven two binary strings, return their sum (also a binary string). For example,a = “11”b = “1”Return “100”. 123456789101112131415161718192021222324252627/** * @param &amp;#123;string&amp;#125; a * @">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-29T17:44:41.869Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code@浮生记">
-<meta name="twitter:description" content="Life is beautiful!">
+<meta name="twitter:title" content="LeetCode Notes II">
+<meta name="twitter:description" content="Add BinaryGiven two binary strings, return their sum (also a binary string). For example,a = “11”b = “1”Return “100”. 123456789101112131415161718192021222324252627/** * @param &amp;#123;string&amp;#125; a * @">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -165,177 +167,188 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-Notes-II" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode Notes II
+    </h1>
+  
+
+        
+        <a href="" class="archive-article-date">
+  	<time datetime="2017-12-29T17:39:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-30</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Add-Binary"><a href="#Add-Binary" class="headerlink" title="Add Binary"></a>Add Binary</h3><p>Given two binary strings, return their sum (also a binary string).</p>
+<p>For example,<br>a = “11”<br>b = “1”<br>Return “100”.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; a</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; b</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> addBinary = <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  a = a.split(<span class="string">''</span>).reverse();</span><br><span class="line">  b = b.split(<span class="string">''</span>).reverse();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> c = [];</span><br><span class="line">  <span class="keyword">var</span> add = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">Math</span>.max(a.length, b.length);i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> sum = (a[i] === <span class="literal">undefined</span> ? <span class="number">0</span> : <span class="built_in">Number</span>(a[i])) + (b[i] === <span class="literal">undefined</span> ? <span class="number">0</span>: <span class="built_in">Number</span>(b[i])) + add;</span><br><span class="line">    c[i] = sum &amp; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (sum &gt;= <span class="number">2</span>) </span><br><span class="line">      add = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">      add = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (add)</span><br><span class="line">    c[len] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> c.reverse().join(<span class="string">''</span>).toString();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Add-Digit"><a href="#Add-Digit" class="headerlink" title="Add Digit"></a>Add Digit</h3><p>Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.</p>
+<p><strong>For example:</strong></p>
+<p>Given num = 38, the process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one digit, return it.</p>
+<p><strong>Follow up:</strong><br>Could you do it without any loop/recursion in O(1) runtime?</p>
+<p><strong>Credits:</strong><br>Special thanks to @jianchao.li.fighter for adding this problem and creating all test cases.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; num</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addDigits = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">while</span>(num.toString().length !== <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (num) &#123;</span><br><span class="line">      sum += num % <span class="number">10</span>;</span><br><span class="line">      num = ~~(num / <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    num = sum;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> num;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Add-Strings"><a href="#Add-Strings" class="headerlink" title="Add Strings"></a>Add Strings</h3><p>Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.</p>
+<p>Note:</p>
+<ol>
+<li>The length of both num1 and num2 is &lt; 5100.</li>
+<li>Both num1 and num2 contains only digits 0-9.</li>
+<li>Both num1 and num2 does not contain any leading zero.</li>
+<li>You must not use any built-in BigInteger library or convert the inputs to integer directly.</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; num1</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; num2</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addStrings = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> [i, j] = [num1.length, num2.length];</span><br><span class="line">  <span class="keyword">let</span> ans = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">let</span> add = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  i -= <span class="number">1</span>, j -= <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> ( ; i &gt;= <span class="number">0</span> || j &gt;= <span class="number">0</span>; i--, j--) &#123;</span><br><span class="line">    <span class="keyword">let</span> a = i &gt;= <span class="number">0</span> ? +num1[i] : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> b = j &gt;= <span class="number">0</span> ? +num2[j] : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> sum = a + b + add;</span><br><span class="line">    ans = sum % <span class="number">10</span> + ans;</span><br><span class="line">    add = ~~(sum / <span class="number">10</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  add &amp;&amp; (ans = add + ans);</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oxyywddt8.bkt.clouddn.com/qrcode/zhifubao.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="../.." class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/27/剑指offer-JavaScript版II/" class="archive-article-date">
-  	<time datetime="2017-12-27T15:54:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/27/剑指offer-JavaScript版II/">剑指offer--JavaScript版II</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript, leetcode</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:onlookerliu.github.io/2017/12/30/LeetCode-Notes-II/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/27/剑指offer-JavaScript版I/" class="archive-article-date">
-  	<time datetime="2017-12-27T15:47:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="../../29/A-simple-Metropolis-Hastings-MCMC-in-R/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">A simple Metropolis-Hastings MCMC in R</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/27/剑指offer-JavaScript版I/">剑指offer--JavaScript版I</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/25/30-seconds-of-code/" class="archive-article-date">
-  	<time datetime="2017-12-25T15:24:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/25/30-seconds-of-code/">30 seconds of code</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/11/29/julia基于GLM包的线性回归/" class="archive-article-date">
-  	<time datetime="2017-11-29T13:49:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/11/29/julia基于GLM包的线性回归/">julia基于GLM包的线性回归</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../../">&laquo; Prev</a><a class="page-number" href="../../">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -359,8 +372,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
