@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>onlookerliu.github.io/2018/02/23/Linear-Regression-in-JS/</loc>
+    
+    <lastmod>2018-02-28T16:52:10.408Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/26/Simple-Perceptron-using-Processing/</loc>
+    
+    <lastmod>2018-02-28T16:51:47.700Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>onlookerliu.github.io/2017/11/14/Assignment-2-of-Advanced-Computational-Method/</loc>
     
     <lastmod>2018-02-28T16:02:48.000Z</lastmod>
@@ -16,14 +30,7 @@
   </url>
   
   <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
-    
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
     
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     
@@ -37,7 +44,14 @@
   </url>
   
   <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
+    
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
     
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     
@@ -54,13 +68,6 @@
     <loc>onlookerliu.github.io/2017/12/29/DataFrame-Demo/</loc>
     
     <lastmod>2018-02-28T15:55:12.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/28/Linear-Regression-in-JS/</loc>
-    
-    <lastmod>2018-02-28T15:15:50.509Z</lastmod>
     
   </url>
   

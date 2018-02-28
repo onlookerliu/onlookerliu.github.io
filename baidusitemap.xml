@@ -4,6 +4,48 @@
 
     
   <url>
+    <loc>onlookerliu.github.io/2018/02/23/Linear-Regression-in-JS/</loc>
+    <lastmod>2018-02-28T16:52:10.408Z</lastmod>
+    <data>
+        <display>
+        <title>Linear Regression in JS</title>
+        <pubTime>2018-02-23T14:51:57.000Z</pubTime>
+        
+        <tag>statistics</tag>
+         
+        <tag>javascript</tag>
+         
+        <tag>p5js</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2018/02/26/Simple-Perceptron-using-Processing/</loc>
+    <lastmod>2018-02-28T16:51:47.700Z</lastmod>
+    <data>
+        <display>
+        <title>Simple Perceptron using Processing</title>
+        <pubTime>2018-02-25T16:22:03.000Z</pubTime>
+        
+        <tag>machine learning</tag>
+         
+        <tag>processing</tag>
+         
+        <tag>java</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>onlookerliu.github.io/2017/11/14/Assignment-2-of-Advanced-Computational-Method/</loc>
     <lastmod>2018-02-28T16:02:48.000Z</lastmod>
     <data>
@@ -11,9 +53,9 @@
         <title>Assignment 2 of Advanced Computational Method</title>
         <pubTime>2017-11-13T16:01:20.000Z</pubTime>
         
-        <tag>statistics</tag>
-         
         <tag>r</tag>
+         
+        <tag>statistics</tag>
          
         <tag>computational method</tag>
          
@@ -46,35 +88,16 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 4 of Statistics.md</title>
-        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
+        <title>Project 1 of Statistics.md</title>
+        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
         
         <tag>r</tag>
          
-        <tag>statistic</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 2 of Statistics.md</title>
-        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
-        
         <tag>statistics</tag>
-         
-        <tag>r</tag>
          
          
            
@@ -103,16 +126,35 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 1 of Statistics.md</title>
-        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
+        <title>Project 2 of Statistics.md</title>
+        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
         
+        <tag>r</tag>
+         
         <tag>statistics</tag>
          
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 4 of Statistics.md</title>
+        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
+        
         <tag>r</tag>
+         
+        <tag>statistic</tag>
          
          
            
@@ -147,27 +189,6 @@
         <pubTime>2017-12-28T17:37:43.000Z</pubTime>
         
         <tag>julia</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2018/02/28/Linear-Regression-in-JS/</loc>
-    <lastmod>2018-02-28T15:15:50.509Z</lastmod>
-    <data>
-        <display>
-        <title>Linear Regression in JS</title>
-        <pubTime>2018-02-28T14:51:57.000Z</pubTime>
-        
-        <tag>statistics</tag>
-         
-        <tag>javascript</tag>
-         
-        <tag>p5js</tag>
          
          
            
