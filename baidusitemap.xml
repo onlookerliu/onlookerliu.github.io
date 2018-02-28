@@ -5,7 +5,7 @@
     
   <url>
     <loc>onlookerliu.github.io/2018/02/26/Simple-Perceptron-using-Processing/</loc>
-    <lastmod>2018-02-28T16:53:32.428Z</lastmod>
+    <lastmod>2018-02-28T16:53:54.160Z</lastmod>
     <data>
         <display>
         <title>Simple Perceptron using Processing</title>
@@ -74,9 +74,9 @@
         <title>Assignment 1 of Advanced Computational Method</title>
         <pubTime>2017-10-30T15:59:42.000Z</pubTime>
         
-        <tag>statistics</tag>
-         
         <tag>julia</tag>
+         
+        <tag>statistics</tag>
          
         <tag>computationa method</tag>
          
@@ -88,31 +88,12 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 1 of Statistics.md</title>
-        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
-        
-        <tag>r</tag>
-         
-        <tag>statistics</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 3 of Statistics.md</title>
-        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
+        <title>Project 4 of Statistics.md</title>
+        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
         
         <tag>r</tag>
          
@@ -145,12 +126,12 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 4 of Statistics.md</title>
-        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
+        <title>Project 3 of Statistics.md</title>
+        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
         
         <tag>r</tag>
          
@@ -172,6 +153,25 @@
         <pubTime>2017-12-28T17:47:23.000Z</pubTime>
         
         <tag>r</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 1 of Statistics.md</title>
+        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistics</tag>
          
          
            
@@ -358,9 +358,9 @@
         <title>LeetCode Notes 001</title>
         <pubTime>2017-12-27T17:14:13.000Z</pubTime>
         
-        <tag>leetcode</tag>
-         
         <tag>javascript</tag>
+         
+        <tag>leetcode</tag>
          
          
            
@@ -377,9 +377,9 @@
         <title>LeetCode Notes 002</title>
         <pubTime>2017-12-29T17:39:34.000Z</pubTime>
         
-        <tag>leetcode</tag>
-         
         <tag>javascript</tag>
+         
+        <tag>leetcode</tag>
          
          
            
