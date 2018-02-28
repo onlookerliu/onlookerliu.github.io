@@ -167,6 +167,124 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Project-Euler-007" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="2018/02/14/Project-Euler-007/">Project-Euler-007</a>
+    </h1>
+  
+
+        
+        <a href="2018/02/14/Project-Euler-007/" class="archive-article-date">
+  	<time datetime="2018-02-14T14:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13,<br>we can see that the 6th prime is 13.</p>
+<p>What is the 10001st prime number?</p>
+<h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">104743</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eratosthenes</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''Yields the sequence of prime numbers via the Sieve of Eratosthenes.'''</span></span><br><span class="line">    D = &#123;&#125;  <span class="comment"># map composite integers to primes witnessing their compositeness</span></span><br><span class="line">    q = <span class="number">2</span>   <span class="comment"># first integer to test for primality</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> q <span class="keyword">not</span> <span class="keyword">in</span> D:</span><br><span class="line">            <span class="keyword">yield</span> q        <span class="comment"># not marked composite, must be prime</span></span><br><span class="line">            D[q*q] = [q]   <span class="comment"># first multiple of q not already marked</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> D[q]: <span class="comment"># move each witness to its next multiple</span></span><br><span class="line">                D.setdefault(p+q,[]).append(p)</span><br><span class="line">            <span class="keyword">del</span> D[q]       <span class="comment"># no longer need D[q], free memory</span></span><br><span class="line">        q += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nth_prime</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i, prime <span class="keyword">in</span> enumerate(eratosthenes()):</span><br><span class="line">        <span class="keyword">if</span> i == n - <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> prime</span><br><span class="line"></span><br><span class="line">print(nth_prime(<span class="number">10001</span>))</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>JavaScript<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const sieve = &#123;&#125;</span><br><span class="line">let n = 0</span><br><span class="line">for (var q = 2; n &lt; 10001; q++) &#123;</span><br><span class="line">  if (sieve[q]) &#123;</span><br><span class="line">    sieve[q].forEach((p) =&gt; &#123;</span><br><span class="line">      const list = sieve[p + q] || []</span><br><span class="line">      list.push(p)</span><br><span class="line">      sieve[p + q] = list</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    sieve[q * q] = [q]</span><br><span class="line">    n++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(q - 1)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Go<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">iSqrt</span><span class="params">(n <span class="keyword">int64</span>)</span> <span class="title">int64</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> r1, r <span class="keyword">int64</span> = n, n + <span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> r1 &lt; r &#123;</span><br><span class="line">		r, r1 = r1, (r1+n/r1)&gt;&gt;<span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> r</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PrimeSieve</span><span class="params">(n <span class="keyword">int64</span>)</span> []<span class="title">int64</span></span> &#123;</span><br><span class="line">	result := <span class="built_in">make</span>([]<span class="keyword">int64</span>, <span class="number">0</span>, n)</span><br><span class="line">	sieve := <span class="built_in">make</span>([]<span class="keyword">bool</span>, n+<span class="number">1</span>)</span><br><span class="line">	sn := iSqrt(n)</span><br><span class="line">	<span class="keyword">var</span> i, j <span class="keyword">int64</span></span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">2</span>; i &lt;= sn; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> !sieve[i] &#123;</span><br><span class="line">			<span class="keyword">for</span> j = i * i; j &lt;= n; j += i &#123;</span><br><span class="line">				sieve[j] = <span class="literal">true</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">2</span>; i &lt;= n; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> !sieve[i] &#123;</span><br><span class="line">			result = <span class="built_in">append</span>(result, i)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	primes := PrimeSieve(<span class="number">1000000</span>)</span><br><span class="line">	fmt.Println(primes[<span class="number">10000</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'mathn'</span></span><br><span class="line">puts Prime.take(<span class="number">10001</span>).last</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">primes</span> :: [<span class="type">Integer</span>]</span><br><span class="line"><span class="title">primes</span> = <span class="number">2</span> : sieve primes [<span class="number">3</span>,<span class="number">5.</span>.] <span class="keyword">where</span></span><br><span class="line">    sieve (p:ps) xs = h ++ sieve ps [x | x &lt;- t, rem x p /= <span class="number">0</span>]</span><br><span class="line">                      <span class="keyword">where</span> (h, t) = span (&lt; p*p) xs</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> :: <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ primes !! <span class="number">10000</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Clojure<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure</span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> primes [n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">defn</span></span> improve [p nums]</span><br><span class="line">    (<span class="name"><span class="builtin-name">filter</span></span> #(<span class="name"><span class="builtin-name">or</span></span> </span><br><span class="line">               (<span class="name"><span class="builtin-name">not</span></span> (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">rem</span></span> % p) <span class="number">0</span>))</span><br><span class="line">               (<span class="name"><span class="builtin-name">=</span></span> % p))</span><br><span class="line">            nums))</span><br><span class="line">  (<span class="name"><span class="builtin-name">defn</span></span> prime-iter [p nums i]</span><br><span class="line">    (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">&gt;</span></span> (<span class="name"><span class="builtin-name">*</span></span> p p) n)</span><br><span class="line">      nums</span><br><span class="line">      (<span class="name">prime-iter</span> (<span class="name"><span class="builtin-name">nth</span></span> nums (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>)) (<span class="name">improve</span> (<span class="name"><span class="builtin-name">nth</span></span> nums (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>)) nums) (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>))))</span><br><span class="line">  (<span class="name">prime-iter</span> <span class="number">2</span> (<span class="name"><span class="builtin-name">range</span></span> <span class="number">2</span> (<span class="name"><span class="builtin-name">+</span></span> n <span class="number">1</span>)) <span class="number">-1</span>))</span><br><span class="line"></span><br><span class="line">(<span class="name">println</span> (<span class="name"><span class="builtin-name">nth</span></span> (<span class="name">primes</span> <span class="number">1000000</span>) <span class="number">10000</span>))</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Rust<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">eratosthenes</span></span>(limit: <span class="built_in">usize</span>) -&gt; <span class="built_in">Vec</span>&lt;<span class="built_in">usize</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> sieve = <span class="built_in">vec!</span>[<span class="literal">true</span>; limit];</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> p = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="comment">// Eliminate multiples of p.</span></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut</span> i = <span class="number">2</span> * p - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> i &lt; limit &#123;</span><br><span class="line">            sieve[i] = <span class="literal">false</span>;</span><br><span class="line">            i += p;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Find the next prime.</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="literal">Some</span>(n) = (p..limit).find(|&amp;n| sieve[n]) &#123;</span><br><span class="line">            p = n + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sieve</span><br><span class="line">        .iter()</span><br><span class="line">        .enumerate()</span><br><span class="line">        .filter(|&amp;(_, &amp;is_prime)| is_prime)</span><br><span class="line">        .skip(<span class="number">1</span>)</span><br><span class="line">        .map(|(i, _)| i + <span class="number">1</span>)</span><br><span class="line">        .collect()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> primes = eratosthenes(<span class="number">1000000</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, primes[<span class="number">10000</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Mathematica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* Use Mathematica's built-in functions for easy problem-solving. *)</span></span><br><span class="line"><span class="keyword">Prime</span>[<span class="number">10001</span>]</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Java<br>```java<br>public final class p007 implements EulerSolution {</p>
+<pre><code>public static void main(String[] args) {
+    System.out.println(new p007().run());
+}
+
+
+/* 
+ * Computers are fast, so we can implement this solution by testing each number
+ * individually for primeness, instead of using the more efficient sieve of Eratosthenes.
+ */
+public String run() {
+    for (int i = 2, count = 0; ; i++) {
+        if (Library.isPrime(i)) {
+            count++;
+            if (count == 10001)
+                return Integer.toString(i);
+        }
+    }
+}
+</code></pre><p>}</p>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="2018/02/14/Project-Euler-007/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Project-Euler-006" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -832,11 +950,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -1087,92 +1205,9 @@ F-statistic: 748.3 on 1 and 29 DF,  p-value: &lt; 2.2e-16
 
 
   
-    <article id="post-Classifier-Comparison" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2017/12/29/Classifier-Comparison/">Classifier_Comparison</a>
-    </h1>
-  
-
-        
-        <a href="2017/12/29/Classifier-Comparison/" class="archive-article-date">
-  	<time datetime="2017-12-28T17:44:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Classifier-Comparison"><a href="#Classifier-Comparison" class="headerlink" title="Classifier Comparison"></a>Classifier Comparison</h1><p>Adapted from <a href="http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html</a></p>
-<p>A comparison of a several classifiers in scikit-learn on synthetic datasets. The point of this example is to illustrate the nature of decision boundaries of different classifiers. This should be taken with a grain of salt, as the intuition conveyed by these examples does not necessarily carry over to real datasets.</p>
-<p>Particularly in high-dimensional spaces, data can more easily be separated linearly and the simplicity of classifiers such as naive Bayes and linear SVMs might lead to better generalization than is achieved by other classifiers.</p>
-<p>The plots show training points in solid colors and testing points semi-transparent. The lower right shows the classification accuracy on the test set.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python Code source: Gaël Varoquaux</span></span><br><span class="line"><span class="comment">#                     Andreas Müller</span></span><br><span class="line"><span class="comment"># Julia adaptation: Cédric St-Jean</span></span><br><span class="line"><span class="comment"># Modified for documentation by Jaques Grobler</span></span><br><span class="line"><span class="comment"># License: BSD 3 clause</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ScikitLearn</span><br><span class="line"><span class="keyword">using</span> PyCall</span><br><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line"><span class="keyword">using</span> ScikitLearn.CrossValidation: train_test_split</span><br><span class="line"><span class="meta">@pyimport</span> matplotlib.colors as mplc</span><br><span class="line"><span class="meta">@sk_import</span> preprocessing: StandardScaler</span><br><span class="line"><span class="meta">@sk_import</span> datasets: (make_moons, make_circles, make_classification)</span><br><span class="line"><span class="meta">@sk_import</span> neighbors: KNeighborsClassifier</span><br><span class="line"><span class="meta">@sk_import</span> svm: SVC</span><br><span class="line"><span class="meta">@sk_import</span> tree: DecisionTreeClassifier</span><br><span class="line"><span class="meta">@sk_import</span> ensemble: (RandomForestClassifier, AdaBoostClassifier)</span><br><span class="line"><span class="meta">@sk_import</span> naive_bayes: GaussianNB</span><br><span class="line"><span class="meta">@sk_import</span> discriminant_analysis: (LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis)</span><br><span class="line"><span class="keyword">using</span> ScikitLearn.Utils: meshgrid</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">h = <span class="number">.02</span>  <span class="comment"># step size in the mesh</span></span><br><span class="line"></span><br><span class="line">names = [<span class="string">"Nearest Neighbors"</span>, <span class="string">"Linear SVM"</span>, <span class="string">"RBF SVM"</span>, <span class="string">"Decision Tree"</span>,</span><br><span class="line">         <span class="string">"Random Forest"</span>, <span class="string">"AdaBoost"</span>, <span class="string">"Naive Bayes"</span>, <span class="string">"Linear Discriminant Analysis"</span>,</span><br><span class="line">         <span class="string">"Quadratic Discriminant Analysis"</span>]</span><br><span class="line">classifiers = [</span><br><span class="line">    KNeighborsClassifier(<span class="number">3</span>),</span><br><span class="line">    SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">0.025</span>),</span><br><span class="line">    SVC(gamma=<span class="number">2</span>, C=<span class="number">1</span>),</span><br><span class="line">    DecisionTreeClassifier(max_depth=<span class="number">5</span>),</span><br><span class="line">    RandomForestClassifier(max_depth=<span class="number">5</span>, n_estimators=<span class="number">10</span>, max_features=<span class="number">1</span>),</span><br><span class="line">    AdaBoostClassifier(),</span><br><span class="line">    GaussianNB(),</span><br><span class="line">    LinearDiscriminantAnalysis(),</span><br><span class="line">    QuadraticDiscriminantAnalysis()]</span><br><span class="line"></span><br><span class="line">X, y = make_classification(n_features=<span class="number">2</span>, n_redundant=<span class="number">0</span>, n_informative=<span class="number">2</span>,</span><br><span class="line">                           random_state=<span class="number">1</span>, n_clusters_per_class=<span class="number">1</span>)</span><br><span class="line">srand(<span class="number">42</span>)</span><br><span class="line">X += <span class="number">2</span> * rand(size(X)...)</span><br><span class="line">linearly_separable = (X, y)</span><br><span class="line"></span><br><span class="line">datasets = [make_moons(noise=<span class="number">0.3</span>, random_state=<span class="number">0</span>),</span><br><span class="line">            make_circles(noise=<span class="number">0.2</span>, factor=<span class="number">0.5</span>, random_state=<span class="number">1</span>),</span><br><span class="line">            linearly_separable</span><br><span class="line">            ];</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">fig = figure(figsize=(<span class="number">27</span>, <span class="number">9</span>))</span><br><span class="line">i = <span class="number">1</span></span><br><span class="line"><span class="comment"># iterate over datasets</span></span><br><span class="line"><span class="keyword">for</span> ds <span class="keyword">in</span> datasets</span><br><span class="line">    <span class="comment"># preprocess dataset, split into training and test part</span></span><br><span class="line">    X, y = ds</span><br><span class="line">    X = fit_transform!(StandardScaler(), X)</span><br><span class="line">    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.4</span>)</span><br><span class="line"></span><br><span class="line">    x_min, x_max = minimum(X[:, <span class="number">1</span>]) - <span class="number">.5</span>, maximum(X[:, <span class="number">1</span>]) + <span class="number">.5</span></span><br><span class="line">    y_min, y_max = minimum(X[:, <span class="number">2</span>]) - <span class="number">.5</span>, maximum(X[:, <span class="number">2</span>]) + <span class="number">.5</span></span><br><span class="line">    xx, yy = meshgrid(x_min:h:x_max, y_min:h:y_max)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># just plot the dataset first</span></span><br><span class="line">    cm = PyPlot.cm[:RdBu]</span><br><span class="line">    cm_bright = mplc.ListedColormap([<span class="string">"#FF0000"</span>, <span class="string">"#0000FF"</span>])</span><br><span class="line">    ax = subplot(length(datasets), length(classifiers) + <span class="number">1</span>, i)</span><br><span class="line">    <span class="comment"># Plot the training points</span></span><br><span class="line">    ax[:scatter](X_train[:, <span class="number">1</span>], X_train[:, <span class="number">2</span>], c=y_train, cmap=cm_bright)</span><br><span class="line">    <span class="comment"># and testing points</span></span><br><span class="line">    ax[:scatter](X_test[:, <span class="number">1</span>], X_test[:, <span class="number">2</span>], c=y_test, cmap=cm_bright, alpha=<span class="number">0.6</span>)</span><br><span class="line"></span><br><span class="line">    ax[:set_xlim](minimum(xx), maximum(xx))</span><br><span class="line">    ax[:set_ylim](minimum(yy), maximum(yy))</span><br><span class="line">    ax[:set_xticks](())</span><br><span class="line">    ax[:set_yticks](())</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># iterate over classifiers</span></span><br><span class="line">    <span class="keyword">for</span> (name, clf) <span class="keyword">in</span> zip(names, classifiers)</span><br><span class="line">        ax = subplot(length(datasets), length(classifiers) + <span class="number">1</span>, i)</span><br><span class="line">        fit!(clf, X_train, y_train)</span><br><span class="line">        scor = score(clf, X_test, y_test)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Plot the decision boundary. For that, we will assign a color to each</span></span><br><span class="line">        <span class="comment"># point in the mesh [x_min, m_max]x[y_min, y_max].</span></span><br><span class="line">        <span class="keyword">try</span> </span><br><span class="line">            <span class="comment"># Not implemented for some</span></span><br><span class="line">            Z = decision_function(clf, hcat(xx[:], yy[:]))</span><br><span class="line">        <span class="keyword">catch</span></span><br><span class="line">            Z = predict_proba(clf, hcat(xx[:], yy[:]))[:, <span class="number">2</span>]</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Put the result into a color plot</span></span><br><span class="line">        Z = reshape(Z, size(xx)...)</span><br><span class="line">        ax[:contourf](xx, yy, Z, cmap=cm, alpha=<span class="number">.8</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Plot also the training points</span></span><br><span class="line">        ax[:scatter](X_train[:, <span class="number">1</span>], X_train[:, <span class="number">2</span>], c=y_train, cmap=cm_bright)</span><br><span class="line">        <span class="comment"># and testing points</span></span><br><span class="line">        ax[:scatter](X_test[:, <span class="number">1</span>], X_test[:, <span class="number">2</span>], c=y_test, cmap=cm_bright,</span><br><span class="line">                   alpha=<span class="number">0.6</span>)</span><br><span class="line"></span><br><span class="line">        ax[:set_xlim](minimum(xx), maximum(xx))</span><br><span class="line">        ax[:set_ylim](minimum(yy), maximum(yy))</span><br><span class="line">        ax[:set_xticks](())</span><br><span class="line">        ax[:set_yticks](())</span><br><span class="line">        ax[:set_title](name)</span><br><span class="line"></span><br><span class="line">        ax[:text](maximum(xx) - <span class="number">.3</span>, minimum(yy) + <span class="number">.3</span>, <span class="meta">@sprintf</span>(<span class="string">"%.2f"</span>, scor),</span><br><span class="line">                size=<span class="number">15</span>, horizontalalignment=<span class="string">"right"</span>)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fig[:subplots_adjust](left=<span class="number">.02</span>, right=<span class="number">.98</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/leanote/Classifier_Comparison/output_5_0.png" alt="png"></p>
-<pre><code>/Users/kay/.julia/v0.6/Conda/deps/usr/lib/python2.7/site-packages/sklearn/cross_validation.py:41: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-  &quot;This module will be removed in 0.20.&quot;, DeprecationWarning)
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2017/12/29/Classifier-Comparison/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><a class="extend next" rel="next" href="page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><a class="page-number" href="page/3/">3</a><a class="extend next" rel="next" href="page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1294,19 +1329,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">R</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

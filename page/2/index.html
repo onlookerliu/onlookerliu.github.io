@@ -167,6 +167,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Classifier-Comparison" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/12/29/Classifier-Comparison/">Classifier_Comparison</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/12/29/Classifier-Comparison/" class="archive-article-date">
+  	<time datetime="2017-12-28T17:44:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Classifier-Comparison"><a href="#Classifier-Comparison" class="headerlink" title="Classifier Comparison"></a>Classifier Comparison</h1><p>Adapted from <a href="http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html</a></p>
+<p>A comparison of a several classifiers in scikit-learn on synthetic datasets. The point of this example is to illustrate the nature of decision boundaries of different classifiers. This should be taken with a grain of salt, as the intuition conveyed by these examples does not necessarily carry over to real datasets.</p>
+<p>Particularly in high-dimensional spaces, data can more easily be separated linearly and the simplicity of classifiers such as naive Bayes and linear SVMs might lead to better generalization than is achieved by other classifiers.</p>
+<p>The plots show training points in solid colors and testing points semi-transparent. The lower right shows the classification accuracy on the test set.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python Code source: Gaël Varoquaux</span></span><br><span class="line"><span class="comment">#                     Andreas Müller</span></span><br><span class="line"><span class="comment"># Julia adaptation: Cédric St-Jean</span></span><br><span class="line"><span class="comment"># Modified for documentation by Jaques Grobler</span></span><br><span class="line"><span class="comment"># License: BSD 3 clause</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ScikitLearn</span><br><span class="line"><span class="keyword">using</span> PyCall</span><br><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line"><span class="keyword">using</span> ScikitLearn.CrossValidation: train_test_split</span><br><span class="line"><span class="meta">@pyimport</span> matplotlib.colors as mplc</span><br><span class="line"><span class="meta">@sk_import</span> preprocessing: StandardScaler</span><br><span class="line"><span class="meta">@sk_import</span> datasets: (make_moons, make_circles, make_classification)</span><br><span class="line"><span class="meta">@sk_import</span> neighbors: KNeighborsClassifier</span><br><span class="line"><span class="meta">@sk_import</span> svm: SVC</span><br><span class="line"><span class="meta">@sk_import</span> tree: DecisionTreeClassifier</span><br><span class="line"><span class="meta">@sk_import</span> ensemble: (RandomForestClassifier, AdaBoostClassifier)</span><br><span class="line"><span class="meta">@sk_import</span> naive_bayes: GaussianNB</span><br><span class="line"><span class="meta">@sk_import</span> discriminant_analysis: (LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis)</span><br><span class="line"><span class="keyword">using</span> ScikitLearn.Utils: meshgrid</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">h = <span class="number">.02</span>  <span class="comment"># step size in the mesh</span></span><br><span class="line"></span><br><span class="line">names = [<span class="string">"Nearest Neighbors"</span>, <span class="string">"Linear SVM"</span>, <span class="string">"RBF SVM"</span>, <span class="string">"Decision Tree"</span>,</span><br><span class="line">         <span class="string">"Random Forest"</span>, <span class="string">"AdaBoost"</span>, <span class="string">"Naive Bayes"</span>, <span class="string">"Linear Discriminant Analysis"</span>,</span><br><span class="line">         <span class="string">"Quadratic Discriminant Analysis"</span>]</span><br><span class="line">classifiers = [</span><br><span class="line">    KNeighborsClassifier(<span class="number">3</span>),</span><br><span class="line">    SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">0.025</span>),</span><br><span class="line">    SVC(gamma=<span class="number">2</span>, C=<span class="number">1</span>),</span><br><span class="line">    DecisionTreeClassifier(max_depth=<span class="number">5</span>),</span><br><span class="line">    RandomForestClassifier(max_depth=<span class="number">5</span>, n_estimators=<span class="number">10</span>, max_features=<span class="number">1</span>),</span><br><span class="line">    AdaBoostClassifier(),</span><br><span class="line">    GaussianNB(),</span><br><span class="line">    LinearDiscriminantAnalysis(),</span><br><span class="line">    QuadraticDiscriminantAnalysis()]</span><br><span class="line"></span><br><span class="line">X, y = make_classification(n_features=<span class="number">2</span>, n_redundant=<span class="number">0</span>, n_informative=<span class="number">2</span>,</span><br><span class="line">                           random_state=<span class="number">1</span>, n_clusters_per_class=<span class="number">1</span>)</span><br><span class="line">srand(<span class="number">42</span>)</span><br><span class="line">X += <span class="number">2</span> * rand(size(X)...)</span><br><span class="line">linearly_separable = (X, y)</span><br><span class="line"></span><br><span class="line">datasets = [make_moons(noise=<span class="number">0.3</span>, random_state=<span class="number">0</span>),</span><br><span class="line">            make_circles(noise=<span class="number">0.2</span>, factor=<span class="number">0.5</span>, random_state=<span class="number">1</span>),</span><br><span class="line">            linearly_separable</span><br><span class="line">            ];</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">fig = figure(figsize=(<span class="number">27</span>, <span class="number">9</span>))</span><br><span class="line">i = <span class="number">1</span></span><br><span class="line"><span class="comment"># iterate over datasets</span></span><br><span class="line"><span class="keyword">for</span> ds <span class="keyword">in</span> datasets</span><br><span class="line">    <span class="comment"># preprocess dataset, split into training and test part</span></span><br><span class="line">    X, y = ds</span><br><span class="line">    X = fit_transform!(StandardScaler(), X)</span><br><span class="line">    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.4</span>)</span><br><span class="line"></span><br><span class="line">    x_min, x_max = minimum(X[:, <span class="number">1</span>]) - <span class="number">.5</span>, maximum(X[:, <span class="number">1</span>]) + <span class="number">.5</span></span><br><span class="line">    y_min, y_max = minimum(X[:, <span class="number">2</span>]) - <span class="number">.5</span>, maximum(X[:, <span class="number">2</span>]) + <span class="number">.5</span></span><br><span class="line">    xx, yy = meshgrid(x_min:h:x_max, y_min:h:y_max)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># just plot the dataset first</span></span><br><span class="line">    cm = PyPlot.cm[:RdBu]</span><br><span class="line">    cm_bright = mplc.ListedColormap([<span class="string">"#FF0000"</span>, <span class="string">"#0000FF"</span>])</span><br><span class="line">    ax = subplot(length(datasets), length(classifiers) + <span class="number">1</span>, i)</span><br><span class="line">    <span class="comment"># Plot the training points</span></span><br><span class="line">    ax[:scatter](X_train[:, <span class="number">1</span>], X_train[:, <span class="number">2</span>], c=y_train, cmap=cm_bright)</span><br><span class="line">    <span class="comment"># and testing points</span></span><br><span class="line">    ax[:scatter](X_test[:, <span class="number">1</span>], X_test[:, <span class="number">2</span>], c=y_test, cmap=cm_bright, alpha=<span class="number">0.6</span>)</span><br><span class="line"></span><br><span class="line">    ax[:set_xlim](minimum(xx), maximum(xx))</span><br><span class="line">    ax[:set_ylim](minimum(yy), maximum(yy))</span><br><span class="line">    ax[:set_xticks](())</span><br><span class="line">    ax[:set_yticks](())</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># iterate over classifiers</span></span><br><span class="line">    <span class="keyword">for</span> (name, clf) <span class="keyword">in</span> zip(names, classifiers)</span><br><span class="line">        ax = subplot(length(datasets), length(classifiers) + <span class="number">1</span>, i)</span><br><span class="line">        fit!(clf, X_train, y_train)</span><br><span class="line">        scor = score(clf, X_test, y_test)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Plot the decision boundary. For that, we will assign a color to each</span></span><br><span class="line">        <span class="comment"># point in the mesh [x_min, m_max]x[y_min, y_max].</span></span><br><span class="line">        <span class="keyword">try</span> </span><br><span class="line">            <span class="comment"># Not implemented for some</span></span><br><span class="line">            Z = decision_function(clf, hcat(xx[:], yy[:]))</span><br><span class="line">        <span class="keyword">catch</span></span><br><span class="line">            Z = predict_proba(clf, hcat(xx[:], yy[:]))[:, <span class="number">2</span>]</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Put the result into a color plot</span></span><br><span class="line">        Z = reshape(Z, size(xx)...)</span><br><span class="line">        ax[:contourf](xx, yy, Z, cmap=cm, alpha=<span class="number">.8</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Plot also the training points</span></span><br><span class="line">        ax[:scatter](X_train[:, <span class="number">1</span>], X_train[:, <span class="number">2</span>], c=y_train, cmap=cm_bright)</span><br><span class="line">        <span class="comment"># and testing points</span></span><br><span class="line">        ax[:scatter](X_test[:, <span class="number">1</span>], X_test[:, <span class="number">2</span>], c=y_test, cmap=cm_bright,</span><br><span class="line">                   alpha=<span class="number">0.6</span>)</span><br><span class="line"></span><br><span class="line">        ax[:set_xlim](minimum(xx), maximum(xx))</span><br><span class="line">        ax[:set_ylim](minimum(yy), maximum(yy))</span><br><span class="line">        ax[:set_xticks](())</span><br><span class="line">        ax[:set_yticks](())</span><br><span class="line">        ax[:set_title](name)</span><br><span class="line"></span><br><span class="line">        ax[:text](maximum(xx) - <span class="number">.3</span>, minimum(yy) + <span class="number">.3</span>, <span class="meta">@sprintf</span>(<span class="string">"%.2f"</span>, scor),</span><br><span class="line">                size=<span class="number">15</span>, horizontalalignment=<span class="string">"right"</span>)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fig[:subplots_adjust](left=<span class="number">.02</span>, right=<span class="number">.98</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/leanote/Classifier_Comparison/output_5_0.png" alt="png"></p>
+<pre><code>/Users/kay/.julia/v0.6/Conda/deps/usr/lib/python2.7/site-packages/sklearn/cross_validation.py:41: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  &quot;This module will be removed in 0.20.&quot;, DeprecationWarning)
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/12/29/Classifier-Comparison/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Cross-Validated-Predictions" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -918,11 +1001,11 @@ accuracy: 0.96
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -2125,176 +2208,9 @@ accuracy: 0.96
 
 
   
-    <article id="post-julia基于GLM包的线性回归" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2017/11/29/julia基于GLM包的线性回归/">julia基于GLM包的线性回归</a>
-    </h1>
-  
-
-        
-        <a href="../../2017/11/29/julia基于GLM包的线性回归/" class="archive-article-date">
-  	<time datetime="2017-11-29T13:49:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文利用GLM包进行简单线性回归分析，同时对模型检验以及置信区间作图。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> GLM,DataFrames</span><br></pre></td></tr></table></figure>
-<p>先随机生成一组数据用于回归分析。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置截距</span></span><br><span class="line">α = <span class="number">100</span></span><br><span class="line"><span class="comment"># 设置系数</span></span><br><span class="line">β = <span class="number">5</span></span><br><span class="line"><span class="comment"># 设置随机数个数</span></span><br><span class="line">n = <span class="number">50</span></span><br><span class="line"><span class="comment"># 设置误差项</span></span><br><span class="line">ε = rand(Normal(),n) * <span class="number">11</span></span><br><span class="line"><span class="comment"># 生成数据</span></span><br><span class="line">x = randn(n)*<span class="number">3</span></span><br><span class="line">y = α + β * x + ε</span><br><span class="line">dataForRegression = DataFrame(x = x, y = y)</span><br></pre></td></tr></table></figure>
-<table class="data-frame"><thead><tr><th></th><th>x</th><th>y</th></tr></thead><tbody><tr><th>1</th><td>-0.2945844765867794</td><td>95.47303779965895</td></tr><tr><th>2</th><td>-1.3440842917796316</td><td>100.32164951469537</td></tr><tr><th>3</th><td>1.3037018863265355</td><td>109.57629236830104</td></tr><tr><th>4</th><td>4.012507916775679</td><td>106.46933242509654</td></tr><tr><th>5</th><td>-1.7321051747524616</td><td>89.55844065579969</td></tr><tr><th>6</th><td>-1.4253325394154235</td><td>92.72629790575935</td></tr><tr><th>7</th><td>-0.9042631229720477</td><td>87.93522916305417</td></tr><tr><th>8</th><td>3.4865202058421714</td><td>127.92951823278281</td></tr><tr><th>9</th><td>-2.134433785764415</td><td>94.20802706899649</td></tr><tr><th>10</th><td>3.322020816866826</td><td>118.04216195389577</td></tr><tr><th>11</th><td>2.203086430462482</td><td>105.55320230669415</td></tr><tr><th>12</th><td>-5.281962503754427</td><td>82.8888784146054</td></tr><tr><th>13</th><td>2.001897730730764</td><td>108.02467262087006</td></tr><tr><th>14</th><td>-2.7543838829327565</td><td>88.76348948674855</td></tr><tr><th>15</th><td>6.101614682211077</td><td>128.6239736717972</td></tr><tr><th>16</th><td>0.6888033886810481</td><td>111.17457991815601</td></tr><tr><th>17</th><td>0.7010819245192449</td><td>107.39681268065465</td></tr><tr><th>18</th><td>3.1116548996809783</td><td>113.4549225848041</td></tr><tr><th>19</th><td>-1.8511960189357837</td><td>83.79388935398916</td></tr><tr><th>20</th><td>-0.962664244723129</td><td>91.41543924802386</td></tr><tr><th>21</th><td>0.5608348467513868</td><td>90.8605217368299</td></tr><tr><th>22</th><td>2.1522594774515786</td><td>93.8105103626811</td></tr><tr><th>23</th><td>-0.31022032825520746</td><td>101.53069848453823</td></tr><tr><th>24</th><td>1.6256993827235733</td><td>104.12765249398367</td></tr><tr><th>25</th><td>3.3214081526457813</td><td>118.46644563889394</td></tr><tr><th>26</th><td>0.43501963025212675</td><td>95.810320259296</td></tr><tr><th>27</th><td>2.59876092609342</td><td>121.9741328977443</td></tr><tr><th>28</th><td>-1.0290269848902651</td><td>113.72423797098067</td></tr><tr><th>29</th><td>-0.21404769863190354</td><td>92.43405156194733</td></tr><tr><th>30</th><td>3.5537714568100016</td><td>99.06513391626848</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td></tr></tbody></table>
-
-
-
-<p>使用<code>lm</code>函数进行线性回归分析：</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mod = lm(<span class="meta">@formula</span>(y ~ x), dataForRegression)</span><br></pre></td></tr></table></figure>
-<pre><code>DataFrames.DataFrameRegressionModel{GLM.LinearModel{GLM.LmResp{Array{Float64,1}},GLM.DensePredChol{Float64,Base.LinAlg.Cholesky{Float64,Array{Float64,2}}}},Array{Float64,2}}
-
-Formula: y ~ 1 + x
-
-Coefficients:
-             Estimate Std.Error t value Pr(&gt;|t|)
-(Intercept)   99.8365   1.42361 70.1292   &lt;1e-49
-x             5.19724  0.457037 11.3716   &lt;1e-14
-</code></pre><p>另外一种等价的写法是：</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mod = fit(LinearModel, <span class="meta">@formula</span>(y ~ x), dataForRegression)</span><br></pre></td></tr></table></figure>
-<pre><code>DataFrames.DataFrameRegressionModel{GLM.LinearModel{GLM.LmResp{Array{Float64,1}},GLM.DensePredChol{Float64,Base.LinAlg.Cholesky{Float64,Array{Float64,2}}}},Array{Float64,2}}
-
-Formula: y ~ 1 + x
-
-Coefficients:
-             Estimate Std.Error t value Pr(&gt;|t|)
-(Intercept)   99.8365   1.42361 70.1292   &lt;1e-49
-x             5.19724  0.457037 11.3716   &lt;1e-14
-</code></pre><p>故知回归系数为<code>5.19724</code>，截距为<code>99.8365</code>，所以最优拟合直线为 $y = 99.8365 + 5.19724x$。同时给出了标准差、t检验和p值等结果。</p>
-<p>接下来对假设回归系数是 $0$ 进行FF检验。</p>
-<p>原假设 $H_0: \beta = 0$，备选假设 $H_1: \beta\neq 0$</p>
-<p>构造回归系数为 $0$ 的模型：</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nullmod = lm(<span class="meta">@formula</span>(y ~ <span class="number">1</span>), dataForRegression)</span><br></pre></td></tr></table></figure>
-<pre><code>DataFrames.DataFrameRegressionModel{GLM.LinearModel{GLM.LmResp{Array{Float64,1}},GLM.DensePredChol{Float64,Base.LinAlg.Cholesky{Float64,Array{Float64,2}}}},Array{Float64,2}}
-
-Formula: y ~ +1
-
-Coefficients:
-             Estimate Std.Error t value Pr(&gt;|t|)
-(Intercept)   104.526   2.59199 40.3264   &lt;1e-38
-</code></pre><p>假设回归系数为 $0$，则截距为 $y$ 的平均数。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isapprox(coef(nullmod)[<span class="number">1</span>], mean(dataForRegression[:y]))</span><br></pre></td></tr></table></figure>
-<pre><code>true
-</code></pre><p>GLM的<code>ftest</code>函数提供了回归模型的FF检验。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftest(mod.model, nullmod.model)</span><br></pre></td></tr></table></figure>
-<pre><code>        Res. DOF DOF ΔDOF        SSR        ΔSSR      R²    ΔR²       F*  p(&gt;F)
-Model 1       48   3       4455.8890              0.7293
-Model 2       49   2   -1 16460.1689 -12004.2799 -0.0000 0.7293 129.3132 &lt;1e-14
-</code></pre><p>在此例中，$p&lt;0.05$，差异显著，拒绝 $\beta = 0$ 的假设，回归系数显著不为0，说明了回归方程有较高的有效性。而 $R^2=0.7293$ 也说明了随机变量 $x$ 与 $y$ 之间有相对高的关联程度。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> RCall</span><br><span class="line"><span class="string">R"summary(lm(<span class="subst">$(dataForRegression[:x])</span> ~ <span class="subst">$(dataForRegression[:y])</span>))"</span></span><br></pre></td></tr></table></figure>
-<pre><code>WARNING: Method definition ==(Base.Nullable{S}, Base.Nullable{T}) in module Base at nullable.jl:238 overwritten in module NullableArrays at /Users/kay/.julia/v0.6/NullableArrays/src/operators.jl:99.
-
-
-
-
-
-RCall.RObject{RCall.VecSxp}
-
-Call:
-lm(formula = `#JL`$`(dataForRegression[:x])` ~ `#JL`$`(dataForRegression[:y])`)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--3.2220 -0.9915 -0.1898  0.7734  3.6579
-
-Coefficients:
-                                 Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)                     -13.76511    1.30911  -10.52 4.77e-14 ***
-`#JL`$`(dataForRegression[:y])`   0.14032    0.01234   11.37 3.19e-15 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 1.583 on 48 degrees of freedom
-Multiple R-squared:  0.7293,    Adjusted R-squared:  0.7237
-F-statistic: 129.3 on 1 and 48 DF,  p-value: 3.195e-15
-</code></pre><p>以上是R的输出结果，除了小数点精度外，结果完全相同。</p>
-<p>下面对回归结果做可视化。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本数据作图</span></span><br><span class="line"><span class="keyword">using</span> Gadfly</span><br><span class="line">plot(layer(dataForRegression,</span><br><span class="line">        x = :x,</span><br><span class="line">        y = :y,</span><br><span class="line">        Geom.point,),</span><br><span class="line">    layer(dataForRegression,</span><br><span class="line">        x = :x,</span><br><span class="line">        y = :y,</span><br><span class="line">        Geom.smooth(method = :lm),</span><br><span class="line">        color = [<span class="string">colorant"purple"</span>])</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_17_0.svg"><br></div>
-
-<p>函数<code>predict</code>返回的是回归值。残差定义为回归值与观测值之差。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 残差点图</span></span><br><span class="line">resid = dataForRegression[:y] - predict(mod)</span><br><span class="line">plot(x = predict(mod),</span><br><span class="line">    y = resid,</span><br><span class="line">    Geom.point,</span><br><span class="line">    Guide.xlabel(<span class="string">"predict(mod)"</span>),</span><br><span class="line">    Guide.ylabel(<span class="string">"resid"</span>))</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_19_0.svg"><br></div>
-
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 残差线段图</span></span><br><span class="line">plot(dataForRegression, x = <span class="string">"x"</span>,</span><br><span class="line">    y = <span class="string">"y"</span>,</span><br><span class="line">    xend = <span class="string">"x"</span>,</span><br><span class="line">    yend = predict(mod),</span><br><span class="line">    Geom.segment)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_20_0.svg"><br></div>
-
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过Q-Q图的线性程度来检验残差的正态性。</span></span><br><span class="line">plot(x = Normal(), y = resid, Stat.qq, Geom.point,)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_21_0.svg"><br></div>
-
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制置信区间</span></span><br><span class="line">mod_predict_confidence = predict(mod,</span><br><span class="line">    hcat(ones(nrow(dataForRegression)), collect(dataForRegression[:,<span class="number">1</span>])),</span><br><span class="line">    :confint)</span><br><span class="line"></span><br><span class="line">plot(layer(dataForRegression,</span><br><span class="line">        x = <span class="string">"x"</span>,</span><br><span class="line">        y = <span class="string">"y"</span>,</span><br><span class="line">        Geom.point,</span><br><span class="line">        intercept = [coef(mod)[<span class="number">1</span>]],</span><br><span class="line">        slope = [coef(mod)[<span class="number">2</span>]],</span><br><span class="line">        Geom.abline),</span><br><span class="line">    layer(x = dataForRegression[:x],</span><br><span class="line">        y = mod_predict_confidence[:,<span class="number">2</span>],</span><br><span class="line">        Geom.point, Theme(default_color = <span class="string">"purple"</span>)),</span><br><span class="line">    layer(x = dataForRegression[:x],</span><br><span class="line">        y = mod_predict_confidence[:,<span class="number">3</span>],</span><br><span class="line">        Geom.point, Theme(default_color = <span class="string">"purple"</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_22_0.svg"><br></div>
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2017/11/29/julia基于GLM包的线性回归/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../../index.html">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="../../index.html">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="page-number current">2</span><a class="page-number" href="../3/">3</a><a class="extend next" rel="next" href="../3/">Next &raquo;</a>
     </nav>
   
 
@@ -2416,19 +2332,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">R</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
