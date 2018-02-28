@@ -4,7 +4,24 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics-md/</loc>
+    <loc>onlookerliu.github.io/2017/12/29/DataFrame-Demo/</loc>
+    <lastmod>2018-02-28T15:46:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>DataFrame_Demo</title>
+        <pubTime>2017-12-28T17:37:43.000Z</pubTime>
+        
+        <tag>julia</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
     <lastmod>2018-02-28T15:42:13.000Z</lastmod>
     <data>
         <display>
@@ -23,7 +40,7 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics-md/</loc>
+    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
     <lastmod>2018-02-28T15:40:35.844Z</lastmod>
     <data>
         <display>
@@ -42,7 +59,7 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics-md/</loc>
+    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
     <lastmod>2018-02-28T15:39:41.391Z</lastmod>
     <data>
         <display>
@@ -61,7 +78,7 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics-md/</loc>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
     <lastmod>2018-02-28T15:38:23.483Z</lastmod>
     <data>
         <display>
@@ -261,9 +278,9 @@
         <title>LeetCode Notes 001</title>
         <pubTime>2017-12-27T17:14:13.000Z</pubTime>
         
-        <tag>javascript</tag>
-         
         <tag>leetcode</tag>
+         
+        <tag>javascript</tag>
          
          
            
@@ -280,26 +297,9 @@
         <title>LeetCode Notes 002</title>
         <pubTime>2017-12-29T17:39:34.000Z</pubTime>
         
-        <tag>javascript</tag>
-         
         <tag>leetcode</tag>
          
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2017/12/29/DataFrame-Demo/</loc>
-    <lastmod>2017-12-28T17:50:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>DataFrame_Demo</title>
-        <pubTime>2017-12-28T17:37:43.000Z</pubTime>
-        
-        <tag>julia</tag>
+        <tag>javascript</tag>
          
          
            

@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="onlookerliu.github.io">
-  <title>Tag: javascript | Code@浮生记</title>
+  <title>Project 4 of Statistics.md | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life is beautiful!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Code@浮生记">
-<meta property="og:url" content="onlookerliu.github.io/tags/javascript/page/3/index.html">
+  <meta name="description" content="Homework 61. Prove that $\hat \sigma^2 = \dfrac{SS_E}{(a-1)(b-1)}$ is the unbiased estimation of $\sigma^2$  What we learned is that $$\begin{align}SST &amp;amp;= \sum{i=1}^a \sum{j=1}^b (y{ij} - \bar y)^">
+<meta name="keywords" content="R,statistic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project 4 of Statistics.md">
+<meta property="og:url" content="onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="Life is beautiful!">
+<meta property="og:description" content="Homework 61. Prove that $\hat \sigma^2 = \dfrac{SS_E}{(a-1)(b-1)}$ is the unbiased estimation of $\sigma^2$  What we learned is that $$\begin{align}SST &amp;amp;= \sum{i=1}^a \sum{j=1}^b (y{ij} - \bar y)^">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistics/project4/one-way.svg">
+<meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistics/project4/one-way2.svg">
+<meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistics/project4/two-way.svg">
+<meta property="og:updated_time" content="2018-02-28T15:42:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code@浮生记">
-<meta name="twitter:description" content="Life is beautiful!">
+<meta name="twitter:title" content="Project 4 of Statistics.md">
+<meta name="twitter:description" content="Homework 61. Prove that $\hat \sigma^2 = \dfrac{SS_E}{(a-1)(b-1)}$ is the unbiased estimation of $\sigma^2$  What we learned is that $$\begin{align}SST &amp;amp;= \sum{i=1}^a \sum{j=1}^b (y{ij} - \bar y)^">
+<meta name="twitter:image" content="http://oye4atjxc.bkt.clouddn.com/statistics/project4/one-way.svg">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -165,63 +171,299 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Project-4-of-Statistics" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="../../../../archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/25/30-seconds-of-code/" class="archive-article-date">
-  	<time datetime="2017-12-25T15:24:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/25/30-seconds-of-code/">30 seconds of code</a>
+    <h1 class="article-title" itemprop="name">
+      Project 4 of Statistics.md
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="" class="archive-article-date">
+  	<time datetime="2017-12-15T09:40:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Homework-6"><a href="#Homework-6" class="headerlink" title="Homework 6"></a>Homework 6</h2><h3 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h3><blockquote>
+<p>Prove that $\hat \sigma^2 = \dfrac{SS_E}{(a-1)(b-1)}$ is the unbiased estimation of $\sigma^2$</p>
+</blockquote>
+<p>What we learned is that</p>
+<p>$$<br>\begin{align<em>}<br>SS<em>T &amp;= \sum</em>{i=1}^a \sum<em>{j=1}^b (y</em>{ij} - \bar y)^2 \<br>&amp;= \sum<em>{i=1}^a \sum</em>{j=1}^b (y<em>{ij} - \bar y</em>{i\cdot} - \bar y<em>{\cdot j} + \bar y + \bar y</em>{i\cdot} - \bar y + \bar y<em>{j\cdot} - \bar y)^2 \<br>&amp;= \underbrace{\sum</em>{i=1}^a \sum<em>{j=1}^b (y</em>{ij} - \bar y<em>{i\cdot} - \bar y</em>{\cdot j} + \bar y)^2}_{SS<em>E} + \underbrace{\sum</em>{i=1}^a b(\bar y<em>{i\cdot} - \bar y)^2}</em>{SS<em>A} + \underbrace{\sum</em>{j=1}^b a(\bar y<em>{\cdot j} - \bar y)^2}</em>{SS_B} \<br>\end{align</em>}<br>$$</p>
+<p>For clarity, we give the corresponding matrix form:</p>
+<p>$$<br>\begin{align<em>}<br>SS<em>T &amp;= y’(I</em>{ab} - \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)y \<br>&amp;= y’\Big( (I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) + (A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) + (B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) \Big)y \<br>&amp;= \underbrace{y’(I</em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)y}_{SS<em>E} + \underbrace{ y’(A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’)y }</em>{SS<em>A} + \underbrace{ (B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) }</em>{SS_B}<br>\end{align</em>}<br>$$</p>
+<p>where</p>
+<p>$$<br>\begin{align<em>}<br>&amp;A = \underbrace{\frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’ \oplus \cdots \oplus \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}<em>b’}</em>{a \text{ items}} = (I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) \<br>&amp;B = \underbrace{\frac{1}{b}\boldsymbol{1}_a\boldsymbol{1}_a’ \oplus \cdots \oplus \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}<em>a’}</em>{b \text{ items}} = (I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’)<br>\end{align</em>}<br>$$</p>
+<p>By property of tensor product, we declare that<br>$A$ and $B$ are symmetric and idempotent.</p>
+<p>$$<br>\begin{align<em>}<br>A^2 &amp;= (I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) \cdot (I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) = (I_a\cdot I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’ \cdot \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) \<br>&amp;= I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’ = A \<br>B^2 &amp;= (I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’) \cdot (I_a \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’) = (I_b\cdot I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’ \cdot \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’) \<br>&amp;= I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’ = B \<br>\end{align</em>}<br>$$</p>
+<p>Hence, we claim that $I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’$, $A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’$ and $B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’$ are symmetric and idempotent, with their rank equal to trace:</p>
+<p>$$<br>\begin{align<em>}<br>&amp;\mathrm{rank}(I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) = (a-1)(b-1) \<br>&amp;\mathrm{rank}(A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) = a-1 \<br>&amp;\mathrm{rank}(B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’) = b-1<br>\end{align</em>}<br>$$</p>
+<p>Thus, under the normal hypothesis $Y \sim N(0, \sigma^2 I)$, we have</p>
+<p>$$<br>\begin{align<em>}<br>&amp;\frac{Y’(I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’)Y}{\sigma^2} \sim \chi^2\Big((a-1)(b-1)\Big) \<br>&amp;\frac{Y’(A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’)Y}{\sigma^2} \sim \chi^2(a-1) \quad \frac{Y’(B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’)Y}{\sigma^2} \sim \chi^2(b-1)<br>\end{align</em>}<br>$$</p>
+<p>Now, it is sufficient to say $\dfrac{SS_E}{(a-1)(b-1)}$ is the unbiased estimation of $\sigma^2$.</p>
+<h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3><blockquote>
+<p>Prove that both of $SS_A$ and $SS_B$ are independent with $SS_E$</p>
+</blockquote>
+<p>Note that $\boldsymbol{1}_{ab} = I_a \otimes \boldsymbol{1}_b\boldsymbol{1}_b’ = I_b \otimes \boldsymbol{1}_a\boldsymbol{1}_a’$, it is easy to find that</p>
+<p>$$<br>\begin{align<em>}<br>&amp;A\cdot \boldsymbol{1}_{ab} = (I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) \cdot I_a \otimes \boldsymbol{1}_b\boldsymbol{1}_b’ = I_a \otimes \boldsymbol{1}_b\boldsymbol{1}<em>b’ = \boldsymbol{1}</em>{ab} \<br>&amp;B\cdot \boldsymbol{1}_{ab} = (I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’) \cdot I_b \otimes \boldsymbol{1}_a\boldsymbol{1}_a’ = I_b \otimes \boldsymbol{1}_a\boldsymbol{1}<em>a’ = \boldsymbol{1}</em>{ab}<br>\end{align</em>}<br>$$</p>
+<p>Now, based on the derivation of question <a href="###1.">1</a>, it suffices to show that</p>
+<p>$$<br>\begin{align<em>}<br>&amp; (I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) (A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) = 0 \<br>&amp; (I</em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) (B-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) = 0<br>\end{align</em>}<br>$$</p>
+<p>By symmetry, we only give the derivation of the first equation, the second is similar to this work.</p>
+<p>$$<br>\begin{align<em>}<br>&amp; (I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) (A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) \<br>&amp;= [I</em>{ab}-B-(A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)] (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) \<br>&amp;= (I-B)(A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) - (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)^2 \<br>&amp;= A - BA - \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ + \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ - (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)^2 \<br>&amp;= A - BA - (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) \<br>&amp;= \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ - BA \<br>&amp;= \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ - (I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’)(I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}<em>b’)\<br>&amp;= \frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’ - \frac{1}{ab} (I_b\boldsymbol{1}_b\boldsymbol{1}_b’ \otimes I_a\boldsymbol{1}_a\boldsymbol{1}<em>a’ ) \<br>&amp;= \frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’ - \frac{1}{ab} (\boldsymbol{1}_b\boldsymbol{1}_b’ \otimes \boldsymbol{1}_a\boldsymbol{1}<em>a’ ) \<br>&amp;= \frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’ - \frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’ \<br>&amp;= 0<br>\end{align</em>}<br>$$</p>
+<p>The detailed matrix $A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’$ is idempotent since</p>
+<p>$$<br>\begin{align<em>}<br>(A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)^2 &amp;= (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)(A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) \<br>&amp;= A^2 - \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’A - \frac{1}{ab}A\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ + \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ \<br>&amp;= A^2 - \frac{2}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ + \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ \<br>&amp;= A - \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’<br>\end{align</em>}<br>$$</p>
+<p>Hence the independency is proved, which furthermore indicates the fact that under the hypothesis $H_1$</p>
+<p>$$<br>F_A = \frac{SS_A/(a-1)}{SS<em>E/(a-1)(b-1)} \sim F</em>{a-1, (a-1)(b-1)}<br>$$</p>
+<p>Similarly, under the hypothesis $H_2$</p>
+<p>$$<br>F_B = \frac{SS_B/(b-1)}{SS<em>E/(a-1)(b-1)} \sim F</em>{b-1, (a-1)(b-1)}<br>$$</p>
+<h3 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h3><blockquote>
+<p>Prove that $c’\beta$ is an estimable function $ \iff\, c \in \mathcal{M}(X’)$</p>
+</blockquote>
+<p>$c’\beta$ is said to be <em>estimable</em> if and only if there is a linear function of $y$, such that $a’y$ is an unbiased estimator of $c’\beta$ (for arbitrary $\beta$ ), i.e.</p>
+<p>$$<br>\begin{align<em>}<br>E(a’y) = c’\beta \quad \forall \beta\in\mathbb{R}^p &amp;\iff a’X\beta = c’\beta \quad \forall \beta\in\mathbb{R}^p \<br>&amp;\iff a’X = c \<br>&amp;\iff c = X’a \in \mathcal{M}(X’)<br>\end{align</em>}<br>$$</p>
+<h3 id="4-Project"><a href="#4-Project" class="headerlink" title="4. Project"></a>4. Project</h3><h4 id="One-way-ANCOVA"><a href="#One-way-ANCOVA" class="headerlink" title="One-way ANCOVA"></a>One-way ANCOVA</h4><p>This example comes from the <em>litter</em> dataset in the multcomp package. Pregnant mice were divided into four treatment groups; each group received a different dose of a drug (0, 5, 50, or 500). The mean post-birth weight for each litter was the dependent variable and gestation time was included as a <strong>covariate</strong>.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data(litter, package=<span class="string">"multcomp"</span>)</span><br><span class="line"><span class="keyword">attach</span>(litter)</span><br><span class="line">table(dose)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dose</span><br><span class="line">  <span class="number">0</span>   <span class="number">5</span>  <span class="number">50</span> <span class="number">500</span></span><br><span class="line"> <span class="number">20</span>  <span class="number">19</span>  <span class="number">18</span>  <span class="number">17</span></span><br></pre></td></tr></table></figure>
+<p>From the <code>table()</code> function we can see that there are an unequal number of litters at each dosage level.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aggregate(weight, by=list(dose), FUN=mean)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  Group.1        x</span><br><span class="line"><span class="number">1</span>       <span class="number">0</span> <span class="number">32.30850</span></span><br><span class="line"><span class="number">2</span>       <span class="number">5</span> <span class="number">29.30842</span></span><br><span class="line"><span class="number">3</span>      <span class="number">50</span> <span class="number">29.86611</span></span><br><span class="line"><span class="number">4</span>     <span class="number">500</span> <span class="number">29.64647</span></span><br></pre></td></tr></table></figure>
+<p>Based on the group means provided by the <code>aggregate()</code> function, the <em>no-drug</em> group had the highest mean litter weight.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fit &lt;- aov(weight ~ gesttime + dose)</span><br><span class="line">summary(fit)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Df Sum Sq Mean Sq <span class="literal">F</span> value  Pr(&gt;<span class="literal">F</span>)</span><br><span class="line">gesttime     <span class="number">1</span>  <span class="number">134.3</span>  <span class="number">134.30</span>   <span class="number">8.049</span> <span class="number">0.00597</span> **</span><br><span class="line">dose         <span class="number">3</span>  <span class="number">137.1</span>   <span class="number">45.71</span>   <span class="number">2.739</span> <span class="number">0.04988</span> *</span><br><span class="line">Residuals   <span class="number">69</span> <span class="number">1151.3</span>   <span class="number">16.69</span></span><br><span class="line">---</span><br><span class="line">Signif. codes:  <span class="number">0</span> ‘***’ <span class="number">0.001</span> ‘**’ <span class="number">0.01</span> ‘*’ <span class="number">0.05</span> ‘.’ <span class="number">0.1</span> ‘ ’ <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>The ANCOVA F tests indicate that</p>
+<ol>
+<li>gestation time was related to birth weight</li>
+<li>drug dosage was related to birth weight after controlling for gestation time.</li>
+</ol>
+<p>Furthermore, the <code>effects</code> package provides a powerful method of obtaining the adjusted means.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(effects)</span><br><span class="line">effect(<span class="string">"dose"</span>, fit)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> dose effect</span><br><span class="line">dose</span><br><span class="line">       <span class="number">0</span>        <span class="number">5</span>       <span class="number">50</span>      <span class="number">500</span></span><br><span class="line"><span class="number">32.35367</span> <span class="number">28.87672</span> <span class="number">30.56614</span> <span class="number">29.33460</span></span><br></pre></td></tr></table></figure>
+<p>But in this case, the adjusted means are similar to unadjusted one produced by the <code>aggregate()</code> function.</p>
+<p>Now, suppose we are interested in whether the no-drug condition differs from the three-drug condition. We can use the multcomp package to test specific defined hypothesis about the means.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(multcomp)</span><br><span class="line">contrast &lt;- rbind(<span class="string">"no drug vs. drug"</span> = c(<span class="number">3</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line">summary(glht(fit, linfct=mcp(dose=contrast)))</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	 Simultaneous Tests <span class="keyword">for</span> General Linear hypothesis</span><br><span class="line"></span><br><span class="line">Multiple Comparisons of Means: User-defined Contrasts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Fit: aov(formula = weight ~ gesttime + dose)</span><br><span class="line"></span><br><span class="line">Linear hypothesis:</span><br><span class="line">                      Estimate Std. Error t value Pr(&gt;|t|)</span><br><span class="line">no drug vs. drug == <span class="number">0</span>    <span class="number">8.284</span>      <span class="number">3.209</span>   <span class="number">2.581</span>    <span class="number">0.012</span> *</span><br><span class="line">---</span><br><span class="line">Signif. codes:  <span class="number">0</span> ‘***’ <span class="number">0.001</span> ‘**’ <span class="number">0.01</span> ‘*’ <span class="number">0.05</span> ‘.’ <span class="number">0.1</span> ‘ ’ <span class="number">1</span></span><br><span class="line">(Adjusted p values reported -- single-step method)</span><br></pre></td></tr></table></figure>
+<p>The contrast <code>c(3, -1, -1, -1)</code> specifies a comparison of the first group with the average of the other three. The hypothesis is tested with a t-statistics, which is significant at the $p&lt;0.05$ level.</p>
+<p>Therefore, we can conclude that the no-drug group has a higher birth weight than drug conditions.</p>
+<h5 id="Assessing-test-assumptions"><a href="#Assessing-test-assumptions" class="headerlink" title="Assessing test assumptions"></a>Assessing test assumptions</h5><p>In this case, it is assumed that the regression slope for predicting birth weight from gestation time is the same in each of four treatment groups. A test for the homogeneity of regression slopes can be obtained by including a <code>gestation*dose</code> interaction term in ANCOVA model.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fit2 &lt;- aov(weight ~ gesttime*dose, data=litter)</span><br><span class="line">summary(fit2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">              Df Sum Sq Mean Sq <span class="literal">F</span> value  Pr(&gt;<span class="literal">F</span>)</span><br><span class="line">gesttime       <span class="number">1</span>  <span class="number">134.3</span>  <span class="number">134.30</span>   <span class="number">8.289</span> <span class="number">0.00537</span> **</span><br><span class="line">dose           <span class="number">3</span>  <span class="number">137.1</span>   <span class="number">45.71</span>   <span class="number">2.821</span> <span class="number">0.04556</span> *</span><br><span class="line">gesttime:dose  <span class="number">3</span>   <span class="number">81.9</span>   <span class="number">27.29</span>   <span class="number">1.684</span> <span class="number">0.17889</span></span><br><span class="line">Residuals     <span class="number">66</span> <span class="number">1069.4</span>   <span class="number">16.20</span></span><br><span class="line">---</span><br><span class="line">Signif. codes:  <span class="number">0</span> ‘***’ <span class="number">0.001</span> ‘**’ <span class="number">0.01</span> ‘*’ <span class="number">0.05</span> ‘.’ <span class="number">0.1</span> ‘ ’ <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>The interaction is nonsignificant, supporting the assumption of equality of slopes. That’s to say, the relationship between gestation and birth weight does not depend on the level of dose variable.</p>
+<h5 id="Visualizing-the-results"><a href="#Visualizing-the-results" class="headerlink" title="Visualizing the results"></a>Visualizing the results</h5><p>The <code>ancova()</code> function in the <code>HH</code> package provides a plot of the relationship between the dependent variable, the covariate, and the factor.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(HH)</span><br><span class="line">ancova(weight ~ gesttime + dose, data=litter)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistics/project4/one-way.svg" width="400" height="300"><br></div>
+
+<p>Here we can see that the regression lines for predicting birth weight from gestation time are parallel in each group but have differetn intercepts. As gestation time increases, birth weight increases. Additionally, we can see that 0-dose group has the largest intercept and the 5-dose group has the lowest intercept.</p>
+<p>Now we use the statement <code>ancova(weight ~ gesttime*dose)</code> instead to generate a plot that allows both the slopes and intercepts to vary by group.</p>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistics/project4/one-way2.svg" width="400" height="300"><br></div>
+
+<h4 id="Two-way-factorial-ANOVA"><a href="#Two-way-factorial-ANOVA" class="headerlink" title="Two-way factorial ANOVA"></a>Two-way factorial ANOVA</h4><p>This example uses the <code>ToothGrowth</code> dataset in the base installation to demonstrate a two-way between-groups ANOVA. 60 guinea pigs are randomly assigned to receive one of three levels of ascorbic acid ($0.5$, $1$, or $2$ mg) and one of two delivery methods (orange juice or Vitamin C), under the restriction that each treatment combination has 10 guinea pigs. The dependent variable is tooth length.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">attach</span>(ToothGrowth)</span><br><span class="line">table(supp, dose)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    dose</span><br><span class="line">supp <span class="number">0.5</span>  <span class="number">1</span>  <span class="number">2</span></span><br><span class="line">  OJ  <span class="number">10</span> <span class="number">10</span> <span class="number">10</span></span><br><span class="line">  VC  <span class="number">10</span> <span class="number">10</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>The <code>table</code> statement indicates that we have a balanced design (equal sample sizes in each cell of the design), and the next two <code>aggregate</code> statements provide the cell means and standard deviations.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aggregate(len, by=list(supp, dose), FUN=mean)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  Group.1 Group.2     x</span><br><span class="line"><span class="number">1</span>      OJ     <span class="number">0.5</span> <span class="number">13.23</span></span><br><span class="line"><span class="number">2</span>      VC     <span class="number">0.5</span>  <span class="number">7.98</span></span><br><span class="line"><span class="number">3</span>      OJ     <span class="number">1.0</span> <span class="number">22.70</span></span><br><span class="line"><span class="number">4</span>      VC     <span class="number">1.0</span> <span class="number">16.77</span></span><br><span class="line"><span class="number">5</span>      OJ     <span class="number">2.0</span> <span class="number">26.06</span></span><br><span class="line"><span class="number">6</span>      VC     <span class="number">2.0</span> <span class="number">26.14</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aggregate(len, by=list(supp, dose), FUN=sd)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  Group.1 Group.2        x</span><br><span class="line"><span class="number">1</span>      OJ     <span class="number">0.5</span> <span class="number">4.459709</span></span><br><span class="line"><span class="number">2</span>      VC     <span class="number">0.5</span> <span class="number">2.746634</span></span><br><span class="line"><span class="number">3</span>      OJ       <span class="number">1</span> <span class="number">3.910953</span></span><br><span class="line"><span class="number">4</span>      VC       <span class="number">1</span> <span class="number">2.515309</span></span><br><span class="line"><span class="number">5</span>      OJ       <span class="number">2</span> <span class="number">2.655058</span></span><br><span class="line"><span class="number">6</span>      VC       <span class="number">2</span> <span class="number">4.797731</span></span><br></pre></td></tr></table></figure>
+<p>The below ANOVA table provided by the <code>summary()</code> function indicates that both main effects (<code>supp</code> and <code>dose</code>) and the interaction between these factors are significant.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dose &lt;- factor(dose)</span><br><span class="line">fit &lt;- aov(len ~ supp*dose)</span><br><span class="line">summary(fit)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">            Df Sum Sq Mean Sq <span class="literal">F</span> value   Pr(&gt;<span class="literal">F</span>)</span><br><span class="line">supp         <span class="number">1</span>  <span class="number">205.4</span>   <span class="number">205.4</span>  <span class="number">15.572</span> <span class="number">0.000231</span> ***</span><br><span class="line">dose         <span class="number">2</span> <span class="number">2426.4</span>  <span class="number">1213.2</span>  <span class="number">92.000</span>  &lt; <span class="number">2e-16</span> ***</span><br><span class="line">supp:dose    <span class="number">2</span>  <span class="number">108.3</span>    <span class="number">54.2</span>   <span class="number">4.107</span> <span class="number">0.021860</span> *</span><br><span class="line">Residuals   <span class="number">54</span>  <span class="number">712.1</span>    <span class="number">13.2</span></span><br><span class="line">---</span><br><span class="line">Signif. codes:  <span class="number">0</span> ‘***’ <span class="number">0.001</span> ‘**’ <span class="number">0.01</span> ‘*’ <span class="number">0.05</span> ‘.’ <span class="number">0.1</span> ‘ ’ <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>Furthermore, we can use the <code>interaction2wt()</code> function in the <code>HH</code> package to produce a plot of both main effects and two-way interactions for any factorial design of any order.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(HH)</span><br><span class="line">interaction2wt(len ~ supp*dose)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistics/project4/two-way.svg" width="400" height="300"><br></div>
+
+<p>The above graph indicates that tooth growth increases with the dose of ascorbic acid for both orange juice and Vitamin C. For the $0.5$ and $1$ mg doses, orange juice produced more tooth growth than Vitamin C. For $2$ mg of ascorbic acid, both delivery methods produced identical growth.</p>
+<hr>
+<p><em>Kai Liu, wrote on 2017/12/14</em></p>
+<p><em>Student ID: 116071910015</em></p>
+<p><em>Mail: liu1995@sjtu.edu.cn</em></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oxyywddt8.bkt.clouddn.com/qrcode/ali-qrcode.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oxyywddt8.bkt.clouddn.com/qrcode/Wechat.jpeg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">R</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">statistic</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="../../25/30-seconds-of-code/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          30 seconds of code
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="../../01/Project-3-of-Statistics/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Project 3 of Statistics.md</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Project-4-of-Statistics" data-title="Project 4 of Statistics.md" data-url="onlookerliu.github.io"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../2/">&laquo; Prev</a><a class="page-number" href="../../">1</a><a class="page-number" href="../2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -251,9 +493,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
