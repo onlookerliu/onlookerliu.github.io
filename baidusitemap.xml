@@ -4,14 +4,75 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/29/DataFrame-Demo/</loc>
-    <lastmod>2018-02-28T15:46:31.000Z</lastmod>
+    <loc>onlookerliu.github.io/2017/11/14/Assignment-2-of-Advanced-Computational-Method/</loc>
+    <lastmod>2018-02-28T16:02:48.000Z</lastmod>
     <data>
         <display>
-        <title>DataFrame_Demo</title>
-        <pubTime>2017-12-28T17:37:43.000Z</pubTime>
+        <title>Assignment 2 of Advanced Computational Method</title>
+        <pubTime>2017-11-13T16:01:20.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistics</tag>
+         
+        <tag>computational method</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/10/30/Assignment-1-of-Advanced-Computational-Method/</loc>
+    <lastmod>2018-02-28T16:01:12.401Z</lastmod>
+    <data>
+        <display>
+        <title>Assignment 1 of Advanced Computational Method</title>
+        <pubTime>2017-10-30T15:59:42.000Z</pubTime>
         
         <tag>julia</tag>
+         
+        <tag>statistics</tag>
+         
+        <tag>computationa method</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 2 of Statistics.md</title>
+        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistics</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>A simple Metropolis-Hastings MCMC in R</title>
+        <pubTime>2017-12-28T17:47:23.000Z</pubTime>
+        
+        <tag>r</tag>
          
          
            
@@ -22,13 +83,13 @@
     
   <url>
     <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:42:13.000Z</lastmod>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
         <title>Project 4 of Statistics.md</title>
         <pubTime>2017-12-15T09:40:41.000Z</pubTime>
         
-        <tag>R</tag>
+        <tag>r</tag>
          
         <tag>statistic</tag>
          
@@ -41,13 +102,13 @@
     
   <url>
     <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:40:35.844Z</lastmod>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
         <title>Project 3 of Statistics.md</title>
         <pubTime>2017-12-01T12:39:50.000Z</pubTime>
         
-        <tag>R</tag>
+        <tag>r</tag>
          
         <tag>statistic</tag>
          
@@ -59,14 +120,14 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:39:41.391Z</lastmod>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 2 of Statistics.md</title>
-        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
+        <title>Project 1 of Statistics.md</title>
+        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
         
-        <tag>R</tag>
+        <tag>r</tag>
          
         <tag>statistics</tag>
          
@@ -78,16 +139,14 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:38:23.483Z</lastmod>
+    <loc>onlookerliu.github.io/2017/12/29/DataFrame-Demo/</loc>
+    <lastmod>2018-02-28T15:55:12.000Z</lastmod>
     <data>
         <display>
-        <title>Project 1 of Statistics.md</title>
-        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
+        <title>DataFrame_Demo</title>
+        <pubTime>2017-12-28T17:37:43.000Z</pubTime>
         
-        <tag>R</tag>
-         
-        <tag>statistics</tag>
+        <tag>julia</tag>
          
          
            
@@ -104,9 +163,9 @@
         <title>Linear Regression in JS</title>
         <pubTime>2018-02-28T14:51:57.000Z</pubTime>
         
-        <tag>javascript</tag>
-         
         <tag>statistics</tag>
+         
+        <tag>javascript</tag>
          
         <tag>p5js</tag>
          
@@ -278,9 +337,9 @@
         <title>LeetCode Notes 001</title>
         <pubTime>2017-12-27T17:14:13.000Z</pubTime>
         
-        <tag>leetcode</tag>
-         
         <tag>javascript</tag>
+         
+        <tag>leetcode</tag>
          
          
            
@@ -297,9 +356,9 @@
         <title>LeetCode Notes 002</title>
         <pubTime>2017-12-29T17:39:34.000Z</pubTime>
         
-        <tag>leetcode</tag>
-         
         <tag>javascript</tag>
+         
+        <tag>leetcode</tag>
          
          
            
@@ -317,23 +376,6 @@
         <pubTime>2017-11-29T13:49:51.000Z</pubTime>
         
         <tag>julia</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
-    <lastmod>2017-12-28T17:47:39.397Z</lastmod>
-    <data>
-        <display>
-        <title>A simple Metropolis-Hastings MCMC in R</title>
-        <pubTime>2017-12-28T17:47:23.000Z</pubTime>
-        
-        <tag>R</tag>
          
          
            

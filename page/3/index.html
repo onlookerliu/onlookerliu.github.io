@@ -1219,7 +1219,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">R</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1412,7 +1412,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">R</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -2084,7 +2084,7 @@ F-statistic: 12.03 on 5 and 24 DF,  p-value: 6.658e-06
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">R</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -2099,6 +2099,198 @@ F-statistic: 12.03 on 5 and 24 DF,  p-value: 6.658e-06
       
         <p class="article-more-link">
           <a class="article-more-a" href="../../2017/11/17/Project-2-of-Statistics/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Assignment-2-of-Advanced-Computational-Method" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/11/14/Assignment-2-of-Advanced-Computational-Method/">Assignment 2 of Advanced Computational Method</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/11/14/Assignment-2-of-Advanced-Computational-Method/" class="archive-article-date">
+  	<time datetime="2017-11-13T16:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Homework-3"><a href="#Homework-3" class="headerlink" title="Homework 3"></a>Homework 3</h2><p>The Metropolis–Hastings algorithm works by generating a sequence of sample values in such a way that, as more and more sample values are produced, the distribution of values more closely approximates the desired distribution, $P(x)$. These sample values are produced iteratively, with the distribution of the next sample being dependent only on the current sample value (thus making the sequence of samples into a Markov chain). Specifically, at each iteration, the algorithm picks a candidate for the next sample value based on the current sample value. Then, with some probability, the candidate is either accepted (in which case the candidate value is used in the next iteration) or rejected (in which case the candidate value is discarded, and current value is reused in the next iteration)−the probability of acceptance is determined by comparing the values of the function $f(x)$ of the current and candidate sample values with respect to the desired distribution $P(x)$.</p>
+<h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><blockquote>
+<p>Draw samples from the distribution $p(x, y) = \mathrm{e}^{-(x-1)^2-100(y-x)^2}$</p>
+<ol>
+<li>use RW-MH, use different step size and compare the performance;</li>
+<li>use IS with different proposals of your choice and compare the performance.</li>
+<li>use adaptive MCMC and compare the performance with standard RW-MH.</li>
+</ol>
+</blockquote>
+<p>For the purpose of implementation, the Metropolis algorithm, a special case of the Metropolis–Hastings algorithm where the proposal function is symmetric, is described below.</p>
+<p><strong>Metropolis algorithm (symmetric proposal distribution)</strong></p>
+<p>Let $f(x)$ be a function that is proportional to the desired probability distribution $P(x)$ (a.k.a. a target distribution).</p>
+<ol>
+<li><p>Initialization: Choose an arbitrary point x0 to be the first sample, and choose an arbitrary probability density $g(x\mid y)$ that suggests a candidate for the next sample value x, given the previous sample value y. For the Metropolis algorithm, $g$ must be symmetric; in other words, it must satisfy $q(x\mid y)=q(y\mid x)$. A usual choice is to let $q(x\mid y)$ be a Gaussian distribution centered at $y$, so that points closer to $y$ are more likely to be visited next—making the sequence of samples into a random walk. The function $g$ is referred to as the <em>proposal density</em> or <em>jumping distribution</em>.</p>
+</li>
+<li><p>For each iteration $t$:</p>
+</li>
+</ol>
+<ul>
+<li><strong>Generate</strong> : Generate a candidate x for the next sample by picking from the distribution $q(x’|x_{t})$.</li>
+<li><strong>Calculate</strong> : Calculate the acceptance ratio $\alpha =p(x)/p(x<em>{t})$, which will be used to decide whether to accept or reject the candidate. Because $f$ is proportional to the density of $P$, we have that $\alpha =p(x’)/p(x</em>{t})=P(x’)/P(x_{t})$</li>
+<li><strong>Accept</strong> or <strong>Reject</strong> :<ul>
+<li>Generate a uniform random number $u$ on $[0,1]$.</li>
+<li>If $u\leq \alpha$ <em>accept</em> the candidate by setting $x_{t+1}=x’$</li>
+<li>If $u&gt;\alpha$ <em>reject</em> the candidate and set $x<em>{t+1}=x</em>{t}$, instead.</li>
+</ul>
+</li>
+</ul>
+<p><strong>The Metropolis-Hastings Algorithm</strong> (MH)</p>
+<pre><code>1. initialize at $X^0$
+2. for $i = 0$ to $n-1$
+</code></pre><ul>
+<li>sample $y\sim q(\cdot \mid X^i)$</li>
+<li>sample $u\sim U[0,1]$</li>
+<li>$a(X^i, y)=\min\lbrace 1, \frac{p(y)}{p(X^{i})}\frac{q(X^i \mid y)}{p(y \mid X^i)}\rbrace$</li>
+<li>accept/reject the proposed $y$ according to probability $a(X,y)$</li>
+<li>if $u\leq a$ set $X^{i+1} = X$<br>   else $X^{i+1} = X^{i}$</li>
+</ul>
+<h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4><p>First, let’s take a look at the target distribution. Here, we present a 3D plot by <code>R</code></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x &lt;- seq(-<span class="number">2</span>, <span class="number">2</span>, length=<span class="number">100</span>)</span><br><span class="line">y &lt;- x</span><br><span class="line">f &lt;- <span class="keyword">function</span>(x, y)&#123;exp(-(x-<span class="number">1</span>)^<span class="number">2</span> - <span class="number">100</span>*(y - x)^<span class="number">2</span>)&#125;</span><br><span class="line">z &lt;- outer(x, y, f)</span><br><span class="line">persp(x, y, z, shade=<span class="number">0.1</span>, col=<span class="string">"white"</span>, ticktype=<span class="string">"detailed"</span>, xlab=<span class="string">"x"</span>, ylab=<span class="string">"y"</span>, zlab=<span class="string">"rosenbrock"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/rosenbrock.svg" width="50%"></p>
+<p>The picture shown above is shaped like banana as is taught to be.</p>
+<p>Next, we follow the Metropolis-Hastings Algorithm and give a simple implement.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define arguments: target distribution</span></span><br><span class="line">rosenbrock &lt;- <span class="keyword">function</span>(x)    <span class="comment"># x is a vector</span></span><br><span class="line">&#123;</span><br><span class="line">    exp(-(x[<span class="number">1</span>]-<span class="number">1</span>)^<span class="number">2</span> - <span class="number">100</span>*(x[<span class="number">2</span>] - x[<span class="number">1</span>])^<span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define the sampling function</span></span><br><span class="line">rwMetro &lt;- <span class="keyword">function</span>(target, N, x, step, burnin=<span class="number">1000</span>)</span><br><span class="line">&#123;</span><br><span class="line">    cov &lt;- step*diag(<span class="number">2</span>)</span><br><span class="line">    samples &lt;- x</span><br><span class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">2</span>:(burnin+N))</span><br><span class="line">    &#123;</span><br><span class="line">        prop &lt;- mvrnorm(n = <span class="number">1</span>, x, cov)</span><br><span class="line">        <span class="keyword">if</span> (runif(<span class="number">1</span>) &lt; min(<span class="number">1</span>, target(prop)/target(x)))</span><br><span class="line">            x &lt;- prop</span><br><span class="line">        samples &lt;- rbind(samples,x)</span><br><span class="line">    &#125;</span><br><span class="line">    samples[(burnin+<span class="number">1</span>):(N+burnin),]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The above forms a rosenbrock function for general usage and construct a sampling function with considerate arguments. For example, the <code>burnin</code> period is typically necessary, where an initial number of samples (e.g. the first default $1000$ or so) are thrown away, since the initial samples may follow a very different distribution, especially if the starting point is in a region of low density.</p>
+<p>Hence, we can draw samples by calling the function.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rwMetro.samples &lt;- rwMetro(rosenbrock, 10000, c(0,0), 1)</span><br></pre></td></tr></table></figure>
+<p>Here, <code>rwMetro.samples</code> contains <code>10000</code> rows of samples with 2 columns. Continually, we want to evaluate the performance of this sampling method. Correlations should be a key of parameter choosing. For example, here we set step size $\delta$ to be $1$ and plot the autocorrelation function below:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acf(rwMetro.samples, lag.max=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/rwMetro.svg" width="60%"></p>
+<p>As is shown in the picture, the self-correlation (diagonal part) decays when the effective sample size equals $100$[^size], which somehow indicates the Markov chain eventually converges to the desired distribution,</p>
+<p>[^size]: here we set $100$ to be the default number of effectively independent samples.</p>
+<p>Simply change the <code>step</code> parameter in function calling/sampling, we can obtain different shows of autocorrelation functions, which decays faster implies a more independent sampling.</p>
+<p>Based on this criterion, we can do repetition test and comparison work in RStudio. An optimal step size is selected to be quite near $1$[^exp].</p>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/rwMetro_best.svg" width="60%"></p>
+<p>[^exp]: the result is not quite stable, but we find $\delta\in[0.9,1]$ is adequate.</p>
+<h4 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h4><p>However, Metropolis–Hastings and other MCMC algorithms have a number of disadvantages. For example, the samples are correlated. This means that if we want a set of independent samples, we have to throw away the majority of samples.</p>
+<p>Hence, independence sampler is necessary in some practical use. The thought comes like below:</p>
+<p>Set</p>
+<p>$$<br>\begin{split}<br>&amp; p(y\mid X) = p(y) \<br>&amp; a(X, y) = \frac{p(y)}{p(X)} \frac{q(X\mid y)}{p(y\mid X)} = 1 \<br>\end{split}<br>$$</p>
+<p>which implies us:</p>
+<p>$$<br>q(Y\mid X) = q(y) \approx p(y)<br>$$</p>
+<p>that means $q(y)$ is a fixed distribution which is independent on $X$</p>
+<p>Thus, we can construct a global proposal $q(y)$ which is independent on $X$. In this way,</p>
+<p>$$<br>a(X^i, y) = \frac{p(X^i)}{p(y)} \frac{q(y \mid X^i)}{p(X^i\mid y)} = \frac{q(y \mid X^i)}{p(y)}<br>$$</p>
+<p>Noticed that the rosenbrock function is symmetric on vector $(1,1)$, we can propose a new normal distribution centered at $(1,1)$, i.e. $q(y)$ is the PDF of $N(\begin{pmatrix} 1\ 1\ \end{pmatrix}, \delta^2)$.</p>
+<p>Thus, we modify the RW-MH function and give an independence sampler named <code>isSampler</code>.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">isSampler &lt;- <span class="keyword">function</span>(target, N, x, step, burnin=<span class="number">1000</span>)</span><br><span class="line">&#123;</span><br><span class="line">    cov &lt;- step*diag(<span class="number">2</span>)</span><br><span class="line">    samples &lt;- x</span><br><span class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">2</span>:(burnin+N))</span><br><span class="line">    &#123;</span><br><span class="line">        prop &lt;- mvrnorm(n = <span class="number">1</span>, c(<span class="number">1</span>,<span class="number">1</span>), cov)</span><br><span class="line">        <span class="keyword">if</span> (runif(<span class="number">1</span>) &lt; min(<span class="number">1</span>, target(prop)/target(x)))</span><br><span class="line">            x &lt;- prop</span><br><span class="line">        samples &lt;- rbind(samples,x)</span><br><span class="line">    &#125;</span><br><span class="line">    samples[(burnin+<span class="number">1</span>):(N+burnin),]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Directly call the new function, we will receive a set of independent samples with an image of correlation function.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">is.samples &lt;- isSampler(rosenbrock, <span class="number">10000</span>, c(<span class="number">0</span>,<span class="number">0</span>), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">acf(is.samples, lag.max=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/isSampler.svg" width="60%"></p>
+<p>Similarily, we can change the <code>step</code> parameter to get different proposals. Repeated works have been done to get the optimal distribution $N(0,0.1)$, the corresponding autocorrelation function shapes like below:</p>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/isSampler_best.svg" width="60%"></p>
+<h4 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h4><p><strong>Adaptive MCMC Algorithm</strong></p>
+<ol>
+<li>draw a set of $N$ samples from the target distribution with standard RW-MH method.</li>
+<li>estimate the sample covariance of the samples.</li>
+<li>update the covariance matrix[^cov] of the proposal with the computed sample covariance.</li>
+<li>draw a set of samples from the updated proposal.</li>
+</ol>
+<p>[^cov]: the updated covariance matrix needs to be positive.</p>
+<p>Here, we set $\varepsilon \sim N(0, \Sigma)$ where $\Sigma$ is the updated covariance matrix:</p>
+<p>$$<br>\mathrm{Cov}(X) = \frac{1}{N}\sum(X^i - \bar X^N)(X^i - \bar X^N)’ + \delta I \quad,\quad \bar X^N = \frac{1}{N}\sum_{i=1}^{N} X^i<br>$$</p>
+<p>Thus, we can derive the following adaptive MCMC sampler:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">adaptiveMCMC &lt;- <span class="keyword">function</span>(target, N, x, step, burnin=<span class="number">1000</span>)</span><br><span class="line">&#123;</span><br><span class="line">  cov &lt;- step*diag(<span class="number">2</span>)</span><br><span class="line">  samples &lt;- x</span><br><span class="line">  <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">2</span>:(burnin+N))</span><br><span class="line">  &#123;</span><br><span class="line">    prop &lt;- mvrnorm(n = <span class="number">1</span>, x, cov)</span><br><span class="line">    <span class="keyword">if</span> (runif(<span class="number">1</span>) &lt; min(<span class="number">1</span>, target(prop)/target(x)))</span><br><span class="line">      x &lt;- prop</span><br><span class="line">    samples &lt;- rbind(samples,x)</span><br><span class="line">    cov &lt;- cov(samples) + step*diag(<span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  samples[(burnin+<span class="number">1</span>):(N+burnin),]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adaptive.samples &lt;- adaptiveMCMC(rosenbrock, <span class="number">10000</span>, c(<span class="number">0</span>,<span class="number">0</span>), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">acf(adaptive.samples, lag.max=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/adaptiveMCMC.svg" width="60%"></p>
+<p>Tedious works have been done to obtain the optimal step size $\delta=0.5$ in the way <code>adaptiveMCMC</code> performs.</p>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/ada_best.svg" width="60%"></p>
+<p>The self-correlations decay rapidly within $60$ lags and tend to converge after that.</p>
+<p>Compared with standard RW-MH method, an obvious improvement can be seen in performing adaptive MCMC method. Also, we find that the optimal result is more stable in <code>adaptiveMCMC</code> than in <code>rwMetro</code>.</p>
+<p>Finally, let’s have a look at samples generated by these three methods.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Display the samples</span></span><br><span class="line">par(mfrow=c(<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">plot(rwMetro.samples[,<span class="number">1</span>], rwMetro.samples[,<span class="number">2</span>], xlim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>),ylim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>), main=<span class="string">'MH Samples'</span>,xlab=<span class="string">'x'</span>, ylab=<span class="string">'y'</span>, pch=<span class="string">'.'</span>)</span><br><span class="line"></span><br><span class="line">plot(is.samples[,<span class="number">1</span>], is.samples[,<span class="number">2</span>], xlim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>),ylim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>), main=<span class="string">'IS Samples'</span>,xlab=<span class="string">'x'</span>, ylab=<span class="string">'y'</span>, pch=<span class="string">'.'</span>)</span><br><span class="line"></span><br><span class="line">plot(adaptive.samples[,<span class="number">1</span>], adaptive.samples[,<span class="number">2</span>], xlim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>),ylim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>), main=<span class="string">'MCMC Samples'</span>,xlab=<span class="string">'x'</span>, ylab=<span class="string">'y'</span>, pch=<span class="string">'.'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/samples.svg" width="60%"></p>
+<p>Compared with the target distribution, we find that the <code>adaptiveMCMC</code> samples are best simulated and <code>rwMetro</code> seems to be fairly standard, while the <code>isSampler</code>, in a way, tends to be extreme.</p>
+<p>Furthermore, we can test our optimal result using the generated samples. For example, samples generate from <code>adaptiveMCMC</code> method can be used to plot the density curve and make comparison with our optimal proposal $q(y)\sim N(1,0.5)$</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">x &lt;- adaptive.samples[,<span class="number">1</span>]</span><br><span class="line">y &lt;- adaptive.samples[,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">par(mfrow=c(<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">hist(x, xlab=<span class="string">"x"</span>, main=<span class="string">"Distribution of Samples"</span>)</span><br><span class="line"></span><br><span class="line">plot(density(x), col=<span class="string">"red"</span>, lwd=<span class="number">1.5</span>)</span><br><span class="line">curve(dnorm(x, mean=<span class="number">1</span>, sd=sqrt(<span class="number">0.5</span>)), add=<span class="literal">TRUE</span>, col=<span class="string">"blue"</span>, lwd=<span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">hist(x, xlab=<span class="string">"y"</span>, main=<span class="string">"Distribution of Samples"</span>)</span><br><span class="line"></span><br><span class="line">plot(density(y), col=<span class="string">"red"</span>, lwd=<span class="number">1.5</span>)</span><br><span class="line">curve(dnorm(x, mean=<span class="number">1</span>, sd=sqrt(<span class="number">0.5</span>)), add=<span class="literal">TRUE</span>, col=<span class="string">"blue"</span>, lwd=<span class="number">1.5</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/density.svg" width="60%"></p>
+<p>It can be seen that the proposed distribution fits well, which make our result more persuative.</p>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Most simple rejection sampling methods suffer from the “curse of dimensionality”, where the probability of rejection increases exponentially as a function of the number of dimensions. But Metropolis–Hastings, along with other MCMC methods, <strong>do not</strong> have this problem to such a degree. Thus they are often the only solutions available when the number of dimensions of the distribution to be sampled is high.</p>
+<p>In multivariate distributions, the classic Metropolis–Hastings algorithm as described above involves choosing a new multi-dimensional sample point. When the number of dimensions is high, finding the right proposed distribution to use can be difficult, as the different individual dimensions behave in very different ways, and the step size must be “just right” for all dimensions at once to avoid excessively slow mixing. An alternative approach that often works better in such situations, known as <em>Gibbs sampling</em>, involves choosing a new sample for each dimension separately from the others, rather than choosing a sample for all dimensions at once. Various algorithms can be used to choose these individual samples, depending on the exact form of the multivariate distribution such as the adaptive rejection Metropolis sampling algorithm.</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ol>
+<li><a href="https://arxiv.org/pdf/1504.01896.pdf" target="_blank" rel="noopener">The Metropolis-Hastings algorithm Christian P. Robert (U. Paris-Dauphine PSL &amp; U. Warwick)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm#Step-by-step_instructions" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm#Step-by-step_instructions</a></li>
+<li><a href="http://blog.csdn.net/abcjennifer/article/details/25908495" target="_blank" rel="noopener">http://blog.csdn.net/abcjennifer/article/details/25908495</a></li>
+<li><a href="https://theoreticalecology.wordpress.com/2010/09/17/metropolis-hastings-mcmc-in-r/" target="_blank" rel="noopener">https://theoreticalecology.wordpress.com/2010/09/17/metropolis-hastings-mcmc-in-r/</a></li>
+</ol>
+<hr>
+<p><em>Kai Liu, wrote on 2017/11/13</em></p>
+<p><em>Student ID: 116071910015</em></p>
+<p><em>Mail: liu1995@sjtu.edu.cn</em></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">computational method</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/11/14/Assignment-2-of-Advanced-Computational-Method/">展开全文 >></a>
         </p>
       
 
@@ -2402,7 +2594,7 @@ F-statistic: 609.4 on 2 and 28 DF,  p-value: &lt; 2.2e-16
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">R</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -2417,6 +2609,270 @@ F-statistic: 609.4 on 2 and 28 DF,  p-value: &lt; 2.2e-16
       
         <p class="article-more-link">
           <a class="article-more-a" href="../../2017/11/03/Project-1-of-Statistics/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Assignment-1-of-Advanced-Computational-Method" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/10/30/Assignment-1-of-Advanced-Computational-Method/">Assignment 1 of Advanced Computational Method</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/10/30/Assignment-1-of-Advanced-Computational-Method/" class="archive-article-date">
+  	<time datetime="2017-10-30T15:59:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Homework-1"><a href="#Homework-1" class="headerlink" title="Homework 1"></a>Homework 1</h2><p><strong>Monte Carlo method</strong> is a method to compute the expectation of a random variable.</p>
+<p>The basic steps follow like this:</p>
+<ol>
+<li><p>draw random samples ${x_1, x_2, \cdots, x_n}$ according to $p(x)$.</p>
+</li>
+<li><p>derive the <em>monte carlo estimator</em> of $E(f)$ from</p>
+</li>
+</ol>
+<p>$$<br>\hat{f}<em>{\text{mc}}=\frac{1}{n}\sum</em>{i=1}^n f(x_i)<br>$$</p>
+<h3 id="Problem-1"><a href="#Problem-1" class="headerlink" title="Problem 1"></a>Problem 1</h3><blockquote>
+<p>Suppose $x_1, x<em>2, \cdots, x</em>{10}$ satisfy independent identical distributions i.e. $x_i\sim N(0,1)\quad i=1,2,\cdots,10$</p>
+<p>Set $f(x)=\sum_{i=1}^{10}x_i^2$, use <em>Monte Carlo method</em> to compute $E[f(x)]$.</p>
+<p>Compare your results with the exact value.</p>
+</blockquote>
+<p><strong>Solution</strong>:</p>
+<p>From basic statistics, we can deduce that<br>$$<br>\begin{align<em>}<br>Ef(x)&amp;=E\sum_{i=1}^{10}x_i^2=10\,Ex_i^2\<br>&amp;=10\,[Dx_i+(Ex_i)^2]\<br>&amp;=10\times(1+0)\<br>&amp;=10<br>\end{align</em>}<br>$$</p>
+<p>Thus, the exact value of $E[f(x)]$ equals 10.</p>
+<p>Continuely, we derive a Monte Carlo method for evaluating $E[f(x)]$</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Distributions</span><br><span class="line"><span class="meta">@everywhere</span> <span class="keyword">function</span> MC_mean(N::<span class="built_in">Int</span>)</span><br><span class="line">    <span class="comment"># N = number of Monto Carlo points</span></span><br><span class="line"></span><br><span class="line">    x = rand(Normal(<span class="number">0</span>, <span class="number">1</span>), N); <span class="comment"># draw random samples</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> * mean(x.^<span class="number">2</span>) <span class="comment"># return the Monte Carlo estimator of f</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">MC_mean(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">9.98580160514502</span></span><br></pre></td></tr></table></figure>
+<p>A billion Monte Carlo steps yields an even better estimate:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_mean(<span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10.000288570895224</span></span><br></pre></td></tr></table></figure>
+<p>Now, let’s take a brief look at the time cost.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@elapsed</span> MC_mean(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.013395715</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@elapsed</span> MC_mean(<span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">50.939757386</span></span><br></pre></td></tr></table></figure>
+<p>When it comes to Monte Carlo simulation, our goal is to get good data as fast as possible. For now, let’s look at how to speed up our code. First of all, we can easily notice the time cost grows out of all proportion. The calculation for 1 million Monte Carlo cost is over 1000 times faster than the billion’s.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="meta">@elapsed</span> MC_mean(<span class="number">10</span>^<span class="number">9</span>))/(<span class="meta">@elapsed</span> MC_mean(<span class="number">10</span>^<span class="number">6</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>1286.3957285556933
+</code></pre><p>Of course, we can do better than this. In preparation for these calculations, let us introduce a <strong>parallel computation</strong> for Monte Carlo simulation. We build a function that takes <code>MC_mean</code> and evenly splits the jobs to our processors:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> parallel_calc(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, proc::<span class="built_in">Int</span>=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># f = some predefined function</span></span><br><span class="line">    <span class="comment"># N = number of Monte Carlo steps</span></span><br><span class="line">    <span class="comment"># proc = number of additional processors, preset to four</span></span><br><span class="line"></span><br><span class="line">    n = round(<span class="built_in">Int</span>, N/proc); <span class="comment"># split the number of Monte Carlo steps equally between processors</span></span><br><span class="line"></span><br><span class="line">    proc_sum = <span class="meta">@parallel</span> (+) <span class="keyword">for</span> i=<span class="number">1</span>:proc <span class="comment"># loop through the processors and distribute jobs</span></span><br><span class="line">        f(n)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> proc_sum / proc <span class="comment"># return the average of the parallel jobs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre><code>parallel_calc (generic function with 2 methods)
+</code></pre><p>Now, we can quickly and efficiently calculate a billion MC samples:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@elapsed</span> parallel_calc(MC_mean, <span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>21.05725137
+</code></pre><p>There is also an easier way to see the speed up of parallel processing by plotting the elapsed time. Below, we define a simple code to plot the elapsed times of <code>MC_mean</code>(in blue) and parallel (in red) vs. the number of MC samplings:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line">PyPlot.svg(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> mean_time_plotter(N::<span class="built_in">Int</span>)</span><br><span class="line">    n = <span class="built_in">Int64</span>(N/<span class="number">10</span>) <span class="comment"># ensure that you only plot 10 points</span></span><br><span class="line"></span><br><span class="line">    plot(collect(<span class="number">1</span>:n:N),[<span class="meta">@elapsed</span> MC_mean(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">10</span>:n:N], linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"blue"</span>, label=<span class="string">"Single Processor"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># the above plots mean for 10 values of MC steps from 10 to N vs. the number of MC steps</span></span><br><span class="line"></span><br><span class="line">    plot(collect(<span class="number">1</span>:n:N),[<span class="meta">@elapsed</span> parallel_calc(MC_mean,i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">10</span>:n:N], linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"red"</span>, label=<span class="string">"Parallel Processor"</span>)</span><br><span class="line"></span><br><span class="line">    title(<span class="string">"Comparison of Parallel vs. Single Processor MC Efficiency"</span>) <span class="comment"># make title and labels</span></span><br><span class="line">    ylabel(<span class="string">"Elapsed Time (sec)"</span>)</span><br><span class="line">    xlabel(<span class="string">"# of random points"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>, <span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>) <span class="comment"># anchor the legend</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre><code>mean_time_plotter (generic function with 1 method)
+</code></pre><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mean_time_plotter(<span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_15_0.svg"></p>
+<pre><code>PyObject &lt;matplotlib.legend.Legend object at 0x132777510&gt;
+</code></pre><p>We can see that the elapsed time of simulation is approximately equal around 0.7 billion MC samplings, after which parallel processing begins to win in favor of the single processor. This trend is continued when we look at a billion MC samples.</p>
+<p>Now, we turn to present this MC data and visualize the error. To do this, let’s write a simple program to plot the output of parallel vs. the number of Monte Carlo samplings. Because we already know what the mean is, let’s also plot the accepted value as a straight line in red. Finally, let’s also calculate the percent error and display it in the title. The format used here will be useful in later code where we have to compare with some exact analytical value. The following tedious codes (if I remember to present) are quite similar to each other.</p>
+<p>However, one thing unfortunate is that the parallel efficiency does <strong>not</strong> high within one billion samples. In proper case, for example, we need fast result,  single processor is fairly enough.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> MC_mean_plotter(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, m::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line">    n = <span class="built_in">Int64</span>(N/m) <span class="comment"># define the step size between points to plot</span></span><br><span class="line"></span><br><span class="line">    mean_list = [parallel_calc(f,i) <span class="keyword">for</span> i <span class="keyword">in</span> n:n:N] <span class="comment"># generate list of mean values from parallel for i MC steps</span></span><br><span class="line"></span><br><span class="line">    plot(collect(n:n:N), mean_list, linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>,</span><br><span class="line">        color=<span class="string">"blue"</span>, label=string(<span class="string">L"MC Estimator: "</span>, round(mean_list[<span class="keyword">end</span>],<span class="number">6</span>)))</span><br><span class="line">    <span class="comment"># in the above, we plot the MC estimate of 10 vs. the number of MC steps</span></span><br><span class="line"></span><br><span class="line">    axhline(y=<span class="number">10</span>, linestyle=<span class="string">"-"</span>, color=<span class="string">"red"</span>, label=string(<span class="string">"Exact Value: "</span>, <span class="number">10</span>))</span><br><span class="line">    <span class="comment"># in the above, we plot a horizontal line at the 10 value</span></span><br><span class="line"></span><br><span class="line">    per_error = <span class="number">100</span>*abs((mean_list[<span class="keyword">end</span>]-<span class="number">10</span>)/(mean_list[<span class="keyword">end</span>])) <span class="comment"># calculate percent error from mean_list</span></span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">L"Monte Carlo Estimation of $10$--within "</span>, round(per_error,<span class="number">5</span>), <span class="string">"%"</span>)) <span class="comment"># make titles and labels</span></span><br><span class="line">    ylabel(<span class="string">"Estimation of 10"</span>)</span><br><span class="line">    xlabel(<span class="string">"# of random points"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>,<span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>) <span class="comment"># make legend</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre><code>MC_mean_plotter (generic function with 1 method)
+</code></pre><p>To get a nice plot, we take a maximum of a million Monte Carlo samples and plot a total of a hundred points:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_mean_plotter(MC_mean, <span class="number">10</span>^<span class="number">9</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_19_0.svg"></p>
+<pre><code>PyObject &lt;matplotlib.legend.Legend object at 0x1326e2cd0&gt;
+</code></pre><p>Although we appear to obtain a reasonable value for 10(below 0.00421%!), it is difficult to see how well the data is converging. Therefore, let’s build a new function that calculates a list of $M$ Monte Carlo estimates of 10 at a given value of $N$. From this list, we can obtain the average and standard deviation:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> stat_calc(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, M::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># f = some general function</span></span><br><span class="line"><span class="comment"># N = number of Monte Carlo steps</span></span><br><span class="line"><span class="comment"># M = number of times to repeat a single MC step to for statistical analysis</span></span><br><span class="line"></span><br><span class="line">    avg_list = [parallel_calc(f,N) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">1</span>:M] <span class="comment"># create list of MC data of length M</span></span><br><span class="line"></span><br><span class="line">    avg = sum(avg_list)/M <span class="comment"># calculate average of MC data</span></span><br><span class="line"></span><br><span class="line">    stdev = std(avg_list) <span class="comment"># calculate standard deviation of MC data</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> avg, stdev</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre><code>stat_calc (generic function with 1 method)
+</code></pre><p>Now, we can modify <code>MC_mean_plotter</code> to include error bars to better visualize the convergence of our data:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> MC_errorbar(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, m::<span class="built_in">Int</span>, M::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># f = some general function</span></span><br><span class="line"><span class="comment"># N = number of Monte Carlo steps</span></span><br><span class="line"><span class="comment"># m = number of points to plot</span></span><br><span class="line"><span class="comment"># M = number of times to repeat a single MC step to for statistical analysis</span></span><br><span class="line"></span><br><span class="line">    n = <span class="built_in">Int64</span>(N/m) <span class="comment"># define the step size between points to plot</span></span><br><span class="line"></span><br><span class="line">    stat_list = [stat_calc(f,i,M) <span class="keyword">for</span> i <span class="keyword">in</span> n:n:N] <span class="comment"># make a list of averages and standard deviations from stat_calc</span></span><br><span class="line">    avg_list = [stat_list[i][<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:m] <span class="comment"># create list of averages</span></span><br><span class="line">    stdev_list = [stat_list[i][<span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:m] <span class="comment"># create list of standard deviations</span></span><br><span class="line"></span><br><span class="line">    errorbar(collect(n:n:N), avg_list, yerr=stdev_list, linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>,</span><br><span class="line">        color=<span class="string">"blue"</span>, label=string(<span class="string">"MC Estimate: "</span>, round(avg_list[<span class="keyword">end</span>], <span class="number">6</span>)))</span><br><span class="line">    <span class="comment"># in the above, we plot the averages vs. MC step size with error bars of the standard deviation</span></span><br><span class="line"></span><br><span class="line">    axhline(y=<span class="number">10</span>, linestyle=<span class="string">"-"</span>, color=<span class="string">"red"</span>, label=string(<span class="string">"Exact Value: "</span>, <span class="number">10</span>))</span><br><span class="line">    <span class="comment"># in the above, we plot a horizontal line at the 10 value</span></span><br><span class="line"></span><br><span class="line">    per_error = <span class="number">100</span>*abs((avg_list[<span class="keyword">end</span>]-<span class="number">10</span>)/(avg_list[<span class="keyword">end</span>])) <span class="comment"># calculate percent error</span></span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">L"Monte Carlo Estimation of $10$--within "</span>, round(per_error,<span class="number">5</span>), <span class="string">"%"</span>)) <span class="comment"># make titles and labels</span></span><br><span class="line">    ylabel(<span class="string">"Estimation of 10"</span>)</span><br><span class="line">    xlabel(<span class="string">"# of random points"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>,<span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>) <span class="comment"># make legend</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre><code>MC_errorbar (generic function with 1 method)
+</code></pre><p>With <code>MC_mean_plot</code>, we can easily generalize the program in future modification.</p>
+<p>Now, we plot a hundred values of MC samples with a maximum of a billion, with each set of samples performed fifteen times for statistical analysis. The resulting data shows a clear convergence of error.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_errorbar(MC_mean, <span class="number">10</span>^<span class="number">6</span>, <span class="number">100</span>, <span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_25_0.svg"></p>
+<pre><code>PyObject &lt;matplotlib.legend.Legend object at 0x1262c3fd0&gt;
+</code></pre><p>We can test our result by looking at the convergence of the standard deviation with increasing sample size. Recall the Monte Carlo estimation of the integral of some general function $f(x)$</p>
+<p>$$<br>\int<em>a^b f(x)dx = \frac{b-a}{N}\sum</em>{i=0}^{N-1}E(f(x_i))<br>$$</p>
+<p>The st.dev. squared can easily be calculated:</p>
+<p>$$<br>\sigma<em>{int}^2 = \frac{b-a}{N^2}\left( \sum</em>{i=0}^{N-1}E(f(x_i)) \right)<br>$$</p>
+<p>If the random variables $x_i$ are uncorrelated, we can easily simplify the above further:</p>
+<p>$$<br>\begin{split}<br>\sigma<em>{int}^2 &amp;= \frac{b-a}{N^2}\sum</em>{i=0}^{N-1}\sigma^2(E(f(x_i))) \<br>&amp;= \frac{b-a}{N}\sigma^2(E(f(x)))<br>\end{split}<br>$$</p>
+<p>Therefore, we find that the st.dev. goes as the inverse of the square of the sample size:</p>
+<p>$$<br>\sigma_{int}\propto\frac{1}{\sqrt{N}}<br>$$</p>
+<p>To test this result, we plot the numerically calculated st.dev. alongside $1/\sqrt{N}$</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> MC_errorbar_visual(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, m::<span class="built_in">Int</span>, M::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># f = some general function</span></span><br><span class="line"><span class="comment"># N = number of Monte Carlo steps</span></span><br><span class="line"><span class="comment"># m = number of points to plot</span></span><br><span class="line"><span class="comment"># M = number of times to repeat a single MC step to for statistical analysis</span></span><br><span class="line"></span><br><span class="line">    n = <span class="built_in">Int64</span>(N/m) <span class="comment"># define the step size between points to plot</span></span><br><span class="line"></span><br><span class="line">    stat_list = [stat_calc(f,i,M) <span class="keyword">for</span> i <span class="keyword">in</span> n:n:N] <span class="comment"># make a list of averages and standard deviations from stat_calc</span></span><br><span class="line">    stdev_list = [stat_list[i][<span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:m] <span class="comment"># create list of standard deviations</span></span><br><span class="line"></span><br><span class="line">    plot(collect(n:n:N), stdev_list, linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"blue"</span>) <span class="comment"># plot the list of st.dev from MC data</span></span><br><span class="line"></span><br><span class="line">    plot(collect(n:n:N), [<span class="number">1</span>/i^(<span class="number">1</span>/<span class="number">2</span>) <span class="keyword">for</span> i <span class="keyword">in</span> n:n:N], linestyle=<span class="string">"--"</span>, color=<span class="string">"red"</span>) <span class="comment"># plot the prediction for the st.dev</span></span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">"Convergence of Error bars in MC Data"</span>)) <span class="comment"># make titles and labels</span></span><br><span class="line">    ylabel(<span class="string">"Standard Deviation"</span>)</span><br><span class="line">    xlabel(<span class="string">"# of random points"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>,<span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>) <span class="comment"># make legend</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre><code>MC_errorbar_visual (generic function with 1 method)
+</code></pre><p>Running a maximum of a million samples in steps of a hundred, we find roughly the expected behavior, with each sample repeated fifteen times for statistical analysis.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_errorbar_visual(MC_mean, <span class="number">10</span>^<span class="number">6</span>, <span class="number">100</span>, <span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_29_0.svg"></p>
+<h3 id="Problem-2"><a href="#Problem-2" class="headerlink" title="Problem 2"></a>Problem 2</h3><p>Here we want to estimate the probability of a point location, i.e. $P[x\in\Omega]$</p>
+<p>we have already learned that</p>
+<p>$$<br>P[x\in\Omega] = \int_{\Omega}p(x)\,dx=\int I(x)p(x)\,dx = E_p[I]<br>$$</p>
+<p>Now, set $\Omega: (x_1-5)^2+(x_2-5)^2\leq 1 $ , $p(x)$ to be the PDF (probability density function) of a binormal distribution i.e. $x_1, x_2 \sim N(0,1)$</p>
+<blockquote>
+<p>Use Importance Sampling method (<strong>choose best IS distribution</strong> $q(x)$) to get the best result.</p>
+</blockquote>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/region.svg" style="zoom:65%"></p>
+<p>The <strong>importance sampling method</strong> comes from a single idea like this</p>
+<p>$$<br>\begin{align<em>}<br>P[x\in\Omega]&amp;= E_p[I]\<br>&amp;= \int I(x)p(x)\,dx \<br>&amp;= \int I(x)\frac{p(x)}{q(x)}\cdot q(x)\,dx = \int I(x)w(x)\cdot q(x)\,dx\<br>&amp;= E_q[I\cdot w]<br>\end{align</em>}<br>$$</p>
+<p>Thus</p>
+<p>$$<br>\hat{I}<em>\text{IS} = \frac1n \sum</em>{i=1}^n I(x_i)w(x_i) \qquad x_i\in q(x)<br>$$</p>
+<p>where</p>
+<p>$\hat{I}_\text{IS}: $ IS estimator ;      $q(x): $ IS distribution ;     $w(x) :$ IS weight ;</p>
+<p>Assume that $q(x)$ is the PDF of a binormal distribution i.e. $q\sim N({\mu_1,\mu_2},1)$</p>
+<p>the problem should be solve in following steps:</p>
+<ol>
+<li>choose samples according to $q(x)$ ;</li>
+<li>use these samples to get the value of weight function $w(x)$ ;</li>
+<li>apply monte carlo method to the calculation of $E[I\cdot w]$ ;</li>
+<li>compare our result with the exact probability and filter the parameters ;</li>
+</ol>
+<p>To get the best result, the fourth step is always needed.</p>
+<p>Actually, we can directly calculate the exact probability</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p=<span class="keyword">Integrate</span>[</span><br><span class="line">  <span class="keyword">PDF</span>[<span class="keyword">BinormalDistribution</span>[&#123;0, 0&#125;, &#123;1, 1&#125;, <span class="number">0</span>], &#123;x, y&#125;], &#123;x, 4, 6&#125;, &#123;y,</span><br><span class="line">    5 - Sqrt[1 - (x - 5)^2], 5 + Sqrt[1 - (x - 5)^2]&#125;] // <span class="keyword">N</span></span><br></pre></td></tr></table></figure>
+<p>which gives</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2.23465</span>*<span class="number">10</span>^<span class="number">-10</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Distributions</span><br><span class="line"><span class="meta">@everywhere</span> <span class="keyword">function</span> MC_prob(μ<span class="number">1</span>::<span class="built_in">Float64</span>, μ<span class="number">2</span>::<span class="built_in">Float64</span>, N::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># N = number of Monto Carlo points</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># step 1. set initial values and draw random samples</span></span><br><span class="line">    r = -<span class="number">1</span></span><br><span class="line">    <span class="literal">I</span> = zeros(N,<span class="number">1</span>)</span><br><span class="line">    x = rand(Normal(μ<span class="number">1</span>, <span class="number">1</span>), N)</span><br><span class="line">    y = rand(Normal(μ<span class="number">2</span>, <span class="number">1</span>), N)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step 2. use these samples to get function values I, p, q, w</span></span><br><span class="line">    g = -(x-<span class="number">5</span>).^<span class="number">2</span>-(y-<span class="number">5</span>).^<span class="number">2</span></span><br><span class="line">    <span class="comment">## construct the indicator function</span></span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">1</span>:N</span><br><span class="line">        <span class="keyword">if</span> g[i] &gt; r</span><br><span class="line">            <span class="literal">I</span>[i] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="literal">I</span>[i] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    p = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * (x.^<span class="number">2</span> + y.^<span class="number">2</span>))</span><br><span class="line">    q = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * ((x-<span class="number">5</span>).^<span class="number">2</span> + (y-<span class="number">5</span>).^<span class="number">2</span>))</span><br><span class="line">    w = p./q</span><br><span class="line"></span><br><span class="line"><span class="comment"># step 3. apply Monte Carlo to calculate the expectation</span></span><br><span class="line">    <span class="keyword">return</span> mean(<span class="literal">I</span>.*w)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>A natural thought is to set $\mu1=\mu2=5$, $N=10^5$, but the simulated probability seems to be flawed:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_prob(<span class="number">5.0</span>, <span class="number">5.0</span>, <span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>2.2415303094407912e-10
+</code></pre><p>Indicated by the parameter choosing rules, we can set $\mu1=\mu2$ and make a simple plot of errors on the specific line $y=x$.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line">PyPlot.svg(<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">function</span> error_plotter(N::<span class="built_in">Int</span>)</span><br><span class="line">    plot(collect(<span class="number">1.0</span>:<span class="number">0.1</span>:<span class="number">5.0</span>), [MC_prob(i,i,N) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1.0</span>:<span class="number">0.1</span>:<span class="number">5.0</span>],</span><br><span class="line">    linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"blue"</span>, label=<span class="string">"Single Processor"</span>)</span><br><span class="line"></span><br><span class="line">    axhline(y=<span class="number">2.23465e-10</span>, linestyle=<span class="string">"-"</span>, color=<span class="string">"red"</span>, label=string(<span class="string">"Exact Value: "</span>, <span class="number">2.23465e-10</span>))</span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">"Monte Carlo Estimation of probability"</span>))</span><br><span class="line">    ylabel(<span class="string">"Estimation of prob"</span>)</span><br><span class="line">    xlabel(<span class="string">"μ1=μ2"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>, <span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre><code>error_plotter (generic function with 1 method)
+</code></pre><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_plotter(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_36_0.svg"></p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PyObject &lt;matplotlib.legend.Legend object at <span class="number">0x123259fd0</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>As shown in the plot, $\mu1=\mu2=3.9$ is the best choice, though it is not always perfect.</p>
+<p>For fixed parameters, we can do parallel calculation by setting a new function:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> fixed_MC_prob(N::<span class="built_in">Int</span>)</span><br><span class="line">    MC_prob(<span class="number">3.9</span>, <span class="number">3.9</span>, N)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre><code>fixed_MC_prob (generic function with 1 method)
+</code></pre><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fixed_MC_prob(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2.3208602460224826e-10</span></span><br></pre></td></tr></table></figure>
+<p>Recall the <code>parallel_calc</code> function before, it will be much more convenient to get the result in large number simulations by running:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parallel_calc(fixed_MC_prob, <span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+<p>Also, we can obtain the elapsed time in the similar way with <code>mean_time_plotter</code>. (and not explained here)</p>
+<h2 id="Homework-2"><a href="#Homework-2" class="headerlink" title="Homework 2"></a>Homework 2</h2><h3 id="Problem-3"><a href="#Problem-3" class="headerlink" title="Problem 3"></a>Problem 3</h3><blockquote>
+<p>Redo Problem 2 by Cross Entropy method. Find the best distribution $q(x)$ to get the persuasive result.</p>
+</blockquote>
+<p><strong>CE Method for rare probability estimation</strong></p>
+<p>Consider a rare probability</p>
+<p>$$<br>P(x\in\Omega) \ll 1 \quad\Omega={x\mid g(x)&gt;r }<br>$$</p>
+<p>While applying CE method to solve the optimization problem</p>
+<p>$$<br>\max<em>{q’\in Q}\frac1n \sum</em>{i=1}^nf(x_i)\ln q’(x_i)u<br>$$</p>
+<p>we can easily find that $x_i\sim q\approx p$</p>
+<p>Thus, $I(x_i)=0$ almost for all $x_i$. Obviously, it does nothing to our work.</p>
+<p>Pratically, we usually use the variant of CE method i.e.</p>
+<p><strong>Multilevel / Multistage CE Method</strong></p>
+<p>Denote</p>
+<p>$$<br>I_r(x)=\begin{cases}<br>1 &amp; g(x)&gt;r\<br>0 &amp; g(x)&lt;r<br>\end{cases}<br>$$</p>
+<p>First we do sampling work, then choose $r$ according to the samples. Thus, we can fetch the specific number of $g(x)$ satisfying $g(x)&lt; r$</p>
+<p>$$<br>g(x_1)\leq g(x_2)\cdots\leq g(x_n)<br>$$</p>
+<p>Set $0&lt; \rho\leq 1$ to be the confidence coefficient, define that the $(1-\rho)$-th quantile of a r.v. $y$ is the $r$ satisfying that</p>
+<p>$$<br>P[y\geq r] \geq \rho, \quad P[y\leq r]\leq 1-\rho<br>$$</p>
+<p>Hence, we can derive an estimation of $r$</p>
+<p>$$<br>r=y[(1-\rho)N]<br>$$</p>
+<p>if ${y_i}$ is ordered assendingly $y_i=g(x_i)$</p>
+<p>The basic algorithm goes like below:</p>
+<p><strong>Algorithom</strong></p>
+<ol>
+<li>let $q=p$</li>
+<li>draw samples from $q:{ x_1,\cdot,x_n }$</li>
+<li>compute $\hat{r} = (1-\rho)$-th quantile of ${g(x<em>i)}</em>{i=1}^n$ if $\hat{r}&gt;r$, let $\hat{r}=r$</li>
+<li>solve $\max<em>{q’\in Q}\frac1n \sum</em>{i=1}^nI_{\hat{r}}(x_i)\ln q’(x_i)w(x_i)$; let $q=q’$</li>
+<li>if $\hat{r}&lt;r$, return to step 2, otherwise proceed to step 6</li>
+<li>estimate $\hat{P}=\frac1n \sum<em>{i=1}^n I</em>{r}(x_i)w(x_i)$ with $x_i\sim q(x)$</li>
+</ol>
+<p>As for Problem 2, the corresponding functions and parameters should be:</p>
+<p>$$<br>p\sim N(0,I_2) \quad g(x)=-(x-5)^2-(y-5)^2 \quad r=-1<br>$$</p>
+<p>For fixed variance $\Sigma=I_2$, we can directly give the optimal mean value in step 4 as taught in lecture 2:<br>$$<br>\mu=\frac{E_q[xIw]}{E_q[Iw]}<br>$$</p>
+<p>Hence, it is sufficient enough to give an implement:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@everywhere</span> <span class="keyword">function</span> CE_prob(ρ::<span class="built_in">Float64</span>, N::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step 1. set initial values</span></span><br><span class="line">μ<span class="number">1</span> = <span class="number">0</span></span><br><span class="line">μ<span class="number">2</span> = <span class="number">0</span></span><br><span class="line">iter = <span class="number">5000</span></span><br><span class="line">r = -<span class="number">1</span></span><br><span class="line">rhat = -<span class="number">10</span></span><br><span class="line">p = zeros(N,<span class="number">1</span>)</span><br><span class="line">q = zeros(N,<span class="number">1</span>)</span><br><span class="line">w = zeros(N,<span class="number">1</span>)</span><br><span class="line"><span class="literal">I</span> = zeros(N,<span class="number">1</span>)</span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># step 5. set loops for calculation</span></span><br><span class="line">    <span class="keyword">while</span> rhat &lt; r &amp;&amp; k &lt; iter</span><br><span class="line"><span class="comment"># step 2. draw random samples on two diff coordinates</span></span><br><span class="line">        x = rand(Normal(μ<span class="number">1</span>, <span class="number">1</span>), N)</span><br><span class="line">        y = rand(Normal(μ<span class="number">2</span>, <span class="number">1</span>), N)</span><br><span class="line"><span class="comment"># step 3.</span></span><br><span class="line">        <span class="comment">## sort the corresponding function value</span></span><br><span class="line">        g = -(x-<span class="number">5</span>).^<span class="number">2</span>-(y-<span class="number">5</span>).^<span class="number">2</span></span><br><span class="line">        orderg = sort(g)</span><br><span class="line">        <span class="comment">## comupte the quantile</span></span><br><span class="line">        ix = floor(<span class="built_in">Int</span>,(<span class="number">1</span>-ρ)*N)</span><br><span class="line">        rhat = orderg[ix]</span><br><span class="line">        <span class="comment">## set constraint to narrow the search area</span></span><br><span class="line">        <span class="keyword">if</span> rhat &gt; r</span><br><span class="line">            rhat = r</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="comment"># step 4.</span></span><br><span class="line">        <span class="comment">## derive the optimization problem</span></span><br><span class="line">        p = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * (x.^<span class="number">2</span> + y.^<span class="number">2</span>))</span><br><span class="line">        q = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * ((x-<span class="number">5</span>).^<span class="number">2</span> + (y-<span class="number">5</span>).^<span class="number">2</span>))</span><br><span class="line">        w = p./q</span><br><span class="line">        <span class="comment">## construct the indicator function, which implies the search region</span></span><br><span class="line">        <span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> g[i] &gt; rhat</span><br><span class="line">                <span class="literal">I</span>[i] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="literal">I</span>[i] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="comment">## update the sampling distribution</span></span><br><span class="line">        μ<span class="number">1</span> = mean(x .* <span class="literal">I</span> .* w)/mean(<span class="literal">I</span> .* w)</span><br><span class="line">        μ<span class="number">2</span> = mean(y .* <span class="literal">I</span> .* w)/mean(<span class="literal">I</span> .* w)</span><br><span class="line"></span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="comment"># step 6. apply Monte Carlo to calculate the prob</span></span><br><span class="line">    mean(<span class="literal">I</span>.*w) <span class="comment"># append μ1, μ2 to get the optimal value</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>Let’s make single simulation by setting $\rho = 0.2$ and $N=10^6$, the probability is shown below.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CE_prob(<span class="number">0.2</span>,<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2.9121974873535745e-10</span></span><br></pre></td></tr></table></figure>
+<p>The result is fair enough, but may raise the question in parameter choice of $\rho$. Now, let’s consider the quantile effect by program below:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line">PyPlot.svg(<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">function</span> quantile_effect(N::<span class="built_in">Int</span>)</span><br><span class="line">    plot(collect(<span class="number">0.1</span>:<span class="number">0.05</span>:<span class="number">0.9</span>), [CE_prob(i,N) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0.1</span>:<span class="number">0.05</span>:<span class="number">0.9</span>],</span><br><span class="line">    linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"blue"</span>, label=<span class="string">"Single Processor"</span>)</span><br><span class="line"></span><br><span class="line">    axhline(y=<span class="number">2.23465e-10</span>, linestyle=<span class="string">"-"</span>, color=<span class="string">"red"</span>,</span><br><span class="line">            label=string(<span class="string">"Exact Value: "</span>, <span class="number">2.23465e-10</span>))</span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">"Monte Carlo Estimation of probability"</span>))</span><br><span class="line">    ylabel(<span class="string">"Estimation of prob"</span>)</span><br><span class="line">    xlabel(<span class="string">"parameter: ρ"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>, <span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre><code>quantile_effect (generic function with 1 method)
+</code></pre><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">quantile_effect(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_50_0.svg"></p>
+<pre><code>PyObject &lt;matplotlib.legend.Legend object at 0x136c6e050&gt;
+</code></pre><p>As shown in the picture, it is resonable for us to choose $\rho$ in $[0,0.5]$. For clarity, here we set $\rho=0.2$</p>
+<p>Rewrite the code in <code>CE_prob</code> by appending $\mu1, \mu2$ to the return command, we will obtain the corresponding distribution and probability:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Distributions</span><br><span class="line"><span class="meta">@everywhere</span> <span class="keyword">function</span> CE(N::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step 1. set initial values</span></span><br><span class="line">μ<span class="number">1</span> = <span class="number">0</span></span><br><span class="line">μ<span class="number">2</span> = <span class="number">0</span></span><br><span class="line">iter = <span class="number">5000</span></span><br><span class="line">ρ = <span class="number">0.2</span></span><br><span class="line">r = -<span class="number">1</span></span><br><span class="line">rhat = -<span class="number">10</span></span><br><span class="line">p = zeros(N,<span class="number">1</span>)</span><br><span class="line">q = zeros(N,<span class="number">1</span>)</span><br><span class="line">w = zeros(N,<span class="number">1</span>)</span><br><span class="line"><span class="literal">I</span> = zeros(N,<span class="number">1</span>)</span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># step 5. set loops for calculation</span></span><br><span class="line">    <span class="keyword">while</span> rhat &lt; r &amp;&amp; k &lt; iter</span><br><span class="line"><span class="comment"># step 2. draw random samples on two diff coordinates</span></span><br><span class="line">        x = rand(Normal(μ<span class="number">1</span>, <span class="number">1</span>), N)</span><br><span class="line">        y = rand(Normal(μ<span class="number">2</span>, <span class="number">1</span>), N)</span><br><span class="line"><span class="comment"># step 3.</span></span><br><span class="line">        <span class="comment">## sort the corresponding function value</span></span><br><span class="line">        g = -(x-<span class="number">5</span>).^<span class="number">2</span>-(y-<span class="number">5</span>).^<span class="number">2</span></span><br><span class="line">        orderg = sort(g)</span><br><span class="line">        <span class="comment">## comupte the quantile</span></span><br><span class="line">        ix = floor(<span class="built_in">Int</span>,(<span class="number">1</span>-ρ)*N)</span><br><span class="line">        rhat = orderg[ix]</span><br><span class="line">        <span class="comment">## set constraint to narrow the search area</span></span><br><span class="line">        <span class="keyword">if</span> rhat &gt; r</span><br><span class="line">            rhat = r</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="comment"># step 4.</span></span><br><span class="line">        <span class="comment">## derive the optimization problem</span></span><br><span class="line">        p = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * (x.^<span class="number">2</span> + y.^<span class="number">2</span>))</span><br><span class="line">        q = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * ((x-<span class="number">5</span>).^<span class="number">2</span> + (y-<span class="number">5</span>).^<span class="number">2</span>))</span><br><span class="line">        w = p./q</span><br><span class="line">        <span class="comment">## construct the indicator function, which implies the search region</span></span><br><span class="line">        <span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> g[i] &gt; rhat</span><br><span class="line">                <span class="literal">I</span>[i] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="literal">I</span>[i] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="comment">## update the sampling distribution</span></span><br><span class="line">        μ<span class="number">1</span> = mean(x .* <span class="literal">I</span> .* w)/mean(<span class="literal">I</span> .* w)</span><br><span class="line">        μ<span class="number">2</span> = mean(y .* <span class="literal">I</span> .* w)/mean(<span class="literal">I</span> .* w)</span><br><span class="line"></span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="comment"># step 6. apply Monte Carlo to calculate the prob</span></span><br><span class="line">    μ<span class="number">1</span>, μ<span class="number">2</span>, mean(<span class="literal">I</span>.*w)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CE(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>(4.426701996662324, 4.423183271573601, 2.8762783318578916e-10)
+</code></pre><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Blogs of Monte Carlo work in Github: <a href="http://onlookerliu.leanote.com/post/5c355c764900" target="_blank" rel="noopener">http://onlookerliu.leanote.com/post/5c355c764900</a></li>
+<li>Gonçalo, Abecasis. “Monte Carlo Integration”, Biostatistics 615/815, Lecture 22: <a href="http://csg.sph.umich.edu/abecasis/class/2006/615.22.pdf" target="_blank" rel="noopener">http://csg.sph.umich.edu/abecasis/class/2006/615.22.pdf</a></li>
+<li>Ho, Shirley. “Introduction to Monte Carlo”, Astro 542 at Princeton University: <a href="http://www.phys.ubbcluj.ro/~zneda/edu/mc/mcshort.pdf" target="_blank" rel="noopener">http://www.phys.ubbcluj.ro/~zneda/edu/mc/mcshort.pdf</a></li>
+<li>Julia language guide: <a href="http://julia-cn.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">http://julia-cn.readthedocs.io/zh_CN/latest/</a></li>
+</ol>
+<hr>
+<p><em>Kai Liu, wrote on 2017/10/28</em></p>
+<p><em>Student ID: 116071910015</em></p>
+<p><em>Mail: liu1995@sjtu.edu.cn</em></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">computationa method</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/10/30/Assignment-1-of-Advanced-Computational-Method/">展开全文 >></a>
         </p>
       
 
@@ -2570,7 +3026,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">R</a>
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2578,7 +3034,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">statistics</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">computational method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2586,15 +3050,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">statistics</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">p5js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2603,6 +3063,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">multilingual</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2658,7 +3122,7 @@ MathJax.Hub.Queue(function() {
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://onlookerliu.leanote.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>数学人的博客</a>
+              <a href="http://onlookerliu.leanote.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>关于数学的博客</a>
             </li>
           
             <li class="search-li">
