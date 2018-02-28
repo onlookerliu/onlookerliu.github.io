@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="ProblemBy listing the first six prime numbers: 2, 3, 5, 7, 11, and 13,we can see that the 6th prime is 13. What is the 10001st prime number? Answer1104743  Python123456789101112131415161718192021#!/us">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-28T14:14:13.000Z">
+<meta property="og:updated_time" content="2018-02-28T14:22:37.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Project-Euler-007">
 <meta name="twitter:description" content="ProblemBy listing the first six prime numbers: 2, 3, 5, 7, 11, and 13,we can see that the 6th prime is 13. What is the 10001st prime number? Answer1104743  Python123456789101112131415161718192021#!/us">
@@ -207,26 +207,7 @@
 <hr>
 <p>Mathematica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* Use Mathematica's built-in functions for easy problem-solving. *)</span></span><br><span class="line"><span class="keyword">Prime</span>[<span class="number">10001</span>]</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p>Java<br>```java<br>public final class p007 implements EulerSolution {</p>
-<pre><code>public static void main(String[] args) {
-    System.out.println(new p007().run());
-}
-
-
-/* 
- * Computers are fast, so we can implement this solution by testing each number
- * individually for primeness, instead of using the more efficient sieve of Eratosthenes.
- */
-public String run() {
-    for (int i = 2, count = 0; ; i++) {
-        if (Library.isPrime(i)) {
-            count++;
-            if (count == 10001)
-                return Integer.toString(i);
-        }
-    }
-}
-</code></pre><p>}</p>
+<p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p007</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p007().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * Computers are fast, so we can implement this solution by testing each number</span></span><br><span class="line"><span class="comment">	 * individually for primeness, instead of using the more efficient sieve of Eratosthenes.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>, count = <span class="number">0</span>; ; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (Library.isPrime(i)) &#123;</span><br><span class="line">				count++;</span><br><span class="line">				<span class="keyword">if</span> (count == <span class="number">10001</span>)</span><br><span class="line">					<span class="keyword">return</span> Integer.toString(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
 
       
