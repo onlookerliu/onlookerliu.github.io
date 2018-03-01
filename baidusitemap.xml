@@ -88,25 +88,6 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 3 of Statistics.md</title>
-        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
-        
-        <tag>r</tag>
-         
-        <tag>statistic</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
@@ -117,6 +98,25 @@
         <tag>r</tag>
          
         <tag>statistics</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 3 of Statistics.md</title>
+        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistic</tag>
          
          
            
@@ -145,23 +145,6 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>A simple Metropolis-Hastings MCMC in R</title>
-        <pubTime>2017-12-28T17:47:23.000Z</pubTime>
-        
-        <tag>r</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
@@ -172,6 +155,23 @@
         <tag>r</tag>
          
         <tag>statistics</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>A simple Metropolis-Hastings MCMC in R</title>
+        <pubTime>2017-12-28T17:47:23.000Z</pubTime>
+        
+        <tag>r</tag>
          
          
            
