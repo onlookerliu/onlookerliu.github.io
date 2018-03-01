@@ -88,44 +88,6 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 2 of Statistics.md</title>
-        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
-        
-        <tag>r</tag>
-         
-        <tag>statistics</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 4 of Statistics.md</title>
-        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
-        
-        <tag>r</tag>
-         
-        <tag>statistic</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
@@ -164,6 +126,25 @@
 
     
   <url>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 4 of Statistics.md</title>
+        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistic</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
@@ -172,6 +153,25 @@
         <pubTime>2017-12-28T17:47:23.000Z</pubTime>
         
         <tag>r</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 2 of Statistics.md</title>
+        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistics</tag>
          
          
            
@@ -358,9 +358,9 @@
         <title>LeetCode Notes 001</title>
         <pubTime>2017-12-27T17:14:13.000Z</pubTime>
         
-        <tag>javascript</tag>
-         
         <tag>leetcode</tag>
+         
+        <tag>javascript</tag>
          
          
            
@@ -377,9 +377,9 @@
         <title>LeetCode Notes 002</title>
         <pubTime>2017-12-29T17:39:34.000Z</pubTime>
         
-        <tag>javascript</tag>
-         
         <tag>leetcode</tag>
+         
+        <tag>javascript</tag>
          
          
            
