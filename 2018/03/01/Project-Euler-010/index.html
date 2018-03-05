@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="onlookerliu.github.io">
-  <title>Tag: javascript | Code@浮生记</title>
+  <title>Project-Euler-010 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life is beautiful!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Code@浮生记">
-<meta property="og:url" content="onlookerliu.github.io/tags/javascript/page/2/index.html">
+  <meta name="description" content="ProblemThe sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.  Find the sum of all the primes below two million.  Answer1142913828922  Python123456789101112131415161718#!/usr/bin/env pythonfrom itert">
+<meta name="keywords" content="euler,multilingual">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project-Euler-010">
+<meta property="og:url" content="onlookerliu.github.io/2018/03/01/Project-Euler-010/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="Life is beautiful!">
+<meta property="og:description" content="ProblemThe sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.  Find the sum of all the primes below two million.  Answer1142913828922  Python123456789101112131415161718#!/usr/bin/env pythonfrom itert">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-05T04:04:48.211Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code@浮生记">
-<meta name="twitter:description" content="Life is beautiful!">
+<meta name="twitter:title" content="Project-Euler-010">
+<meta name="twitter:description" content="ProblemThe sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.  Find the sum of all the primes below two million.  Answer1142913828922  Python123456789101112131415161718#!/usr/bin/env pythonfrom itert">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -165,139 +167,220 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Project-Euler-010" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Project-Euler-010
+    </h1>
+  
+
+        
+        <a href="" class="archive-article-date">
+  	<time datetime="2018-03-01T03:56:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-01</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p><br>The sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.<br></p>
+
+<p><br>Find the sum of all the primes below two million.<br></p>
+
+<h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">142913828922</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> takewhile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eratosthenes</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''Yields the sequence of prime numbers via the Sieve of Eratosthenes.'''</span></span><br><span class="line">    D = &#123;&#125;  <span class="comment"># map composite integers to primes witnessing their compositeness</span></span><br><span class="line">    q = <span class="number">2</span>   <span class="comment"># first integer to test for primality</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> q <span class="keyword">not</span> <span class="keyword">in</span> D:</span><br><span class="line">            <span class="keyword">yield</span> q        <span class="comment"># not marked composite, must be prime</span></span><br><span class="line">            D[q*q] = [q]   <span class="comment"># first multiple of q not already marked</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> D[q]: <span class="comment"># move each witness to its next multiple</span></span><br><span class="line">                D.setdefault(p+q,[]).append(p)</span><br><span class="line">            <span class="keyword">del</span> D[q]       <span class="comment"># no longer need D[q], free memory</span></span><br><span class="line">        q += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(sum(takewhile(<span class="keyword">lambda</span> x: x &lt; <span class="number">2000000</span>, eratosthenes())))</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>JavaScript<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sieve = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> s = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> q = <span class="number">2</span>; q &lt; <span class="number">2000000</span>; q++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (sieve[q]) &#123;</span><br><span class="line">    sieve[q].forEach(<span class="function">(<span class="params">p</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> list = sieve[p + q] || []</span><br><span class="line">      list.push(p)</span><br><span class="line">      sieve[p + q] = list</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">delete</span> sieve[q]</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    s += q</span><br><span class="line">    sieve[q * q] = [q]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(s)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Go<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"math"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PrimeSieve</span><span class="params">(n <span class="keyword">int64</span>)</span> []<span class="title">int64</span></span> &#123;</span><br><span class="line">	result := <span class="built_in">make</span>([]<span class="keyword">int64</span>, <span class="number">0</span>, n/<span class="keyword">int64</span>(math.Log(<span class="keyword">float64</span>(n))))</span><br><span class="line">	sieve := <span class="built_in">make</span>([]<span class="keyword">bool</span>, n+<span class="number">1</span>)</span><br><span class="line">	sn := <span class="keyword">int64</span>(math.Sqrt(<span class="keyword">float64</span>(n)))</span><br><span class="line">	<span class="keyword">var</span> i, j <span class="keyword">int64</span></span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">2</span>; i &lt;= sn; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> !sieve[i] &#123;</span><br><span class="line">			<span class="keyword">for</span> j = i * i; j &lt;= n; j += i &#123;</span><br><span class="line">				sieve[j] = <span class="literal">true</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">2</span>; i &lt;= n; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> !sieve[i] &#123;</span><br><span class="line">			result = <span class="built_in">append</span>(result, i)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	primes := PrimeSieve(<span class="number">2000000</span>)</span><br><span class="line">	<span class="keyword">var</span> sum <span class="keyword">int64</span> = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> _, p := <span class="keyword">range</span> primes &#123;</span><br><span class="line">		sum += p</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'mathn'</span></span><br><span class="line">puts Prime.take_while&#123; <span class="params">|n|</span> n &lt; <span class="number">2000000</span> &#125;.reduce(<span class="symbol">:+</span>)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">primes</span> :: [<span class="type">Integer</span>]</span><br><span class="line"><span class="title">primes</span> = <span class="number">2</span> : sieve primes [<span class="number">3</span>,<span class="number">5.</span>.] <span class="keyword">where</span></span><br><span class="line">    sieve (p:ps) xs = h ++ sieve ps [x | x &lt;- t, rem x p /= <span class="number">0</span>]</span><br><span class="line">                      <span class="keyword">where</span> (h, t) = span (&lt; p*p) xs</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> :: <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ sum $ takeWhile (&lt; <span class="number">2000000</span>) primes</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Clojure<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure</span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> primes [n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">defn</span></span> improve [p nums]</span><br><span class="line">    (<span class="name"><span class="builtin-name">filter</span></span> #(<span class="name"><span class="builtin-name">or</span></span> </span><br><span class="line">               (<span class="name"><span class="builtin-name">not</span></span> (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">rem</span></span> % p) <span class="number">0</span>))</span><br><span class="line">               (<span class="name"><span class="builtin-name">=</span></span> % p))</span><br><span class="line">            nums))</span><br><span class="line">  (<span class="name"><span class="builtin-name">defn</span></span> prime-iter [p nums i]</span><br><span class="line">    (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">&gt;</span></span> (<span class="name"><span class="builtin-name">*</span></span> p p) n)</span><br><span class="line">      nums</span><br><span class="line">      (<span class="name">prime-iter</span> (<span class="name"><span class="builtin-name">nth</span></span> nums (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>)) (<span class="name">improve</span> (<span class="name"><span class="builtin-name">nth</span></span> nums (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>)) nums) (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>))))</span><br><span class="line">  (<span class="name">prime-iter</span> <span class="number">2</span> (<span class="name"><span class="builtin-name">range</span></span> <span class="number">2</span> (<span class="name"><span class="builtin-name">+</span></span> n <span class="number">1</span>)) <span class="number">-1</span>))</span><br><span class="line"></span><br><span class="line">(<span class="name">println</span> (<span class="name"><span class="builtin-name">reduce</span></span> + (<span class="name">primes</span> <span class="number">2000000</span>)))</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Mathematica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* Use Mathematica's built-in functions for easy problem-solving. *)</span></span><br><span class="line"><span class="keyword">Total</span>[<span class="keyword">Select</span>[<span class="keyword">Range</span>[<span class="number">1999999</span>], <span class="keyword">PrimeQ</span>]]</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p010</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p010().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * Call the sieve of Eratosthenes and sum the primes found.</span></span><br><span class="line"><span class="comment">	 * A conservative upper bound for the sum is 2000000^2, which fits in a Java long type.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> LIMIT = <span class="number">2000000</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> p : Library.listPrimes(LIMIT - <span class="number">1</span>))</span><br><span class="line">			sum += p;</span><br><span class="line">		<span class="keyword">return</span> Long.toString(sum);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果～<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oxyywddt8.bkt.clouddn.com/qrcode/ali-qrcode.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oxyywddt8.bkt.clouddn.com/qrcode/Wechat.jpeg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="../../../../archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/27/剑指offer-JavaScript版III/" class="archive-article-date">
-  	<time datetime="2017-12-27T15:55:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/27/剑指offer-JavaScript版III/">剑指offer--JavaScript版III</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/27/剑指offer-JavaScript版II/" class="archive-article-date">
-  	<time datetime="2017-12-27T15:54:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/27/剑指offer-JavaScript版II/">剑指offer--JavaScript版II</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:onlookerliu.github.io/2018/03/01/Project-Euler-010/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/27/剑指offer-JavaScript版I/" class="archive-article-date">
-  	<time datetime="2017-12-27T15:47:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="../../../02/27/Project-Euler-009/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Project-Euler-009</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/27/剑指offer-JavaScript版I/">剑指offer--JavaScript版I</a>
-    </h1>
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Project-Euler-010" data-title="Project-Euler-010" data-url="onlookerliu.github.io"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../../">&laquo; Prev</a><a class="page-number" href="../../">1</a><span class="page-number current">2</span><a class="page-number" href="../3/">3</a><a class="extend next" rel="next" href="../3/">Next &raquo;</a>
-    </nav>
+  
+
   
 
 
@@ -327,9 +410,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
