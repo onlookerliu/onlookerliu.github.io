@@ -126,25 +126,6 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 1 of Statistics.md</title>
-        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
-        
-        <tag>r</tag>
-         
-        <tag>statistics</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
@@ -155,25 +136,6 @@
         <tag>r</tag>
          
         <tag>statistics</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 3 of Statistics.md</title>
-        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
-        
-        <tag>r</tag>
-         
-        <tag>statistic</tag>
          
          
            
@@ -210,6 +172,44 @@
         <pubTime>2017-12-28T17:47:23.000Z</pubTime>
         
         <tag>r</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 1 of Statistics.md</title>
+        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistics</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 3 of Statistics.md</title>
+        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistic</tag>
          
          
            
@@ -377,9 +377,9 @@
         <title>LeetCode Notes 001</title>
         <pubTime>2017-12-27T17:14:13.000Z</pubTime>
         
-        <tag>leetcode</tag>
-         
         <tag>javascript</tag>
+         
+        <tag>leetcode</tag>
          
          
            
@@ -396,9 +396,9 @@
         <title>LeetCode Notes 002</title>
         <pubTime>2017-12-29T17:39:34.000Z</pubTime>
         
-        <tag>leetcode</tag>
-         
         <tag>javascript</tag>
+         
+        <tag>leetcode</tag>
          
          
            
