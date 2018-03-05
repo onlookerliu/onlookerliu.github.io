@@ -167,6 +167,138 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-A-simple-Metropolis-Hastings-MCMC-in-R" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/">A simple Metropolis-Hastings MCMC in R</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/" class="archive-article-date">
+  	<time datetime="2017-12-28T17:47:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>While there are certainly good software packages out there to do the job for you, notably BUGS or JAGS, it is instructive to program a simple MCMC yourself. In this post, I give an educational example of the Bayesian equivalent of a linear regression, sampled by an MCMC with Metropolis-Hastings steps, based on an earlier version which I did to together with Tamara Münkemüller. Since first publishing this post, I have made a few small modifications to improve clarity. A similar post on Metropolis-Hastings MCMC algorithms by Darren Wilkinson is also worth looking at. More on analyzing the results of this algorithm can be found in a recent post.</p>
+<h2 id="Creating-test-data"><a href="#Creating-test-data" class="headerlink" title="Creating test data"></a>Creating test data</h2><p>As a first step, we create some test data that will be used to fit our model. Let’s assume a linear relationship between the predictor and the response variable, so we take a linear model and add some noise.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">trueA &lt;- <span class="number">5</span></span><br><span class="line">trueB &lt;- <span class="number">0</span></span><br><span class="line">trueSd &lt;- <span class="number">10</span></span><br><span class="line">sampleSize &lt;- <span class="number">31</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># create independent x-values</span></span><br><span class="line">x &lt;- (-(sampleSize-<span class="number">1</span>)/<span class="number">2</span>):((sampleSize-<span class="number">1</span>)/<span class="number">2</span>)</span><br><span class="line"><span class="comment"># create dependent values according to ax + b + N(0,sd)</span></span><br><span class="line">y &lt;-  trueA * x + trueB + rnorm(n=sampleSize,mean=<span class="number">0</span>,sd=trueSd)</span><br><span class="line"></span><br><span class="line">plot(x,y, main=<span class="string">"Test Data"</span>)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/machineLearning/MCMC/output_2_0.png" width="60%"><br></div>
+
+
+<p>I balanced x values around zero to “de-correlate” slope and intercept. The result should look something like the figure to the above.</p>
+<h2 id="Defining-the-statistical-model"><a href="#Defining-the-statistical-model" class="headerlink" title="Defining the statistical model"></a>Defining the statistical model</h2><p>The next step is to specify the statistical model. We already know that the data was created with a linear relationship $y = a*x + b$ between $x$ and $y$ and a normal error model $N(0,sd)$ with standard deviation $sd$, so let’s use the same model for the fit and see if we can retrieve our original parameter values.</p>
+<h2 id="Derive-the-likelihood-function-from-the-model"><a href="#Derive-the-likelihood-function-from-the-model" class="headerlink" title="Derive the likelihood function from the model"></a>Derive the likelihood function from the model</h2><p>For estimating parameters in a Bayesian analysis, we need to derive the likelihood function for the model that we want to fit. The likelihood is the probability (density) with which we would expect the observed data to occur conditional on the parameters of the model that we look at. So, given that our linear model $y = b + a<em>x + N(0,sd)$ takes the parameters $(a, b, sd)$ as an input, we have to return the probability of obtaining the test data above under this model (this sounds more complicated as it is, as you see in the code, we simply calculate the difference between predictions $y = b + a</em>x$ and the observed $y$, and then we have to look up the probability densities (using <code>dnorm</code>) for such deviations to occur.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">likelihood &lt;- <span class="keyword">function</span>(param)&#123;</span><br><span class="line">    a = param[<span class="number">1</span>]</span><br><span class="line">    b = param[<span class="number">2</span>]</span><br><span class="line">    sd = param[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">    pred = a*x + b</span><br><span class="line">    singlelikelihoods = dnorm(y, mean = pred, sd = sd, log = <span class="literal">T</span>)</span><br><span class="line">    sumll = sum(singlelikelihoods)</span><br><span class="line">    <span class="keyword">return</span>(sumll)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example: plot the likelihood profile of the slope a</span></span><br><span class="line">slopevalues &lt;- <span class="keyword">function</span>(x)&#123;<span class="keyword">return</span>(likelihood(c(x, trueB, trueSd)))&#125;</span><br><span class="line">slopelikelihoods &lt;- lapply(seq(<span class="number">3</span>, <span class="number">7</span>, by=<span class="number">.05</span>), slopevalues )</span><br><span class="line">plot (seq(<span class="number">3</span>, <span class="number">7</span>, by=<span class="number">.05</span>), slopelikelihoods , type=<span class="string">"l"</span>, xlab = <span class="string">"values of slope parameter a"</span>, ylab = <span class="string">"Log likelihood"</span>)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/machineLearning/MCMC/output_5_0.png" width="60%"><br></div>
+
+
+<p>As an illustration, the last lines of the code plot the Likelihood for a range of parameter values of the slope parameter a. The result should look something like the plot to the above.</p>
+<h2 id="Why-we-work-with-logarithms"><a href="#Why-we-work-with-logarithms" class="headerlink" title="Why we work with logarithms"></a>Why we work with logarithms</h2><p>You might have noticed that I return the logarithm of the probabilities in the likelihood function, which is also the reason why I sum the probabilities of all our datapoints (the logarithm of a product equals the sum of the logarithms). Why do we do this?</p>
+<p>You don’t have to, but it’s strongly advisable because likelihoods, where a lot of small probabilities are multiplied, can get ridiculously small pretty fast (something like $10^-34$). At some stage, computer programs are getting into numerical rounding or underflow problems then. So, bottom-line: when you program something with likelihoods, always use logarithms!!!</p>
+<h2 id="Defining-the-prior"><a href="#Defining-the-prior" class="headerlink" title="Defining the prior"></a>Defining the prior</h2><p>As a second step, as always in Bayesian statistics, we have to specify a <a href="https://en.wikipedia.org/wiki/Prior_probability" target="_blank" rel="noopener">prior distribution</a> for each parameter. To make it easy, I used uniform distributions and normal distributions for all three parameters. Some additional information for the “professionals”, skip this when you don’t understand what I’m talking about: while this choice can be considered pretty <a href="https://en.wikipedia.org/wiki/Prior_probability#Uninformative_priors" target="_blank" rel="noopener">“uninformative”</a> for the slope and intercept parameters, it is not really uninformative for the standard deviations. An uninformative prior for the latter would usually be scale with $1/sigma$ (if you want to understand the reason, see <a href="https://en.wikipedia.org/wiki/Jeffreys_prior#Gaussian_distribution_with_standard_deviation_parameter" target="_blank" rel="noopener">here</a>. This stuff is important when you seriously dive into Bayesian statistics, but I didn’t want to make the code more confusing here.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Prior distribution</span></span><br><span class="line">prior &lt;- <span class="keyword">function</span>(param)&#123;</span><br><span class="line">    a = param[<span class="number">1</span>]</span><br><span class="line">    b = param[<span class="number">2</span>]</span><br><span class="line">    sd = param[<span class="number">3</span>]</span><br><span class="line">    aprior = dunif(a, min=<span class="number">0</span>, max=<span class="number">10</span>, log = <span class="literal">T</span>)</span><br><span class="line">    bprior = dnorm(b, sd = <span class="number">5</span>, log = <span class="literal">T</span>)</span><br><span class="line">    sdprior = dunif(sd, min=<span class="number">0</span>, max=<span class="number">30</span>, log = <span class="literal">T</span>)</span><br><span class="line">    <span class="keyword">return</span>(aprior+bprior+sdprior)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="The-posterior"><a href="#The-posterior" class="headerlink" title="The posterior"></a>The posterior</h2><p>The product of prior and likelihood is the actual quantity the MCMC will be working on. This function is called the <a href="https://en.wikipedia.org/wiki/Posterior_probability" target="_blank" rel="noopener">posterior</a> (or to be exact, it’s called the posterior after it’s normalized, which the MCMC will do for us, but let’s not be picky for the moment). Again, here we work with the sum because we work with logarithms.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">posterior &lt;- <span class="keyword">function</span>(param)&#123;</span><br><span class="line">   <span class="keyword">return</span> (likelihood(param) + prior(param))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="The-MCMC"><a href="#The-MCMC" class="headerlink" title="The MCMC"></a>The MCMC</h2><p>Now, here comes the actual <a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm" target="_blank" rel="noopener">Metropolis-Hastings algorithm</a>. One of the most frequent applications of this algorithm (as in this example) is sampling from the posterior density in Bayesian statistics. In principle, however, the algorithm may be used to sample from any integrable function. So, the aim of this algorithm is to jump around in parameter space, but in a way that the probability to be at a point is proportional to the function we sample from (this is usually called the target function). In our case this is the posterior defined above.</p>
+<p>This is achieved by</p>
+<ol>
+<li>Starting at a random parameter value</li>
+<li>Choosing a new parameter value close to the old value based on some probability density that is called the proposal function</li>
+<li>Jumping to this new point with a probability p(new)/p(old), where p is the target function, and $p&gt;1$ means jumping as well</li>
+</ol>
+<p>It’s fun to think about why that works, but for the moment I can assure you it does – when we run this algorithm, distribution of the parameters it visits converges to the target distribution $p$. So, let’s get this in R:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">######## Metropolis algorithm ################</span></span><br><span class="line"></span><br><span class="line">proposalfunction &lt;- <span class="keyword">function</span>(param)&#123;</span><br><span class="line">    <span class="keyword">return</span>(rnorm(<span class="number">3</span>,mean = param, sd= c(<span class="number">0.1</span>,<span class="number">0.5</span>,<span class="number">0.3</span>)))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">run_metropolis_MCMC &lt;- <span class="keyword">function</span>(startvalue, iterations)&#123;</span><br><span class="line">    chain = array(dim = c(iterations+<span class="number">1</span>,<span class="number">3</span>))</span><br><span class="line">    chain[<span class="number">1</span>,] = startvalue</span><br><span class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:iterations)&#123;</span><br><span class="line">        proposal = proposalfunction(chain[i,])</span><br><span class="line"></span><br><span class="line">        probab = exp(posterior(proposal) - posterior(chain[i,]))</span><br><span class="line">        <span class="keyword">if</span> (runif(<span class="number">1</span>) &lt; probab)&#123;</span><br><span class="line">            chain[i+<span class="number">1</span>,] = proposal</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            chain[i+<span class="number">1</span>,] = chain[i,]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>(chain)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">startvalue = c(<span class="number">4</span>,<span class="number">0</span>,<span class="number">10</span>)</span><br><span class="line">chain = run_metropolis_MCMC(startvalue, <span class="number">10000</span>)</span><br><span class="line"></span><br><span class="line">burnIn = <span class="number">5000</span></span><br><span class="line">acceptance = <span class="number">1</span>-mean(duplicated(chain[-(<span class="number">1</span>:burnIn),]))</span><br></pre></td></tr></table></figure>
+<p>Again, working with the logarithms of the posterior might be a bit confusing at first, in particular when you look at the line where the acceptance probability is calculated (probab = exp(posterior(proposal) – posterior(chain[i,]))). To understand why we do this, note that $p1/p2 = exp[log(p1)-log(p2)]$.</p>
+<p>The first steps of the algorithm may be biased by the initial value, and are therefore usually discarded for the further analysis (burn-in time). An interesting output to look at is the acceptance rate: how often was a proposal rejected by the metropolis-hastings acceptance criterion? The acceptance rate can be influenced by the proposal function: generally, the closer the proposals are, the larger the acceptance rate. Very high acceptance rates, however, are usually not beneficial: this means that the algorithms is “staying” at the same point, which results in a suboptimal probing of the parameter space (mixing). It can be shown that acceptance rates between 20% and 30% are optimal for typical applications (more on that here).</p>
+<p>Finally, we can plot the results. There are more elegant ways of plotting this which I discuss in another recent post, so check this out, but for the moment I didn’t want to use any packages, so we do it the hard way:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### Summary: #######################</span></span><br><span class="line"></span><br><span class="line">par(mfrow = c(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">hist(chain[-(<span class="number">1</span>:burnIn),<span class="number">1</span>],nclass=<span class="number">30</span>, , main=<span class="string">"Posterior of a"</span>, xlab=<span class="string">"True value = red line"</span> )</span><br><span class="line">abline(v = mean(chain[-(<span class="number">1</span>:burnIn),<span class="number">1</span>]))</span><br><span class="line">abline(v = trueA, col=<span class="string">"red"</span> )</span><br><span class="line">hist(chain[-(<span class="number">1</span>:burnIn),<span class="number">2</span>],nclass=<span class="number">30</span>, main=<span class="string">"Posterior of b"</span>, xlab=<span class="string">"True value = red line"</span>)</span><br><span class="line">abline(v = mean(chain[-(<span class="number">1</span>:burnIn),<span class="number">2</span>]))</span><br><span class="line">abline(v = trueB, col=<span class="string">"red"</span> )</span><br><span class="line">hist(chain[-(<span class="number">1</span>:burnIn),<span class="number">3</span>],nclass=<span class="number">30</span>, main=<span class="string">"Posterior of sd"</span>, xlab=<span class="string">"True value = red line"</span>)</span><br><span class="line">abline(v = mean(chain[-(<span class="number">1</span>:burnIn),<span class="number">3</span>]) )</span><br><span class="line">abline(v = trueSd, col=<span class="string">"red"</span> )</span><br><span class="line">plot(chain[-(<span class="number">1</span>:burnIn),<span class="number">1</span>], type = <span class="string">"l"</span>, xlab=<span class="string">"True value = red line"</span> , main = <span class="string">"Chain values of a"</span>, )</span><br><span class="line">abline(h = trueA, col=<span class="string">"red"</span> )</span><br><span class="line">plot(chain[-(<span class="number">1</span>:burnIn),<span class="number">2</span>], type = <span class="string">"l"</span>, xlab=<span class="string">"True value = red line"</span> , main = <span class="string">"Chain values of b"</span>, )</span><br><span class="line">abline(h = trueB, col=<span class="string">"red"</span> )</span><br><span class="line">plot(chain[-(<span class="number">1</span>:burnIn),<span class="number">3</span>], type = <span class="string">"l"</span>, xlab=<span class="string">"True value = red line"</span> , main = <span class="string">"Chain values of sd"</span>, )</span><br><span class="line">abline(h = trueSd, col=<span class="string">"red"</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># for comparison:</span></span><br><span class="line">summary(lm(y~x))</span><br></pre></td></tr></table></figure>
+<p>​<br>    Call:<br>    lm(formula = y ~ x)</p>
+<pre><code>Residuals:
+    Min      1Q  Median      3Q     Max
+-15.844  -5.834  -1.342   5.479  19.348
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  -0.7967     1.6512  -0.482    0.633
+x             5.0498     0.1846  27.354   &lt;2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 9.193 on 29 degrees of freedom
+Multiple R-squared:  0.9627,    Adjusted R-squared:  0.9614
+F-statistic: 748.3 on 1 and 29 DF,  p-value: &lt; 2.2e-16
+</code></pre><div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/machineLearning/MCMC/output_13_1.png" width="100%"><br></div>
+
+
+<p>The resulting plots should look something like the plot above. You see that we retrieve more or less the original parameters that were used to create our data, and you also see that we get a certain area around the highest posterior values that also have some support by the data, which is the Bayesian equivalent of confidence intervals.</p>
+<p><strong>Remark</strong>:</p>
+<p>The upper row shows posterior estimates for slope (a), intercept (b) and standard deviation of the error (sd). The lower row shows the Markov Chain of parameter values.</p>
+<h2 id="References-for-further-reading"><a href="#References-for-further-reading" class="headerlink" title="References for further reading"></a>References for further reading</h2><ol>
+<li>Gelman, A.; Carlin, J. B.; Stern, H. S. &amp; Rubin, D. B. (2003) Bayesian Data Analysis</li>
+<li>Andrieu, C.; de Freitas, N.; Doucet, A. &amp; Jordan, M. I. (2003) An introduction to MCMC for machine learning Mach. Learning, Springer, 50, 5-43</li>
+<li>Hartig, F.; Calabrese, J. M.; Reineking, B.; Wiegand, T. &amp; Huth, A. (2011) Statistical inference for stochastic simulation models – theory and application Ecol. Lett., 14, 816–827.</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Decision-Tree-Regression" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -329,87 +461,9 @@
 
 
   
-    <article id="post-Cross-Validated-Predictions" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2017/12/29/Cross-Validated-Predictions/">Cross_Validated_Predictions</a>
-    </h1>
-  
-
-        
-        <a href="../../2017/12/29/Cross-Validated-Predictions/" class="archive-article-date">
-  	<time datetime="2017-12-28T17:42:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Plotting-Cross-Validated-Predictions"><a href="#Plotting-Cross-Validated-Predictions" class="headerlink" title="Plotting Cross-Validated Predictions"></a>Plotting Cross-Validated Predictions</h1><p>Adapted from <a href="http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html</a></p>
-<p>This example shows how to use cross_val_predict to visualize prediction errors.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> ScikitLearn</span><br><span class="line"><span class="keyword">using</span> ScikitLearn.CrossValidation: cross_val_predict</span><br><span class="line"></span><br><span class="line"><span class="meta">@sk_import</span> datasets: load_boston</span><br><span class="line"><span class="meta">@sk_import</span> linear_model: LinearRegression</span><br><span class="line"><span class="keyword">using</span> PyPlot</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">lr = LinearRegression()</span><br><span class="line">boston = load_boston()</span><br><span class="line">y = boston[<span class="string">"target"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># cross_val_predict returns an array of the same size as `y` where each entry</span></span><br><span class="line"><span class="comment"># is a prediction obtained by cross validated:</span></span><br><span class="line">predicted = cross_val_predict(lr, boston[<span class="string">"data"</span>], y, cv=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">scatter(y, predicted)</span><br><span class="line">plot([minimum(y), maximum(y)], [minimum(y), maximum(y)], <span class="string">"k--"</span>, lw=<span class="number">4</span>)</span><br><span class="line">xlabel(<span class="string">"Measured"</span>)</span><br><span class="line">ylabel(<span class="string">"Predicted"</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/leanote/Cross_Validated_Predictions/output_4_0.png" alt="png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2017/12/29/Cross-Validated-Predictions/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../5/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../4/">4</a><a class="page-number" href="../5/">5</a><span class="page-number current">6</span><a class="page-number" href="../7/">7</a><a class="page-number" href="../8/">8</a><span class="space">&hellip;</span><a class="page-number" href="../11/">11</a><a class="extend next" rel="next" href="../7/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="../5/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../4/">4</a><a class="page-number" href="../5/">5</a><span class="page-number current">6</span><a class="page-number" href="../7/">7</a><a class="page-number" href="../8/">8</a><span class="space">&hellip;</span><a class="page-number" href="../12/">12</a><a class="extend next" rel="next" href="../7/">Next &raquo;</a>
     </nav>
   
 
@@ -531,10 +585,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">r</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
@@ -544,6 +594,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -167,6 +167,174 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Project-4-of-Statistics" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/12/15/Project-4-of-Statistics/">Project 4 of Statistics.md</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/12/15/Project-4-of-Statistics/" class="archive-article-date">
+  	<time datetime="2017-12-15T09:40:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Homework-6"><a href="#Homework-6" class="headerlink" title="Homework 6"></a>Homework 6</h2><h3 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h3><blockquote>
+<p>Prove that $\hat \sigma^2 = \dfrac{SS_E}{(a-1)(b-1)}$ is the unbiased estimation of $\sigma^2$</p>
+</blockquote>
+<p>What we learned is that</p>
+<p>$$<br>\begin{align<em>}<br>SS<em>T &amp;= \sum</em>{i=1}^a \sum<em>{j=1}^b (y</em>{ij} - \bar y)^2 \<br>&amp;= \sum<em>{i=1}^a \sum</em>{j=1}^b (y<em>{ij} - \bar y</em>{i\cdot} - \bar y<em>{\cdot j} + \bar y + \bar y</em>{i\cdot} - \bar y + \bar y<em>{j\cdot} - \bar y)^2 \<br>&amp;= \underbrace{\sum</em>{i=1}^a \sum<em>{j=1}^b (y</em>{ij} - \bar y<em>{i\cdot} - \bar y</em>{\cdot j} + \bar y)^2}_{SS<em>E} + \underbrace{\sum</em>{i=1}^a b(\bar y<em>{i\cdot} - \bar y)^2}</em>{SS<em>A} + \underbrace{\sum</em>{j=1}^b a(\bar y<em>{\cdot j} - \bar y)^2}</em>{SS_B} \<br>\end{align</em>}<br>$$</p>
+<p>For clarity, we give the corresponding matrix form:</p>
+<p>$$<br>\begin{align<em>}<br>SS<em>T &amp;= y’(I</em>{ab} - \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)y \<br>&amp;= y’\Big( (I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) + (A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) + (B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) \Big)y \<br>&amp;= \underbrace{y’(I</em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)y}_{SS<em>E} + \underbrace{ y’(A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’)y }</em>{SS<em>A} + \underbrace{ (B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) }</em>{SS_B}<br>\end{align</em>}<br>$$</p>
+<p>where</p>
+<p>$$<br>\begin{align<em>}<br>&amp;A = \underbrace{\frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’ \oplus \cdots \oplus \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}<em>b’}</em>{a \text{ items}} = (I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) \<br>&amp;B = \underbrace{\frac{1}{b}\boldsymbol{1}_a\boldsymbol{1}_a’ \oplus \cdots \oplus \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}<em>a’}</em>{b \text{ items}} = (I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’)<br>\end{align</em>}<br>$$</p>
+<p>By property of tensor product, we declare that<br>$A$ and $B$ are symmetric and idempotent.</p>
+<p>$$<br>\begin{align<em>}<br>A^2 &amp;= (I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) \cdot (I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) = (I_a\cdot I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’ \cdot \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) \<br>&amp;= I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’ = A \<br>B^2 &amp;= (I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’) \cdot (I_a \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’) = (I_b\cdot I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’ \cdot \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’) \<br>&amp;= I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’ = B \<br>\end{align</em>}<br>$$</p>
+<p>Hence, we claim that $I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’$, $A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’$ and $B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’$ are symmetric and idempotent, with their rank equal to trace:</p>
+<p>$$<br>\begin{align<em>}<br>&amp;\mathrm{rank}(I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) = (a-1)(b-1) \<br>&amp;\mathrm{rank}(A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) = a-1 \<br>&amp;\mathrm{rank}(B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’) = b-1<br>\end{align</em>}<br>$$</p>
+<p>Thus, under the normal hypothesis $Y \sim N(0, \sigma^2 I)$, we have</p>
+<p>$$<br>\begin{align<em>}<br>&amp;\frac{Y’(I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’)Y}{\sigma^2} \sim \chi^2\Big((a-1)(b-1)\Big) \<br>&amp;\frac{Y’(A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’)Y}{\sigma^2} \sim \chi^2(a-1) \quad \frac{Y’(B-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’)Y}{\sigma^2} \sim \chi^2(b-1)<br>\end{align</em>}<br>$$</p>
+<p>Now, it is sufficient to say $\dfrac{SS_E}{(a-1)(b-1)}$ is the unbiased estimation of $\sigma^2$.</p>
+<h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3><blockquote>
+<p>Prove that both of $SS_A$ and $SS_B$ are independent with $SS_E$</p>
+</blockquote>
+<p>Note that $\boldsymbol{1}_{ab} = I_a \otimes \boldsymbol{1}_b\boldsymbol{1}_b’ = I_b \otimes \boldsymbol{1}_a\boldsymbol{1}_a’$, it is easy to find that</p>
+<p>$$<br>\begin{align<em>}<br>&amp;A\cdot \boldsymbol{1}_{ab} = (I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}_b’) \cdot I_a \otimes \boldsymbol{1}_b\boldsymbol{1}_b’ = I_a \otimes \boldsymbol{1}_b\boldsymbol{1}<em>b’ = \boldsymbol{1}</em>{ab} \<br>&amp;B\cdot \boldsymbol{1}_{ab} = (I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’) \cdot I_b \otimes \boldsymbol{1}_a\boldsymbol{1}_a’ = I_b \otimes \boldsymbol{1}_a\boldsymbol{1}<em>a’ = \boldsymbol{1}</em>{ab}<br>\end{align</em>}<br>$$</p>
+<p>Now, based on the derivation of question <a href="###1.">1</a>, it suffices to show that</p>
+<p>$$<br>\begin{align<em>}<br>&amp; (I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) (A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) = 0 \<br>&amp; (I</em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) (B-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) = 0<br>\end{align</em>}<br>$$</p>
+<p>By symmetry, we only give the derivation of the first equation, the second is similar to this work.</p>
+<p>$$<br>\begin{align<em>}<br>&amp; (I<em>{ab}-A-B+\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) (A-\frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’) \<br>&amp;= [I</em>{ab}-B-(A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)] (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) \<br>&amp;= (I-B)(A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) - (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)^2 \<br>&amp;= A - BA - \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ + \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ - (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)^2 \<br>&amp;= A - BA - (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) \<br>&amp;= \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ - BA \<br>&amp;= \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ - (I_b \otimes \frac{1}{a}\boldsymbol{1}_a\boldsymbol{1}_a’)(I_a \otimes \frac{1}{b}\boldsymbol{1}_b\boldsymbol{1}<em>b’)\<br>&amp;= \frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’ - \frac{1}{ab} (I_b\boldsymbol{1}_b\boldsymbol{1}_b’ \otimes I_a\boldsymbol{1}_a\boldsymbol{1}<em>a’ ) \<br>&amp;= \frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’ - \frac{1}{ab} (\boldsymbol{1}_b\boldsymbol{1}_b’ \otimes \boldsymbol{1}_a\boldsymbol{1}<em>a’ ) \<br>&amp;= \frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}<em>{ab}’ - \frac{1}{ab}\boldsymbol{1}</em>{ab}\boldsymbol{1}_{ab}’ \<br>&amp;= 0<br>\end{align</em>}<br>$$</p>
+<p>The detailed matrix $A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’$ is idempotent since</p>
+<p>$$<br>\begin{align<em>}<br>(A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)^2 &amp;= (A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’)(A-\frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’) \<br>&amp;= A^2 - \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’A - \frac{1}{ab}A\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ + \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ \<br>&amp;= A^2 - \frac{2}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ + \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’ \<br>&amp;= A - \frac{1}{ab}\boldsymbol{1}<em>{ab}\boldsymbol{1}</em>{ab}’<br>\end{align</em>}<br>$$</p>
+<p>Hence the independency is proved, which furthermore indicates the fact that under the hypothesis $H_1$</p>
+<p>$$<br>F_A = \frac{SS_A/(a-1)}{SS<em>E/(a-1)(b-1)} \sim F</em>{a-1, (a-1)(b-1)}<br>$$</p>
+<p>Similarly, under the hypothesis $H_2$</p>
+<p>$$<br>F_B = \frac{SS_B/(b-1)}{SS<em>E/(a-1)(b-1)} \sim F</em>{b-1, (a-1)(b-1)}<br>$$</p>
+<h3 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h3><blockquote>
+<p>Prove that $c’\beta$ is an estimable function $ \iff\, c \in \mathcal{M}(X’)$</p>
+</blockquote>
+<p>$c’\beta$ is said to be <em>estimable</em> if and only if there is a linear function of $y$, such that $a’y$ is an unbiased estimator of $c’\beta$ (for arbitrary $\beta$ ), i.e.</p>
+<p>$$<br>\begin{align<em>}<br>E(a’y) = c’\beta \quad \forall \beta\in\mathbb{R}^p &amp;\iff a’X\beta = c’\beta \quad \forall \beta\in\mathbb{R}^p \<br>&amp;\iff a’X = c \<br>&amp;\iff c = X’a \in \mathcal{M}(X’)<br>\end{align</em>}<br>$$</p>
+<h3 id="4-Project"><a href="#4-Project" class="headerlink" title="4. Project"></a>4. Project</h3><h4 id="One-way-ANCOVA"><a href="#One-way-ANCOVA" class="headerlink" title="One-way ANCOVA"></a>One-way ANCOVA</h4><p>This example comes from the <em>litter</em> dataset in the multcomp package. Pregnant mice were divided into four treatment groups; each group received a different dose of a drug (0, 5, 50, or 500). The mean post-birth weight for each litter was the dependent variable and gestation time was included as a <strong>covariate</strong>.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data(litter, package=<span class="string">"multcomp"</span>)</span><br><span class="line"><span class="keyword">attach</span>(litter)</span><br><span class="line">table(dose)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dose</span><br><span class="line">  <span class="number">0</span>   <span class="number">5</span>  <span class="number">50</span> <span class="number">500</span></span><br><span class="line"> <span class="number">20</span>  <span class="number">19</span>  <span class="number">18</span>  <span class="number">17</span></span><br></pre></td></tr></table></figure>
+<p>From the <code>table()</code> function we can see that there are an unequal number of litters at each dosage level.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aggregate(weight, by=list(dose), FUN=mean)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  Group.1        x</span><br><span class="line"><span class="number">1</span>       <span class="number">0</span> <span class="number">32.30850</span></span><br><span class="line"><span class="number">2</span>       <span class="number">5</span> <span class="number">29.30842</span></span><br><span class="line"><span class="number">3</span>      <span class="number">50</span> <span class="number">29.86611</span></span><br><span class="line"><span class="number">4</span>     <span class="number">500</span> <span class="number">29.64647</span></span><br></pre></td></tr></table></figure>
+<p>Based on the group means provided by the <code>aggregate()</code> function, the <em>no-drug</em> group had the highest mean litter weight.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fit &lt;- aov(weight ~ gesttime + dose)</span><br><span class="line">summary(fit)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Df Sum Sq Mean Sq <span class="literal">F</span> value  Pr(&gt;<span class="literal">F</span>)</span><br><span class="line">gesttime     <span class="number">1</span>  <span class="number">134.3</span>  <span class="number">134.30</span>   <span class="number">8.049</span> <span class="number">0.00597</span> **</span><br><span class="line">dose         <span class="number">3</span>  <span class="number">137.1</span>   <span class="number">45.71</span>   <span class="number">2.739</span> <span class="number">0.04988</span> *</span><br><span class="line">Residuals   <span class="number">69</span> <span class="number">1151.3</span>   <span class="number">16.69</span></span><br><span class="line">---</span><br><span class="line">Signif. codes:  <span class="number">0</span> ‘***’ <span class="number">0.001</span> ‘**’ <span class="number">0.01</span> ‘*’ <span class="number">0.05</span> ‘.’ <span class="number">0.1</span> ‘ ’ <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>The ANCOVA F tests indicate that</p>
+<ol>
+<li>gestation time was related to birth weight</li>
+<li>drug dosage was related to birth weight after controlling for gestation time.</li>
+</ol>
+<p>Furthermore, the <code>effects</code> package provides a powerful method of obtaining the adjusted means.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(effects)</span><br><span class="line">effect(<span class="string">"dose"</span>, fit)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> dose effect</span><br><span class="line">dose</span><br><span class="line">       <span class="number">0</span>        <span class="number">5</span>       <span class="number">50</span>      <span class="number">500</span></span><br><span class="line"><span class="number">32.35367</span> <span class="number">28.87672</span> <span class="number">30.56614</span> <span class="number">29.33460</span></span><br></pre></td></tr></table></figure>
+<p>But in this case, the adjusted means are similar to unadjusted one produced by the <code>aggregate()</code> function.</p>
+<p>Now, suppose we are interested in whether the no-drug condition differs from the three-drug condition. We can use the multcomp package to test specific defined hypothesis about the means.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(multcomp)</span><br><span class="line">contrast &lt;- rbind(<span class="string">"no drug vs. drug"</span> = c(<span class="number">3</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>))</span><br><span class="line">summary(glht(fit, linfct=mcp(dose=contrast)))</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	 Simultaneous Tests <span class="keyword">for</span> General Linear hypothesis</span><br><span class="line"></span><br><span class="line">Multiple Comparisons of Means: User-defined Contrasts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Fit: aov(formula = weight ~ gesttime + dose)</span><br><span class="line"></span><br><span class="line">Linear hypothesis:</span><br><span class="line">                      Estimate Std. Error t value Pr(&gt;|t|)</span><br><span class="line">no drug vs. drug == <span class="number">0</span>    <span class="number">8.284</span>      <span class="number">3.209</span>   <span class="number">2.581</span>    <span class="number">0.012</span> *</span><br><span class="line">---</span><br><span class="line">Signif. codes:  <span class="number">0</span> ‘***’ <span class="number">0.001</span> ‘**’ <span class="number">0.01</span> ‘*’ <span class="number">0.05</span> ‘.’ <span class="number">0.1</span> ‘ ’ <span class="number">1</span></span><br><span class="line">(Adjusted p values reported -- single-step method)</span><br></pre></td></tr></table></figure>
+<p>The contrast <code>c(3, -1, -1, -1)</code> specifies a comparison of the first group with the average of the other three. The hypothesis is tested with a t-statistics, which is significant at the $p&lt;0.05$ level.</p>
+<p>Therefore, we can conclude that the no-drug group has a higher birth weight than drug conditions.</p>
+<h5 id="Assessing-test-assumptions"><a href="#Assessing-test-assumptions" class="headerlink" title="Assessing test assumptions"></a>Assessing test assumptions</h5><p>In this case, it is assumed that the regression slope for predicting birth weight from gestation time is the same in each of four treatment groups. A test for the homogeneity of regression slopes can be obtained by including a <code>gestation*dose</code> interaction term in ANCOVA model.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fit2 &lt;- aov(weight ~ gesttime*dose, data=litter)</span><br><span class="line">summary(fit2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">              Df Sum Sq Mean Sq <span class="literal">F</span> value  Pr(&gt;<span class="literal">F</span>)</span><br><span class="line">gesttime       <span class="number">1</span>  <span class="number">134.3</span>  <span class="number">134.30</span>   <span class="number">8.289</span> <span class="number">0.00537</span> **</span><br><span class="line">dose           <span class="number">3</span>  <span class="number">137.1</span>   <span class="number">45.71</span>   <span class="number">2.821</span> <span class="number">0.04556</span> *</span><br><span class="line">gesttime:dose  <span class="number">3</span>   <span class="number">81.9</span>   <span class="number">27.29</span>   <span class="number">1.684</span> <span class="number">0.17889</span></span><br><span class="line">Residuals     <span class="number">66</span> <span class="number">1069.4</span>   <span class="number">16.20</span></span><br><span class="line">---</span><br><span class="line">Signif. codes:  <span class="number">0</span> ‘***’ <span class="number">0.001</span> ‘**’ <span class="number">0.01</span> ‘*’ <span class="number">0.05</span> ‘.’ <span class="number">0.1</span> ‘ ’ <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>The interaction is nonsignificant, supporting the assumption of equality of slopes. That’s to say, the relationship between gestation and birth weight does not depend on the level of dose variable.</p>
+<h5 id="Visualizing-the-results"><a href="#Visualizing-the-results" class="headerlink" title="Visualizing the results"></a>Visualizing the results</h5><p>The <code>ancova()</code> function in the <code>HH</code> package provides a plot of the relationship between the dependent variable, the covariate, and the factor.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(HH)</span><br><span class="line">ancova(weight ~ gesttime + dose, data=litter)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistics/project4/one-way.svg" width="400" height="300"><br></div>
+
+<p>Here we can see that the regression lines for predicting birth weight from gestation time are parallel in each group but have differetn intercepts. As gestation time increases, birth weight increases. Additionally, we can see that 0-dose group has the largest intercept and the 5-dose group has the lowest intercept.</p>
+<p>Now we use the statement <code>ancova(weight ~ gesttime*dose)</code> instead to generate a plot that allows both the slopes and intercepts to vary by group.</p>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistics/project4/one-way2.svg" width="400" height="300"><br></div>
+
+<h4 id="Two-way-factorial-ANOVA"><a href="#Two-way-factorial-ANOVA" class="headerlink" title="Two-way factorial ANOVA"></a>Two-way factorial ANOVA</h4><p>This example uses the <code>ToothGrowth</code> dataset in the base installation to demonstrate a two-way between-groups ANOVA. 60 guinea pigs are randomly assigned to receive one of three levels of ascorbic acid ($0.5$, $1$, or $2$ mg) and one of two delivery methods (orange juice or Vitamin C), under the restriction that each treatment combination has 10 guinea pigs. The dependent variable is tooth length.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">attach</span>(ToothGrowth)</span><br><span class="line">table(supp, dose)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    dose</span><br><span class="line">supp <span class="number">0.5</span>  <span class="number">1</span>  <span class="number">2</span></span><br><span class="line">  OJ  <span class="number">10</span> <span class="number">10</span> <span class="number">10</span></span><br><span class="line">  VC  <span class="number">10</span> <span class="number">10</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>The <code>table</code> statement indicates that we have a balanced design (equal sample sizes in each cell of the design), and the next two <code>aggregate</code> statements provide the cell means and standard deviations.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aggregate(len, by=list(supp, dose), FUN=mean)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  Group.1 Group.2     x</span><br><span class="line"><span class="number">1</span>      OJ     <span class="number">0.5</span> <span class="number">13.23</span></span><br><span class="line"><span class="number">2</span>      VC     <span class="number">0.5</span>  <span class="number">7.98</span></span><br><span class="line"><span class="number">3</span>      OJ     <span class="number">1.0</span> <span class="number">22.70</span></span><br><span class="line"><span class="number">4</span>      VC     <span class="number">1.0</span> <span class="number">16.77</span></span><br><span class="line"><span class="number">5</span>      OJ     <span class="number">2.0</span> <span class="number">26.06</span></span><br><span class="line"><span class="number">6</span>      VC     <span class="number">2.0</span> <span class="number">26.14</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aggregate(len, by=list(supp, dose), FUN=sd)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  Group.1 Group.2        x</span><br><span class="line"><span class="number">1</span>      OJ     <span class="number">0.5</span> <span class="number">4.459709</span></span><br><span class="line"><span class="number">2</span>      VC     <span class="number">0.5</span> <span class="number">2.746634</span></span><br><span class="line"><span class="number">3</span>      OJ       <span class="number">1</span> <span class="number">3.910953</span></span><br><span class="line"><span class="number">4</span>      VC       <span class="number">1</span> <span class="number">2.515309</span></span><br><span class="line"><span class="number">5</span>      OJ       <span class="number">2</span> <span class="number">2.655058</span></span><br><span class="line"><span class="number">6</span>      VC       <span class="number">2</span> <span class="number">4.797731</span></span><br></pre></td></tr></table></figure>
+<p>The below ANOVA table provided by the <code>summary()</code> function indicates that both main effects (<code>supp</code> and <code>dose</code>) and the interaction between these factors are significant.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dose &lt;- factor(dose)</span><br><span class="line">fit &lt;- aov(len ~ supp*dose)</span><br><span class="line">summary(fit)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">            Df Sum Sq Mean Sq <span class="literal">F</span> value   Pr(&gt;<span class="literal">F</span>)</span><br><span class="line">supp         <span class="number">1</span>  <span class="number">205.4</span>   <span class="number">205.4</span>  <span class="number">15.572</span> <span class="number">0.000231</span> ***</span><br><span class="line">dose         <span class="number">2</span> <span class="number">2426.4</span>  <span class="number">1213.2</span>  <span class="number">92.000</span>  &lt; <span class="number">2e-16</span> ***</span><br><span class="line">supp:dose    <span class="number">2</span>  <span class="number">108.3</span>    <span class="number">54.2</span>   <span class="number">4.107</span> <span class="number">0.021860</span> *</span><br><span class="line">Residuals   <span class="number">54</span>  <span class="number">712.1</span>    <span class="number">13.2</span></span><br><span class="line">---</span><br><span class="line">Signif. codes:  <span class="number">0</span> ‘***’ <span class="number">0.001</span> ‘**’ <span class="number">0.01</span> ‘*’ <span class="number">0.05</span> ‘.’ <span class="number">0.1</span> ‘ ’ <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>Furthermore, we can use the <code>interaction2wt()</code> function in the <code>HH</code> package to produce a plot of both main effects and two-way interactions for any factorial design of any order.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(HH)</span><br><span class="line">interaction2wt(len ~ supp*dose)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistics/project4/two-way.svg" width="400" height="300"><br></div>
+
+<p>The above graph indicates that tooth growth increases with the dose of ascorbic acid for both orange juice and Vitamin C. For the $0.5$ and $1$ mg doses, orange juice produced more tooth growth than Vitamin C. For $2$ mg of ascorbic acid, both delivery methods produced identical growth.</p>
+<hr>
+<p><em>Kai Liu, wrote on 2017/12/14</em></p>
+<p><em>Student ID: 116071910015</em></p>
+<p><em>Mail: liu1995@sjtu.edu.cn</em></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">statistic</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/12/15/Project-4-of-Statistics/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Project-3-of-Statistics" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -527,514 +695,9 @@ F-statistic: 129.3 on 1 and 48 DF,  p-value: 3.195e-15
 
 
   
-    <article id="post-Project-2-of-Statistics" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2017/11/17/Project-2-of-Statistics/">Project 2 of Statistics.md</a>
-    </h1>
-  
-
-        
-        <a href="../../2017/11/17/Project-2-of-Statistics/" class="archive-article-date">
-  	<time datetime="2017-11-17T08:38:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>本次大作业按章节依次展示了岭估计、主成分估计、逐步回归和带示性变量的回归分析。</p>
-<p>主要使用 <code>dplyr</code> 和 <code>readxl</code> 包导入数据并获得数据框视图；利用 <code>MASS</code> 和 <code>car</code> 包作岭迹图、主成分估计和逐步回归分析； <code>dummies</code> 包提供了将示性变量转换为特殊矩阵的可能；<code>bootstrap</code> 包帮助我们实现了 $k$ 重交叉验证。</p>
-<p>所有文献和数据集均可在文末的参考文献链接中下载获得。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(dplyr)</span><br><span class="line"><span class="keyword">library</span>(readxl)</span><br><span class="line"><span class="keyword">library</span>(MASS)</span><br><span class="line"><span class="keyword">library</span>(car)</span><br><span class="line"><span class="keyword">library</span>(dummies)</span><br><span class="line"><span class="keyword">library</span>(bootstrap)</span><br></pre></td></tr></table></figure>
-<h3 id="岭估计"><a href="#岭估计" class="headerlink" title="岭估计"></a>岭估计</h3><p>对《线性模型与回归分析》(王松桂)书习题3.19数据进行回归分析，十次试验得到的观测数据如下</p>
-<table>
-<thead>
-<tr>
-<th>$y$</th>
-<th>16.3</th>
-<th>16.8</th>
-<th>19.2</th>
-<th>18.0</th>
-<th>19.5</th>
-<th>20.9</th>
-<th>21.1</th>
-<th>20.9</th>
-<th>20.3</th>
-<th>22.0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$X_1$</td>
-<td>1.1</td>
-<td>1.4</td>
-<td>1.7</td>
-<td>1.7</td>
-<td>1.8</td>
-<td>1.8</td>
-<td>1.9</td>
-<td>2.0</td>
-<td>2.3</td>
-<td>2.4</td>
-</tr>
-<tr>
-<td>$X_2$</td>
-<td>1.1</td>
-<td>1.5</td>
-<td>1.8</td>
-<td>1.7</td>
-<td>1.9</td>
-<td>1.8</td>
-<td>1.8</td>
-<td>2.1</td>
-<td>2.4</td>
-<td>2.5</td>
-</tr>
-</tbody>
-</table>
-<p>首先导入数据并获得预览：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test &lt;- tbl_df(read_excel(<span class="string">"/path/to/test.xlsx"</span>))</span><br><span class="line"></span><br><span class="line">str(test)</span><br></pre></td></tr></table></figure>
-<pre><code>Classes ‘tbl_df’, ‘tbl’ and &apos;data.frame&apos;:    10 obs. of  3 variables:
- $ y : num  16.3 16.8 19.2 18 19.5 20.9 21.1 20.9 20.3 22
- $ x1: num  1.1 1.4 1.7 1.7 1.8 1.8 1.9 2 2.3 2.4
- $ x2: num  1.1 1.5 1.8 1.7 1.9 1.8 1.8 2.1 2.4 2.5
-</code></pre><p>下面假设数据满足线性模型:</p>
-<p>$$<br>y=\beta_0 + \beta_1 x_1+ \beta_2 x_2 + e<br>$$</p>
-<p>其中误差 $e$ 满足 Gauss-Markov 假设，最小二乘法估计参数 $\beta = (\beta_0, \beta_1, \beta_2)$.</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">md1 &lt;- lm(y ~ x1 + x2, test)</span><br><span class="line"></span><br><span class="line">summary(md1)</span><br><span class="line"></span><br><span class="line">vif(md1)</span><br></pre></td></tr></table></figure>
-<pre><code>Call:
-lm(formula = y ~ x1 + x2, data = test)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--1.3107 -0.3727  0.1168  0.5054  1.1176
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   11.292      1.463   7.719 0.000114 ***
-x1            11.307      4.719   2.396 0.047740 *
-x2            -6.591      4.436  -1.486 0.180941
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.9072 on 7 degrees of freedom
-Multiple R-squared:  0.8267,    Adjusted R-squared:  0.7772
-F-statistic:  16.7 on 2 and 7 DF,  p-value: 0.002167
-</code></pre><dl class="dl-horizontal"><br>    <dt>x1</dt><br>        <dd>35.9628643396901</dd><br>    <dt>x2</dt><br>        <dd>35.9628643396901</dd><br></dl>
-
-
-
-<p>由上可知预测变量 $x$ 的方差膨胀因子均大于30, 数据存在较严重的共线性, 于是考虑使用岭估计确定线形模型中的系数.</p>
-<p>下面规定岭参数在 $(0,1)$ 中, 以 $0.1$ 为步长作出岭迹图：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">md2 &lt;- lm.ridge(y ~ x1 + x2, test, lambda = seq(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0.1</span>))</span><br><span class="line"></span><br><span class="line">plot(md2)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/project2/output_8_0.png" width="50%"><br></div>
-
-
-<p>从图中发现当岭参数 $k=4$ 时, $\hat{\beta}(k)$的图像趋于平稳, 故选择</p>
-<p>$$<br>\hat{\beta(4)}=(11.86099 ,\  4.480425, \ -0.25298675)<br>$$</p>
-<h3 id="主成分估计"><a href="#主成分估计" class="headerlink" title="主成分估计"></a>主成分估计</h3><p>对《线性模型与回归分析》(王松桂)习题3.20数据进行回归分析。导入数据集 <code>commodity</code>:</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commodity &lt;- tbl_df(read_excel(<span class="string">"/path/to/commodity.xlsx"</span>))</span><br><span class="line"></span><br><span class="line">str(commodity)</span><br></pre></td></tr></table></figure>
-<pre><code>Classes ‘tbl_df’, ‘tbl’ and &apos;data.frame&apos;:    10 obs. of  5 variables:
- $ y : num  8.4 9.6 10.4 11.4 12.2 14.2 15.8 17.9 19.6 20.8
- $ x1: num  82.9 88 99.9 105.3 117.7 ...
- $ x2: num  92 93 96 94 100 101 105 112 112 112
- $ x3: num  17.1 21.3 25.1 29 34 40 44 49 51 53
- $ x4: num  94 96 97 97 100 101 104 109 111 111
-</code></pre><p>假设数据满足线性模型:</p>
-<p>$$<br>y=\beta_0 + \beta_1 x_1+ \beta_2 x_2  +x_3 + x_4+ e<br>$$</p>
-<p>误差 $e$ 满足Gauss - Markov 假设.</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">md1 &lt;- lm(y ~ x1 + x2 + x3 + x4, commodity)</span><br><span class="line"></span><br><span class="line">summary(md1)</span><br><span class="line"></span><br><span class="line">vif(md1)</span><br></pre></td></tr></table></figure>
-<pre><code>Call:
-lm(formula = y ~ x1 + x2 + x3 + x4, data = commodity)
-
-Residuals:
-        1         2         3         4         5         6         7         8
- 0.024803  0.079476  0.012381 -0.007025 -0.288345  0.216090 -0.142085  0.158360
-        9        10
--0.135964  0.082310
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -17.66768    5.94360  -2.973  0.03107 *
-x1            0.09006    0.02095   4.298  0.00773 **
-x2           -0.23132    0.07132  -3.243  0.02287 *
-x3            0.01806    0.03907   0.462  0.66328
-x4            0.42075    0.11847   3.552  0.01636 *
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.2037 on 5 degrees of freedom
-Multiple R-squared:  0.9988,    Adjusted R-squared:  0.9978
-F-statistic:  1021 on 4 and 5 DF,  p-value: 1.827e-07
-</code></pre><dl class="dl-horizontal"><br>    <dt>x1</dt><br>        <dd>126.280159677426</dd><br>    <dt>x2</dt><br>        <dd>72.827434063754</dd><br>    <dt>x3</dt><br>        <dd>55.4395006902401</dd><br>    <dt>x4</dt><br>        <dd>125.122528952804</dd><br></dl>
-
-
-
-<p>使用最小二乘法估计参数 $\beta$ , 发现回归系数 $\beta_3$ 不显著不为0，并且预测变量 $x$ 的方差膨胀因子均大于30, 数据存在较严重的共线性,考虑使用主成分回归估计参数.</p>
-<p>使用样本的相关矩阵进行主成分分析：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pca &lt;- princomp(~ x1 + x2 + x3 + x4, commodity, cor=<span class="literal">T</span>)</span><br><span class="line"></span><br><span class="line">summary(pca, loading=<span class="literal">TRUE</span>)</span><br><span class="line"></span><br><span class="line">pre &lt;- predict(pca)</span><br><span class="line"></span><br><span class="line">pre</span><br></pre></td></tr></table></figure>
-<pre><code>Importance of components:
-                          Comp.1      Comp.2     Comp.3       Comp.4
-Standard deviation     1.9859037 0.199906992 0.11218966 0.0603085506
-Proportion of Variance 0.9859534 0.009990701 0.00314663 0.0009092803
-Cumulative Proportion  0.9859534 0.995944090 0.99909072 1.0000000000
-
-Loadings:
-   Comp.1 Comp.2 Comp.3 Comp.4
-x1 -0.502 -0.237  0.579 -0.598
-x2 -0.500  0.493 -0.610 -0.367
-x3 -0.498 -0.707 -0.368  0.342
-x4 -0.501  0.449  0.396  0.626
-</code></pre><table><br><thead><tr><th></th><th scope="col">Comp.1</th><th scope="col">Comp.2</th><th scope="col">Comp.3</th><th scope="col">Comp.4</th></tr></thead><br><tbody><br>    <tr><th scope="row">1</th><td> 2.74300221 </td><td> 0.21717213 </td><td> 0.04664610 </td><td>-0.092431543</td></tr><br>    <tr><th scope="row">2</th><td> 2.26912529 </td><td> 0.15180493 </td><td> 0.05701818 </td><td> 0.094266513</td></tr><br>    <tr><th scope="row">3</th><td> 1.66536864 </td><td> 0.11683915 </td><td>-0.03013748 </td><td>-0.045923725</td></tr><br>    <tr><th scope="row">4</th><td> 1.55844739 </td><td>-0.27262184 </td><td> 0.10173123 </td><td> 0.064513216</td></tr><br>    <tr><th scope="row">5</th><td> 0.53961155 </td><td>-0.04080947 </td><td>-0.12051901 </td><td> 0.011795871</td></tr><br>    <tr><th scope="row">6</th><td>-0.04403012 </td><td>-0.33989164 </td><td>-0.09182299 </td><td> 0.003917754</td></tr><br>    <tr><th scope="row">7</th><td>-0.96230840 </td><td>-0.21126360 </td><td>-0.04524573 </td><td>-0.064368428</td></tr><br>    <tr><th scope="row">8</th><td>-2.22802489 </td><td> 0.22379838 </td><td>-0.19645929 </td><td> 0.020173666</td></tr><br>    <tr><th scope="row">9</th><td>-2.65380615 </td><td> 0.17110117 </td><td> 0.08143164 </td><td> 0.067009629</td></tr><br>    <tr><th scope="row">10</th><td>-2.88738552 </td><td>-0.01612921 </td><td> 0.19735735 </td><td>-0.058952953</td></tr><br></tbody><br></table>
-
-
-
-<p>由上可得第一主成分的方差贡献率达到 $98.59534\%$，且第一主成分为：</p>
-<p>$$<br>Z_1 = -0.502x_1 -0.500x_2 - 0.498x_3 - 0.501x_4<br>$$</p>
-<p>下面使用第一主成分进行回归：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commodity$z1 &lt;- pre[, <span class="number">1</span>]</span><br><span class="line">md2 &lt;- lm(y ~ z1, commodity)</span><br><span class="line">summary(md2)</span><br></pre></td></tr></table></figure>
-<pre><code>Call:
-lm(formula = y ~ z1, data = commodity)
-
-Residuals:
-     Min       1Q   Median       3Q      Max
--0.72237 -0.20946  0.05154  0.21032  0.81856
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) 14.03000    0.16615   84.44 4.32e-13 ***
-z1          -2.06119    0.08367  -24.64 7.87e-09 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.5254 on 8 degrees of freedom
-Multiple R-squared:  0.987,    Adjusted R-squared:  0.9854
-F-statistic: 606.9 on 1 and 8 DF,  p-value: 7.873e-09
-</code></pre><p>得到：</p>
-<p>$$<br>y = 14.0300 - 2.06119 * Z_1<br>$$</p>
-<p>最后我们仍需将变量 $Z_1$ 还原：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Phi &lt;- loadings(pca)</span><br><span class="line">xm &lt;- pca$center</span><br><span class="line">xs &lt;- pca$scale</span><br><span class="line">tem &lt;- md2$coefficients</span><br><span class="line">beta &lt;- tem[<span class="number">2</span>] * Phi[, <span class="number">1</span>] / xs</span><br><span class="line">cons &lt;- tem[<span class="number">1</span>] - beta %*% xm</span><br><span class="line">beta &lt;- c(cons, beta)</span><br><span class="line">beta</span><br></pre></td></tr></table></figure>
-<dl class="dl-horizontal"><br>    <dt>1</dt><br>        <dd>-23.7777186112137</dd><br>    <dt>x1</dt><br>        <dd>0.0299264271458343</dd><br>    <dt>x2</dt><br>        <dd>0.133651577042884</dd><br>    <dt>x3</dt><br>        <dd>0.0836115587386088</dd><br>    <dt>x4</dt><br>        <dd>0.169651874372033</dd><br></dl>
-
-
-
-<p>得到回归方程：</p>
-<p>$$<br>y = -23.7777 + 0.0299 <em> x_1 + 0.1337 </em> x_2 + 0.08361 <em> x_3 + 0.1697 </em> x_4<br>$$</p>
-<h3 id="逐步回归"><a href="#逐步回归" class="headerlink" title="逐步回归"></a>逐步回归</h3><p>对《线性模型与回归分析》(王松桂)习题5.7数据做逐步回归分析.</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data &lt;- tbl_df(read_excel(<span class="string">"/path/to/data.xlsx"</span>))</span><br><span class="line"></span><br><span class="line">str(data)</span><br></pre></td></tr></table></figure>
-<pre><code>Classes ‘tbl_df’, ‘tbl’ and &apos;data.frame&apos;:    29 obs. of  6 variables:
- $ y : num  272 264 239 231 252 ...
- $ x1: num  783 748 684 828 860 ...
- $ x2: num  33.5 36.5 34.7 33.1 35.8 ...
- $ x3: num  40.5 36.2 37.3 35.5 33.7 ...
- $ x4: num  16.7 16.5 17.7 17.5 16.4 ...
- $ x5: num  13.2 14.1 15.7 10.5 11 ...
-</code></pre><p>先对数据集做<strong>向后</strong>逐步回归：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">md1 &lt;- lm(y ~ x1 + x2 + x3 + x4 + x5, data=data)</span><br><span class="line"></span><br><span class="line">stepAIC(md1, direction=<span class="string">"backward"</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>Start:  AIC=176
-y ~ x1 + x2 + x3 + x4 + x5
-
-       Df Sum of Sq     RSS    AIC
-- x3    1      35.1  8323.5 174.13
-- x2    1     114.0  8402.4 174.40
-- x5    1     411.8  8700.1 175.41
-&lt;none&gt;               8288.4 176.00
-- x1    1     723.8  9012.2 176.43
-- x4    1    5074.5 13362.9 187.85
-
-Step:  AIC=174.13
-y ~ x1 + x2 + x4 + x5
-
-       Df Sum of Sq     RSS    AIC
-- x2    1     217.2  8540.7 172.87
-&lt;none&gt;               8323.5 174.13
-- x1    1    1009.8  9333.3 175.45
-- x5    1    1267.3  9590.9 176.24
-- x4    1    5136.6 13460.1 186.06
-
-Step:  AIC=172.87
-y ~ x1 + x4 + x5
-
-       Df Sum of Sq     RSS    AIC
-&lt;none&gt;               8540.7 172.87
-- x5    1    1365.8  9906.5 175.18
-- x1    1    1605.5 10146.2 175.87
-- x4    1    4929.7 13470.4 184.09
-
-
-
-
-Call:
-lm(formula = y ~ x1 + x4 + x5, data = data)
-
-Coefficients:
-(Intercept)           x1           x4           x5
-   447.3340       0.1273     -21.8362       5.1049
-</code></pre><p>再对数据集做向前逐步回归：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">md2 &lt;- lm(y ~ <span class="number">1</span>, data=data)</span><br><span class="line"></span><br><span class="line">stepAIC(md2, direction=<span class="string">"forward"</span>, scope=<span class="string">"~ x1 + x2 + x3 + x4 + x5"</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>Start:  AIC=193.65
-y ~ 1
-
-       Df Sum of Sq   RSS    AIC
-+ x4    1   10612.7 10892 175.93
-+ x1    1    8030.1 13475 182.10
-+ x5    1    2563.9 18941 191.97
-&lt;none&gt;              21505 193.65
-+ x2    1     245.0 21260 195.32
-+ x3    1       1.8 21503 195.65
-
-Step:  AIC=175.93
-y ~ x4
-
-       Df Sum of Sq     RSS    AIC
-+ x3    1   1656.22  9235.8 173.14
-+ x1    1    985.56  9906.5 175.18
-+ x2    1    779.98 10112.1 175.77
-+ x5    1    745.86 10146.2 175.87
-&lt;none&gt;              10892.0 175.93
-
-Step:  AIC=173.14
-y ~ x4 + x3
-
-       Df Sum of Sq    RSS    AIC
-&lt;none&gt;              9235.8 173.14
-+ x1    1    505.14 8730.7 173.51
-+ x2    1    143.80 9092.0 174.69
-+ x5    1     14.91 9220.9 175.10
-
-
-
-
-Call:
-lm(formula = y ~ x4 + x3, data = data)
-
-Coefficients:
-(Intercept)           x4           x3
-    491.523      -24.663        4.675
-</code></pre><p>发现两种方向的结果并<strong>不一致</strong>。</p>
-<p>下面对数据进行划分: 前15个样本作为训练数据, 后14个样本作为测试数据，根据AIC准则和RSS准则综合判断如何选择经逐步回归后得到的线性方程.</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">datatrain &lt;- data[<span class="number">1</span>:<span class="number">15</span>, ]</span><br><span class="line">datatest &lt;- data[<span class="number">16</span>:<span class="number">29</span>, ]</span><br><span class="line"></span><br><span class="line">md1 &lt;- lm(y ~ <span class="number">1</span>, datatrain)</span><br><span class="line">md2 &lt;- step(md1, direction = <span class="string">"both"</span>, scope = <span class="string">"~ x1 + x2 + x3 + x4 + x5"</span>)</span><br><span class="line"></span><br><span class="line">summary(md2)</span><br></pre></td></tr></table></figure>
-<pre><code>Start:  AIC=79.88
-y ~ 1
-
-       Df Sum of Sq    RSS    AIC
-+ x4    1   1107.48 1589.4 73.946
-+ x3    1    666.73 2030.1 77.617
-+ x5    1    397.59 2299.3 79.485
-+ x1    1    385.77 2311.1 79.561
-&lt;none&gt;              2696.9 79.877
-+ x2    1    104.83 2592.0 81.282
-
-Step:  AIC=73.95
-y ~ x4
-
-       Df Sum of Sq     RSS    AIC
-+ x3    1   1182.99  406.40 55.489
-+ x5    1    835.24  754.14 64.763
-+ x2    1    295.31 1294.07 72.862
-&lt;none&gt;              1589.39 73.946
-+ x1    1      1.30 1588.09 75.934
-- x4    1   1107.48 2696.87 79.877
-
-Step:  AIC=55.49
-y ~ x4 + x3
-
-       Df Sum of Sq     RSS    AIC
-+ x1    1     70.01  336.39 54.653
-&lt;none&gt;               406.40 55.489
-+ x5    1     42.58  363.82 55.829
-+ x2    1      2.93  403.47 57.381
-- x3    1   1182.99 1589.39 73.946
-- x4    1   1623.74 2030.14 77.617
-
-Step:  AIC=54.65
-y ~ x4 + x3 + x1
-
-       Df Sum of Sq     RSS    AIC
-+ x5    1    116.20  220.18 50.296
-+ x2    1     42.17  294.21 54.644
-&lt;none&gt;               336.39 54.653
-- x1    1     70.01  406.40 55.489
-- x4    1    881.47 1217.86 71.952
-- x3    1   1251.70 1588.09 75.934
-
-Step:  AIC=50.3
-y ~ x4 + x3 + x1 + x5
-
-       Df Sum of Sq     RSS    AIC
-&lt;none&gt;               220.18 50.296
-+ x2    1     13.40  206.78 51.354
-- x5    1    116.20  336.39 54.653
-- x1    1    143.64  363.82 55.829
-- x3    1    317.12  537.30 61.678
-- x4    1    790.37 1010.56 71.153
-
-
-
-
-Call:
-lm(formula = y ~ x4 + x3 + x1 + x5, data = datatrain)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--6.1147 -2.7790 -0.4392  3.2326  6.8494
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) 324.64019   67.10578   4.838 0.000684 ***
-x4          -17.84038    2.97769  -5.991 0.000134 ***
-x3            3.62457    0.95507   3.795 0.003514 **
-x1            0.07047    0.02759   2.554 0.028659 *
-x5            2.99391    1.30323   2.297 0.044459 *
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 4.692 on 10 degrees of freedom
-Multiple R-squared:  0.9184,    Adjusted R-squared:  0.8857
-F-statistic: 28.12 on 4 and 10 DF,  p-value: 2.028e-05
-</code></pre><p>由上可以发现：</p>
-<p>首先, 引入 $x_4$ 后,方程的AIC将降低, 并且引入后的RSS最小,故考虑引入 $x_4$；</p>
-<p>接下来, 引入 $x_3$ 会继续降低方程的AIC, 且引入 $x_3$ 对应的RSS最小；</p>
-<p>继续地，以此判断准则分别引入 $x_1$ 和 $x_5$, 依据AIC准则,方程达到最优。</p>
-<p>$$<br>y = 324.64019 + 0.07047 <em> x1 + 3.62457 </em> x3 - 17.84038 <em> x4 + 2.99391 </em> x5<br>$$</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">R &lt;- summary(md2)$r.square</span><br><span class="line">MSE &lt;- sum(residuals(md2)^<span class="number">2</span>)/<span class="number">7</span></span><br><span class="line"></span><br><span class="line">yp &lt;- predict(md2, datatest)</span><br><span class="line">yf &lt;- datatest$y</span><br><span class="line"></span><br><span class="line">Rp &lt;- <span class="number">1</span> - sum((yf-yp)^<span class="number">2</span>)/sum((yf-mean(yf))^<span class="number">2</span>)</span><br><span class="line">MSEp &lt;- sum((yf-yp)^<span class="number">2</span>)/<span class="number">7</span></span><br><span class="line"></span><br><span class="line">cat(<span class="string">"Original R-Square ="</span>, R, <span class="string">"\n"</span>)</span><br><span class="line">cat(<span class="string">"cv Rp-Square ="</span>, Rp, <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line">cat(<span class="string">"Original MSE ="</span>, MSE, <span class="string">"\n"</span>)</span><br><span class="line">cat(<span class="string">"cv MSEp ="</span>, MSEp, <span class="string">"\n"</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>Original R-Square = 0.9183561
-cv Rp-Square = 0.4209326
-Original MSE = 31.4547
-cv MSEp = 1362.036
-</code></pre><p>对比原方程的 $R^2 = 91.84\%$, $MSE=27.52287$ 使用测试数据进行交叉验证得到的 $R^2<em>{pre} = 42.09\%$, $MSE</em>{pre} = 1362.036$.</p>
-<p>$R^2$ 下降很多, 说明若用该方程进行预测, 预测结果不可靠.</p>
-<h3 id="带示性的线性回归模型"><a href="#带示性的线性回归模型" class="headerlink" title="带示性的线性回归模型"></a>带示性的线性回归模型</h3><p>使用讲义上的2014年全国教育数据进行回归分析:</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">edu &lt;- tbl_df(read_excel(<span class="string">"/path/to/education.xlsx"</span>))</span><br><span class="line"></span><br><span class="line">head(edu, n=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
-<table><br><thead><tr><th scope="col">y</th><th scope="col">x1</th><th scope="col">x2</th><th scope="col">jbh</th></tr></thead><br><tbody><br>    <tr><td>5082.47 </td><td>44488.57</td><td>14119   </td><td>1       </td></tr><br>    <tr><td>4170.25 </td><td>28832.29</td><td>13544   </td><td>1       </td></tr><br>    <tr><td>1470.97 </td><td>16647.40</td><td>18461   </td><td>3       </td></tr><br>    <tr><td>1928.79 </td><td>16538.32</td><td>18415   </td><td>3       </td></tr><br>    <tr><td>2552.41 </td><td>20559.34</td><td>15207   </td><td>2       </td></tr><br>    <tr><td>1981.45 </td><td>22820.15</td><td>14277   </td><td>2       </td></tr><br>    <tr><td>1945.20 </td><td>17520.39</td><td>13930   </td><td>2       </td></tr><br>    <tr><td>1638.09 </td><td>17404.39</td><td>12597   </td><td>2       </td></tr><br></tbody><br></table>
-
-
-
-
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">edu$jbh &lt;- factor(edu$jbh)</span><br><span class="line"></span><br><span class="line">md &lt;- lm(y ~ x1 + x2 + jbh, data=edu)</span><br><span class="line"></span><br><span class="line">influencePlot(md, id.method=<span class="string">"identity"</span>, main=<span class="string">"Influence Plot"</span>, sub=<span class="string">"Circle size is proportional to Cook's"</span>)</span><br></pre></td></tr></table></figure>
-<table><br><thead><tr><th></th><th scope="col">StudRes</th><th scope="col">Hat</th><th scope="col">CookD</th></tr></thead><br><tbody><br>    <tr><th scope="row">9</th><td>-0.7881532</td><td>0.4759338 </td><td>0.09546883</td></tr><br>    <tr><th scope="row">26</th><td> 4.8251309</td><td>0.1874467 </td><td>0.47330170</td></tr><br></tbody><br></table>
-
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/project2/output_37_1.png" width="50%"><br></div>
-
-<p>由上图，我们需要剔除异常点西藏省对应的数据.</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edu &lt;- edu[-<span class="number">26</span>,]</span><br></pre></td></tr></table></figure>
-<p>原数据中对人均可支配收入 <code>jbh</code> 进行了分组, 我们针对分组做适当简化: 将原数据中第一组作为高收入组 <code>h</code>; 第二组和第三组作为中等收入组 <code>m</code>, 第四组作为低收入组 <code>l</code>.</p>
-<p>简化后的分组有四个水平, 故引入三个示性变量:</p>
-<p>$$<br>x_3 = \begin{cases}<br>1 \quad jbh=1 \<br>0 \quad \text{else} \<br>\end{cases} \qquad x_4 = \begin{cases}<br>1 \quad jbh=2  \<br>0 \quad \text{else} \<br>\end{cases} \qquad x_5 = \begin{cases}<br>1 \quad jbh=3  \<br>0 \quad \text{else} \<br>\end{cases}<br>$$</p>
-<p>据此我们可将数据框 <code>edu</code> 做如下变换</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jbh &lt;- dummy(edu$jbh)  <span class="comment"># convert the dummies into a sparse matrix</span></span><br><span class="line">edu.new &lt;- data.frame(edu$y, edu$x1, edu$x2, jbh)  <span class="comment"># update the dateframe</span></span><br><span class="line">names(edu.new) &lt;- c(<span class="string">"y"</span>, <span class="string">"x1"</span>, <span class="string">"x2"</span>, <span class="string">"x3"</span>, <span class="string">"x4"</span>, <span class="string">"x5"</span>, <span class="string">"x6"</span>) <span class="comment"># rename the columns</span></span><br><span class="line"></span><br><span class="line">head(edu.new, n=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
-<table><br><thead><tr><th scope="col">y</th><th scope="col">x1</th><th scope="col">x2</th><th scope="col">x3</th><th scope="col">x4</th><th scope="col">x5</th><th scope="col">x6</th></tr></thead><br><tbody><br>    <tr><td>5082.47 </td><td>44488.57</td><td>14119   </td><td>1       </td><td>0       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>4170.25 </td><td>28832.29</td><td>13544   </td><td>1       </td><td>0       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>1470.97 </td><td>16647.40</td><td>18461   </td><td>0       </td><td>0       </td><td>1       </td><td>0       </td></tr><br>    <tr><td>1928.79 </td><td>16538.32</td><td>18415   </td><td>0       </td><td>0       </td><td>1       </td><td>0       </td></tr><br>    <tr><td>2552.41 </td><td>20559.34</td><td>15207   </td><td>0       </td><td>1       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>1981.45 </td><td>22820.15</td><td>14277   </td><td>0       </td><td>1       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>1945.20 </td><td>17520.39</td><td>13930   </td><td>0       </td><td>1       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>1638.09 </td><td>17404.39</td><td>12597   </td><td>0       </td><td>1       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>4077.58 </td><td>45965.83</td><td>11719   </td><td>1       </td><td>0       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>2613.18 </td><td>27172.77</td><td>16619   </td><td>1       </td><td>0       </td><td>0       </td><td>0       </td></tr><br></tbody><br></table>
-
-
-
-<p>新的 <code>edu.new</code> 中已将哑变量 <code>x3</code> 转化为相应矩阵，可以假设此数据满足线性模型:</p>
-<p>$$<br>y=\beta_0 + \beta_1\, x_1+ \beta_2\, x_2  + \beta_3\, x_3 + \beta_4\, x_4 + \beta_5\, x_5 + e<br>$$</p>
-<p>误差 $e$ 满足 Gauss-Markov 假设. 使用最小二乘法估计参数 $\beta$.</p>
-<p>下面对模型进行交叉验证，将样本分为 $k$ 个子样本，轮流将 $k-1$ 个子样本组合作为训练集，另外 $1$ 个子样本作为保留集。这样获得的 $k$ 个预测方程，记录了 $k$ 个保留样本的预测表现结果，然后求其均值。</p>
-<p>利用 <code>bootstrap</code> 包中的 <code>crossval()</code> 函数实现如下交叉验证函数：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># construct the k fold cross validation function</span></span><br><span class="line">shrinkage &lt;- <span class="keyword">function</span>(fit, k=<span class="number">3</span>) &#123;</span><br><span class="line"></span><br><span class="line">  theta.fit &lt;- <span class="keyword">function</span>(x, y) &#123;lsfit(x, y)&#125;</span><br><span class="line">  theta.predict &lt;- <span class="keyword">function</span>(fit, x) &#123;cbind(<span class="number">1</span>, x) %*% fit$coef&#125;</span><br><span class="line"></span><br><span class="line">  x &lt;- fit$model[, <span class="number">2</span>:ncol(fit$model)]</span><br><span class="line">  y &lt;- fit$model[, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">  results &lt;- crossval(x, y, theta.fit, theta.predict, ngroup = k)</span><br><span class="line">  r2 &lt;- cor(y, fit$fitted.values)^<span class="number">2</span></span><br><span class="line">  r2cv &lt;- cor(y, results$cv.fit)^<span class="number">2</span></span><br><span class="line">  cat(<span class="string">"Original R-square ="</span>, r2, <span class="string">"\n"</span>)</span><br><span class="line">  cat(k, <span class="string">"Fold Cross-Validated R-square ="</span>, r2cv, <span class="string">"\n"</span>)</span><br><span class="line">  cat(<span class="string">"R-square Change ="</span>, r2 - r2cv, <span class="string">"\n"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对 <code>new.data</code> 所有预测变量进行回归，然后再用 <code>shrinkage()</code> 函数做 $3$ 重交叉验证：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">md.new &lt;- lm(y ~ x1 + x2 + x3 + x4 + x5, data=edu.new)</span><br><span class="line"></span><br><span class="line">shrinkage(md.new)</span><br></pre></td></tr></table></figure>
-<pre><code>Original R-square = 0.7147451
-3 Fold Cross-Validated R-square = 0.4983459
-R-square Change = 0.2163992
-</code></pre><p>可以看到，基于初始样本的 $R$ 平方为 <code>0.7147451</code>，对新数据更好的方差解释率估计是交叉验证后的 $R$ 平方 <code>0.4686895</code>，$R$ 平方减少量 <code>0.2163992</code> 较小，说明预测变量模型泛化能力较好，预测较为精准。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary(md.new)</span><br></pre></td></tr></table></figure>
-<pre><code>Call:
-lm(formula = y ~ x1 + x2 + x3 + x4 + x5, data = edu.new)
-
-Residuals:
-   Min     1Q Median     3Q    Max
--520.1 -271.8 -198.1  259.4 1176.5
-
-Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  858.93181 1012.19824   0.849 0.404499
-x1             0.09523    0.02400   3.967 0.000572 ***
-x2             0.01520    0.03799   0.400 0.692716
-x3          -816.78300  498.04009  -1.640 0.114050
-x4          -873.96293  312.85124  -2.794 0.010079 *
-x5          -776.99506  280.13906  -2.774 0.010556 *
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 490.3 on 24 degrees of freedom
-Multiple R-squared:  0.7147,    Adjusted R-squared:  0.6553
-F-statistic: 12.03 on 5 and 24 DF,  p-value: 6.658e-06
-</code></pre><p>故可得带哑变量的线性模型回归方程：</p>
-<p>$$<br>y = 858.93181 + 0.09523 <em> x1 + 0.01520 </em> x2 - 816.78300 <em> x3 - 873.96293 </em> x4 - 776.99506 * x5<br>$$</p>
-<p>由上可知，<strong>人均可支配收入最高省份</strong>相比<strong>人均可支配收入最低省份</strong>在<strong>人均教育费用</strong>上会减少约 <code>816.78</code> 元的投入。 <strong>人均收入稍高的省份</strong>相比减少 <code>873.96</code> 元人均教育经费投入，再稍低的相比减少 <code>776.99</code> 元的人均教育经费投入。最低收入的作为参考指标，视为不减少。</p>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
-<li>R in action Data Analysis and Graphics with R (Second Edition)</li>
-<li>线性模型引论（王松桂、史建红等）</li>
-<li>线性统计模型（王松桂、陈敏等）</li>
-<li>数据集地址：<a href="http://oye4atjxc.bkt.clouddn.com/statistic/project2/data.zip" target="_blank" rel="noopener">http://oye4atjxc.bkt.clouddn.com/statistic/project2/data.zip</a></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2017/11/17/Project-2-of-Statistics/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../9/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../8/">8</a><a class="page-number" href="../9/">9</a><span class="page-number current">10</span><a class="page-number" href="../11/">11</a><a class="extend next" rel="next" href="../11/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="../9/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../8/">8</a><a class="page-number" href="../9/">9</a><span class="page-number current">10</span><a class="page-number" href="../11/">11</a><a class="page-number" href="../12/">12</a><a class="extend next" rel="next" href="../11/">Next &raquo;</a>
     </nav>
   
 
@@ -1156,10 +819,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">r</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
@@ -1169,6 +828,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">
