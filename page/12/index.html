@@ -167,6 +167,511 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Project-2-of-Statistics" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/11/17/Project-2-of-Statistics/">Project 2 of Statistics.md</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/11/17/Project-2-of-Statistics/" class="archive-article-date">
+  	<time datetime="2017-11-17T08:38:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>本次大作业按章节依次展示了岭估计、主成分估计、逐步回归和带示性变量的回归分析。</p>
+<p>主要使用 <code>dplyr</code> 和 <code>readxl</code> 包导入数据并获得数据框视图；利用 <code>MASS</code> 和 <code>car</code> 包作岭迹图、主成分估计和逐步回归分析； <code>dummies</code> 包提供了将示性变量转换为特殊矩阵的可能；<code>bootstrap</code> 包帮助我们实现了 $k$ 重交叉验证。</p>
+<p>所有文献和数据集均可在文末的参考文献链接中下载获得。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(dplyr)</span><br><span class="line"><span class="keyword">library</span>(readxl)</span><br><span class="line"><span class="keyword">library</span>(MASS)</span><br><span class="line"><span class="keyword">library</span>(car)</span><br><span class="line"><span class="keyword">library</span>(dummies)</span><br><span class="line"><span class="keyword">library</span>(bootstrap)</span><br></pre></td></tr></table></figure>
+<h3 id="岭估计"><a href="#岭估计" class="headerlink" title="岭估计"></a>岭估计</h3><p>对《线性模型与回归分析》(王松桂)书习题3.19数据进行回归分析，十次试验得到的观测数据如下</p>
+<table>
+<thead>
+<tr>
+<th>$y$</th>
+<th>16.3</th>
+<th>16.8</th>
+<th>19.2</th>
+<th>18.0</th>
+<th>19.5</th>
+<th>20.9</th>
+<th>21.1</th>
+<th>20.9</th>
+<th>20.3</th>
+<th>22.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$X_1$</td>
+<td>1.1</td>
+<td>1.4</td>
+<td>1.7</td>
+<td>1.7</td>
+<td>1.8</td>
+<td>1.8</td>
+<td>1.9</td>
+<td>2.0</td>
+<td>2.3</td>
+<td>2.4</td>
+</tr>
+<tr>
+<td>$X_2$</td>
+<td>1.1</td>
+<td>1.5</td>
+<td>1.8</td>
+<td>1.7</td>
+<td>1.9</td>
+<td>1.8</td>
+<td>1.8</td>
+<td>2.1</td>
+<td>2.4</td>
+<td>2.5</td>
+</tr>
+</tbody>
+</table>
+<p>首先导入数据并获得预览：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test &lt;- tbl_df(read_excel(<span class="string">"/path/to/test.xlsx"</span>))</span><br><span class="line"></span><br><span class="line">str(test)</span><br></pre></td></tr></table></figure>
+<pre><code>Classes ‘tbl_df’, ‘tbl’ and &apos;data.frame&apos;:    10 obs. of  3 variables:
+ $ y : num  16.3 16.8 19.2 18 19.5 20.9 21.1 20.9 20.3 22
+ $ x1: num  1.1 1.4 1.7 1.7 1.8 1.8 1.9 2 2.3 2.4
+ $ x2: num  1.1 1.5 1.8 1.7 1.9 1.8 1.8 2.1 2.4 2.5
+</code></pre><p>下面假设数据满足线性模型:</p>
+<p>$$<br>y=\beta_0 + \beta_1 x_1+ \beta_2 x_2 + e<br>$$</p>
+<p>其中误差 $e$ 满足 Gauss-Markov 假设，最小二乘法估计参数 $\beta = (\beta_0, \beta_1, \beta_2)$.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">md1 &lt;- lm(y ~ x1 + x2, test)</span><br><span class="line"></span><br><span class="line">summary(md1)</span><br><span class="line"></span><br><span class="line">vif(md1)</span><br></pre></td></tr></table></figure>
+<pre><code>Call:
+lm(formula = y ~ x1 + x2, data = test)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-1.3107 -0.3727  0.1168  0.5054  1.1176
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   11.292      1.463   7.719 0.000114 ***
+x1            11.307      4.719   2.396 0.047740 *
+x2            -6.591      4.436  -1.486 0.180941
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9072 on 7 degrees of freedom
+Multiple R-squared:  0.8267,    Adjusted R-squared:  0.7772
+F-statistic:  16.7 on 2 and 7 DF,  p-value: 0.002167
+</code></pre><dl class="dl-horizontal"><br>    <dt>x1</dt><br>        <dd>35.9628643396901</dd><br>    <dt>x2</dt><br>        <dd>35.9628643396901</dd><br></dl>
+
+
+
+<p>由上可知预测变量 $x$ 的方差膨胀因子均大于30, 数据存在较严重的共线性, 于是考虑使用岭估计确定线形模型中的系数.</p>
+<p>下面规定岭参数在 $(0,1)$ 中, 以 $0.1$ 为步长作出岭迹图：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">md2 &lt;- lm.ridge(y ~ x1 + x2, test, lambda = seq(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0.1</span>))</span><br><span class="line"></span><br><span class="line">plot(md2)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/project2/output_8_0.png" width="50%"><br></div>
+
+
+<p>从图中发现当岭参数 $k=4$ 时, $\hat{\beta}(k)$的图像趋于平稳, 故选择</p>
+<p>$$<br>\hat{\beta(4)}=(11.86099 ,\  4.480425, \ -0.25298675)<br>$$</p>
+<h3 id="主成分估计"><a href="#主成分估计" class="headerlink" title="主成分估计"></a>主成分估计</h3><p>对《线性模型与回归分析》(王松桂)习题3.20数据进行回归分析。导入数据集 <code>commodity</code>:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commodity &lt;- tbl_df(read_excel(<span class="string">"/path/to/commodity.xlsx"</span>))</span><br><span class="line"></span><br><span class="line">str(commodity)</span><br></pre></td></tr></table></figure>
+<pre><code>Classes ‘tbl_df’, ‘tbl’ and &apos;data.frame&apos;:    10 obs. of  5 variables:
+ $ y : num  8.4 9.6 10.4 11.4 12.2 14.2 15.8 17.9 19.6 20.8
+ $ x1: num  82.9 88 99.9 105.3 117.7 ...
+ $ x2: num  92 93 96 94 100 101 105 112 112 112
+ $ x3: num  17.1 21.3 25.1 29 34 40 44 49 51 53
+ $ x4: num  94 96 97 97 100 101 104 109 111 111
+</code></pre><p>假设数据满足线性模型:</p>
+<p>$$<br>y=\beta_0 + \beta_1 x_1+ \beta_2 x_2  +x_3 + x_4+ e<br>$$</p>
+<p>误差 $e$ 满足Gauss - Markov 假设.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">md1 &lt;- lm(y ~ x1 + x2 + x3 + x4, commodity)</span><br><span class="line"></span><br><span class="line">summary(md1)</span><br><span class="line"></span><br><span class="line">vif(md1)</span><br></pre></td></tr></table></figure>
+<pre><code>Call:
+lm(formula = y ~ x1 + x2 + x3 + x4, data = commodity)
+
+Residuals:
+        1         2         3         4         5         6         7         8
+ 0.024803  0.079476  0.012381 -0.007025 -0.288345  0.216090 -0.142085  0.158360
+        9        10
+-0.135964  0.082310
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -17.66768    5.94360  -2.973  0.03107 *
+x1            0.09006    0.02095   4.298  0.00773 **
+x2           -0.23132    0.07132  -3.243  0.02287 *
+x3            0.01806    0.03907   0.462  0.66328
+x4            0.42075    0.11847   3.552  0.01636 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2037 on 5 degrees of freedom
+Multiple R-squared:  0.9988,    Adjusted R-squared:  0.9978
+F-statistic:  1021 on 4 and 5 DF,  p-value: 1.827e-07
+</code></pre><dl class="dl-horizontal"><br>    <dt>x1</dt><br>        <dd>126.280159677426</dd><br>    <dt>x2</dt><br>        <dd>72.827434063754</dd><br>    <dt>x3</dt><br>        <dd>55.4395006902401</dd><br>    <dt>x4</dt><br>        <dd>125.122528952804</dd><br></dl>
+
+
+
+<p>使用最小二乘法估计参数 $\beta$ , 发现回归系数 $\beta_3$ 不显著不为0，并且预测变量 $x$ 的方差膨胀因子均大于30, 数据存在较严重的共线性,考虑使用主成分回归估计参数.</p>
+<p>使用样本的相关矩阵进行主成分分析：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pca &lt;- princomp(~ x1 + x2 + x3 + x4, commodity, cor=<span class="literal">T</span>)</span><br><span class="line"></span><br><span class="line">summary(pca, loading=<span class="literal">TRUE</span>)</span><br><span class="line"></span><br><span class="line">pre &lt;- predict(pca)</span><br><span class="line"></span><br><span class="line">pre</span><br></pre></td></tr></table></figure>
+<pre><code>Importance of components:
+                          Comp.1      Comp.2     Comp.3       Comp.4
+Standard deviation     1.9859037 0.199906992 0.11218966 0.0603085506
+Proportion of Variance 0.9859534 0.009990701 0.00314663 0.0009092803
+Cumulative Proportion  0.9859534 0.995944090 0.99909072 1.0000000000
+
+Loadings:
+   Comp.1 Comp.2 Comp.3 Comp.4
+x1 -0.502 -0.237  0.579 -0.598
+x2 -0.500  0.493 -0.610 -0.367
+x3 -0.498 -0.707 -0.368  0.342
+x4 -0.501  0.449  0.396  0.626
+</code></pre><table><br><thead><tr><th></th><th scope="col">Comp.1</th><th scope="col">Comp.2</th><th scope="col">Comp.3</th><th scope="col">Comp.4</th></tr></thead><br><tbody><br>    <tr><th scope="row">1</th><td> 2.74300221 </td><td> 0.21717213 </td><td> 0.04664610 </td><td>-0.092431543</td></tr><br>    <tr><th scope="row">2</th><td> 2.26912529 </td><td> 0.15180493 </td><td> 0.05701818 </td><td> 0.094266513</td></tr><br>    <tr><th scope="row">3</th><td> 1.66536864 </td><td> 0.11683915 </td><td>-0.03013748 </td><td>-0.045923725</td></tr><br>    <tr><th scope="row">4</th><td> 1.55844739 </td><td>-0.27262184 </td><td> 0.10173123 </td><td> 0.064513216</td></tr><br>    <tr><th scope="row">5</th><td> 0.53961155 </td><td>-0.04080947 </td><td>-0.12051901 </td><td> 0.011795871</td></tr><br>    <tr><th scope="row">6</th><td>-0.04403012 </td><td>-0.33989164 </td><td>-0.09182299 </td><td> 0.003917754</td></tr><br>    <tr><th scope="row">7</th><td>-0.96230840 </td><td>-0.21126360 </td><td>-0.04524573 </td><td>-0.064368428</td></tr><br>    <tr><th scope="row">8</th><td>-2.22802489 </td><td> 0.22379838 </td><td>-0.19645929 </td><td> 0.020173666</td></tr><br>    <tr><th scope="row">9</th><td>-2.65380615 </td><td> 0.17110117 </td><td> 0.08143164 </td><td> 0.067009629</td></tr><br>    <tr><th scope="row">10</th><td>-2.88738552 </td><td>-0.01612921 </td><td> 0.19735735 </td><td>-0.058952953</td></tr><br></tbody><br></table>
+
+
+
+<p>由上可得第一主成分的方差贡献率达到 $98.59534\%$，且第一主成分为：</p>
+<p>$$<br>Z_1 = -0.502x_1 -0.500x_2 - 0.498x_3 - 0.501x_4<br>$$</p>
+<p>下面使用第一主成分进行回归：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commodity$z1 &lt;- pre[, <span class="number">1</span>]</span><br><span class="line">md2 &lt;- lm(y ~ z1, commodity)</span><br><span class="line">summary(md2)</span><br></pre></td></tr></table></figure>
+<pre><code>Call:
+lm(formula = y ~ z1, data = commodity)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-0.72237 -0.20946  0.05154  0.21032  0.81856
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) 14.03000    0.16615   84.44 4.32e-13 ***
+z1          -2.06119    0.08367  -24.64 7.87e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.5254 on 8 degrees of freedom
+Multiple R-squared:  0.987,    Adjusted R-squared:  0.9854
+F-statistic: 606.9 on 1 and 8 DF,  p-value: 7.873e-09
+</code></pre><p>得到：</p>
+<p>$$<br>y = 14.0300 - 2.06119 * Z_1<br>$$</p>
+<p>最后我们仍需将变量 $Z_1$ 还原：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Phi &lt;- loadings(pca)</span><br><span class="line">xm &lt;- pca$center</span><br><span class="line">xs &lt;- pca$scale</span><br><span class="line">tem &lt;- md2$coefficients</span><br><span class="line">beta &lt;- tem[<span class="number">2</span>] * Phi[, <span class="number">1</span>] / xs</span><br><span class="line">cons &lt;- tem[<span class="number">1</span>] - beta %*% xm</span><br><span class="line">beta &lt;- c(cons, beta)</span><br><span class="line">beta</span><br></pre></td></tr></table></figure>
+<dl class="dl-horizontal"><br>    <dt>1</dt><br>        <dd>-23.7777186112137</dd><br>    <dt>x1</dt><br>        <dd>0.0299264271458343</dd><br>    <dt>x2</dt><br>        <dd>0.133651577042884</dd><br>    <dt>x3</dt><br>        <dd>0.0836115587386088</dd><br>    <dt>x4</dt><br>        <dd>0.169651874372033</dd><br></dl>
+
+
+
+<p>得到回归方程：</p>
+<p>$$<br>y = -23.7777 + 0.0299 <em> x_1 + 0.1337 </em> x_2 + 0.08361 <em> x_3 + 0.1697 </em> x_4<br>$$</p>
+<h3 id="逐步回归"><a href="#逐步回归" class="headerlink" title="逐步回归"></a>逐步回归</h3><p>对《线性模型与回归分析》(王松桂)习题5.7数据做逐步回归分析.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data &lt;- tbl_df(read_excel(<span class="string">"/path/to/data.xlsx"</span>))</span><br><span class="line"></span><br><span class="line">str(data)</span><br></pre></td></tr></table></figure>
+<pre><code>Classes ‘tbl_df’, ‘tbl’ and &apos;data.frame&apos;:    29 obs. of  6 variables:
+ $ y : num  272 264 239 231 252 ...
+ $ x1: num  783 748 684 828 860 ...
+ $ x2: num  33.5 36.5 34.7 33.1 35.8 ...
+ $ x3: num  40.5 36.2 37.3 35.5 33.7 ...
+ $ x4: num  16.7 16.5 17.7 17.5 16.4 ...
+ $ x5: num  13.2 14.1 15.7 10.5 11 ...
+</code></pre><p>先对数据集做<strong>向后</strong>逐步回归：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">md1 &lt;- lm(y ~ x1 + x2 + x3 + x4 + x5, data=data)</span><br><span class="line"></span><br><span class="line">stepAIC(md1, direction=<span class="string">"backward"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Start:  AIC=176
+y ~ x1 + x2 + x3 + x4 + x5
+
+       Df Sum of Sq     RSS    AIC
+- x3    1      35.1  8323.5 174.13
+- x2    1     114.0  8402.4 174.40
+- x5    1     411.8  8700.1 175.41
+&lt;none&gt;               8288.4 176.00
+- x1    1     723.8  9012.2 176.43
+- x4    1    5074.5 13362.9 187.85
+
+Step:  AIC=174.13
+y ~ x1 + x2 + x4 + x5
+
+       Df Sum of Sq     RSS    AIC
+- x2    1     217.2  8540.7 172.87
+&lt;none&gt;               8323.5 174.13
+- x1    1    1009.8  9333.3 175.45
+- x5    1    1267.3  9590.9 176.24
+- x4    1    5136.6 13460.1 186.06
+
+Step:  AIC=172.87
+y ~ x1 + x4 + x5
+
+       Df Sum of Sq     RSS    AIC
+&lt;none&gt;               8540.7 172.87
+- x5    1    1365.8  9906.5 175.18
+- x1    1    1605.5 10146.2 175.87
+- x4    1    4929.7 13470.4 184.09
+
+
+
+
+Call:
+lm(formula = y ~ x1 + x4 + x5, data = data)
+
+Coefficients:
+(Intercept)           x1           x4           x5
+   447.3340       0.1273     -21.8362       5.1049
+</code></pre><p>再对数据集做向前逐步回归：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">md2 &lt;- lm(y ~ <span class="number">1</span>, data=data)</span><br><span class="line"></span><br><span class="line">stepAIC(md2, direction=<span class="string">"forward"</span>, scope=<span class="string">"~ x1 + x2 + x3 + x4 + x5"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Start:  AIC=193.65
+y ~ 1
+
+       Df Sum of Sq   RSS    AIC
++ x4    1   10612.7 10892 175.93
++ x1    1    8030.1 13475 182.10
++ x5    1    2563.9 18941 191.97
+&lt;none&gt;              21505 193.65
++ x2    1     245.0 21260 195.32
++ x3    1       1.8 21503 195.65
+
+Step:  AIC=175.93
+y ~ x4
+
+       Df Sum of Sq     RSS    AIC
++ x3    1   1656.22  9235.8 173.14
++ x1    1    985.56  9906.5 175.18
++ x2    1    779.98 10112.1 175.77
++ x5    1    745.86 10146.2 175.87
+&lt;none&gt;              10892.0 175.93
+
+Step:  AIC=173.14
+y ~ x4 + x3
+
+       Df Sum of Sq    RSS    AIC
+&lt;none&gt;              9235.8 173.14
++ x1    1    505.14 8730.7 173.51
++ x2    1    143.80 9092.0 174.69
++ x5    1     14.91 9220.9 175.10
+
+
+
+
+Call:
+lm(formula = y ~ x4 + x3, data = data)
+
+Coefficients:
+(Intercept)           x4           x3
+    491.523      -24.663        4.675
+</code></pre><p>发现两种方向的结果并<strong>不一致</strong>。</p>
+<p>下面对数据进行划分: 前15个样本作为训练数据, 后14个样本作为测试数据，根据AIC准则和RSS准则综合判断如何选择经逐步回归后得到的线性方程.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">datatrain &lt;- data[<span class="number">1</span>:<span class="number">15</span>, ]</span><br><span class="line">datatest &lt;- data[<span class="number">16</span>:<span class="number">29</span>, ]</span><br><span class="line"></span><br><span class="line">md1 &lt;- lm(y ~ <span class="number">1</span>, datatrain)</span><br><span class="line">md2 &lt;- step(md1, direction = <span class="string">"both"</span>, scope = <span class="string">"~ x1 + x2 + x3 + x4 + x5"</span>)</span><br><span class="line"></span><br><span class="line">summary(md2)</span><br></pre></td></tr></table></figure>
+<pre><code>Start:  AIC=79.88
+y ~ 1
+
+       Df Sum of Sq    RSS    AIC
++ x4    1   1107.48 1589.4 73.946
++ x3    1    666.73 2030.1 77.617
++ x5    1    397.59 2299.3 79.485
++ x1    1    385.77 2311.1 79.561
+&lt;none&gt;              2696.9 79.877
++ x2    1    104.83 2592.0 81.282
+
+Step:  AIC=73.95
+y ~ x4
+
+       Df Sum of Sq     RSS    AIC
++ x3    1   1182.99  406.40 55.489
++ x5    1    835.24  754.14 64.763
++ x2    1    295.31 1294.07 72.862
+&lt;none&gt;              1589.39 73.946
++ x1    1      1.30 1588.09 75.934
+- x4    1   1107.48 2696.87 79.877
+
+Step:  AIC=55.49
+y ~ x4 + x3
+
+       Df Sum of Sq     RSS    AIC
++ x1    1     70.01  336.39 54.653
+&lt;none&gt;               406.40 55.489
++ x5    1     42.58  363.82 55.829
++ x2    1      2.93  403.47 57.381
+- x3    1   1182.99 1589.39 73.946
+- x4    1   1623.74 2030.14 77.617
+
+Step:  AIC=54.65
+y ~ x4 + x3 + x1
+
+       Df Sum of Sq     RSS    AIC
++ x5    1    116.20  220.18 50.296
++ x2    1     42.17  294.21 54.644
+&lt;none&gt;               336.39 54.653
+- x1    1     70.01  406.40 55.489
+- x4    1    881.47 1217.86 71.952
+- x3    1   1251.70 1588.09 75.934
+
+Step:  AIC=50.3
+y ~ x4 + x3 + x1 + x5
+
+       Df Sum of Sq     RSS    AIC
+&lt;none&gt;               220.18 50.296
++ x2    1     13.40  206.78 51.354
+- x5    1    116.20  336.39 54.653
+- x1    1    143.64  363.82 55.829
+- x3    1    317.12  537.30 61.678
+- x4    1    790.37 1010.56 71.153
+
+
+
+
+Call:
+lm(formula = y ~ x4 + x3 + x1 + x5, data = datatrain)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-6.1147 -2.7790 -0.4392  3.2326  6.8494
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) 324.64019   67.10578   4.838 0.000684 ***
+x4          -17.84038    2.97769  -5.991 0.000134 ***
+x3            3.62457    0.95507   3.795 0.003514 **
+x1            0.07047    0.02759   2.554 0.028659 *
+x5            2.99391    1.30323   2.297 0.044459 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.692 on 10 degrees of freedom
+Multiple R-squared:  0.9184,    Adjusted R-squared:  0.8857
+F-statistic: 28.12 on 4 and 10 DF,  p-value: 2.028e-05
+</code></pre><p>由上可以发现：</p>
+<p>首先, 引入 $x_4$ 后,方程的AIC将降低, 并且引入后的RSS最小,故考虑引入 $x_4$；</p>
+<p>接下来, 引入 $x_3$ 会继续降低方程的AIC, 且引入 $x_3$ 对应的RSS最小；</p>
+<p>继续地，以此判断准则分别引入 $x_1$ 和 $x_5$, 依据AIC准则,方程达到最优。</p>
+<p>$$<br>y = 324.64019 + 0.07047 <em> x1 + 3.62457 </em> x3 - 17.84038 <em> x4 + 2.99391 </em> x5<br>$$</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">R &lt;- summary(md2)$r.square</span><br><span class="line">MSE &lt;- sum(residuals(md2)^<span class="number">2</span>)/<span class="number">7</span></span><br><span class="line"></span><br><span class="line">yp &lt;- predict(md2, datatest)</span><br><span class="line">yf &lt;- datatest$y</span><br><span class="line"></span><br><span class="line">Rp &lt;- <span class="number">1</span> - sum((yf-yp)^<span class="number">2</span>)/sum((yf-mean(yf))^<span class="number">2</span>)</span><br><span class="line">MSEp &lt;- sum((yf-yp)^<span class="number">2</span>)/<span class="number">7</span></span><br><span class="line"></span><br><span class="line">cat(<span class="string">"Original R-Square ="</span>, R, <span class="string">"\n"</span>)</span><br><span class="line">cat(<span class="string">"cv Rp-Square ="</span>, Rp, <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line">cat(<span class="string">"Original MSE ="</span>, MSE, <span class="string">"\n"</span>)</span><br><span class="line">cat(<span class="string">"cv MSEp ="</span>, MSEp, <span class="string">"\n"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Original R-Square = 0.9183561
+cv Rp-Square = 0.4209326
+Original MSE = 31.4547
+cv MSEp = 1362.036
+</code></pre><p>对比原方程的 $R^2 = 91.84\%$, $MSE=27.52287$ 使用测试数据进行交叉验证得到的 $R^2<em>{pre} = 42.09\%$, $MSE</em>{pre} = 1362.036$.</p>
+<p>$R^2$ 下降很多, 说明若用该方程进行预测, 预测结果不可靠.</p>
+<h3 id="带示性的线性回归模型"><a href="#带示性的线性回归模型" class="headerlink" title="带示性的线性回归模型"></a>带示性的线性回归模型</h3><p>使用讲义上的2014年全国教育数据进行回归分析:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">edu &lt;- tbl_df(read_excel(<span class="string">"/path/to/education.xlsx"</span>))</span><br><span class="line"></span><br><span class="line">head(edu, n=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<table><br><thead><tr><th scope="col">y</th><th scope="col">x1</th><th scope="col">x2</th><th scope="col">jbh</th></tr></thead><br><tbody><br>    <tr><td>5082.47 </td><td>44488.57</td><td>14119   </td><td>1       </td></tr><br>    <tr><td>4170.25 </td><td>28832.29</td><td>13544   </td><td>1       </td></tr><br>    <tr><td>1470.97 </td><td>16647.40</td><td>18461   </td><td>3       </td></tr><br>    <tr><td>1928.79 </td><td>16538.32</td><td>18415   </td><td>3       </td></tr><br>    <tr><td>2552.41 </td><td>20559.34</td><td>15207   </td><td>2       </td></tr><br>    <tr><td>1981.45 </td><td>22820.15</td><td>14277   </td><td>2       </td></tr><br>    <tr><td>1945.20 </td><td>17520.39</td><td>13930   </td><td>2       </td></tr><br>    <tr><td>1638.09 </td><td>17404.39</td><td>12597   </td><td>2       </td></tr><br></tbody><br></table>
+
+
+
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">edu$jbh &lt;- factor(edu$jbh)</span><br><span class="line"></span><br><span class="line">md &lt;- lm(y ~ x1 + x2 + jbh, data=edu)</span><br><span class="line"></span><br><span class="line">influencePlot(md, id.method=<span class="string">"identity"</span>, main=<span class="string">"Influence Plot"</span>, sub=<span class="string">"Circle size is proportional to Cook's"</span>)</span><br></pre></td></tr></table></figure>
+<table><br><thead><tr><th></th><th scope="col">StudRes</th><th scope="col">Hat</th><th scope="col">CookD</th></tr></thead><br><tbody><br>    <tr><th scope="row">9</th><td>-0.7881532</td><td>0.4759338 </td><td>0.09546883</td></tr><br>    <tr><th scope="row">26</th><td> 4.8251309</td><td>0.1874467 </td><td>0.47330170</td></tr><br></tbody><br></table>
+
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/project2/output_37_1.png" width="50%"><br></div>
+
+<p>由上图，我们需要剔除异常点西藏省对应的数据.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edu &lt;- edu[-<span class="number">26</span>,]</span><br></pre></td></tr></table></figure>
+<p>原数据中对人均可支配收入 <code>jbh</code> 进行了分组, 我们针对分组做适当简化: 将原数据中第一组作为高收入组 <code>h</code>; 第二组和第三组作为中等收入组 <code>m</code>, 第四组作为低收入组 <code>l</code>.</p>
+<p>简化后的分组有四个水平, 故引入三个示性变量:</p>
+<p>$$<br>x_3 = \begin{cases}<br>1 \quad jbh=1 \<br>0 \quad \text{else} \<br>\end{cases} \qquad x_4 = \begin{cases}<br>1 \quad jbh=2  \<br>0 \quad \text{else} \<br>\end{cases} \qquad x_5 = \begin{cases}<br>1 \quad jbh=3  \<br>0 \quad \text{else} \<br>\end{cases}<br>$$</p>
+<p>据此我们可将数据框 <code>edu</code> 做如下变换</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jbh &lt;- dummy(edu$jbh)  <span class="comment"># convert the dummies into a sparse matrix</span></span><br><span class="line">edu.new &lt;- data.frame(edu$y, edu$x1, edu$x2, jbh)  <span class="comment"># update the dateframe</span></span><br><span class="line">names(edu.new) &lt;- c(<span class="string">"y"</span>, <span class="string">"x1"</span>, <span class="string">"x2"</span>, <span class="string">"x3"</span>, <span class="string">"x4"</span>, <span class="string">"x5"</span>, <span class="string">"x6"</span>) <span class="comment"># rename the columns</span></span><br><span class="line"></span><br><span class="line">head(edu.new, n=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<table><br><thead><tr><th scope="col">y</th><th scope="col">x1</th><th scope="col">x2</th><th scope="col">x3</th><th scope="col">x4</th><th scope="col">x5</th><th scope="col">x6</th></tr></thead><br><tbody><br>    <tr><td>5082.47 </td><td>44488.57</td><td>14119   </td><td>1       </td><td>0       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>4170.25 </td><td>28832.29</td><td>13544   </td><td>1       </td><td>0       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>1470.97 </td><td>16647.40</td><td>18461   </td><td>0       </td><td>0       </td><td>1       </td><td>0       </td></tr><br>    <tr><td>1928.79 </td><td>16538.32</td><td>18415   </td><td>0       </td><td>0       </td><td>1       </td><td>0       </td></tr><br>    <tr><td>2552.41 </td><td>20559.34</td><td>15207   </td><td>0       </td><td>1       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>1981.45 </td><td>22820.15</td><td>14277   </td><td>0       </td><td>1       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>1945.20 </td><td>17520.39</td><td>13930   </td><td>0       </td><td>1       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>1638.09 </td><td>17404.39</td><td>12597   </td><td>0       </td><td>1       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>4077.58 </td><td>45965.83</td><td>11719   </td><td>1       </td><td>0       </td><td>0       </td><td>0       </td></tr><br>    <tr><td>2613.18 </td><td>27172.77</td><td>16619   </td><td>1       </td><td>0       </td><td>0       </td><td>0       </td></tr><br></tbody><br></table>
+
+
+
+<p>新的 <code>edu.new</code> 中已将哑变量 <code>x3</code> 转化为相应矩阵，可以假设此数据满足线性模型:</p>
+<p>$$<br>y=\beta_0 + \beta_1\, x_1+ \beta_2\, x_2  + \beta_3\, x_3 + \beta_4\, x_4 + \beta_5\, x_5 + e<br>$$</p>
+<p>误差 $e$ 满足 Gauss-Markov 假设. 使用最小二乘法估计参数 $\beta$.</p>
+<p>下面对模型进行交叉验证，将样本分为 $k$ 个子样本，轮流将 $k-1$ 个子样本组合作为训练集，另外 $1$ 个子样本作为保留集。这样获得的 $k$ 个预测方程，记录了 $k$ 个保留样本的预测表现结果，然后求其均值。</p>
+<p>利用 <code>bootstrap</code> 包中的 <code>crossval()</code> 函数实现如下交叉验证函数：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># construct the k fold cross validation function</span></span><br><span class="line">shrinkage &lt;- <span class="keyword">function</span>(fit, k=<span class="number">3</span>) &#123;</span><br><span class="line"></span><br><span class="line">  theta.fit &lt;- <span class="keyword">function</span>(x, y) &#123;lsfit(x, y)&#125;</span><br><span class="line">  theta.predict &lt;- <span class="keyword">function</span>(fit, x) &#123;cbind(<span class="number">1</span>, x) %*% fit$coef&#125;</span><br><span class="line"></span><br><span class="line">  x &lt;- fit$model[, <span class="number">2</span>:ncol(fit$model)]</span><br><span class="line">  y &lt;- fit$model[, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">  results &lt;- crossval(x, y, theta.fit, theta.predict, ngroup = k)</span><br><span class="line">  r2 &lt;- cor(y, fit$fitted.values)^<span class="number">2</span></span><br><span class="line">  r2cv &lt;- cor(y, results$cv.fit)^<span class="number">2</span></span><br><span class="line">  cat(<span class="string">"Original R-square ="</span>, r2, <span class="string">"\n"</span>)</span><br><span class="line">  cat(k, <span class="string">"Fold Cross-Validated R-square ="</span>, r2cv, <span class="string">"\n"</span>)</span><br><span class="line">  cat(<span class="string">"R-square Change ="</span>, r2 - r2cv, <span class="string">"\n"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对 <code>new.data</code> 所有预测变量进行回归，然后再用 <code>shrinkage()</code> 函数做 $3$ 重交叉验证：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">md.new &lt;- lm(y ~ x1 + x2 + x3 + x4 + x5, data=edu.new)</span><br><span class="line"></span><br><span class="line">shrinkage(md.new)</span><br></pre></td></tr></table></figure>
+<pre><code>Original R-square = 0.7147451
+3 Fold Cross-Validated R-square = 0.4983459
+R-square Change = 0.2163992
+</code></pre><p>可以看到，基于初始样本的 $R$ 平方为 <code>0.7147451</code>，对新数据更好的方差解释率估计是交叉验证后的 $R$ 平方 <code>0.4686895</code>，$R$ 平方减少量 <code>0.2163992</code> 较小，说明预测变量模型泛化能力较好，预测较为精准。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary(md.new)</span><br></pre></td></tr></table></figure>
+<pre><code>Call:
+lm(formula = y ~ x1 + x2 + x3 + x4 + x5, data = edu.new)
+
+Residuals:
+   Min     1Q Median     3Q    Max
+-520.1 -271.8 -198.1  259.4 1176.5
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  858.93181 1012.19824   0.849 0.404499
+x1             0.09523    0.02400   3.967 0.000572 ***
+x2             0.01520    0.03799   0.400 0.692716
+x3          -816.78300  498.04009  -1.640 0.114050
+x4          -873.96293  312.85124  -2.794 0.010079 *
+x5          -776.99506  280.13906  -2.774 0.010556 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 490.3 on 24 degrees of freedom
+Multiple R-squared:  0.7147,    Adjusted R-squared:  0.6553
+F-statistic: 12.03 on 5 and 24 DF,  p-value: 6.658e-06
+</code></pre><p>故可得带哑变量的线性模型回归方程：</p>
+<p>$$<br>y = 858.93181 + 0.09523 <em> x1 + 0.01520 </em> x2 - 816.78300 <em> x3 - 873.96293 </em> x4 - 776.99506 * x5<br>$$</p>
+<p>由上可知，<strong>人均可支配收入最高省份</strong>相比<strong>人均可支配收入最低省份</strong>在<strong>人均教育费用</strong>上会减少约 <code>816.78</code> 元的投入。 <strong>人均收入稍高的省份</strong>相比减少 <code>873.96</code> 元人均教育经费投入，再稍低的相比减少 <code>776.99</code> 元的人均教育经费投入。最低收入的作为参考指标，视为不减少。</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
+<li>R in action Data Analysis and Graphics with R (Second Edition)</li>
+<li>线性模型引论（王松桂、史建红等）</li>
+<li>线性统计模型（王松桂、陈敏等）</li>
+<li>数据集地址：<a href="http://oye4atjxc.bkt.clouddn.com/statistic/project2/data.zip" target="_blank" rel="noopener">http://oye4atjxc.bkt.clouddn.com/statistic/project2/data.zip</a></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/11/17/Project-2-of-Statistics/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Assignment-2-of-Advanced-Computational-Method" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -311,11 +816,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -633,11 +1138,11 @@ F-statistic: 609.4 on 2 and 28 DF,  p-value: &lt; 2.2e-16
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
         		</li>
       		
 		</ul>
@@ -677,273 +1182,9 @@ F-statistic: 609.4 on 2 and 28 DF,  p-value: &lt; 2.2e-16
 
 
   
-    <article id="post-Assignment-1-of-Advanced-Computational-Method" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2017/10/30/Assignment-1-of-Advanced-Computational-Method/">Assignment 1 of Advanced Computational Method</a>
-    </h1>
-  
-
-        
-        <a href="../../2017/10/30/Assignment-1-of-Advanced-Computational-Method/" class="archive-article-date">
-  	<time datetime="2017-10-30T15:59:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Homework-1"><a href="#Homework-1" class="headerlink" title="Homework 1"></a>Homework 1</h2><p><strong>Monte Carlo method</strong> is a method to compute the expectation of a random variable.</p>
-<p>The basic steps follow like this:</p>
-<ol>
-<li><p>draw random samples ${x_1, x_2, \cdots, x_n}$ according to $p(x)$.</p>
-</li>
-<li><p>derive the <em>monte carlo estimator</em> of $E(f)$ from</p>
-</li>
-</ol>
-<p>$$<br>\hat{f}<em>{\text{mc}}=\frac{1}{n}\sum</em>{i=1}^n f(x_i)<br>$$</p>
-<h3 id="Problem-1"><a href="#Problem-1" class="headerlink" title="Problem 1"></a>Problem 1</h3><blockquote>
-<p>Suppose $x_1, x<em>2, \cdots, x</em>{10}$ satisfy independent identical distributions i.e. $x_i\sim N(0,1)\quad i=1,2,\cdots,10$</p>
-<p>Set $f(x)=\sum_{i=1}^{10}x_i^2$, use <em>Monte Carlo method</em> to compute $E[f(x)]$.</p>
-<p>Compare your results with the exact value.</p>
-</blockquote>
-<p><strong>Solution</strong>:</p>
-<p>From basic statistics, we can deduce that<br>$$<br>\begin{align<em>}<br>Ef(x)&amp;=E\sum_{i=1}^{10}x_i^2=10\,Ex_i^2\<br>&amp;=10\,[Dx_i+(Ex_i)^2]\<br>&amp;=10\times(1+0)\<br>&amp;=10<br>\end{align</em>}<br>$$</p>
-<p>Thus, the exact value of $E[f(x)]$ equals 10.</p>
-<p>Continuely, we derive a Monte Carlo method for evaluating $E[f(x)]$</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Distributions</span><br><span class="line"><span class="meta">@everywhere</span> <span class="keyword">function</span> MC_mean(N::<span class="built_in">Int</span>)</span><br><span class="line">    <span class="comment"># N = number of Monto Carlo points</span></span><br><span class="line"></span><br><span class="line">    x = rand(Normal(<span class="number">0</span>, <span class="number">1</span>), N); <span class="comment"># draw random samples</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> * mean(x.^<span class="number">2</span>) <span class="comment"># return the Monte Carlo estimator of f</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">MC_mean(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">9.98580160514502</span></span><br></pre></td></tr></table></figure>
-<p>A billion Monte Carlo steps yields an even better estimate:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_mean(<span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10.000288570895224</span></span><br></pre></td></tr></table></figure>
-<p>Now, let’s take a brief look at the time cost.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@elapsed</span> MC_mean(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.013395715</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@elapsed</span> MC_mean(<span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">50.939757386</span></span><br></pre></td></tr></table></figure>
-<p>When it comes to Monte Carlo simulation, our goal is to get good data as fast as possible. For now, let’s look at how to speed up our code. First of all, we can easily notice the time cost grows out of all proportion. The calculation for 1 million Monte Carlo cost is over 1000 times faster than the billion’s.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="meta">@elapsed</span> MC_mean(<span class="number">10</span>^<span class="number">9</span>))/(<span class="meta">@elapsed</span> MC_mean(<span class="number">10</span>^<span class="number">6</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>1286.3957285556933
-</code></pre><p>Of course, we can do better than this. In preparation for these calculations, let us introduce a <strong>parallel computation</strong> for Monte Carlo simulation. We build a function that takes <code>MC_mean</code> and evenly splits the jobs to our processors:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> parallel_calc(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, proc::<span class="built_in">Int</span>=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># f = some predefined function</span></span><br><span class="line">    <span class="comment"># N = number of Monte Carlo steps</span></span><br><span class="line">    <span class="comment"># proc = number of additional processors, preset to four</span></span><br><span class="line"></span><br><span class="line">    n = round(<span class="built_in">Int</span>, N/proc); <span class="comment"># split the number of Monte Carlo steps equally between processors</span></span><br><span class="line"></span><br><span class="line">    proc_sum = <span class="meta">@parallel</span> (+) <span class="keyword">for</span> i=<span class="number">1</span>:proc <span class="comment"># loop through the processors and distribute jobs</span></span><br><span class="line">        f(n)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> proc_sum / proc <span class="comment"># return the average of the parallel jobs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<pre><code>parallel_calc (generic function with 2 methods)
-</code></pre><p>Now, we can quickly and efficiently calculate a billion MC samples:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@elapsed</span> parallel_calc(MC_mean, <span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>21.05725137
-</code></pre><p>There is also an easier way to see the speed up of parallel processing by plotting the elapsed time. Below, we define a simple code to plot the elapsed times of <code>MC_mean</code>(in blue) and parallel (in red) vs. the number of MC samplings:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line">PyPlot.svg(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> mean_time_plotter(N::<span class="built_in">Int</span>)</span><br><span class="line">    n = <span class="built_in">Int64</span>(N/<span class="number">10</span>) <span class="comment"># ensure that you only plot 10 points</span></span><br><span class="line"></span><br><span class="line">    plot(collect(<span class="number">1</span>:n:N),[<span class="meta">@elapsed</span> MC_mean(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">10</span>:n:N], linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"blue"</span>, label=<span class="string">"Single Processor"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># the above plots mean for 10 values of MC steps from 10 to N vs. the number of MC steps</span></span><br><span class="line"></span><br><span class="line">    plot(collect(<span class="number">1</span>:n:N),[<span class="meta">@elapsed</span> parallel_calc(MC_mean,i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">10</span>:n:N], linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"red"</span>, label=<span class="string">"Parallel Processor"</span>)</span><br><span class="line"></span><br><span class="line">    title(<span class="string">"Comparison of Parallel vs. Single Processor MC Efficiency"</span>) <span class="comment"># make title and labels</span></span><br><span class="line">    ylabel(<span class="string">"Elapsed Time (sec)"</span>)</span><br><span class="line">    xlabel(<span class="string">"# of random points"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>, <span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>) <span class="comment"># anchor the legend</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<pre><code>mean_time_plotter (generic function with 1 method)
-</code></pre><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mean_time_plotter(<span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_15_0.svg"></p>
-<pre><code>PyObject &lt;matplotlib.legend.Legend object at 0x132777510&gt;
-</code></pre><p>We can see that the elapsed time of simulation is approximately equal around 0.7 billion MC samplings, after which parallel processing begins to win in favor of the single processor. This trend is continued when we look at a billion MC samples.</p>
-<p>Now, we turn to present this MC data and visualize the error. To do this, let’s write a simple program to plot the output of parallel vs. the number of Monte Carlo samplings. Because we already know what the mean is, let’s also plot the accepted value as a straight line in red. Finally, let’s also calculate the percent error and display it in the title. The format used here will be useful in later code where we have to compare with some exact analytical value. The following tedious codes (if I remember to present) are quite similar to each other.</p>
-<p>However, one thing unfortunate is that the parallel efficiency does <strong>not</strong> high within one billion samples. In proper case, for example, we need fast result,  single processor is fairly enough.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> MC_mean_plotter(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, m::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line">    n = <span class="built_in">Int64</span>(N/m) <span class="comment"># define the step size between points to plot</span></span><br><span class="line"></span><br><span class="line">    mean_list = [parallel_calc(f,i) <span class="keyword">for</span> i <span class="keyword">in</span> n:n:N] <span class="comment"># generate list of mean values from parallel for i MC steps</span></span><br><span class="line"></span><br><span class="line">    plot(collect(n:n:N), mean_list, linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>,</span><br><span class="line">        color=<span class="string">"blue"</span>, label=string(<span class="string">L"MC Estimator: "</span>, round(mean_list[<span class="keyword">end</span>],<span class="number">6</span>)))</span><br><span class="line">    <span class="comment"># in the above, we plot the MC estimate of 10 vs. the number of MC steps</span></span><br><span class="line"></span><br><span class="line">    axhline(y=<span class="number">10</span>, linestyle=<span class="string">"-"</span>, color=<span class="string">"red"</span>, label=string(<span class="string">"Exact Value: "</span>, <span class="number">10</span>))</span><br><span class="line">    <span class="comment"># in the above, we plot a horizontal line at the 10 value</span></span><br><span class="line"></span><br><span class="line">    per_error = <span class="number">100</span>*abs((mean_list[<span class="keyword">end</span>]-<span class="number">10</span>)/(mean_list[<span class="keyword">end</span>])) <span class="comment"># calculate percent error from mean_list</span></span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">L"Monte Carlo Estimation of $10$--within "</span>, round(per_error,<span class="number">5</span>), <span class="string">"%"</span>)) <span class="comment"># make titles and labels</span></span><br><span class="line">    ylabel(<span class="string">"Estimation of 10"</span>)</span><br><span class="line">    xlabel(<span class="string">"# of random points"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>,<span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>) <span class="comment"># make legend</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<pre><code>MC_mean_plotter (generic function with 1 method)
-</code></pre><p>To get a nice plot, we take a maximum of a million Monte Carlo samples and plot a total of a hundred points:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_mean_plotter(MC_mean, <span class="number">10</span>^<span class="number">9</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_19_0.svg"></p>
-<pre><code>PyObject &lt;matplotlib.legend.Legend object at 0x1326e2cd0&gt;
-</code></pre><p>Although we appear to obtain a reasonable value for 10(below 0.00421%!), it is difficult to see how well the data is converging. Therefore, let’s build a new function that calculates a list of $M$ Monte Carlo estimates of 10 at a given value of $N$. From this list, we can obtain the average and standard deviation:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> stat_calc(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, M::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># f = some general function</span></span><br><span class="line"><span class="comment"># N = number of Monte Carlo steps</span></span><br><span class="line"><span class="comment"># M = number of times to repeat a single MC step to for statistical analysis</span></span><br><span class="line"></span><br><span class="line">    avg_list = [parallel_calc(f,N) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">1</span>:M] <span class="comment"># create list of MC data of length M</span></span><br><span class="line"></span><br><span class="line">    avg = sum(avg_list)/M <span class="comment"># calculate average of MC data</span></span><br><span class="line"></span><br><span class="line">    stdev = std(avg_list) <span class="comment"># calculate standard deviation of MC data</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> avg, stdev</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<pre><code>stat_calc (generic function with 1 method)
-</code></pre><p>Now, we can modify <code>MC_mean_plotter</code> to include error bars to better visualize the convergence of our data:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> MC_errorbar(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, m::<span class="built_in">Int</span>, M::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># f = some general function</span></span><br><span class="line"><span class="comment"># N = number of Monte Carlo steps</span></span><br><span class="line"><span class="comment"># m = number of points to plot</span></span><br><span class="line"><span class="comment"># M = number of times to repeat a single MC step to for statistical analysis</span></span><br><span class="line"></span><br><span class="line">    n = <span class="built_in">Int64</span>(N/m) <span class="comment"># define the step size between points to plot</span></span><br><span class="line"></span><br><span class="line">    stat_list = [stat_calc(f,i,M) <span class="keyword">for</span> i <span class="keyword">in</span> n:n:N] <span class="comment"># make a list of averages and standard deviations from stat_calc</span></span><br><span class="line">    avg_list = [stat_list[i][<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:m] <span class="comment"># create list of averages</span></span><br><span class="line">    stdev_list = [stat_list[i][<span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:m] <span class="comment"># create list of standard deviations</span></span><br><span class="line"></span><br><span class="line">    errorbar(collect(n:n:N), avg_list, yerr=stdev_list, linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>,</span><br><span class="line">        color=<span class="string">"blue"</span>, label=string(<span class="string">"MC Estimate: "</span>, round(avg_list[<span class="keyword">end</span>], <span class="number">6</span>)))</span><br><span class="line">    <span class="comment"># in the above, we plot the averages vs. MC step size with error bars of the standard deviation</span></span><br><span class="line"></span><br><span class="line">    axhline(y=<span class="number">10</span>, linestyle=<span class="string">"-"</span>, color=<span class="string">"red"</span>, label=string(<span class="string">"Exact Value: "</span>, <span class="number">10</span>))</span><br><span class="line">    <span class="comment"># in the above, we plot a horizontal line at the 10 value</span></span><br><span class="line"></span><br><span class="line">    per_error = <span class="number">100</span>*abs((avg_list[<span class="keyword">end</span>]-<span class="number">10</span>)/(avg_list[<span class="keyword">end</span>])) <span class="comment"># calculate percent error</span></span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">L"Monte Carlo Estimation of $10$--within "</span>, round(per_error,<span class="number">5</span>), <span class="string">"%"</span>)) <span class="comment"># make titles and labels</span></span><br><span class="line">    ylabel(<span class="string">"Estimation of 10"</span>)</span><br><span class="line">    xlabel(<span class="string">"# of random points"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>,<span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>) <span class="comment"># make legend</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<pre><code>MC_errorbar (generic function with 1 method)
-</code></pre><p>With <code>MC_mean_plot</code>, we can easily generalize the program in future modification.</p>
-<p>Now, we plot a hundred values of MC samples with a maximum of a billion, with each set of samples performed fifteen times for statistical analysis. The resulting data shows a clear convergence of error.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_errorbar(MC_mean, <span class="number">10</span>^<span class="number">6</span>, <span class="number">100</span>, <span class="number">15</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_25_0.svg"></p>
-<pre><code>PyObject &lt;matplotlib.legend.Legend object at 0x1262c3fd0&gt;
-</code></pre><p>We can test our result by looking at the convergence of the standard deviation with increasing sample size. Recall the Monte Carlo estimation of the integral of some general function $f(x)$</p>
-<p>$$<br>\int<em>a^b f(x)dx = \frac{b-a}{N}\sum</em>{i=0}^{N-1}E(f(x_i))<br>$$</p>
-<p>The st.dev. squared can easily be calculated:</p>
-<p>$$<br>\sigma<em>{int}^2 = \frac{b-a}{N^2}\left( \sum</em>{i=0}^{N-1}E(f(x_i)) \right)<br>$$</p>
-<p>If the random variables $x_i$ are uncorrelated, we can easily simplify the above further:</p>
-<p>$$<br>\begin{split}<br>\sigma<em>{int}^2 &amp;= \frac{b-a}{N^2}\sum</em>{i=0}^{N-1}\sigma^2(E(f(x_i))) \<br>&amp;= \frac{b-a}{N}\sigma^2(E(f(x)))<br>\end{split}<br>$$</p>
-<p>Therefore, we find that the st.dev. goes as the inverse of the square of the sample size:</p>
-<p>$$<br>\sigma_{int}\propto\frac{1}{\sqrt{N}}<br>$$</p>
-<p>To test this result, we plot the numerically calculated st.dev. alongside $1/\sqrt{N}$</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> MC_errorbar_visual(f::<span class="built_in">Function</span>, N::<span class="built_in">Int</span>, m::<span class="built_in">Int</span>, M::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># f = some general function</span></span><br><span class="line"><span class="comment"># N = number of Monte Carlo steps</span></span><br><span class="line"><span class="comment"># m = number of points to plot</span></span><br><span class="line"><span class="comment"># M = number of times to repeat a single MC step to for statistical analysis</span></span><br><span class="line"></span><br><span class="line">    n = <span class="built_in">Int64</span>(N/m) <span class="comment"># define the step size between points to plot</span></span><br><span class="line"></span><br><span class="line">    stat_list = [stat_calc(f,i,M) <span class="keyword">for</span> i <span class="keyword">in</span> n:n:N] <span class="comment"># make a list of averages and standard deviations from stat_calc</span></span><br><span class="line">    stdev_list = [stat_list[i][<span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:m] <span class="comment"># create list of standard deviations</span></span><br><span class="line"></span><br><span class="line">    plot(collect(n:n:N), stdev_list, linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"blue"</span>) <span class="comment"># plot the list of st.dev from MC data</span></span><br><span class="line"></span><br><span class="line">    plot(collect(n:n:N), [<span class="number">1</span>/i^(<span class="number">1</span>/<span class="number">2</span>) <span class="keyword">for</span> i <span class="keyword">in</span> n:n:N], linestyle=<span class="string">"--"</span>, color=<span class="string">"red"</span>) <span class="comment"># plot the prediction for the st.dev</span></span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">"Convergence of Error bars in MC Data"</span>)) <span class="comment"># make titles and labels</span></span><br><span class="line">    ylabel(<span class="string">"Standard Deviation"</span>)</span><br><span class="line">    xlabel(<span class="string">"# of random points"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>,<span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>) <span class="comment"># make legend</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<pre><code>MC_errorbar_visual (generic function with 1 method)
-</code></pre><p>Running a maximum of a million samples in steps of a hundred, we find roughly the expected behavior, with each sample repeated fifteen times for statistical analysis.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_errorbar_visual(MC_mean, <span class="number">10</span>^<span class="number">6</span>, <span class="number">100</span>, <span class="number">15</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_29_0.svg"></p>
-<h3 id="Problem-2"><a href="#Problem-2" class="headerlink" title="Problem 2"></a>Problem 2</h3><p>Here we want to estimate the probability of a point location, i.e. $P[x\in\Omega]$</p>
-<p>we have already learned that</p>
-<p>$$<br>P[x\in\Omega] = \int_{\Omega}p(x)\,dx=\int I(x)p(x)\,dx = E_p[I]<br>$$</p>
-<p>Now, set $\Omega: (x_1-5)^2+(x_2-5)^2\leq 1 $ , $p(x)$ to be the PDF (probability density function) of a binormal distribution i.e. $x_1, x_2 \sim N(0,1)$</p>
-<blockquote>
-<p>Use Importance Sampling method (<strong>choose best IS distribution</strong> $q(x)$) to get the best result.</p>
-</blockquote>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/region.svg" style="zoom:65%"></p>
-<p>The <strong>importance sampling method</strong> comes from a single idea like this</p>
-<p>$$<br>\begin{align<em>}<br>P[x\in\Omega]&amp;= E_p[I]\<br>&amp;= \int I(x)p(x)\,dx \<br>&amp;= \int I(x)\frac{p(x)}{q(x)}\cdot q(x)\,dx = \int I(x)w(x)\cdot q(x)\,dx\<br>&amp;= E_q[I\cdot w]<br>\end{align</em>}<br>$$</p>
-<p>Thus</p>
-<p>$$<br>\hat{I}<em>\text{IS} = \frac1n \sum</em>{i=1}^n I(x_i)w(x_i) \qquad x_i\in q(x)<br>$$</p>
-<p>where</p>
-<p>$\hat{I}_\text{IS}: $ IS estimator ;      $q(x): $ IS distribution ;     $w(x) :$ IS weight ;</p>
-<p>Assume that $q(x)$ is the PDF of a binormal distribution i.e. $q\sim N({\mu_1,\mu_2},1)$</p>
-<p>the problem should be solve in following steps:</p>
-<ol>
-<li>choose samples according to $q(x)$ ;</li>
-<li>use these samples to get the value of weight function $w(x)$ ;</li>
-<li>apply monte carlo method to the calculation of $E[I\cdot w]$ ;</li>
-<li>compare our result with the exact probability and filter the parameters ;</li>
-</ol>
-<p>To get the best result, the fourth step is always needed.</p>
-<p>Actually, we can directly calculate the exact probability</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p=<span class="keyword">Integrate</span>[</span><br><span class="line">  <span class="keyword">PDF</span>[<span class="keyword">BinormalDistribution</span>[&#123;0, 0&#125;, &#123;1, 1&#125;, <span class="number">0</span>], &#123;x, y&#125;], &#123;x, 4, 6&#125;, &#123;y,</span><br><span class="line">    5 - Sqrt[1 - (x - 5)^2], 5 + Sqrt[1 - (x - 5)^2]&#125;] // <span class="keyword">N</span></span><br></pre></td></tr></table></figure>
-<p>which gives</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2.23465</span>*<span class="number">10</span>^<span class="number">-10</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Distributions</span><br><span class="line"><span class="meta">@everywhere</span> <span class="keyword">function</span> MC_prob(μ<span class="number">1</span>::<span class="built_in">Float64</span>, μ<span class="number">2</span>::<span class="built_in">Float64</span>, N::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># N = number of Monto Carlo points</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># step 1. set initial values and draw random samples</span></span><br><span class="line">    r = -<span class="number">1</span></span><br><span class="line">    <span class="literal">I</span> = zeros(N,<span class="number">1</span>)</span><br><span class="line">    x = rand(Normal(μ<span class="number">1</span>, <span class="number">1</span>), N)</span><br><span class="line">    y = rand(Normal(μ<span class="number">2</span>, <span class="number">1</span>), N)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step 2. use these samples to get function values I, p, q, w</span></span><br><span class="line">    g = -(x-<span class="number">5</span>).^<span class="number">2</span>-(y-<span class="number">5</span>).^<span class="number">2</span></span><br><span class="line">    <span class="comment">## construct the indicator function</span></span><br><span class="line">    <span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">1</span>:N</span><br><span class="line">        <span class="keyword">if</span> g[i] &gt; r</span><br><span class="line">            <span class="literal">I</span>[i] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="literal">I</span>[i] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    p = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * (x.^<span class="number">2</span> + y.^<span class="number">2</span>))</span><br><span class="line">    q = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * ((x-<span class="number">5</span>).^<span class="number">2</span> + (y-<span class="number">5</span>).^<span class="number">2</span>))</span><br><span class="line">    w = p./q</span><br><span class="line"></span><br><span class="line"><span class="comment"># step 3. apply Monte Carlo to calculate the expectation</span></span><br><span class="line">    <span class="keyword">return</span> mean(<span class="literal">I</span>.*w)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>A natural thought is to set $\mu1=\mu2=5$, $N=10^5$, but the simulated probability seems to be flawed:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MC_prob(<span class="number">5.0</span>, <span class="number">5.0</span>, <span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>2.2415303094407912e-10
-</code></pre><p>Indicated by the parameter choosing rules, we can set $\mu1=\mu2$ and make a simple plot of errors on the specific line $y=x$.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line">PyPlot.svg(<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">function</span> error_plotter(N::<span class="built_in">Int</span>)</span><br><span class="line">    plot(collect(<span class="number">1.0</span>:<span class="number">0.1</span>:<span class="number">5.0</span>), [MC_prob(i,i,N) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1.0</span>:<span class="number">0.1</span>:<span class="number">5.0</span>],</span><br><span class="line">    linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"blue"</span>, label=<span class="string">"Single Processor"</span>)</span><br><span class="line"></span><br><span class="line">    axhline(y=<span class="number">2.23465e-10</span>, linestyle=<span class="string">"-"</span>, color=<span class="string">"red"</span>, label=string(<span class="string">"Exact Value: "</span>, <span class="number">2.23465e-10</span>))</span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">"Monte Carlo Estimation of probability"</span>))</span><br><span class="line">    ylabel(<span class="string">"Estimation of prob"</span>)</span><br><span class="line">    xlabel(<span class="string">"μ1=μ2"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>, <span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<pre><code>error_plotter (generic function with 1 method)
-</code></pre><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_plotter(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_36_0.svg"></p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PyObject &lt;matplotlib.legend.Legend object at <span class="number">0x123259fd0</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>As shown in the plot, $\mu1=\mu2=3.9$ is the best choice, though it is not always perfect.</p>
-<p>For fixed parameters, we can do parallel calculation by setting a new function:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> fixed_MC_prob(N::<span class="built_in">Int</span>)</span><br><span class="line">    MC_prob(<span class="number">3.9</span>, <span class="number">3.9</span>, N)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<pre><code>fixed_MC_prob (generic function with 1 method)
-</code></pre><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fixed_MC_prob(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2.3208602460224826e-10</span></span><br></pre></td></tr></table></figure>
-<p>Recall the <code>parallel_calc</code> function before, it will be much more convenient to get the result in large number simulations by running:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parallel_calc(fixed_MC_prob, <span class="number">10</span>^<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
-<p>Also, we can obtain the elapsed time in the similar way with <code>mean_time_plotter</code>. (and not explained here)</p>
-<h2 id="Homework-2"><a href="#Homework-2" class="headerlink" title="Homework 2"></a>Homework 2</h2><h3 id="Problem-3"><a href="#Problem-3" class="headerlink" title="Problem 3"></a>Problem 3</h3><blockquote>
-<p>Redo Problem 2 by Cross Entropy method. Find the best distribution $q(x)$ to get the persuasive result.</p>
-</blockquote>
-<p><strong>CE Method for rare probability estimation</strong></p>
-<p>Consider a rare probability</p>
-<p>$$<br>P(x\in\Omega) \ll 1 \quad\Omega={x\mid g(x)&gt;r }<br>$$</p>
-<p>While applying CE method to solve the optimization problem</p>
-<p>$$<br>\max<em>{q’\in Q}\frac1n \sum</em>{i=1}^nf(x_i)\ln q’(x_i)u<br>$$</p>
-<p>we can easily find that $x_i\sim q\approx p$</p>
-<p>Thus, $I(x_i)=0$ almost for all $x_i$. Obviously, it does nothing to our work.</p>
-<p>Pratically, we usually use the variant of CE method i.e.</p>
-<p><strong>Multilevel / Multistage CE Method</strong></p>
-<p>Denote</p>
-<p>$$<br>I_r(x)=\begin{cases}<br>1 &amp; g(x)&gt;r\<br>0 &amp; g(x)&lt;r<br>\end{cases}<br>$$</p>
-<p>First we do sampling work, then choose $r$ according to the samples. Thus, we can fetch the specific number of $g(x)$ satisfying $g(x)&lt; r$</p>
-<p>$$<br>g(x_1)\leq g(x_2)\cdots\leq g(x_n)<br>$$</p>
-<p>Set $0&lt; \rho\leq 1$ to be the confidence coefficient, define that the $(1-\rho)$-th quantile of a r.v. $y$ is the $r$ satisfying that</p>
-<p>$$<br>P[y\geq r] \geq \rho, \quad P[y\leq r]\leq 1-\rho<br>$$</p>
-<p>Hence, we can derive an estimation of $r$</p>
-<p>$$<br>r=y[(1-\rho)N]<br>$$</p>
-<p>if ${y_i}$ is ordered assendingly $y_i=g(x_i)$</p>
-<p>The basic algorithm goes like below:</p>
-<p><strong>Algorithom</strong></p>
-<ol>
-<li>let $q=p$</li>
-<li>draw samples from $q:{ x_1,\cdot,x_n }$</li>
-<li>compute $\hat{r} = (1-\rho)$-th quantile of ${g(x<em>i)}</em>{i=1}^n$ if $\hat{r}&gt;r$, let $\hat{r}=r$</li>
-<li>solve $\max<em>{q’\in Q}\frac1n \sum</em>{i=1}^nI_{\hat{r}}(x_i)\ln q’(x_i)w(x_i)$; let $q=q’$</li>
-<li>if $\hat{r}&lt;r$, return to step 2, otherwise proceed to step 6</li>
-<li>estimate $\hat{P}=\frac1n \sum<em>{i=1}^n I</em>{r}(x_i)w(x_i)$ with $x_i\sim q(x)$</li>
-</ol>
-<p>As for Problem 2, the corresponding functions and parameters should be:</p>
-<p>$$<br>p\sim N(0,I_2) \quad g(x)=-(x-5)^2-(y-5)^2 \quad r=-1<br>$$</p>
-<p>For fixed variance $\Sigma=I_2$, we can directly give the optimal mean value in step 4 as taught in lecture 2:<br>$$<br>\mu=\frac{E_q[xIw]}{E_q[Iw]}<br>$$</p>
-<p>Hence, it is sufficient enough to give an implement:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@everywhere</span> <span class="keyword">function</span> CE_prob(ρ::<span class="built_in">Float64</span>, N::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step 1. set initial values</span></span><br><span class="line">μ<span class="number">1</span> = <span class="number">0</span></span><br><span class="line">μ<span class="number">2</span> = <span class="number">0</span></span><br><span class="line">iter = <span class="number">5000</span></span><br><span class="line">r = -<span class="number">1</span></span><br><span class="line">rhat = -<span class="number">10</span></span><br><span class="line">p = zeros(N,<span class="number">1</span>)</span><br><span class="line">q = zeros(N,<span class="number">1</span>)</span><br><span class="line">w = zeros(N,<span class="number">1</span>)</span><br><span class="line"><span class="literal">I</span> = zeros(N,<span class="number">1</span>)</span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># step 5. set loops for calculation</span></span><br><span class="line">    <span class="keyword">while</span> rhat &lt; r &amp;&amp; k &lt; iter</span><br><span class="line"><span class="comment"># step 2. draw random samples on two diff coordinates</span></span><br><span class="line">        x = rand(Normal(μ<span class="number">1</span>, <span class="number">1</span>), N)</span><br><span class="line">        y = rand(Normal(μ<span class="number">2</span>, <span class="number">1</span>), N)</span><br><span class="line"><span class="comment"># step 3.</span></span><br><span class="line">        <span class="comment">## sort the corresponding function value</span></span><br><span class="line">        g = -(x-<span class="number">5</span>).^<span class="number">2</span>-(y-<span class="number">5</span>).^<span class="number">2</span></span><br><span class="line">        orderg = sort(g)</span><br><span class="line">        <span class="comment">## comupte the quantile</span></span><br><span class="line">        ix = floor(<span class="built_in">Int</span>,(<span class="number">1</span>-ρ)*N)</span><br><span class="line">        rhat = orderg[ix]</span><br><span class="line">        <span class="comment">## set constraint to narrow the search area</span></span><br><span class="line">        <span class="keyword">if</span> rhat &gt; r</span><br><span class="line">            rhat = r</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="comment"># step 4.</span></span><br><span class="line">        <span class="comment">## derive the optimization problem</span></span><br><span class="line">        p = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * (x.^<span class="number">2</span> + y.^<span class="number">2</span>))</span><br><span class="line">        q = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * ((x-<span class="number">5</span>).^<span class="number">2</span> + (y-<span class="number">5</span>).^<span class="number">2</span>))</span><br><span class="line">        w = p./q</span><br><span class="line">        <span class="comment">## construct the indicator function, which implies the search region</span></span><br><span class="line">        <span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> g[i] &gt; rhat</span><br><span class="line">                <span class="literal">I</span>[i] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="literal">I</span>[i] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="comment">## update the sampling distribution</span></span><br><span class="line">        μ<span class="number">1</span> = mean(x .* <span class="literal">I</span> .* w)/mean(<span class="literal">I</span> .* w)</span><br><span class="line">        μ<span class="number">2</span> = mean(y .* <span class="literal">I</span> .* w)/mean(<span class="literal">I</span> .* w)</span><br><span class="line"></span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="comment"># step 6. apply Monte Carlo to calculate the prob</span></span><br><span class="line">    mean(<span class="literal">I</span>.*w) <span class="comment"># append μ1, μ2 to get the optimal value</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>Let’s make single simulation by setting $\rho = 0.2$ and $N=10^6$, the probability is shown below.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CE_prob(<span class="number">0.2</span>,<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2.9121974873535745e-10</span></span><br></pre></td></tr></table></figure>
-<p>The result is fair enough, but may raise the question in parameter choice of $\rho$. Now, let’s consider the quantile effect by program below:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line">PyPlot.svg(<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">function</span> quantile_effect(N::<span class="built_in">Int</span>)</span><br><span class="line">    plot(collect(<span class="number">0.1</span>:<span class="number">0.05</span>:<span class="number">0.9</span>), [CE_prob(i,N) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0.1</span>:<span class="number">0.05</span>:<span class="number">0.9</span>],</span><br><span class="line">    linestyle=<span class="string">"--"</span>, marker=<span class="string">"."</span>, color=<span class="string">"blue"</span>, label=<span class="string">"Single Processor"</span>)</span><br><span class="line"></span><br><span class="line">    axhline(y=<span class="number">2.23465e-10</span>, linestyle=<span class="string">"-"</span>, color=<span class="string">"red"</span>,</span><br><span class="line">            label=string(<span class="string">"Exact Value: "</span>, <span class="number">2.23465e-10</span>))</span><br><span class="line"></span><br><span class="line">    title(string(<span class="string">"Monte Carlo Estimation of probability"</span>))</span><br><span class="line">    ylabel(<span class="string">"Estimation of prob"</span>)</span><br><span class="line">    xlabel(<span class="string">"parameter: ρ"</span>)</span><br><span class="line"></span><br><span class="line">    legend(bbox_to_anchor=(<span class="number">1.05</span>, <span class="number">1</span>), loc=<span class="number">2</span>, borderaxespad=<span class="number">0.</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<pre><code>quantile_effect (generic function with 1 method)
-</code></pre><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">quantile_effect(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment1/output_50_0.svg"></p>
-<pre><code>PyObject &lt;matplotlib.legend.Legend object at 0x136c6e050&gt;
-</code></pre><p>As shown in the picture, it is resonable for us to choose $\rho$ in $[0,0.5]$. For clarity, here we set $\rho=0.2$</p>
-<p>Rewrite the code in <code>CE_prob</code> by appending $\mu1, \mu2$ to the return command, we will obtain the corresponding distribution and probability:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Distributions</span><br><span class="line"><span class="meta">@everywhere</span> <span class="keyword">function</span> CE(N::<span class="built_in">Int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># step 1. set initial values</span></span><br><span class="line">μ<span class="number">1</span> = <span class="number">0</span></span><br><span class="line">μ<span class="number">2</span> = <span class="number">0</span></span><br><span class="line">iter = <span class="number">5000</span></span><br><span class="line">ρ = <span class="number">0.2</span></span><br><span class="line">r = -<span class="number">1</span></span><br><span class="line">rhat = -<span class="number">10</span></span><br><span class="line">p = zeros(N,<span class="number">1</span>)</span><br><span class="line">q = zeros(N,<span class="number">1</span>)</span><br><span class="line">w = zeros(N,<span class="number">1</span>)</span><br><span class="line"><span class="literal">I</span> = zeros(N,<span class="number">1</span>)</span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># step 5. set loops for calculation</span></span><br><span class="line">    <span class="keyword">while</span> rhat &lt; r &amp;&amp; k &lt; iter</span><br><span class="line"><span class="comment"># step 2. draw random samples on two diff coordinates</span></span><br><span class="line">        x = rand(Normal(μ<span class="number">1</span>, <span class="number">1</span>), N)</span><br><span class="line">        y = rand(Normal(μ<span class="number">2</span>, <span class="number">1</span>), N)</span><br><span class="line"><span class="comment"># step 3.</span></span><br><span class="line">        <span class="comment">## sort the corresponding function value</span></span><br><span class="line">        g = -(x-<span class="number">5</span>).^<span class="number">2</span>-(y-<span class="number">5</span>).^<span class="number">2</span></span><br><span class="line">        orderg = sort(g)</span><br><span class="line">        <span class="comment">## comupte the quantile</span></span><br><span class="line">        ix = floor(<span class="built_in">Int</span>,(<span class="number">1</span>-ρ)*N)</span><br><span class="line">        rhat = orderg[ix]</span><br><span class="line">        <span class="comment">## set constraint to narrow the search area</span></span><br><span class="line">        <span class="keyword">if</span> rhat &gt; r</span><br><span class="line">            rhat = r</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"><span class="comment"># step 4.</span></span><br><span class="line">        <span class="comment">## derive the optimization problem</span></span><br><span class="line">        p = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * (x.^<span class="number">2</span> + y.^<span class="number">2</span>))</span><br><span class="line">        q = <span class="number">1</span>/(<span class="number">2</span>*<span class="literal">π</span>) * exp.(-<span class="number">1</span>/<span class="number">2</span> * ((x-<span class="number">5</span>).^<span class="number">2</span> + (y-<span class="number">5</span>).^<span class="number">2</span>))</span><br><span class="line">        w = p./q</span><br><span class="line">        <span class="comment">## construct the indicator function, which implies the search region</span></span><br><span class="line">        <span class="keyword">for</span> i=<span class="number">1</span>:<span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> g[i] &gt; rhat</span><br><span class="line">                <span class="literal">I</span>[i] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="literal">I</span>[i] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="comment">## update the sampling distribution</span></span><br><span class="line">        μ<span class="number">1</span> = mean(x .* <span class="literal">I</span> .* w)/mean(<span class="literal">I</span> .* w)</span><br><span class="line">        μ<span class="number">2</span> = mean(y .* <span class="literal">I</span> .* w)/mean(<span class="literal">I</span> .* w)</span><br><span class="line"></span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="comment"># step 6. apply Monte Carlo to calculate the prob</span></span><br><span class="line">    μ<span class="number">1</span>, μ<span class="number">2</span>, mean(<span class="literal">I</span>.*w)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CE(<span class="number">10</span>^<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>(4.426701996662324, 4.423183271573601, 2.8762783318578916e-10)
-</code></pre><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>Blogs of Monte Carlo work in Github: <a href="http://onlookerliu.leanote.com/post/5c355c764900" target="_blank" rel="noopener">http://onlookerliu.leanote.com/post/5c355c764900</a></li>
-<li>Gonçalo, Abecasis. “Monte Carlo Integration”, Biostatistics 615/815, Lecture 22: <a href="http://csg.sph.umich.edu/abecasis/class/2006/615.22.pdf" target="_blank" rel="noopener">http://csg.sph.umich.edu/abecasis/class/2006/615.22.pdf</a></li>
-<li>Ho, Shirley. “Introduction to Monte Carlo”, Astro 542 at Princeton University: <a href="http://www.phys.ubbcluj.ro/~zneda/edu/mc/mcshort.pdf" target="_blank" rel="noopener">http://www.phys.ubbcluj.ro/~zneda/edu/mc/mcshort.pdf</a></li>
-<li>Julia language guide: <a href="http://julia-cn.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">http://julia-cn.readthedocs.io/zh_CN/latest/</a></li>
-</ol>
-<hr>
-<p><em>Kai Liu, wrote on 2017/10/28</em></p>
-<p><em>Student ID: 116071910015</em></p>
-<p><em>Mail: liu1995@sjtu.edu.cn</em></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">computationa method</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2017/10/30/Assignment-1-of-Advanced-Computational-Method/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../11/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../10/">10</a><a class="page-number" href="../11/">11</a><span class="page-number current">12</span>
+      <a class="extend prev" rel="prev" href="../11/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../10/">10</a><a class="page-number" href="../11/">11</a><span class="page-number current">12</span><a class="page-number" href="../13/">13</a><a class="extend next" rel="next" href="../13/">Next &raquo;</a>
     </nav>
   
 
@@ -1065,6 +1306,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
@@ -1074,10 +1319,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">
