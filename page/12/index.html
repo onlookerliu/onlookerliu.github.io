@@ -167,6 +167,198 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Assignment-2-of-Advanced-Computational-Method" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/11/14/Assignment-2-of-Advanced-Computational-Method/">Assignment 2 of Advanced Computational Method</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/11/14/Assignment-2-of-Advanced-Computational-Method/" class="archive-article-date">
+  	<time datetime="2017-11-13T16:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Homework-3"><a href="#Homework-3" class="headerlink" title="Homework 3"></a>Homework 3</h2><p>The Metropolis–Hastings algorithm works by generating a sequence of sample values in such a way that, as more and more sample values are produced, the distribution of values more closely approximates the desired distribution, $P(x)$. These sample values are produced iteratively, with the distribution of the next sample being dependent only on the current sample value (thus making the sequence of samples into a Markov chain). Specifically, at each iteration, the algorithm picks a candidate for the next sample value based on the current sample value. Then, with some probability, the candidate is either accepted (in which case the candidate value is used in the next iteration) or rejected (in which case the candidate value is discarded, and current value is reused in the next iteration)−the probability of acceptance is determined by comparing the values of the function $f(x)$ of the current and candidate sample values with respect to the desired distribution $P(x)$.</p>
+<h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><blockquote>
+<p>Draw samples from the distribution $p(x, y) = \mathrm{e}^{-(x-1)^2-100(y-x)^2}$</p>
+<ol>
+<li>use RW-MH, use different step size and compare the performance;</li>
+<li>use IS with different proposals of your choice and compare the performance.</li>
+<li>use adaptive MCMC and compare the performance with standard RW-MH.</li>
+</ol>
+</blockquote>
+<p>For the purpose of implementation, the Metropolis algorithm, a special case of the Metropolis–Hastings algorithm where the proposal function is symmetric, is described below.</p>
+<p><strong>Metropolis algorithm (symmetric proposal distribution)</strong></p>
+<p>Let $f(x)$ be a function that is proportional to the desired probability distribution $P(x)$ (a.k.a. a target distribution).</p>
+<ol>
+<li><p>Initialization: Choose an arbitrary point x0 to be the first sample, and choose an arbitrary probability density $g(x\mid y)$ that suggests a candidate for the next sample value x, given the previous sample value y. For the Metropolis algorithm, $g$ must be symmetric; in other words, it must satisfy $q(x\mid y)=q(y\mid x)$. A usual choice is to let $q(x\mid y)$ be a Gaussian distribution centered at $y$, so that points closer to $y$ are more likely to be visited next—making the sequence of samples into a random walk. The function $g$ is referred to as the <em>proposal density</em> or <em>jumping distribution</em>.</p>
+</li>
+<li><p>For each iteration $t$:</p>
+</li>
+</ol>
+<ul>
+<li><strong>Generate</strong> : Generate a candidate x for the next sample by picking from the distribution $q(x’|x_{t})$.</li>
+<li><strong>Calculate</strong> : Calculate the acceptance ratio $\alpha =p(x)/p(x<em>{t})$, which will be used to decide whether to accept or reject the candidate. Because $f$ is proportional to the density of $P$, we have that $\alpha =p(x’)/p(x</em>{t})=P(x’)/P(x_{t})$</li>
+<li><strong>Accept</strong> or <strong>Reject</strong> :<ul>
+<li>Generate a uniform random number $u$ on $[0,1]$.</li>
+<li>If $u\leq \alpha$ <em>accept</em> the candidate by setting $x_{t+1}=x’$</li>
+<li>If $u&gt;\alpha$ <em>reject</em> the candidate and set $x<em>{t+1}=x</em>{t}$, instead.</li>
+</ul>
+</li>
+</ul>
+<p><strong>The Metropolis-Hastings Algorithm</strong> (MH)</p>
+<pre><code>1. initialize at $X^0$
+2. for $i = 0$ to $n-1$
+</code></pre><ul>
+<li>sample $y\sim q(\cdot \mid X^i)$</li>
+<li>sample $u\sim U[0,1]$</li>
+<li>$a(X^i, y)=\min\lbrace 1, \frac{p(y)}{p(X^{i})}\frac{q(X^i \mid y)}{p(y \mid X^i)}\rbrace$</li>
+<li>accept/reject the proposed $y$ according to probability $a(X,y)$</li>
+<li>if $u\leq a$ set $X^{i+1} = X$<br>   else $X^{i+1} = X^{i}$</li>
+</ul>
+<h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4><p>First, let’s take a look at the target distribution. Here, we present a 3D plot by <code>R</code></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x &lt;- seq(-<span class="number">2</span>, <span class="number">2</span>, length=<span class="number">100</span>)</span><br><span class="line">y &lt;- x</span><br><span class="line">f &lt;- <span class="keyword">function</span>(x, y)&#123;exp(-(x-<span class="number">1</span>)^<span class="number">2</span> - <span class="number">100</span>*(y - x)^<span class="number">2</span>)&#125;</span><br><span class="line">z &lt;- outer(x, y, f)</span><br><span class="line">persp(x, y, z, shade=<span class="number">0.1</span>, col=<span class="string">"white"</span>, ticktype=<span class="string">"detailed"</span>, xlab=<span class="string">"x"</span>, ylab=<span class="string">"y"</span>, zlab=<span class="string">"rosenbrock"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/rosenbrock.svg" width="50%"></p>
+<p>The picture shown above is shaped like banana as is taught to be.</p>
+<p>Next, we follow the Metropolis-Hastings Algorithm and give a simple implement.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define arguments: target distribution</span></span><br><span class="line">rosenbrock &lt;- <span class="keyword">function</span>(x)    <span class="comment"># x is a vector</span></span><br><span class="line">&#123;</span><br><span class="line">    exp(-(x[<span class="number">1</span>]-<span class="number">1</span>)^<span class="number">2</span> - <span class="number">100</span>*(x[<span class="number">2</span>] - x[<span class="number">1</span>])^<span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define the sampling function</span></span><br><span class="line">rwMetro &lt;- <span class="keyword">function</span>(target, N, x, step, burnin=<span class="number">1000</span>)</span><br><span class="line">&#123;</span><br><span class="line">    cov &lt;- step*diag(<span class="number">2</span>)</span><br><span class="line">    samples &lt;- x</span><br><span class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">2</span>:(burnin+N))</span><br><span class="line">    &#123;</span><br><span class="line">        prop &lt;- mvrnorm(n = <span class="number">1</span>, x, cov)</span><br><span class="line">        <span class="keyword">if</span> (runif(<span class="number">1</span>) &lt; min(<span class="number">1</span>, target(prop)/target(x)))</span><br><span class="line">            x &lt;- prop</span><br><span class="line">        samples &lt;- rbind(samples,x)</span><br><span class="line">    &#125;</span><br><span class="line">    samples[(burnin+<span class="number">1</span>):(N+burnin),]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The above forms a rosenbrock function for general usage and construct a sampling function with considerate arguments. For example, the <code>burnin</code> period is typically necessary, where an initial number of samples (e.g. the first default $1000$ or so) are thrown away, since the initial samples may follow a very different distribution, especially if the starting point is in a region of low density.</p>
+<p>Hence, we can draw samples by calling the function.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rwMetro.samples &lt;- rwMetro(rosenbrock, 10000, c(0,0), 1)</span><br></pre></td></tr></table></figure>
+<p>Here, <code>rwMetro.samples</code> contains <code>10000</code> rows of samples with 2 columns. Continually, we want to evaluate the performance of this sampling method. Correlations should be a key of parameter choosing. For example, here we set step size $\delta$ to be $1$ and plot the autocorrelation function below:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acf(rwMetro.samples, lag.max=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/rwMetro.svg" width="60%"></p>
+<p>As is shown in the picture, the self-correlation (diagonal part) decays when the effective sample size equals $100$[^size], which somehow indicates the Markov chain eventually converges to the desired distribution,</p>
+<p>[^size]: here we set $100$ to be the default number of effectively independent samples.</p>
+<p>Simply change the <code>step</code> parameter in function calling/sampling, we can obtain different shows of autocorrelation functions, which decays faster implies a more independent sampling.</p>
+<p>Based on this criterion, we can do repetition test and comparison work in RStudio. An optimal step size is selected to be quite near $1$[^exp].</p>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/rwMetro_best.svg" width="60%"></p>
+<p>[^exp]: the result is not quite stable, but we find $\delta\in[0.9,1]$ is adequate.</p>
+<h4 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h4><p>However, Metropolis–Hastings and other MCMC algorithms have a number of disadvantages. For example, the samples are correlated. This means that if we want a set of independent samples, we have to throw away the majority of samples.</p>
+<p>Hence, independence sampler is necessary in some practical use. The thought comes like below:</p>
+<p>Set</p>
+<p>$$<br>\begin{split}<br>&amp; p(y\mid X) = p(y) \<br>&amp; a(X, y) = \frac{p(y)}{p(X)} \frac{q(X\mid y)}{p(y\mid X)} = 1 \<br>\end{split}<br>$$</p>
+<p>which implies us:</p>
+<p>$$<br>q(Y\mid X) = q(y) \approx p(y)<br>$$</p>
+<p>that means $q(y)$ is a fixed distribution which is independent on $X$</p>
+<p>Thus, we can construct a global proposal $q(y)$ which is independent on $X$. In this way,</p>
+<p>$$<br>a(X^i, y) = \frac{p(X^i)}{p(y)} \frac{q(y \mid X^i)}{p(X^i\mid y)} = \frac{q(y \mid X^i)}{p(y)}<br>$$</p>
+<p>Noticed that the rosenbrock function is symmetric on vector $(1,1)$, we can propose a new normal distribution centered at $(1,1)$, i.e. $q(y)$ is the PDF of $N(\begin{pmatrix} 1\ 1\ \end{pmatrix}, \delta^2)$.</p>
+<p>Thus, we modify the RW-MH function and give an independence sampler named <code>isSampler</code>.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">isSampler &lt;- <span class="keyword">function</span>(target, N, x, step, burnin=<span class="number">1000</span>)</span><br><span class="line">&#123;</span><br><span class="line">    cov &lt;- step*diag(<span class="number">2</span>)</span><br><span class="line">    samples &lt;- x</span><br><span class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">2</span>:(burnin+N))</span><br><span class="line">    &#123;</span><br><span class="line">        prop &lt;- mvrnorm(n = <span class="number">1</span>, c(<span class="number">1</span>,<span class="number">1</span>), cov)</span><br><span class="line">        <span class="keyword">if</span> (runif(<span class="number">1</span>) &lt; min(<span class="number">1</span>, target(prop)/target(x)))</span><br><span class="line">            x &lt;- prop</span><br><span class="line">        samples &lt;- rbind(samples,x)</span><br><span class="line">    &#125;</span><br><span class="line">    samples[(burnin+<span class="number">1</span>):(N+burnin),]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Directly call the new function, we will receive a set of independent samples with an image of correlation function.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">is.samples &lt;- isSampler(rosenbrock, <span class="number">10000</span>, c(<span class="number">0</span>,<span class="number">0</span>), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">acf(is.samples, lag.max=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/isSampler.svg" width="60%"></p>
+<p>Similarily, we can change the <code>step</code> parameter to get different proposals. Repeated works have been done to get the optimal distribution $N(0,0.1)$, the corresponding autocorrelation function shapes like below:</p>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/isSampler_best.svg" width="60%"></p>
+<h4 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h4><p><strong>Adaptive MCMC Algorithm</strong></p>
+<ol>
+<li>draw a set of $N$ samples from the target distribution with standard RW-MH method.</li>
+<li>estimate the sample covariance of the samples.</li>
+<li>update the covariance matrix[^cov] of the proposal with the computed sample covariance.</li>
+<li>draw a set of samples from the updated proposal.</li>
+</ol>
+<p>[^cov]: the updated covariance matrix needs to be positive.</p>
+<p>Here, we set $\varepsilon \sim N(0, \Sigma)$ where $\Sigma$ is the updated covariance matrix:</p>
+<p>$$<br>\mathrm{Cov}(X) = \frac{1}{N}\sum(X^i - \bar X^N)(X^i - \bar X^N)’ + \delta I \quad,\quad \bar X^N = \frac{1}{N}\sum_{i=1}^{N} X^i<br>$$</p>
+<p>Thus, we can derive the following adaptive MCMC sampler:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">adaptiveMCMC &lt;- <span class="keyword">function</span>(target, N, x, step, burnin=<span class="number">1000</span>)</span><br><span class="line">&#123;</span><br><span class="line">  cov &lt;- step*diag(<span class="number">2</span>)</span><br><span class="line">  samples &lt;- x</span><br><span class="line">  <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">2</span>:(burnin+N))</span><br><span class="line">  &#123;</span><br><span class="line">    prop &lt;- mvrnorm(n = <span class="number">1</span>, x, cov)</span><br><span class="line">    <span class="keyword">if</span> (runif(<span class="number">1</span>) &lt; min(<span class="number">1</span>, target(prop)/target(x)))</span><br><span class="line">      x &lt;- prop</span><br><span class="line">    samples &lt;- rbind(samples,x)</span><br><span class="line">    cov &lt;- cov(samples) + step*diag(<span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  samples[(burnin+<span class="number">1</span>):(N+burnin),]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adaptive.samples &lt;- adaptiveMCMC(rosenbrock, <span class="number">10000</span>, c(<span class="number">0</span>,<span class="number">0</span>), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">acf(adaptive.samples, lag.max=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/adaptiveMCMC.svg" width="60%"></p>
+<p>Tedious works have been done to obtain the optimal step size $\delta=0.5$ in the way <code>adaptiveMCMC</code> performs.</p>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/ada_best.svg" width="60%"></p>
+<p>The self-correlations decay rapidly within $60$ lags and tend to converge after that.</p>
+<p>Compared with standard RW-MH method, an obvious improvement can be seen in performing adaptive MCMC method. Also, we find that the optimal result is more stable in <code>adaptiveMCMC</code> than in <code>rwMetro</code>.</p>
+<p>Finally, let’s have a look at samples generated by these three methods.</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Display the samples</span></span><br><span class="line">par(mfrow=c(<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">plot(rwMetro.samples[,<span class="number">1</span>], rwMetro.samples[,<span class="number">2</span>], xlim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>),ylim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>), main=<span class="string">'MH Samples'</span>,xlab=<span class="string">'x'</span>, ylab=<span class="string">'y'</span>, pch=<span class="string">'.'</span>)</span><br><span class="line"></span><br><span class="line">plot(is.samples[,<span class="number">1</span>], is.samples[,<span class="number">2</span>], xlim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>),ylim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>), main=<span class="string">'IS Samples'</span>,xlab=<span class="string">'x'</span>, ylab=<span class="string">'y'</span>, pch=<span class="string">'.'</span>)</span><br><span class="line"></span><br><span class="line">plot(adaptive.samples[,<span class="number">1</span>], adaptive.samples[,<span class="number">2</span>], xlim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>),ylim=c(-<span class="number">1.5</span>,<span class="number">1.5</span>), main=<span class="string">'MCMC Samples'</span>,xlab=<span class="string">'x'</span>, ylab=<span class="string">'y'</span>, pch=<span class="string">'.'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/samples.svg" width="60%"></p>
+<p>Compared with the target distribution, we find that the <code>adaptiveMCMC</code> samples are best simulated and <code>rwMetro</code> seems to be fairly standard, while the <code>isSampler</code>, in a way, tends to be extreme.</p>
+<p>Furthermore, we can test our optimal result using the generated samples. For example, samples generate from <code>adaptiveMCMC</code> method can be used to plot the density curve and make comparison with our optimal proposal $q(y)\sim N(1,0.5)$</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">x &lt;- adaptive.samples[,<span class="number">1</span>]</span><br><span class="line">y &lt;- adaptive.samples[,<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">par(mfrow=c(<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">hist(x, xlab=<span class="string">"x"</span>, main=<span class="string">"Distribution of Samples"</span>)</span><br><span class="line"></span><br><span class="line">plot(density(x), col=<span class="string">"red"</span>, lwd=<span class="number">1.5</span>)</span><br><span class="line">curve(dnorm(x, mean=<span class="number">1</span>, sd=sqrt(<span class="number">0.5</span>)), add=<span class="literal">TRUE</span>, col=<span class="string">"blue"</span>, lwd=<span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">hist(x, xlab=<span class="string">"y"</span>, main=<span class="string">"Distribution of Samples"</span>)</span><br><span class="line"></span><br><span class="line">plot(density(y), col=<span class="string">"red"</span>, lwd=<span class="number">1.5</span>)</span><br><span class="line">curve(dnorm(x, mean=<span class="number">1</span>, sd=sqrt(<span class="number">0.5</span>)), add=<span class="literal">TRUE</span>, col=<span class="string">"blue"</span>, lwd=<span class="number">1.5</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/density.svg" width="60%"></p>
+<p>It can be seen that the proposed distribution fits well, which make our result more persuative.</p>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Most simple rejection sampling methods suffer from the “curse of dimensionality”, where the probability of rejection increases exponentially as a function of the number of dimensions. But Metropolis–Hastings, along with other MCMC methods, <strong>do not</strong> have this problem to such a degree. Thus they are often the only solutions available when the number of dimensions of the distribution to be sampled is high.</p>
+<p>In multivariate distributions, the classic Metropolis–Hastings algorithm as described above involves choosing a new multi-dimensional sample point. When the number of dimensions is high, finding the right proposed distribution to use can be difficult, as the different individual dimensions behave in very different ways, and the step size must be “just right” for all dimensions at once to avoid excessively slow mixing. An alternative approach that often works better in such situations, known as <em>Gibbs sampling</em>, involves choosing a new sample for each dimension separately from the others, rather than choosing a sample for all dimensions at once. Various algorithms can be used to choose these individual samples, depending on the exact form of the multivariate distribution such as the adaptive rejection Metropolis sampling algorithm.</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ol>
+<li><a href="https://arxiv.org/pdf/1504.01896.pdf" target="_blank" rel="noopener">The Metropolis-Hastings algorithm Christian P. Robert (U. Paris-Dauphine PSL &amp; U. Warwick)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm#Step-by-step_instructions" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm#Step-by-step_instructions</a></li>
+<li><a href="http://blog.csdn.net/abcjennifer/article/details/25908495" target="_blank" rel="noopener">http://blog.csdn.net/abcjennifer/article/details/25908495</a></li>
+<li><a href="https://theoreticalecology.wordpress.com/2010/09/17/metropolis-hastings-mcmc-in-r/" target="_blank" rel="noopener">https://theoreticalecology.wordpress.com/2010/09/17/metropolis-hastings-mcmc-in-r/</a></li>
+</ol>
+<hr>
+<p><em>Kai Liu, wrote on 2017/11/13</em></p>
+<p><em>Student ID: 116071910015</em></p>
+<p><em>Mail: liu1995@sjtu.edu.cn</em></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">computational method</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/11/14/Assignment-2-of-Advanced-Computational-Method/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Project-1-of-Statistics" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -441,11 +633,11 @@ F-statistic: 609.4 on 2 and 28 DF,  p-value: &lt; 2.2e-16
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
         		</li>
       		
 		</ul>
@@ -873,10 +1065,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">r</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
@@ -886,6 +1074,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">
