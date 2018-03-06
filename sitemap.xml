@@ -44,7 +44,7 @@
   </url>
   
   <url>
-    <loc>onlookerliu.github.io/2018/02/09/Project-Euler-002/</loc>
+    <loc>onlookerliu.github.io/2018/02/14/Project-Euler-007/</loc>
     
     <lastmod>2018-03-05T03:57:01.717Z</lastmod>
     
@@ -58,7 +58,7 @@
   </url>
   
   <url>
-    <loc>onlookerliu.github.io/2018/02/14/Project-Euler-007/</loc>
+    <loc>onlookerliu.github.io/2018/02/09/Project-Euler-002/</loc>
     
     <lastmod>2018-03-05T03:57:01.717Z</lastmod>
     
@@ -114,21 +114,7 @@
   </url>
   
   <url>
-    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
-    
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
-    
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
     
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     
@@ -143,6 +129,20 @@
   
   <url>
     <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
+    
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
     
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     
