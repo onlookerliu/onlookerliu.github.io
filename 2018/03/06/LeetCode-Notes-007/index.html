@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="onlookerliu.github.io">
-  <title>Tag: javascript | Code@浮生记</title>
+  <title>LeetCode Notes 007 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life is beautiful!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Code@浮生记">
-<meta property="og:url" content="onlookerliu.github.io/tags/javascript/page/3/index.html">
+  <meta name="description" content="Best Time to Buy and Sell Stock IISay you have an array for which the i-th element is the price of a given stock on day i. Design an algorithm to find the maximum profit. You may complete as many tran">
+<meta name="keywords" content="leetcode,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Notes 007">
+<meta property="og:url" content="onlookerliu.github.io/2018/03/06/LeetCode-Notes-007/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="Life is beautiful!">
+<meta property="og:description" content="Best Time to Buy and Sell Stock IISay you have an array for which the i-th element is the price of a given stock on day i. Design an algorithm to find the maximum profit. You may complete as many tran">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-06T15:24:04.066Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code@浮生记">
-<meta name="twitter:description" content="Life is beautiful!">
+<meta name="twitter:title" content="LeetCode Notes 007">
+<meta name="twitter:description" content="Best Time to Buy and Sell Stock IISay you have an array for which the i-th element is the price of a given stock on day i. Design an algorithm to find the maximum profit. You may complete as many tran">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -165,36 +167,81 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-Notes-007" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="../../../../archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/30/LeetCode-Notes-002/" class="archive-article-date">
-  	<time datetime="2017-12-29T17:39:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/30/LeetCode-Notes-002/">LeetCode Notes 002</a>
+    <h1 class="article-title" itemprop="name">
+      LeetCode Notes 007
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="" class="archive-article-date">
+  	<time datetime="2018-03-06T15:17:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Best-Time-to-Buy-and-Sell-Stock-II"><a href="#Best-Time-to-Buy-and-Sell-Stock-II" class="headerlink" title="Best Time to Buy and Sell Stock II"></a>Best Time to Buy and Sell Stock II</h3><p>Say you have an array for which the i-th element is the price of a given stock on day i.</p>
+<p>Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; prices</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxProfit = <span class="function"><span class="keyword">function</span>(<span class="params">prices</span>) </span>&#123;</span><br><span class="line">  prices.push(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> len = prices.length;</span><br><span class="line">  <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> begin;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i === <span class="number">0</span>) &#123;</span><br><span class="line">      begin = prices[i];</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (prices[i] &gt;= prices[i - <span class="number">1</span>])</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">    sum += (prices[i - <span class="number">1</span>] - begin);</span><br><span class="line">    begin = prices[i];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; prices</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxProfit = <span class="function"><span class="keyword">function</span>(<span class="params">prices</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!prices.length)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> buy = []</span><br><span class="line">    , sell = [];</span><br><span class="line"></span><br><span class="line">  prices.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!index) &#123;</span><br><span class="line">      buy[index] = -item;</span><br><span class="line">      sell[index] = <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      buy[index] = <span class="built_in">Math</span>.max(buy[index - <span class="number">1</span>], sell[index - <span class="number">1</span>] - item);</span><br><span class="line">      sell[index] = <span class="built_in">Math</span>.max(sell[index - <span class="number">1</span>], buy[index - <span class="number">1</span>] + item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> len = prices.length;</span><br><span class="line">  <span class="keyword">return</span> sell[len - <span class="number">1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Best-Time-to-Buy-and-Sell-Stock-III"><a href="#Best-Time-to-Buy-and-Sell-Stock-III" class="headerlink" title="Best Time to Buy and Sell Stock III"></a>Best Time to Buy and Sell Stock III</h3><p>Say you have an array for which the i-th element is the price of a given stock on day i.</p>
+<p>Design an algorithm to find the maximum profit. You may complete at most two transactions.</p>
+<p><strong>Note:</strong></p>
+<p>You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; prices</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxProfit = <span class="function"><span class="keyword">function</span>(<span class="params">prices</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> len = prices.length</span><br><span class="line">    , sell = []</span><br><span class="line">    , buy = []</span><br><span class="line">    , item</span><br><span class="line">    , i;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!len)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    sell[i] = [],</span><br><span class="line">    buy[i] = [],</span><br><span class="line">    item = prices[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!i) &#123;</span><br><span class="line">      sell[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">      sell[i][<span class="number">1</span>]= <span class="number">0</span>;</span><br><span class="line">      sell[i][<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">      buy[i][<span class="number">0</span>] = -item;</span><br><span class="line">      buy[i][<span class="number">1</span>] = -item;</span><br><span class="line">      buy[i][<span class="number">2</span>] = -item;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      sell[i][<span class="number">0</span>] = sell[i - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">      sell[i][<span class="number">1</span>] = <span class="built_in">Math</span>.max(sell[i - <span class="number">1</span>][<span class="number">1</span>], buy[i - <span class="number">1</span>][<span class="number">1</span>] + item);</span><br><span class="line">      sell[i][<span class="number">2</span>] = <span class="built_in">Math</span>.max(sell[i - <span class="number">1</span>][<span class="number">2</span>], buy[i - <span class="number">1</span>][<span class="number">2</span>] + item);</span><br><span class="line">      buy[i][<span class="number">0</span>] = buy[i - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">      buy[i][<span class="number">1</span>] = <span class="built_in">Math</span>.max(buy[i - <span class="number">1</span>][<span class="number">1</span>], sell[i - <span class="number">1</span>][<span class="number">0</span>] - item);</span><br><span class="line">      buy[i][<span class="number">2</span>] = <span class="built_in">Math</span>.max(buy[i - <span class="number">1</span>][<span class="number">2</span>], sell[i - <span class="number">1</span>][<span class="number">1</span>] - item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> sell[len - <span class="number">1</span>][<span class="number">2</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Best-Time-to-Buy-and-Sell-Stock-with-Cooldown"><a href="#Best-Time-to-Buy-and-Sell-Stock-with-Cooldown" class="headerlink" title="Best Time to Buy and Sell Stock with Cooldown"></a>Best Time to Buy and Sell Stock with Cooldown</h3><p>Say you have an array for which the ith element is the price of a given stock on day i.</p>
+<p>Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times) with the following restrictions:</p>
+<ol>
+<li>You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</li>
+<li>After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)</li>
+</ol>
+<p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">prices = [1, 2, 3, 0, 2]</span><br><span class="line">maxProfit = 3</span><br><span class="line">transactions = [buy, sell, cooldown, buy, sell]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; prices</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxProfit = <span class="function"><span class="keyword">function</span>(<span class="params">prices</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> len = prices.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (len === <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> sell = []</span><br><span class="line">    , buy = []</span><br><span class="line">    , rest = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> item = prices[i];</span><br><span class="line">    <span class="keyword">if</span> (!i) &#123;</span><br><span class="line">      sell[i] = <span class="number">0</span>;</span><br><span class="line">      buy[i] = -item;</span><br><span class="line">      rest[i] = <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      sell[i] = <span class="built_in">Math</span>.max(sell[i - <span class="number">1</span>], buy[i - <span class="number">1</span>] + item);</span><br><span class="line">      buy[i] = <span class="built_in">Math</span>.max(buy[i - <span class="number">1</span>], rest[i - <span class="number">1</span>] - item);</span><br><span class="line">      rest[i] = <span class="built_in">Math</span>.max(rest[i - <span class="number">1</span>], sell[i - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.max(sell[len - <span class="number">1</span>], buy[len - <span class="number">1</span>], rest[len - <span class="number">1</span>]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果～<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oxyywddt8.bkt.clouddn.com/qrcode/ali-qrcode.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oxyywddt8.bkt.clouddn.com/qrcode/Wechat.jpeg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -210,102 +257,125 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:onlookerliu.github.io/2018/03/06/LeetCode-Notes-007/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/28/LeetCode-Notes-001/" class="archive-article-date">
-  	<time datetime="2017-12-27T17:14:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-28</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="../../05/Project-Euler-011/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Project-Euler-011</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/28/LeetCode-Notes-001/">LeetCode Notes 001</a>
-    </h1>
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="LeetCode-Notes-007" data-title="LeetCode Notes 007" data-url="onlookerliu.github.io"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../../2017/12/27/剑指offer-JavaScript版III/" class="archive-article-date">
-  	<time datetime="2017-12-27T15:55:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../../2017/12/27/剑指offer-JavaScript版III/">剑指offer--JavaScript版III</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../2/">&laquo; Prev</a><a class="page-number" href="../../">1</a><a class="page-number" href="../2/">2</a><span class="page-number current">3</span><a class="page-number" href="../4/">4</a><a class="extend next" rel="next" href="../4/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -335,9 +405,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
