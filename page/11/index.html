@@ -167,6 +167,173 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-julia基于GLM包的线性回归" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/11/29/julia基于GLM包的线性回归/">julia基于GLM包的线性回归</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/11/29/julia基于GLM包的线性回归/" class="archive-article-date">
+  	<time datetime="2017-11-29T13:49:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文利用GLM包进行简单线性回归分析，同时对模型检验以及置信区间作图。</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> GLM,DataFrames</span><br></pre></td></tr></table></figure>
+<p>先随机生成一组数据用于回归分析。</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置截距</span></span><br><span class="line">α = <span class="number">100</span></span><br><span class="line"><span class="comment"># 设置系数</span></span><br><span class="line">β = <span class="number">5</span></span><br><span class="line"><span class="comment"># 设置随机数个数</span></span><br><span class="line">n = <span class="number">50</span></span><br><span class="line"><span class="comment"># 设置误差项</span></span><br><span class="line">ε = rand(Normal(),n) * <span class="number">11</span></span><br><span class="line"><span class="comment"># 生成数据</span></span><br><span class="line">x = randn(n)*<span class="number">3</span></span><br><span class="line">y = α + β * x + ε</span><br><span class="line">dataForRegression = DataFrame(x = x, y = y)</span><br></pre></td></tr></table></figure>
+<table class="data-frame"><thead><tr><th></th><th>x</th><th>y</th></tr></thead><tbody><tr><th>1</th><td>-0.2945844765867794</td><td>95.47303779965895</td></tr><tr><th>2</th><td>-1.3440842917796316</td><td>100.32164951469537</td></tr><tr><th>3</th><td>1.3037018863265355</td><td>109.57629236830104</td></tr><tr><th>4</th><td>4.012507916775679</td><td>106.46933242509654</td></tr><tr><th>5</th><td>-1.7321051747524616</td><td>89.55844065579969</td></tr><tr><th>6</th><td>-1.4253325394154235</td><td>92.72629790575935</td></tr><tr><th>7</th><td>-0.9042631229720477</td><td>87.93522916305417</td></tr><tr><th>8</th><td>3.4865202058421714</td><td>127.92951823278281</td></tr><tr><th>9</th><td>-2.134433785764415</td><td>94.20802706899649</td></tr><tr><th>10</th><td>3.322020816866826</td><td>118.04216195389577</td></tr><tr><th>11</th><td>2.203086430462482</td><td>105.55320230669415</td></tr><tr><th>12</th><td>-5.281962503754427</td><td>82.8888784146054</td></tr><tr><th>13</th><td>2.001897730730764</td><td>108.02467262087006</td></tr><tr><th>14</th><td>-2.7543838829327565</td><td>88.76348948674855</td></tr><tr><th>15</th><td>6.101614682211077</td><td>128.6239736717972</td></tr><tr><th>16</th><td>0.6888033886810481</td><td>111.17457991815601</td></tr><tr><th>17</th><td>0.7010819245192449</td><td>107.39681268065465</td></tr><tr><th>18</th><td>3.1116548996809783</td><td>113.4549225848041</td></tr><tr><th>19</th><td>-1.8511960189357837</td><td>83.79388935398916</td></tr><tr><th>20</th><td>-0.962664244723129</td><td>91.41543924802386</td></tr><tr><th>21</th><td>0.5608348467513868</td><td>90.8605217368299</td></tr><tr><th>22</th><td>2.1522594774515786</td><td>93.8105103626811</td></tr><tr><th>23</th><td>-0.31022032825520746</td><td>101.53069848453823</td></tr><tr><th>24</th><td>1.6256993827235733</td><td>104.12765249398367</td></tr><tr><th>25</th><td>3.3214081526457813</td><td>118.46644563889394</td></tr><tr><th>26</th><td>0.43501963025212675</td><td>95.810320259296</td></tr><tr><th>27</th><td>2.59876092609342</td><td>121.9741328977443</td></tr><tr><th>28</th><td>-1.0290269848902651</td><td>113.72423797098067</td></tr><tr><th>29</th><td>-0.21404769863190354</td><td>92.43405156194733</td></tr><tr><th>30</th><td>3.5537714568100016</td><td>99.06513391626848</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td></tr></tbody></table>
+
+
+
+<p>使用<code>lm</code>函数进行线性回归分析：</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mod = lm(<span class="meta">@formula</span>(y ~ x), dataForRegression)</span><br></pre></td></tr></table></figure>
+<pre><code>DataFrames.DataFrameRegressionModel{GLM.LinearModel{GLM.LmResp{Array{Float64,1}},GLM.DensePredChol{Float64,Base.LinAlg.Cholesky{Float64,Array{Float64,2}}}},Array{Float64,2}}
+
+Formula: y ~ 1 + x
+
+Coefficients:
+             Estimate Std.Error t value Pr(&gt;|t|)
+(Intercept)   99.8365   1.42361 70.1292   &lt;1e-49
+x             5.19724  0.457037 11.3716   &lt;1e-14
+</code></pre><p>另外一种等价的写法是：</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mod = fit(LinearModel, <span class="meta">@formula</span>(y ~ x), dataForRegression)</span><br></pre></td></tr></table></figure>
+<pre><code>DataFrames.DataFrameRegressionModel{GLM.LinearModel{GLM.LmResp{Array{Float64,1}},GLM.DensePredChol{Float64,Base.LinAlg.Cholesky{Float64,Array{Float64,2}}}},Array{Float64,2}}
+
+Formula: y ~ 1 + x
+
+Coefficients:
+             Estimate Std.Error t value Pr(&gt;|t|)
+(Intercept)   99.8365   1.42361 70.1292   &lt;1e-49
+x             5.19724  0.457037 11.3716   &lt;1e-14
+</code></pre><p>故知回归系数为<code>5.19724</code>，截距为<code>99.8365</code>，所以最优拟合直线为 $y = 99.8365 + 5.19724x$。同时给出了标准差、t检验和p值等结果。</p>
+<p>接下来对假设回归系数是 $0$ 进行FF检验。</p>
+<p>原假设 $H_0: \beta = 0$，备选假设 $H_1: \beta\neq 0$</p>
+<p>构造回归系数为 $0$ 的模型：</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nullmod = lm(<span class="meta">@formula</span>(y ~ <span class="number">1</span>), dataForRegression)</span><br></pre></td></tr></table></figure>
+<pre><code>DataFrames.DataFrameRegressionModel{GLM.LinearModel{GLM.LmResp{Array{Float64,1}},GLM.DensePredChol{Float64,Base.LinAlg.Cholesky{Float64,Array{Float64,2}}}},Array{Float64,2}}
+
+Formula: y ~ +1
+
+Coefficients:
+             Estimate Std.Error t value Pr(&gt;|t|)
+(Intercept)   104.526   2.59199 40.3264   &lt;1e-38
+</code></pre><p>假设回归系数为 $0$，则截距为 $y$ 的平均数。</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isapprox(coef(nullmod)[<span class="number">1</span>], mean(dataForRegression[:y]))</span><br></pre></td></tr></table></figure>
+<pre><code>true
+</code></pre><p>GLM的<code>ftest</code>函数提供了回归模型的FF检验。</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftest(mod.model, nullmod.model)</span><br></pre></td></tr></table></figure>
+<pre><code>        Res. DOF DOF ΔDOF        SSR        ΔSSR      R²    ΔR²       F*  p(&gt;F)
+Model 1       48   3       4455.8890              0.7293
+Model 2       49   2   -1 16460.1689 -12004.2799 -0.0000 0.7293 129.3132 &lt;1e-14
+</code></pre><p>在此例中，$p&lt;0.05$，差异显著，拒绝 $\beta = 0$ 的假设，回归系数显著不为0，说明了回归方程有较高的有效性。而 $R^2=0.7293$ 也说明了随机变量 $x$ 与 $y$ 之间有相对高的关联程度。</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> RCall</span><br><span class="line"><span class="string">R"summary(lm(<span class="subst">$(dataForRegression[:x])</span> ~ <span class="subst">$(dataForRegression[:y])</span>))"</span></span><br></pre></td></tr></table></figure>
+<pre><code>WARNING: Method definition ==(Base.Nullable{S}, Base.Nullable{T}) in module Base at nullable.jl:238 overwritten in module NullableArrays at /Users/kay/.julia/v0.6/NullableArrays/src/operators.jl:99.
+
+
+
+
+
+RCall.RObject{RCall.VecSxp}
+
+Call:
+lm(formula = `#JL`$`(dataForRegression[:x])` ~ `#JL`$`(dataForRegression[:y])`)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-3.2220 -0.9915 -0.1898  0.7734  3.6579
+
+Coefficients:
+                                 Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                     -13.76511    1.30911  -10.52 4.77e-14 ***
+`#JL`$`(dataForRegression[:y])`   0.14032    0.01234   11.37 3.19e-15 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.583 on 48 degrees of freedom
+Multiple R-squared:  0.7293,    Adjusted R-squared:  0.7237
+F-statistic: 129.3 on 1 and 48 DF,  p-value: 3.195e-15
+</code></pre><p>以上是R的输出结果，除了小数点精度外，结果完全相同。</p>
+<p>下面对回归结果做可视化。</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本数据作图</span></span><br><span class="line"><span class="keyword">using</span> Gadfly</span><br><span class="line">plot(layer(dataForRegression,</span><br><span class="line">        x = :x,</span><br><span class="line">        y = :y,</span><br><span class="line">        Geom.point,),</span><br><span class="line">    layer(dataForRegression,</span><br><span class="line">        x = :x,</span><br><span class="line">        y = :y,</span><br><span class="line">        Geom.smooth(method = :lm),</span><br><span class="line">        color = [<span class="string">colorant"purple"</span>])</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_17_0.svg"><br></div>
+
+<p>函数<code>predict</code>返回的是回归值。残差定义为回归值与观测值之差。</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 残差点图</span></span><br><span class="line">resid = dataForRegression[:y] - predict(mod)</span><br><span class="line">plot(x = predict(mod),</span><br><span class="line">    y = resid,</span><br><span class="line">    Geom.point,</span><br><span class="line">    Guide.xlabel(<span class="string">"predict(mod)"</span>),</span><br><span class="line">    Guide.ylabel(<span class="string">"resid"</span>))</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_19_0.svg"><br></div>
+
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 残差线段图</span></span><br><span class="line">plot(dataForRegression, x = <span class="string">"x"</span>,</span><br><span class="line">    y = <span class="string">"y"</span>,</span><br><span class="line">    xend = <span class="string">"x"</span>,</span><br><span class="line">    yend = predict(mod),</span><br><span class="line">    Geom.segment)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_20_0.svg"><br></div>
+
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过Q-Q图的线性程度来检验残差的正态性。</span></span><br><span class="line">plot(x = Normal(), y = resid, Stat.qq, Geom.point,)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_21_0.svg"><br></div>
+
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制置信区间</span></span><br><span class="line">mod_predict_confidence = predict(mod,</span><br><span class="line">    hcat(ones(nrow(dataForRegression)), collect(dataForRegression[:,<span class="number">1</span>])),</span><br><span class="line">    :confint)</span><br><span class="line"></span><br><span class="line">plot(layer(dataForRegression,</span><br><span class="line">        x = <span class="string">"x"</span>,</span><br><span class="line">        y = <span class="string">"y"</span>,</span><br><span class="line">        Geom.point,</span><br><span class="line">        intercept = [coef(mod)[<span class="number">1</span>]],</span><br><span class="line">        slope = [coef(mod)[<span class="number">2</span>]],</span><br><span class="line">        Geom.abline),</span><br><span class="line">    layer(x = dataForRegression[:x],</span><br><span class="line">        y = mod_predict_confidence[:,<span class="number">2</span>],</span><br><span class="line">        Geom.point, Theme(default_color = <span class="string">"purple"</span>)),</span><br><span class="line">    layer(x = dataForRegression[:x],</span><br><span class="line">        y = mod_predict_confidence[:,<span class="number">3</span>],</span><br><span class="line">        Geom.point, Theme(default_color = <span class="string">"purple"</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_22_0.svg"><br></div>
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/11/29/julia基于GLM包的线性回归/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Project-2-of-Statistics" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -628,11 +795,11 @@ F-statistic: 12.03 on 5 and 24 DF,  p-value: 6.658e-06
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
         		</li>
       		
 		</ul>
@@ -816,11 +983,11 @@ F-statistic: 12.03 on 5 and 24 DF,  p-value: 6.658e-06
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -835,324 +1002,6 @@ F-statistic: 12.03 on 5 and 24 DF,  p-value: 6.658e-06
       
         <p class="article-more-link">
           <a class="article-more-a" href="../../2017/11/14/Assignment-2-of-Advanced-Computational-Method/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Project-1-of-Statistics" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2017/11/03/Project-1-of-Statistics/">Project 1 of Statistics.md</a>
-    </h1>
-  
-
-        
-        <a href="../../2017/11/03/Project-1-of-Statistics/" class="archive-article-date">
-  	<time datetime="2017-11-03T12:36:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、准备阶段"><a href="#一、准备阶段" class="headerlink" title="一、准备阶段"></a>一、准备阶段</h2><p>本次实验主要考虑影响大倪体重各体型指标的因素。我们的数据收集了112组大鲵的体重(weight)、全长(tl)、体长(bl)、头长(hl)、体高(h)、体宽(w)、尾柄长(cl)和肠长(sl)。</p>
-<p>利用统计软件R来实现，其中用到的包有<code>readxl</code>, <code>dplyr</code>, <code>ggplot2</code>, <code>car</code>。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(readxl)</span><br><span class="line"><span class="keyword">library</span>(dplyr)</span><br><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(car)</span><br></pre></td></tr></table></figure>
-<p>首先，利用<code>read_excel</code>语句导入数据为新的数据框，并利用<code>str()</code>函数展示一下大致的数据结构。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = tbl_df(read_excel(<span class="string">"/path/to/data.xls"</span>))</span><br><span class="line">str(df)</span><br></pre></td></tr></table></figure>
-<pre><code>Classes ‘tbl_df’, ‘tbl’ and &apos;data.frame&apos;:    112 obs. of  8 variables:
- $ weight: num  2.3 2.4 2.5 2.7 2.8 3 3.2 3.4 3.5 3.6 ...
- $ tl    : num  5.7 5.73 5.9 6.12 6.2 ...
- $ bl    : num  4.9 4.53 4.65 4.85 5.1 5 5.1 6.25 5.25 5.2 ...
- $ hl    : num  1.6 1.63 1.85 1.7 1.75 1.73 1.7 2.08 1.9 1.8 ...
- $ h     : num  0.9 0.93 1.05 1.05 1 1.1 1 1.28 1.05 1.1 ...
- $ w     : num  1 1.1 1 1.1 1.1 1.13 1.1 1.43 1.2 1.2 ...
- $ cl    : num  1.2 1.12 1.2 1.1 1.3 1.27 1.1 1.32 1.35 1.4 ...
- $ sl    : num  4.7 4.3 4.7 4.6 4.2 5 5 6.3 5.75 3.9 ...
-</code></pre><p>下面对影响体重的体型指标做多元线性回归。</p>
-<h2 id="二、多元线性回归"><a href="#二、多元线性回归" class="headerlink" title="二、多元线性回归"></a>二、多元线性回归</h2><h3 id="1-检测二变量关系"><a href="#1-检测二变量关系" class="headerlink" title="1. 检测二变量关系"></a>1. 检测二变量关系</h3><p>首先，检查一下变量间的相关性。可以利用<code>car</code>包中<code>scatterplotMatrix()</code>函数生成散点图矩阵</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scatterplotMatrix(df, spread=<span class="literal">FALSE</span>, smoother.args=list(lty=<span class="number">2</span>), main=<span class="string">"Scatter Plot Matrix"</span>)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_8_0.png"><br></div>
-
-
-<p>从图中可以看到，大鲵体重随着体长、身长、头长、高度、宽度，尾长和肠长的增加而增加，可能有线性关系。</p>
-<h3 id="2-多元线性回归及显著性检验"><a href="#2-多元线性回归及显著性检验" class="headerlink" title="2. 多元线性回归及显著性检验"></a>2. 多元线性回归及显著性检验</h3><p>下面使用<code>lm()</code>函数拟合多元线性回归模型：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mod1 &lt;- lm(weight ~ tl + bl + hl + h + w + cl + sl, data=df)</span><br><span class="line">summary(mod1)</span><br></pre></td></tr></table></figure>
-<pre><code>Call:
-lm(formula = weight ~ tl + bl + hl + h + w + cl + sl, data = df)
-
-Residuals:
-     Min       1Q   Median       3Q      Max
--10.2719  -3.2688  -0.1753   2.2389  27.0821
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -31.0098     2.8396 -10.920  &lt; 2e-16 ***
-tl            5.0452     1.6941   2.978 0.003609 **
-bl           -8.0840     2.2201  -3.641 0.000425 ***
-hl            3.1704     3.1763   0.998 0.320529
-h             3.4869     2.0005   1.743 0.084289 .
-w            26.1356     4.0578   6.441 3.75e-09 ***
-cl            2.4080     3.2128   0.750 0.455246
-sl           -0.8519     0.3111  -2.739 0.007262 **
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 4.867 on 104 degrees of freedom
-Multiple R-squared:  0.8862,    Adjusted R-squared:  0.8785
-F-statistic: 115.7 on 7 and 104 DF,  p-value: &lt; 2.2e-16
-</code></pre><p>上表的最后一行表示自由度为 $7, 104$ 的F统计量取值为 $115.7$，在给定水平 $\alpha = 0.05$ 下， 算出的F统计量大于 $F<em>{7,104}(0.05)$ 的概率 $P(F</em>{7,104}(0.05)&gt;F)$  小于 $2.2\times 10^{-16}$，所以拒绝原假设，认为回归方程是显著的。</p>
-<p>同时，注意到最后一列头长<code>hl</code>和尾柄长<code>cl</code>的回归系数对应的p值大于 $0.025$，认为头长和尾柄长对体重的影响不显著，因而可以将其从回归方程中剔除。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vars &lt;- names(df) %<span class="keyword">in</span>% c(<span class="string">"cl"</span>, <span class="string">"hl"</span>)</span><br><span class="line">newdf &lt;- df[!vars]</span><br><span class="line">newdf</span><br></pre></td></tr></table></figure>
-<table><br><thead><tr><th scope="col">weight</th><th scope="col">tl</th><th scope="col">bl</th><th scope="col">h</th><th scope="col">w</th><th scope="col">sl</th></tr></thead><br><tbody><br>    <tr><td>2.3  </td><td>5.700</td><td>4.90 </td><td>0.90 </td><td>1.00 </td><td>4.70 </td></tr><br>    <tr><td>2.4  </td><td>5.730</td><td>4.53 </td><td>0.93 </td><td>1.10 </td><td>4.30 </td></tr><br>    <tr><td>2.5  </td><td>5.900</td><td>4.65 </td><td>1.05 </td><td>1.00 </td><td>4.70 </td></tr><br>    <tr><td>2.7  </td><td>6.125</td><td>4.85 </td><td>1.05 </td><td>1.10 </td><td>4.60 </td></tr><br>    <tr><td>2.8  </td><td>6.200</td><td>5.10 </td><td>1.00 </td><td>1.10 </td><td>4.20 </td></tr><br>    <tr><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td><td>⋮</td></tr><br>    <tr><td> 49.6</td><td>14.90</td><td>12.70</td><td>2.50 </td><td>3.40 </td><td>11.80</td></tr><br>    <tr><td> 55.8</td><td>15.80</td><td>13.10</td><td>3.01 </td><td>3.30 </td><td> 9.70</td></tr><br>    <tr><td> 64.2</td><td>15.90</td><td>12.30</td><td>2.60 </td><td>3.50 </td><td>15.50</td></tr><br>    <tr><td> 64.9</td><td>15.10</td><td>12.50</td><td>2.30 </td><td>3.60 </td><td>13.90</td></tr><br>    <tr><td>101.2</td><td>18.40</td><td>15.20</td><td>3.30 </td><td>4.30 </td><td>14.20</td></tr><br></tbody><br></table>
-
-
-
-<p>将体重<code>weight</code>对剩余的回归自变量重新做回归，然后再做显著性检验。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mod2 &lt;- lm(weight ~ tl + bl + w + sl, data=newdf)</span><br><span class="line">summary(mod2)</span><br></pre></td></tr></table></figure>
-<pre><code>Call:
-lm(formula = weight ~ tl + bl + w + sl, data = newdf)
-
-Residuals:
-     Min       1Q   Median       3Q      Max
--10.1155  -3.2318  -0.5772   2.5155  27.6941
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -28.8822     2.4665 -11.710  &lt; 2e-16 ***
-tl            5.8369     1.6683   3.499 0.000683 ***
-bl           -7.6708     2.1310  -3.600 0.000484 ***
-w            28.8123     3.8875   7.411 3.07e-11 ***
-sl           -0.8667     0.3059  -2.833 0.005514 **
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 4.908 on 107 degrees of freedom
-Multiple R-squared:  0.8809,    Adjusted R-squared:  0.8764
-F-statistic: 197.8 on 4 and 107 DF,  p-value: &lt; 2.2e-16
-</code></pre><p>观测新表对应的 $p$ 值可知，回归方程是显著的，剩余的回归系数均显著不为0。其中回归系数含义为：一个预测变量增加一个单位，其他预测变量保持不变时，因变量将要增加的数量。如宽度<code>w</code>的回归系数为 $28.8123$，表示体长、身长等其他因素不变时，宽度每上升 $1\%$，体重将会上升 $28.8123\%$</p>
-<p>总体来看，所有的预测变量解释了体重影响因素88.09%的方差,体重<code>w</code>总变动的 $88.09\%$ 可以由该经验回归方程解释。</p>
-<h3 id="3-回归诊断"><a href="#3-回归诊断" class="headerlink" title="3. 回归诊断"></a>3. 回归诊断</h3><h4 id="3-1-Gauss-Markov-假设"><a href="#3-1-Gauss-Markov-假设" class="headerlink" title="3.1 Gauss Markov 假设"></a>3.1 Gauss Markov 假设</h4><p>首先考虑是否满足 $E(e)=0$，我们通过绘制学生化残差图来检验：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sresid &lt;- rstudent(mod2)</span><br><span class="line">fweight &lt;- fitted(mod2)</span><br><span class="line">myplot &lt;- ggplot(newdf, aes(fweight, sresid)) + geom_point()</span><br><span class="line">myplot &lt;- myplot + ggtitle(<span class="string">"Studentized residual vs. fitted weight"</span>)</span><br><span class="line">myplot &lt;- myplot + labs(x = <span class="string">"fitted weight"</span>) + labs(y = <span class="string">"studentized residual"</span>)</span><br><span class="line">myplot</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_17_1.png" width="60%/"><br></div>
-
-
-<p>从上图可以看出，$(\hat w_i, r_i)$ 大致落在宽度为6的水平带 $|r_i|\leq 3$ 区域内，学生化残差 $r_i$ 是否服从标准正态分布可以通过绘制学生化残差的频率分布直方图和 Q-Q 图来进一步分析:</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">par(mfrow=c(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">hist(sresid, freq=<span class="literal">FALSE</span>, xlab=<span class="string">"Studentized Residual"</span>, main=<span class="string">"Distribution of Errors"</span>)</span><br><span class="line">curve(dnorm(x, mean=mean(sresid), sd=sd(sresid)), add=<span class="literal">TRUE</span>, col=<span class="string">"blue"</span>, lwd=<span class="number">2</span>)</span><br><span class="line">legend(<span class="string">"topright"</span>, legend=<span class="string">"Normal Curve"</span>, lty=<span class="number">1</span>, col=<span class="string">"blue"</span>, cex=<span class="number">.7</span>)</span><br><span class="line"></span><br><span class="line">qqPlot(mod2, labels=row.names(newdf), id.method=<span class="string">"identify"</span>, simulate=<span class="literal">TRUE</span>, main=<span class="string">"Q-Q Plot"</span>)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_19_0.png"><br></div>
-
-
-<p>可以看出，除一个明显的离群点(112组数据)，Q-Q图近似于一条截距为0，斜率为1的直线，因此误差很好地服从了正态分布。</p>
-<p>下面进行误差的独立性检验，使用<code>car</code>包提供的<code>Durbin-Watson</code>检验函数，能够检测误差的序列相关性。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">durbinWatsonTest(mod2)</span><br></pre></td></tr></table></figure>
-<pre><code>lag Autocorrelation D-W Statistic p-value
-  1       0.4479978     0.7615764       0
-Alternative hypothesis: rho != 0
-</code></pre><p>$p&lt;0.05$ 显著，说明误差之间不独立，有相关性。</p>
-<p>下面考虑同方差性，利用<code>car</code>包提供的<code>ncvTest()</code>函数生成一个检验，零假设为误差方差不变，备择假设为误差方差随拟合值水平变化而变化。若检验显著，则说明存在异方差性。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncvTest(mod2)</span><br></pre></td></tr></table></figure>
-<pre><code>Non-constant Variance Score Test
-Variance formula: ~ fitted.values
-Chisquare = 117.0427    Df = 1     p = 2.809471e-27
-</code></pre><p>$p&lt;0.05$显著，拒绝同方差假设。我们还可以通过分布水平图(非水平趋势)验证这一点：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spreadLevelPlot(mod2)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_26_2.png" width="60%/"><br></div>
-
-
-<p>综上，该模型不满足Gauss Markov假设。</p>
-<h4 id="3-2-异常点检验"><a href="#3-2-异常点检验" class="headerlink" title="3.2 异常点检验"></a>3.2 异常点检验</h4><p>由上面的残差图可以看出，最后一组数据的残差较其他数据的残差大很多，因此该数据为<em>异常点</em>。由于异常点的检验是一个复杂的问题，我们不能确定异常点的个数，因此不能进一步处理。</p>
-<p>高杠杆值的观测点可以通过<em>帽子统计量</em>判断，对于此处的数据集，帽子均值为$p/n=5/112$，其中 $p$是模型估计的参数数目(包含截距项)，$n$ 是样本量。一般来说，观测点的帽子值大于帽子均值的2或3倍，就可以认定为高杠杆值点。下面画出帽子值的分布：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hat.plot &lt;- <span class="keyword">function</span> (mod2) &#123;</span><br><span class="line">    p &lt;- length(coefficients(mod2))</span><br><span class="line">    n &lt;- length(fitted(mod2))</span><br><span class="line">    plot(hatvalues(mod2), main = <span class="string">"Index Plot of Hat Values"</span>)</span><br><span class="line">    abline(h=c(<span class="number">2</span>,<span class="number">3</span>)*p/n, col=<span class="string">"red"</span>, lty=<span class="number">2</span>)</span><br><span class="line">    identify(<span class="number">1</span>:n, hatvalues(mod2), names(hatvalues(mod2)))</span><br><span class="line">&#125;</span><br><span class="line">hat.plot(mod2)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_30_1.png" width="60%/"><br></div>
-
-
-<p>此图中可以看出有四个高杠杆值点。</p>
-<p>下面根据Cook距离检测强影响点，考虑Cook’s D值大于 $4/(n-k-1)$，其中 $n$ 为样本量大小，$k$ 是预测变量数目。可通过如下代码绘制Cook’s D图形：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cutoff &lt;- <span class="number">4</span>/(nrow(newdf)-length(mod2$coefficients)-<span class="number">2</span>)</span><br><span class="line">plot(mod2, which=<span class="number">4</span>, cook.levels=cutoff)</span><br><span class="line">abline(h=cutoff, lty=<span class="number">2</span>, col=<span class="string">"red"</span>)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_32_0.png" width="60%/"><br></div>
-
-<p>通过图形可以判断第 $24, 110$ 组数据是强影响点（第112组为异常点），若删除强影响点，将会导致回归模型的截距项和斜率发生显著变化。</p>
-<p>其实，利用<code>car</code>包中的<code>influencePlot()</code>函数，可以将离群点，高杠杆值点和强影响点的信息整合到一副图形中：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">influencePlot(mod2, id.method=<span class="string">"identity"</span>, main=<span class="string">"Influence Plot"</span>, sub=<span class="string">"Circle size is proportional to Cook's"</span>)</span><br></pre></td></tr></table></figure>
-<table><br><thead><tr><th></th><th scope="col">StudRes</th><th scope="col">Hat</th><th scope="col">CookD</th></tr></thead><br><tbody><br>    <tr><th scope="row">24</th><td>-1.635591</td><td>0.3859345</td><td>0.3310792</td></tr><br>    <tr><th scope="row">112</th><td> 8.156196</td><td>0.2284171</td><td>2.4427929</td></tr><br></tbody><br></table>
-
-
-
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_34_1.png" width="80%/"><br></div>
-
-
-<h2 id="三、结论"><a href="#三、结论" class="headerlink" title="三、结论"></a>三、结论</h2><p>经验线性回归模型</p>
-<p>$$<br>weight = -28.8822 + 5.8369<em>tl + -7.6708</em>bl + 28.8123<em>w + -0.8667</em>sl<br>$$</p>
-<p>虽然可以解释体重总变动的 $88.09\%$，但是不满足Gauss Markov假设，仍待改善。</p>
-<h2 id="四、参考文献"><a href="#四、参考文献" class="headerlink" title="四、参考文献"></a>四、参考文献</h2><ol>
-<li>R in action Data Analysis and Graphics with R (Second Edition)</li>
-<li>线性模型引论（王松桂、史建红等）</li>
-<li>线性统计模型 (王松桂、陈敏等编</li>
-<li>数据集地址：<a href="http://leanote.com/api/file/getAttach?fileId=59fbe27cab644137db000a2b" target="_blank" rel="noopener">http://leanote.com/api/file/getAttach?fileId=59fbe27cab644137db000a2b</a></li>
-</ol>
-<div style="page-break-after: always;"></div>
-
-<h2 id="Homework-3"><a href="#Homework-3" class="headerlink" title="Homework 3"></a>Homework 3</h2><h3 id="3-16"><a href="#3-16" class="headerlink" title="3.16"></a>3.16</h3><p><strong>Box-Cox变换与加权最小二乘</strong></p>
-<p>(1)</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tree = tbl_df(read.csv(<span class="string">"~/tree.csv"</span>))</span><br><span class="line">mod3 &lt;- lm(Y ~ X1 + X2, data=tree)</span><br><span class="line">summary(mod3)</span><br></pre></td></tr></table></figure>
-<pre><code>Call:
-lm(formula = Y ~ X1 + X2, data = tree)
-
-Residuals:
-    Min      1Q  Median      3Q     Max
--6.4065 -2.6493 -0.2876  2.2003  8.4847
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -57.9877     8.6382  -6.713 2.75e-07 ***
-X1            4.7082     0.2643  17.816  &lt; 2e-16 ***
-X2            0.3393     0.1302   2.607   0.0145 *
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 3.882 on 28 degrees of freedom
-Multiple R-squared:  0.948,    Adjusted R-squared:  0.9442
-F-statistic:   255 on 2 and 28 DF,  p-value: &lt; 2.2e-16
-</code></pre><p>由上表，$X2$ 的回归系数不显著，故剔除后重新回归：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mod4 &lt;- lm(Y ~ X1, data=tree)</span><br><span class="line">summary(mod4)</span><br></pre></td></tr></table></figure>
-<pre><code>Call:
-lm(formula = Y ~ X1, data = tree)
-
-Residuals:
-   Min     1Q Median     3Q    Max
--8.065 -3.107  0.152  3.495  9.587
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -36.9435     3.3651  -10.98 7.62e-12 ***
-X1            5.0659     0.2474   20.48  &lt; 2e-16 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 4.252 on 29 degrees of freedom
-Multiple R-squared:  0.9353,    Adjusted R-squared:  0.9331
-F-statistic: 419.4 on 1 and 29 DF,  p-value: &lt; 2.2e-16
-</code></pre><p>得到经验线性回归方程</p>
-<p>$$<br>Y = -36.9435 + 5.0659*X1<br>$$</p>
-<p>下面作出残差图：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sresid &lt;- rstudent(mod4)</span><br><span class="line">fweight &lt;- fitted(mod4)</span><br><span class="line">plot3_16 &lt;- ggplot(tree, aes(Y, sresid)) + geom_point()</span><br><span class="line">plot3_16 &lt;- plot3_16 + ggtitle(<span class="string">"Studentized residual vs. fitted Y"</span>)</span><br><span class="line">plot3_16 &lt;- plot3_16 + labs(x = <span class="string">"fitted Y"</span>) + labs(y = <span class="string">"studentized residual"</span>)</span><br><span class="line">plot3_16</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_42_1.png" width="60%/"><br></div>
-
-
-<p>残差和拟合值的关系大致呈现喇叭形，说明拟合值与残差不相互独立，不满足 Gauss Markov 假设，故进行 Box-Cox 变换：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(MASS)</span><br><span class="line">boxcox(mod4)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_44_1.png" width="60%/"><br></div>
-
-
-<p>可以由上图看出最优变换参数 $\lambda$ 在 $0$ 附近，进一步做计算找出 $\lambda$ 的最优值：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary(powerTransform(mod4))</span><br></pre></td></tr></table></figure>
-<pre><code>bcPower Transformation to Normality
-   Est.Power Std.Err. Wald Lower Bound Wald Upper Bound
-Y1    0.3791   0.1216           0.1408           0.6175
-
-Likelihood ratio tests about transformation parameters
-                            LRT df         pval
-LR test, lambda = (0)  8.362665  1 3.830084e-03
-LR test, lambda = (1) 21.004754  1 4.581452e-06
-</code></pre><p>得到最优变换参数为<code>0.3791</code></p>
-<p>(2)</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">newY &lt;- (tree$Y^(<span class="number">0.3791</span>)-<span class="number">1</span>)/<span class="number">0.3791</span></span><br><span class="line">newtree &lt;- cbind(tree, newY)</span><br><span class="line">mod5 &lt;- lm(newY ~ X1 + X2, data=newtree)</span><br><span class="line">summary(mod5)</span><br></pre></td></tr></table></figure>
-<pre><code>Call:
-lm(formula = newY ~ X1 + X2, data = newtree)
-
-Residuals:
-     Min       1Q   Median       3Q      Max
--0.57136 -0.17434 -0.02026  0.24693  0.45782
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -4.17273    0.64775  -6.442 5.62e-07 ***
-X1           0.53242    0.01982  26.868  &lt; 2e-16 ***
-X2           0.04975    0.00976   5.098 2.12e-05 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.2911 on 28 degrees of freedom
-Multiple R-squared:  0.9775,    Adjusted R-squared:  0.9759
-F-statistic: 609.4 on 2 and 28 DF,  p-value: &lt; 2.2e-16
-</code></pre><p>经过Box-Cox变换后的经验回归方程仍显著，且能解释<code>Y</code>的变化的 $97.75\%$。</p>
-<p>下面作残差图，检验Gauss Markov假设：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sresid &lt;- rstudent(mod5)</span><br><span class="line">fittedY &lt;- fitted(mod5)</span><br><span class="line">newplot3_16 &lt;- ggplot(newtree, aes(fittedY, sresid)) + geom_point()</span><br><span class="line">newplot3_16 &lt;- newplot3_16 + ggtitle(<span class="string">"Studentized residual vs. fitted Y"</span>)</span><br><span class="line">newplot3_16 &lt;- newplot3_16 + labs(x = <span class="string">"fitted Y"</span>) + labs(y = <span class="string">"studentized residual"</span>)</span><br><span class="line">newplot3_16</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_50_1.png" width="60%/"><br></div>
-
-
-<p>进一步作正态性检验,作如下学生化残差分布图和Q-Q图：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">par(mfrow=c(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">hist(sresid, freq=<span class="literal">FALSE</span>, xlab=<span class="string">"Studentized Residual"</span>, main=<span class="string">"Distribution of Errors"</span>)</span><br><span class="line">curve(dnorm(x, mean=mean(sresid), sd=sd(sresid)), add=<span class="literal">TRUE</span>, col=<span class="string">"blue"</span>, lwd=<span class="number">2</span>)</span><br><span class="line">legend(<span class="string">"topleft"</span>, legend=<span class="string">"Normal Curve"</span>, lty=<span class="number">1</span>, col=<span class="string">"blue"</span>, cex=<span class="number">.7</span>)</span><br><span class="line"></span><br><span class="line">qqPlot(mod5, labels=row.names(newtree), id.method=<span class="string">"identify"</span>, simulate=<span class="literal">TRUE</span>, main=<span class="string">"Q-Q Plot"</span>)</span><br></pre></td></tr></table></figure>
-<div align="center"><br><img src="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_52_0.png"><br></div>
-
-
-<p>可以看出经过Box-Cox变换后，经验回归模型相比原模型有明显改善。</p>
-<p>(3)</p>
-<p>下面我们继续对数据集<code>tree</code>做加权最小二乘回归，编写如下<code>wls</code>函数：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">wls &lt;- <span class="keyword">function</span>(linear_mod, iterations = <span class="number">1</span>)&#123;</span><br><span class="line"></span><br><span class="line">  X &lt;- model.matrix(linear_mod)   <span class="comment"># design matrix</span></span><br><span class="line">  H &lt;- solve(t(X) %*% X) %*% t(X) <span class="comment"># hat matrix</span></span><br><span class="line">  Y &lt;- linear_mod$model[,<span class="number">1</span>]       <span class="comment"># Y observed</span></span><br><span class="line">  size &lt;- nrow(linear_mod$model)  <span class="comment"># block dimensions</span></span><br><span class="line">  beta_ols &lt;- H %*% Y             <span class="comment"># The estimated coefficients using ols</span></span><br><span class="line">  resid &lt;- residuals(linear_mod)</span><br><span class="line">  sigma &lt;- diag(size) * as.vector(abs(resid)^<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">  beta_wls &lt;- solve(t(X) %*% solve(sigma) %*% X) %*% t(X) %*% solve(sigma) %*% Y</span><br><span class="line">  <span class="comment"># the estimated coefficients with weight least squares method (1st iteration)</span></span><br><span class="line"></span><br><span class="line">  beta_list &lt;- list(beta_ols, beta_wls)</span><br><span class="line"></span><br><span class="line">  i &lt;- <span class="number">3</span></span><br><span class="line">  <span class="keyword">while</span>(i &lt;= iterations)&#123;</span><br><span class="line"></span><br><span class="line">    Y_hat &lt;- X %*% beta_wls</span><br><span class="line"></span><br><span class="line">    resid &lt;- Y - Y_hat</span><br><span class="line"></span><br><span class="line">    W_hat &lt;- diag(size) * as.vector(abs(resid)^<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(abs(min(eigen(W_hat)$values)) &lt; <span class="number">1e-15</span>)&#123;<span class="keyword">break</span>&#125;</span><br><span class="line">    <span class="comment"># stops when the estimated covariance matrix (W.hat) becomes singular</span></span><br><span class="line"></span><br><span class="line">    beta_wls &lt;- solve(t(X) %*% solve(W_hat) %*% X) %*% t(X) %*% solve(W_hat) %*% Y</span><br><span class="line"></span><br><span class="line">    beta_list[[i]] &lt;- beta_wls</span><br><span class="line">    i &lt;- i+<span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(beta_list)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>直接调用函数<code>wls(mod3)</code>可以给出如下结果：</p>
-<ol><br>    <li><table><br><tbody><br>    <tr><th scope="row">(Intercept)</th><td>-57.9876589</td></tr><br>    <tr><th scope="row">X1</th><td>  4.7081605</td></tr><br>    <tr><th scope="row">X2</th><td>  0.3392512</td></tr><br></tbody><br></table><br></li><br>    <li><table><br><tbody><br>    <tr><th scope="row">(Intercept)</th><td>-58.6005437</td></tr><br>    <tr><th scope="row">X1</th><td>  4.7738483</td></tr><br>    <tr><th scope="row">X2</th><td>  0.3364717</td></tr><br></tbody><br></table><br></li><br></ol>
-
-
-<p>从而，加权最小二乘模型为</p>
-<p>$$<br>Y = -58.600543 + 4.7738483<em>X1 + 0.3364717</em>X2<br>$$</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">statistics</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">r</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2017/11/03/Project-1-of-Statistics/">展开全文 >></a>
         </p>
       
 
@@ -1306,6 +1155,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
@@ -1315,10 +1168,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">
