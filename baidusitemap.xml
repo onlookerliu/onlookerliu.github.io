@@ -4,8 +4,27 @@
 
     
   <url>
+    <loc>onlookerliu.github.io/2018/03/10/Project-Euler-015/</loc>
+    <lastmod>2018-03-19T08:41:46.561Z</lastmod>
+    <data>
+        <display>
+        <title>Project-Euler-015</title>
+        <pubTime>2018-03-10T07:44:16.000Z</pubTime>
+        
+        <tag>euler</tag>
+         
+        <tag>multilingual</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>onlookerliu.github.io/2018/03/12/Project-Euler-017/</loc>
-    <lastmod>2018-03-19T08:01:05.454Z</lastmod>
+    <lastmod>2018-03-19T08:41:25.811Z</lastmod>
     <data>
         <display>
         <title>Project-Euler-017</title>
@@ -29,25 +48,6 @@
         <display>
         <title>Project-Euler-016</title>
         <pubTime>2018-03-11T07:50:31.000Z</pubTime>
-        
-        <tag>euler</tag>
-         
-        <tag>multilingual</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2018/03/10/Project-Euler-015/</loc>
-    <lastmod>2018-03-19T07:50:21.736Z</lastmod>
-    <data>
-        <display>
-        <title>Project-Euler-015</title>
-        <pubTime>2018-03-10T07:44:16.000Z</pubTime>
         
         <tag>euler</tag>
          
@@ -435,9 +435,9 @@
         <title>Assignment 1 of Advanced Computational Method</title>
         <pubTime>2017-10-30T15:59:42.000Z</pubTime>
         
-        <tag>julia</tag>
-         
         <tag>statistics</tag>
+         
+        <tag>julia</tag>
          
         <tag>computationa method</tag>
          
@@ -449,14 +449,16 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>A simple Metropolis-Hastings MCMC in R</title>
-        <pubTime>2017-12-28T17:47:23.000Z</pubTime>
+        <title>Project 4 of Statistics.md</title>
+        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
         
         <tag>r</tag>
+         
+        <tag>statistic</tag>
          
          
            
@@ -504,16 +506,14 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 4 of Statistics.md</title>
-        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
+        <title>A simple Metropolis-Hastings MCMC in R</title>
+        <pubTime>2017-12-28T17:47:23.000Z</pubTime>
         
         <tag>r</tag>
-         
-        <tag>statistic</tag>
          
          
            
