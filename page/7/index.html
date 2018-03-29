@@ -167,6 +167,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Simple-Perceptron-using-Processing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/02/26/Simple-Perceptron-using-Processing/">Simple Perceptron using Processing</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/02/26/Simple-Perceptron-using-Processing/" class="archive-article-date">
+  	<time datetime="2018-02-25T16:22:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This code is mainly based on <a href="https://processing.org" target="_blank" rel="noopener">Processing</a>, a flexible software sketchbook for visualizing things and arts.</p>
+<p>First, we derive a class named Perceptron with two useful method <code>guess</code> and <code>train</code>.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sign</span><span class="params">(<span class="keyword">float</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Perceptron</span> </span>&#123;</span><br><span class="line">  <span class="keyword">float</span>[] weights = <span class="keyword">new</span> <span class="keyword">float</span>[<span class="number">2</span>];</span><br><span class="line">  <span class="keyword">float</span> lr = <span class="number">0.2</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// constructor</span></span><br><span class="line">  Perceptron() &#123;</span><br><span class="line">    <span class="comment">// initialize the weight randomly</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; weights.length; i++) &#123;</span><br><span class="line">      weights[i] = random(-<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">guess</span><span class="params">(<span class="keyword">float</span>[] inputs)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">float</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; weights.length; i++) &#123;</span><br><span class="line">      sum += inputs[i] * weights[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> output = sign(sum);</span><br><span class="line">    <span class="keyword">return</span> output;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">train</span><span class="params">(<span class="keyword">float</span>[] inputs, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> guess = guess(inputs);</span><br><span class="line">    <span class="keyword">int</span> error = target - guess;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; weights.length; i++) &#123;</span><br><span class="line">      weights[i] += error * inputs[i] * lr;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>To specify the training procession using a simple perceptron, we activate a sketchbook named Training.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="keyword">float</span> x;</span><br><span class="line">  <span class="keyword">float</span> y;</span><br><span class="line">  <span class="keyword">int</span> label;</span><br><span class="line">  </span><br><span class="line">  Point() &#123;</span><br><span class="line">    x = random(width);</span><br><span class="line">    y = random(height);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (x &gt; y) &#123;</span><br><span class="line">      label = <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      label = -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    stroke(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (label == <span class="number">1</span>) &#123;</span><br><span class="line">      fill(<span class="number">255</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fill(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ellipse(x, y, <span class="number">32</span>, <span class="number">32</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Now, come to our basic purpose. Draw random samples and make trainings. Here is the main sketchbook file <code>SimplePerceptron</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">Perceptron brain;</span><br><span class="line"></span><br><span class="line">Point[] points = <span class="keyword">new</span> Point[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> trainingIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  size(<span class="number">800</span>, <span class="number">800</span>);</span><br><span class="line">  brain = <span class="keyword">new</span> Perceptron();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; points.length; i++) &#123;</span><br><span class="line">    points[i] = <span class="keyword">new</span> Point();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">float</span>[] inputs = &#123;-<span class="number">1</span>, <span class="number">0.5</span>&#125;;</span><br><span class="line">  <span class="keyword">int</span> guess = brain.guess(inputs);</span><br><span class="line">  println(guess);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  background(<span class="number">255</span>);</span><br><span class="line">  stroke(<span class="number">0</span>);</span><br><span class="line">  line(<span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">  <span class="keyword">for</span> (Point pt : points) &#123;</span><br><span class="line">    pt.show();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (Point pt : points) &#123;</span><br><span class="line">    <span class="keyword">float</span>[] inputs = &#123;pt.x, pt.y&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> target = pt.label;</span><br><span class="line">    <span class="keyword">int</span> guess = brain.guess(inputs);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (guess == target) &#123;</span><br><span class="line">      fill(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fill(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    noStroke();</span><br><span class="line">    ellipse(pt.x, pt.y, <span class="number">16</span>, <span class="number">16</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  Point training = points[trainingIndex];</span><br><span class="line">  <span class="keyword">float</span>[] inputs = &#123;training.x, training.y&#125;;</span><br><span class="line">  <span class="keyword">int</span> target = training.label;</span><br><span class="line">  brain.train(inputs, target);</span><br><span class="line">  trainingIndex++;</span><br><span class="line">  <span class="keyword">if</span> (trainingIndex == points.length) &#123;</span><br><span class="line">    trainingIndex = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Simply click the run button, Processing will help start an interative interface (similar to the canvas) and render the result below.</p>
+<div align="center"><br><img src="http://oxyywddt8.bkt.clouddn.com/processing/Perceptron.gif" width="60%"><br></div>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">machine learning</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">processing</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/02/26/Simple-Perceptron-using-Processing/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Linear-Regression-in-JS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -368,104 +456,6 @@
 
 
   
-    <article id="post-Project-Euler-007" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2018/02/14/Project-Euler-007/">Project-Euler-007</a>
-    </h1>
-  
-
-        
-        <a href="../../2018/02/14/Project-Euler-007/" class="archive-article-date">
-  	<time datetime="2018-02-14T14:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13,<br>we can see that the 6th prime is 13.</p>
-<p>What is the 10001st prime number?</p>
-<h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">104743</span><br></pre></td></tr></table></figure>
-<hr>
-<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eratosthenes</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''Yields the sequence of prime numbers via the Sieve of Eratosthenes.'''</span></span><br><span class="line">    D = &#123;&#125;  <span class="comment"># map composite integers to primes witnessing their compositeness</span></span><br><span class="line">    q = <span class="number">2</span>   <span class="comment"># first integer to test for primality</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> q <span class="keyword">not</span> <span class="keyword">in</span> D:</span><br><span class="line">            <span class="keyword">yield</span> q        <span class="comment"># not marked composite, must be prime</span></span><br><span class="line">            D[q*q] = [q]   <span class="comment"># first multiple of q not already marked</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> D[q]: <span class="comment"># move each witness to its next multiple</span></span><br><span class="line">                D.setdefault(p+q,[]).append(p)</span><br><span class="line">            <span class="keyword">del</span> D[q]       <span class="comment"># no longer need D[q], free memory</span></span><br><span class="line">        q += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nth_prime</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i, prime <span class="keyword">in</span> enumerate(eratosthenes()):</span><br><span class="line">        <span class="keyword">if</span> i == n - <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> prime</span><br><span class="line"></span><br><span class="line">print(nth_prime(<span class="number">10001</span>))</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>JavaScript<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const sieve = &#123;&#125;</span><br><span class="line">let n = 0</span><br><span class="line">for (var q = 2; n &lt; 10001; q++) &#123;</span><br><span class="line">  if (sieve[q]) &#123;</span><br><span class="line">    sieve[q].forEach((p) =&gt; &#123;</span><br><span class="line">      const list = sieve[p + q] || []</span><br><span class="line">      list.push(p)</span><br><span class="line">      sieve[p + q] = list</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    sieve[q * q] = [q]</span><br><span class="line">    n++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(q - 1)</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Go<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">iSqrt</span><span class="params">(n <span class="keyword">int64</span>)</span> <span class="title">int64</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> r1, r <span class="keyword">int64</span> = n, n + <span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> r1 &lt; r &#123;</span><br><span class="line">		r, r1 = r1, (r1+n/r1)&gt;&gt;<span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> r</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PrimeSieve</span><span class="params">(n <span class="keyword">int64</span>)</span> []<span class="title">int64</span></span> &#123;</span><br><span class="line">	result := <span class="built_in">make</span>([]<span class="keyword">int64</span>, <span class="number">0</span>, n)</span><br><span class="line">	sieve := <span class="built_in">make</span>([]<span class="keyword">bool</span>, n+<span class="number">1</span>)</span><br><span class="line">	sn := iSqrt(n)</span><br><span class="line">	<span class="keyword">var</span> i, j <span class="keyword">int64</span></span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">2</span>; i &lt;= sn; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> !sieve[i] &#123;</span><br><span class="line">			<span class="keyword">for</span> j = i * i; j &lt;= n; j += i &#123;</span><br><span class="line">				sieve[j] = <span class="literal">true</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">2</span>; i &lt;= n; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> !sieve[i] &#123;</span><br><span class="line">			result = <span class="built_in">append</span>(result, i)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	primes := PrimeSieve(<span class="number">1000000</span>)</span><br><span class="line">	fmt.Println(primes[<span class="number">10000</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'mathn'</span></span><br><span class="line">puts Prime.take(<span class="number">10001</span>).last</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">primes</span> :: [<span class="type">Integer</span>]</span><br><span class="line"><span class="title">primes</span> = <span class="number">2</span> : sieve primes [<span class="number">3</span>,<span class="number">5.</span>.] <span class="keyword">where</span></span><br><span class="line">    sieve (p:ps) xs = h ++ sieve ps [x | x &lt;- t, rem x p /= <span class="number">0</span>]</span><br><span class="line">                      <span class="keyword">where</span> (h, t) = span (&lt; p*p) xs</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> :: <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ primes !! <span class="number">10000</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Clojure<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure</span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> primes [n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">defn</span></span> improve [p nums]</span><br><span class="line">    (<span class="name"><span class="builtin-name">filter</span></span> #(<span class="name"><span class="builtin-name">or</span></span> </span><br><span class="line">               (<span class="name"><span class="builtin-name">not</span></span> (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">rem</span></span> % p) <span class="number">0</span>))</span><br><span class="line">               (<span class="name"><span class="builtin-name">=</span></span> % p))</span><br><span class="line">            nums))</span><br><span class="line">  (<span class="name"><span class="builtin-name">defn</span></span> prime-iter [p nums i]</span><br><span class="line">    (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">&gt;</span></span> (<span class="name"><span class="builtin-name">*</span></span> p p) n)</span><br><span class="line">      nums</span><br><span class="line">      (<span class="name">prime-iter</span> (<span class="name"><span class="builtin-name">nth</span></span> nums (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>)) (<span class="name">improve</span> (<span class="name"><span class="builtin-name">nth</span></span> nums (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>)) nums) (<span class="name"><span class="builtin-name">+</span></span> i <span class="number">1</span>))))</span><br><span class="line">  (<span class="name">prime-iter</span> <span class="number">2</span> (<span class="name"><span class="builtin-name">range</span></span> <span class="number">2</span> (<span class="name"><span class="builtin-name">+</span></span> n <span class="number">1</span>)) <span class="number">-1</span>))</span><br><span class="line"></span><br><span class="line">(<span class="name">println</span> (<span class="name"><span class="builtin-name">nth</span></span> (<span class="name">primes</span> <span class="number">1000000</span>) <span class="number">10000</span>))</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Rust<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">eratosthenes</span></span>(limit: <span class="built_in">usize</span>) -&gt; <span class="built_in">Vec</span>&lt;<span class="built_in">usize</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> sieve = <span class="built_in">vec!</span>[<span class="literal">true</span>; limit];</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> p = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="comment">// Eliminate multiples of p.</span></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut</span> i = <span class="number">2</span> * p - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> i &lt; limit &#123;</span><br><span class="line">            sieve[i] = <span class="literal">false</span>;</span><br><span class="line">            i += p;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Find the next prime.</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="literal">Some</span>(n) = (p..limit).find(|&amp;n| sieve[n]) &#123;</span><br><span class="line">            p = n + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sieve</span><br><span class="line">        .iter()</span><br><span class="line">        .enumerate()</span><br><span class="line">        .filter(|&amp;(_, &amp;is_prime)| is_prime)</span><br><span class="line">        .skip(<span class="number">1</span>)</span><br><span class="line">        .map(|(i, _)| i + <span class="number">1</span>)</span><br><span class="line">        .collect()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> primes = eratosthenes(<span class="number">1000000</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, primes[<span class="number">10000</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Mathematica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* Use Mathematica's built-in functions for easy problem-solving. *)</span></span><br><span class="line"><span class="keyword">Prime</span>[<span class="number">10001</span>]</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p007</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p007().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * Computers are fast, so we can implement this solution by testing each number</span></span><br><span class="line"><span class="comment">	 * individually for primeness, instead of using the more efficient sieve of Eratosthenes.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>, count = <span class="number">0</span>; ; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (Library.isPrime(i)) &#123;</span><br><span class="line">				count++;</span><br><span class="line">				<span class="keyword">if</span> (count == <span class="number">10001</span>)</span><br><span class="line">					<span class="keyword">return</span> Integer.toString(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/02/14/Project-Euler-007/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="../6/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../5/">5</a><a class="page-number" href="../6/">6</a><span class="page-number current">7</span><a class="page-number" href="../8/">8</a><a class="page-number" href="../9/">9</a><span class="space">&hellip;</span><a class="page-number" href="../16/">16</a><a class="extend next" rel="next" href="../8/">Next &raquo;</a>
@@ -594,15 +584,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,7 +592,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,11 +604,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">p5js</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
+                <a href="javascript:void(0)" class="js-tag color5">p5js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -631,6 +617,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">multilingual</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
               </li>
              
               <li class="article-tag-list-item">
