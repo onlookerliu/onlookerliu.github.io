@@ -167,6 +167,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-Notes-002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/12/30/LeetCode-Notes-002/">LeetCode Notes 002</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/12/30/LeetCode-Notes-002/" class="archive-article-date">
+  	<time datetime="2017-12-29T17:39:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Add-Binary"><a href="#Add-Binary" class="headerlink" title="Add Binary"></a>Add Binary</h3><p>Given two binary strings, return their sum (also a binary string).</p>
+<p>For example,<br>a = “11”<br>b = “1”<br>Return “100”.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; a</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; b</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> addBinary = <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  a = a.split(<span class="string">''</span>).reverse();</span><br><span class="line">  b = b.split(<span class="string">''</span>).reverse();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> c = [];</span><br><span class="line">  <span class="keyword">var</span> add = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">Math</span>.max(a.length, b.length);i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> sum = (a[i] === <span class="literal">undefined</span> ? <span class="number">0</span> : <span class="built_in">Number</span>(a[i])) + (b[i] === <span class="literal">undefined</span> ? <span class="number">0</span>: <span class="built_in">Number</span>(b[i])) + add;</span><br><span class="line">    c[i] = sum &amp; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (sum &gt;= <span class="number">2</span>) </span><br><span class="line">      add = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">      add = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (add)</span><br><span class="line">    c[len] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> c.reverse().join(<span class="string">''</span>).toString();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Add-Digit"><a href="#Add-Digit" class="headerlink" title="Add Digit"></a>Add Digit</h3><p>Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.</p>
+<p><strong>For example:</strong></p>
+<p>Given num = 38, the process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one digit, return it.</p>
+<p><strong>Follow up:</strong><br>Could you do it without any loop/recursion in O(1) runtime?</p>
+<p><strong>Credits:</strong><br>Special thanks to @jianchao.li.fighter for adding this problem and creating all test cases.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; num</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addDigits = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">while</span>(num.toString().length !== <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (num) &#123;</span><br><span class="line">      sum += num % <span class="number">10</span>;</span><br><span class="line">      num = ~~(num / <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    num = sum;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> num;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Add-Strings"><a href="#Add-Strings" class="headerlink" title="Add Strings"></a>Add Strings</h3><p>Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.</p>
+<p>Note:</p>
+<ol>
+<li>The length of both num1 and num2 is &lt; 5100.</li>
+<li>Both num1 and num2 contains only digits 0-9.</li>
+<li>Both num1 and num2 does not contain any leading zero.</li>
+<li>You must not use any built-in BigInteger library or convert the inputs to integer directly.</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; num1</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; num2</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addStrings = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> [i, j] = [num1.length, num2.length];</span><br><span class="line">  <span class="keyword">let</span> ans = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">let</span> add = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  i -= <span class="number">1</span>, j -= <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> ( ; i &gt;= <span class="number">0</span> || j &gt;= <span class="number">0</span>; i--, j--) &#123;</span><br><span class="line">    <span class="keyword">let</span> a = i &gt;= <span class="number">0</span> ? +num1[i] : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> b = j &gt;= <span class="number">0</span> ? +num2[j] : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> sum = a + b + add;</span><br><span class="line">    ans = sum % <span class="number">10</span> + ans;</span><br><span class="line">    add = ~~(sum / <span class="number">10</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  add &amp;&amp; (ans = add + ans);</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/12/30/LeetCode-Notes-002/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-A-simple-Metropolis-Hastings-MCMC-in-R" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -349,89 +444,6 @@ F-statistic: 748.3 on 1 and 29 DF,  p-value: &lt; 2.2e-16
       
         <p class="article-more-link">
           <a class="article-more-a" href="../../2017/12/29/Decision-Tree-Regression/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Classifier-Comparison" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2017/12/29/Classifier-Comparison/">Classifier_Comparison</a>
-    </h1>
-  
-
-        
-        <a href="../../2017/12/29/Classifier-Comparison/" class="archive-article-date">
-  	<time datetime="2017-12-28T17:44:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Classifier-Comparison"><a href="#Classifier-Comparison" class="headerlink" title="Classifier Comparison"></a>Classifier Comparison</h1><p>Adapted from <a href="http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html</a></p>
-<p>A comparison of a several classifiers in scikit-learn on synthetic datasets. The point of this example is to illustrate the nature of decision boundaries of different classifiers. This should be taken with a grain of salt, as the intuition conveyed by these examples does not necessarily carry over to real datasets.</p>
-<p>Particularly in high-dimensional spaces, data can more easily be separated linearly and the simplicity of classifiers such as naive Bayes and linear SVMs might lead to better generalization than is achieved by other classifiers.</p>
-<p>The plots show training points in solid colors and testing points semi-transparent. The lower right shows the classification accuracy on the test set.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Python Code source: Gaël Varoquaux</span></span><br><span class="line"><span class="comment">#                     Andreas Müller</span></span><br><span class="line"><span class="comment"># Julia adaptation: Cédric St-Jean</span></span><br><span class="line"><span class="comment"># Modified for documentation by Jaques Grobler</span></span><br><span class="line"><span class="comment"># License: BSD 3 clause</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ScikitLearn</span><br><span class="line"><span class="keyword">using</span> PyCall</span><br><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line"><span class="keyword">using</span> ScikitLearn.CrossValidation: train_test_split</span><br><span class="line"><span class="meta">@pyimport</span> matplotlib.colors as mplc</span><br><span class="line"><span class="meta">@sk_import</span> preprocessing: StandardScaler</span><br><span class="line"><span class="meta">@sk_import</span> datasets: (make_moons, make_circles, make_classification)</span><br><span class="line"><span class="meta">@sk_import</span> neighbors: KNeighborsClassifier</span><br><span class="line"><span class="meta">@sk_import</span> svm: SVC</span><br><span class="line"><span class="meta">@sk_import</span> tree: DecisionTreeClassifier</span><br><span class="line"><span class="meta">@sk_import</span> ensemble: (RandomForestClassifier, AdaBoostClassifier)</span><br><span class="line"><span class="meta">@sk_import</span> naive_bayes: GaussianNB</span><br><span class="line"><span class="meta">@sk_import</span> discriminant_analysis: (LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis)</span><br><span class="line"><span class="keyword">using</span> ScikitLearn.Utils: meshgrid</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">h = <span class="number">.02</span>  <span class="comment"># step size in the mesh</span></span><br><span class="line"></span><br><span class="line">names = [<span class="string">"Nearest Neighbors"</span>, <span class="string">"Linear SVM"</span>, <span class="string">"RBF SVM"</span>, <span class="string">"Decision Tree"</span>,</span><br><span class="line">         <span class="string">"Random Forest"</span>, <span class="string">"AdaBoost"</span>, <span class="string">"Naive Bayes"</span>, <span class="string">"Linear Discriminant Analysis"</span>,</span><br><span class="line">         <span class="string">"Quadratic Discriminant Analysis"</span>]</span><br><span class="line">classifiers = [</span><br><span class="line">    KNeighborsClassifier(<span class="number">3</span>),</span><br><span class="line">    SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">0.025</span>),</span><br><span class="line">    SVC(gamma=<span class="number">2</span>, C=<span class="number">1</span>),</span><br><span class="line">    DecisionTreeClassifier(max_depth=<span class="number">5</span>),</span><br><span class="line">    RandomForestClassifier(max_depth=<span class="number">5</span>, n_estimators=<span class="number">10</span>, max_features=<span class="number">1</span>),</span><br><span class="line">    AdaBoostClassifier(),</span><br><span class="line">    GaussianNB(),</span><br><span class="line">    LinearDiscriminantAnalysis(),</span><br><span class="line">    QuadraticDiscriminantAnalysis()]</span><br><span class="line"></span><br><span class="line">X, y = make_classification(n_features=<span class="number">2</span>, n_redundant=<span class="number">0</span>, n_informative=<span class="number">2</span>,</span><br><span class="line">                           random_state=<span class="number">1</span>, n_clusters_per_class=<span class="number">1</span>)</span><br><span class="line">srand(<span class="number">42</span>)</span><br><span class="line">X += <span class="number">2</span> * rand(size(X)...)</span><br><span class="line">linearly_separable = (X, y)</span><br><span class="line"></span><br><span class="line">datasets = [make_moons(noise=<span class="number">0.3</span>, random_state=<span class="number">0</span>),</span><br><span class="line">            make_circles(noise=<span class="number">0.2</span>, factor=<span class="number">0.5</span>, random_state=<span class="number">1</span>),</span><br><span class="line">            linearly_separable</span><br><span class="line">            ];</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">fig = figure(figsize=(<span class="number">27</span>, <span class="number">9</span>))</span><br><span class="line">i = <span class="number">1</span></span><br><span class="line"><span class="comment"># iterate over datasets</span></span><br><span class="line"><span class="keyword">for</span> ds <span class="keyword">in</span> datasets</span><br><span class="line">    <span class="comment"># preprocess dataset, split into training and test part</span></span><br><span class="line">    X, y = ds</span><br><span class="line">    X = fit_transform!(StandardScaler(), X)</span><br><span class="line">    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">.4</span>)</span><br><span class="line"></span><br><span class="line">    x_min, x_max = minimum(X[:, <span class="number">1</span>]) - <span class="number">.5</span>, maximum(X[:, <span class="number">1</span>]) + <span class="number">.5</span></span><br><span class="line">    y_min, y_max = minimum(X[:, <span class="number">2</span>]) - <span class="number">.5</span>, maximum(X[:, <span class="number">2</span>]) + <span class="number">.5</span></span><br><span class="line">    xx, yy = meshgrid(x_min:h:x_max, y_min:h:y_max)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># just plot the dataset first</span></span><br><span class="line">    cm = PyPlot.cm[:RdBu]</span><br><span class="line">    cm_bright = mplc.ListedColormap([<span class="string">"#FF0000"</span>, <span class="string">"#0000FF"</span>])</span><br><span class="line">    ax = subplot(length(datasets), length(classifiers) + <span class="number">1</span>, i)</span><br><span class="line">    <span class="comment"># Plot the training points</span></span><br><span class="line">    ax[:scatter](X_train[:, <span class="number">1</span>], X_train[:, <span class="number">2</span>], c=y_train, cmap=cm_bright)</span><br><span class="line">    <span class="comment"># and testing points</span></span><br><span class="line">    ax[:scatter](X_test[:, <span class="number">1</span>], X_test[:, <span class="number">2</span>], c=y_test, cmap=cm_bright, alpha=<span class="number">0.6</span>)</span><br><span class="line"></span><br><span class="line">    ax[:set_xlim](minimum(xx), maximum(xx))</span><br><span class="line">    ax[:set_ylim](minimum(yy), maximum(yy))</span><br><span class="line">    ax[:set_xticks](())</span><br><span class="line">    ax[:set_yticks](())</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># iterate over classifiers</span></span><br><span class="line">    <span class="keyword">for</span> (name, clf) <span class="keyword">in</span> zip(names, classifiers)</span><br><span class="line">        ax = subplot(length(datasets), length(classifiers) + <span class="number">1</span>, i)</span><br><span class="line">        fit!(clf, X_train, y_train)</span><br><span class="line">        scor = score(clf, X_test, y_test)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Plot the decision boundary. For that, we will assign a color to each</span></span><br><span class="line">        <span class="comment"># point in the mesh [x_min, m_max]x[y_min, y_max].</span></span><br><span class="line">        <span class="keyword">try</span> </span><br><span class="line">            <span class="comment"># Not implemented for some</span></span><br><span class="line">            Z = decision_function(clf, hcat(xx[:], yy[:]))</span><br><span class="line">        <span class="keyword">catch</span></span><br><span class="line">            Z = predict_proba(clf, hcat(xx[:], yy[:]))[:, <span class="number">2</span>]</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Put the result into a color plot</span></span><br><span class="line">        Z = reshape(Z, size(xx)...)</span><br><span class="line">        ax[:contourf](xx, yy, Z, cmap=cm, alpha=<span class="number">.8</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Plot also the training points</span></span><br><span class="line">        ax[:scatter](X_train[:, <span class="number">1</span>], X_train[:, <span class="number">2</span>], c=y_train, cmap=cm_bright)</span><br><span class="line">        <span class="comment"># and testing points</span></span><br><span class="line">        ax[:scatter](X_test[:, <span class="number">1</span>], X_test[:, <span class="number">2</span>], c=y_test, cmap=cm_bright,</span><br><span class="line">                   alpha=<span class="number">0.6</span>)</span><br><span class="line"></span><br><span class="line">        ax[:set_xlim](minimum(xx), maximum(xx))</span><br><span class="line">        ax[:set_ylim](minimum(yy), maximum(yy))</span><br><span class="line">        ax[:set_xticks](())</span><br><span class="line">        ax[:set_yticks](())</span><br><span class="line">        ax[:set_title](name)</span><br><span class="line"></span><br><span class="line">        ax[:text](maximum(xx) - <span class="number">.3</span>, minimum(yy) + <span class="number">.3</span>, <span class="meta">@sprintf</span>(<span class="string">"%.2f"</span>, scor),</span><br><span class="line">                size=<span class="number">15</span>, horizontalalignment=<span class="string">"right"</span>)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">fig[:subplots_adjust](left=<span class="number">.02</span>, right=<span class="number">.98</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/leanote/Classifier_Comparison/output_5_0.png" alt="png"></p>
-<pre><code>/Users/kay/.julia/v0.6/Conda/deps/usr/lib/python2.7/site-packages/sklearn/cross_validation.py:41: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-  &quot;This module will be removed in 0.20.&quot;, DeprecationWarning)
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2017/12/29/Classifier-Comparison/">展开全文 >></a>
         </p>
       
 
