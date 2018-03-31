@@ -167,6 +167,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-Notes-010" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/03/15/LeetCode-Notes-010/">LeetCode Notes 010</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/03/15/LeetCode-Notes-010/" class="archive-article-date">
+  	<time datetime="2018-03-15T06:10:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Binary-Tree-Zigzag-Level-Order-Traversal"><a href="#Binary-Tree-Zigzag-Level-Order-Traversal" class="headerlink" title="Binary Tree Zigzag Level Order Traversal"></a>Binary Tree Zigzag Level Order Traversal</h3><p>Given a binary tree, return the zigzag level order traversal of its nodes’ values. (ie, from left to right, then right to left for the next level and alternate between).</p>
+<p>For example:<br>Given binary tree <code>[3,9,20,null,null,15,7]</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure></p>
+<p>return its zigzag level order traversal as:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [20,9],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;TreeNode&#125; root</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> zigzagLevelOrder = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> maxn = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">var</span> ans = [];</span><br><span class="line"></span><br><span class="line">  dfs(root, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">node, step</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!node)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    maxn = step &gt; maxn ? step : maxn;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!ans[step])</span><br><span class="line">      ans[step] = [];</span><br><span class="line"></span><br><span class="line">    ans[step].push(node.val);</span><br><span class="line"></span><br><span class="line">    dfs(node.left, step + <span class="number">1</span>);</span><br><span class="line">    dfs(node.right, step + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= maxn; i++)</span><br><span class="line">    (i &amp; <span class="number">1</span>) &amp;&amp; (ans[i].reverse());</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Binary-Watch"><a href="#Binary-Watch" class="headerlink" title="Binary Watch"></a>Binary Watch</h3><p>A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).</p>
+<p>Each LED represents a zero or one, with the least significant bit on the right.</p>
+<div align="center"><br><img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Binary_clock_samui_moon.jpg"><br></div>
+
+<p>For example, the above binary watch reads “3:25”.</p>
+<p>Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.</p>
+<p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 1</span><br><span class="line">Return: [&quot;1:00&quot;, &quot;2:00&quot;, &quot;4:00&quot;, &quot;8:00&quot;, &quot;0:01&quot;, &quot;0:02&quot;, &quot;0:04&quot;, &quot;0:08&quot;, &quot;0:16&quot;, &quot;0:32&quot;]</span><br></pre></td></tr></table></figure></p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>The order of output does not matter.</li>
+<li>The hour must not contain a leading zero, for example “01:00” is not valid, it should be “1:00”.</li>
+<li>The minute must be consist of two digits and may contain a leading zero, for example “10:2” is not valid, it should be “10:02”.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; num</span></span><br><span class="line"><span class="comment"> * @return &#123;string[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> readBinaryWatch = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> hours = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>];</span><br><span class="line">  <span class="keyword">let</span> minutes = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">32</span>];</span><br><span class="line">  <span class="keyword">let</span> ans = [];</span><br><span class="line"></span><br><span class="line">  dfs(num, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">left, a, b, hoursTotal, minutesTotal</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (hoursTotal &gt;= <span class="number">12</span> || minutesTotal &gt;= <span class="number">60</span>)</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (left === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> str = hoursTotal + <span class="string">":"</span>;</span><br><span class="line">      str += minutesTotal &lt; <span class="number">10</span> ? <span class="string">'0'</span> + minutesTotal : minutesTotal;</span><br><span class="line">      ans.push(str);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// add i to hour</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = a; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">      dfs(left - <span class="number">1</span>, i + <span class="number">1</span>, b, hoursTotal + hours[i], minutesTotal);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// add i to minute</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = b; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">      dfs(left - <span class="number">1</span>, a, i + <span class="number">1</span>, hoursTotal, minutesTotal + minutes[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(ans));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Bitwise-AND-of-Numbers-Range"><a href="#Bitwise-AND-of-Numbers-Range" class="headerlink" title="Bitwise AND of Numbers Range"></a>Bitwise AND of Numbers Range</h3><p>Given a range [m, n] where 0 &lt;= m &lt;= n &lt;= 2147483647, return the bitwise AND of all numbers in this range, inclusive.</p>
+<p>For example, given the range [5, 7], you should return 4.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; m</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBitNum</span>(<span class="params">a, pos</span>) </span>&#123;</span><br><span class="line">  a++;</span><br><span class="line">  <span class="keyword">var</span> res = <span class="built_in">Math</span>.pow(<span class="number">2</span>, pos)</span><br><span class="line">    , loop = ~~(a / res)</span><br><span class="line">    , num = loop * (res / <span class="number">2</span>) + <span class="built_in">Math</span>.max(a % res - res / <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> rangeBitwiseAnd = <span class="function"><span class="keyword">function</span>(<span class="params">m, n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ans = <span class="number">0</span></span><br><span class="line">    , tmp = n</span><br><span class="line">    , digits = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (tmp) &#123;</span><br><span class="line">    digits++;</span><br><span class="line">    tmp &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; digits; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> num = getBitNum(n, i + <span class="number">1</span>) - getBitNum(m - <span class="number">1</span>, i + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (num === n - m + <span class="number">1</span>)</span><br><span class="line">      ans += <span class="built_in">Math</span>.pow(<span class="number">2</span>, i);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/03/15/LeetCode-Notes-010/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-Notes-009" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -214,11 +311,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -356,128 +453,9 @@ but not on a century unless it is divisible by 400.
 
 
   
-    <article id="post-Project-Euler-018" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2018/03/13/Project-Euler-018/">Project-Euler-018</a>
-    </h1>
-  
-
-        
-        <a href="../../2018/03/13/Project-Euler-018/" class="archive-article-date">
-  	<time datetime="2018-03-13T13:50:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p><br>By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.<br></p>
-
-<pre><code>3
-7 4
-2 4 6
-8 5 9 3
-</code></pre>
-
-<p><br>That is, $3 + 7 + 4 + 9 = 23$.<br></p>
-
-<p><br>Find the maximum total from top to bottom of the triangle below:<br></p>
-
-<pre><code>75
-95 64
-17 47 82
-18 35 87 10
-20 04 82 47 65
-19 01 23 75 03 34
-88 02 77 73 07 63 67
-99 65 04 28 06 16 70 92
-41 41 26 56 83 40 80 70 33
-41 48 72 33 47 32 37 16 94 29
-53 71 44 65 25 43 91 52 97 51 14
-70 11 33 28 77 73 17 78 39 68 17 57
-91 71 52 38 17 14 91 43 58 50 27 29 48
-63 66 04 68 89 53 67 30 73 16 69 87 40 31
-04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
-</code></pre>
-
-<p><br>NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)<br></p>
-
-<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1074</span><br></pre></td></tr></table></figure>
-<hr>
-<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_sum</span><span class="params">(triangle)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_options</span><span class="params">(row, index)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> triangle[row+<span class="number">1</span>][index], triangle[row+<span class="number">1</span>][index+<span class="number">1</span>]</span><br><span class="line">    row = len(triangle) - <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">for</span> index, node <span class="keyword">in</span> enumerate(triangle[row]):</span><br><span class="line">                best = max([node + option <span class="keyword">for</span> option <span class="keyword">in</span> get_options(row, index)])</span><br><span class="line">                triangle[row][index] = best</span><br><span class="line">            row -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">return</span> triangle[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    triangle_str = <span class="string">'''\</span></span><br><span class="line"><span class="string">    75</span></span><br><span class="line"><span class="string">    95 64</span></span><br><span class="line"><span class="string">    17 47 82</span></span><br><span class="line"><span class="string">    18 35 87 10</span></span><br><span class="line"><span class="string">    20 04 82 47 65</span></span><br><span class="line"><span class="string">    19 01 23 75 03 34</span></span><br><span class="line"><span class="string">    88 02 77 73 07 63 67</span></span><br><span class="line"><span class="string">    99 65 04 28 06 16 70 92</span></span><br><span class="line"><span class="string">    41 41 26 56 83 40 80 70 33</span></span><br><span class="line"><span class="string">    41 48 72 33 47 32 37 16 94 29</span></span><br><span class="line"><span class="string">    53 71 44 65 25 43 91 52 97 51 14</span></span><br><span class="line"><span class="string">    70 11 33 28 77 73 17 78 39 68 17 57</span></span><br><span class="line"><span class="string">    91 71 52 38 17 14 91 43 58 50 27 29 48</span></span><br><span class="line"><span class="string">    63 66 04 68 89 53 67 30 73 16 69 87 40 31</span></span><br><span class="line"><span class="string">    04 62 98 27 23 09 70 98 73 93 38 53 60 04 23'''</span></span><br><span class="line"></span><br><span class="line">    triangle = [[int(digit) <span class="keyword">for</span> digit <span class="keyword">in</span> line.strip().split()] <span class="keyword">for</span> line <span class="keyword">in</span> triangle_str.splitlines()]</span><br><span class="line">    print(find_sum(triangle))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line">triangle_str = <span class="string">&lt;&lt;EOS</span></span><br><span class="line"><span class="string">75</span></span><br><span class="line"><span class="number">95</span> <span class="number">64</span></span><br><span class="line"><span class="number">17</span> <span class="number">47</span> <span class="number">82</span></span><br><span class="line"><span class="number">18</span> <span class="number">35</span> <span class="number">87</span> <span class="number">10</span></span><br><span class="line"><span class="number">20</span> <span class="number">04</span> <span class="number">82</span> <span class="number">47</span> <span class="number">65</span></span><br><span class="line"><span class="number">19</span> <span class="number">01</span> <span class="number">23</span> <span class="number">75</span> <span class="number">03</span> <span class="number">34</span></span><br><span class="line"><span class="number">88</span> <span class="number">02</span> <span class="number">77</span> <span class="number">73</span> <span class="number">07</span> <span class="number">63</span> <span class="number">67</span></span><br><span class="line"><span class="number">99</span> <span class="number">65</span> <span class="number">04</span> <span class="number">28</span> <span class="number">06</span> <span class="number">16</span> <span class="number">70</span> <span class="number">92</span></span><br><span class="line"><span class="number">41</span> <span class="number">41</span> <span class="number">26</span> <span class="number">56</span> <span class="number">83</span> <span class="number">40</span> <span class="number">80</span> <span class="number">70</span> <span class="number">33</span></span><br><span class="line"><span class="number">41</span> <span class="number">48</span> <span class="number">72</span> <span class="number">33</span> <span class="number">47</span> <span class="number">32</span> <span class="number">37</span> <span class="number">16</span> <span class="number">94</span> <span class="number">29</span></span><br><span class="line"><span class="number">53</span> <span class="number">71</span> <span class="number">44</span> <span class="number">65</span> <span class="number">25</span> <span class="number">43</span> <span class="number">91</span> <span class="number">52</span> <span class="number">97</span> <span class="number">51</span> <span class="number">14</span></span><br><span class="line"><span class="number">70</span> <span class="number">11</span> <span class="number">33</span> <span class="number">28</span> <span class="number">77</span> <span class="number">73</span> <span class="number">17</span> <span class="number">78</span> <span class="number">39</span> <span class="number">68</span> <span class="number">17</span> <span class="number">57</span></span><br><span class="line"><span class="number">91</span> <span class="number">71</span> <span class="number">52</span> <span class="number">38</span> <span class="number">17</span> <span class="number">14</span> <span class="number">91</span> <span class="number">43</span> <span class="number">58</span> <span class="number">50</span> <span class="number">27</span> <span class="number">29</span> <span class="number">48</span></span><br><span class="line"><span class="number">63</span> <span class="number">66</span> <span class="number">04</span> <span class="number">68</span> <span class="number">89</span> <span class="number">53</span> <span class="number">67</span> <span class="number">30</span> <span class="number">73</span> <span class="number">16</span> <span class="number">69</span> <span class="number">87</span> <span class="number">40</span> <span class="number">31</span></span><br><span class="line"><span class="number">04</span> <span class="number">62</span> <span class="number">98</span> <span class="number">27</span> <span class="number">23</span> 09 <span class="number">70</span> <span class="number">98</span> <span class="number">73</span> <span class="number">93</span> <span class="number">38</span> <span class="number">53</span> <span class="number">60</span> <span class="number">04</span> <span class="number">23</span></span><br><span class="line">EOS</span><br><span class="line"></span><br><span class="line">triangle = triangle_str.each_line.map &#123; <span class="params">|line|</span> line.split.map(&amp;<span class="symbol">:to_i</span>) &#125;</span><br><span class="line"></span><br><span class="line">(triangle.length - <span class="number">2</span>).downto(<span class="number">0</span>) <span class="keyword">do</span> <span class="params">|y|</span></span><br><span class="line">  triangle[y].length.times <span class="keyword">do</span> <span class="params">|x|</span> </span><br><span class="line">    triangle[y][x] += [triangle[y+<span class="number">1</span>][x], triangle[y+<span class="number">1</span>][x+<span class="number">1</span>]].max</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts triangle[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">parse</span> :: <span class="type">String</span> -&gt; [[<span class="type">Integer</span>]]</span><br><span class="line"><span class="title">parse</span> = map (map read . words) . lines</span><br><span class="line"></span><br><span class="line"><span class="title">best</span> :: [<span class="type">Integer</span>] -&gt; [<span class="type">Integer</span>]</span><br><span class="line"><span class="title">best</span> row = map maximum choices <span class="keyword">where</span></span><br><span class="line">    choices = zipWith (\a b -&gt; a : [b]) row (tail row)</span><br><span class="line"></span><br><span class="line"><span class="title">maxStep</span> :: [<span class="type">Integer</span>] -&gt; [<span class="type">Integer</span>] -&gt; [<span class="type">Integer</span>]</span><br><span class="line"><span class="title">maxStep</span> current next = zipWith (+) next (best current)</span><br><span class="line"></span><br><span class="line"><span class="title">maxPath</span> :: [[<span class="type">Integer</span>]] -&gt; <span class="type">Integer</span></span><br><span class="line"><span class="title">maxPath</span> [[x]] = x</span><br><span class="line"><span class="title">maxPath</span> (current:next:rest) = maxPath $ (maxStep current next) : rest</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> :: <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = <span class="keyword">do</span></span><br><span class="line">        str &lt;- readFile <span class="string">"/home/zach/code/euler/018/triangle.txt"</span></span><br><span class="line">        print $ maxPath $ reverse $ parse str</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p018</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p018().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * We create a new blank triangle with the same dimensions as the original big triangle.</span></span><br><span class="line"><span class="comment">	 * For each cell of the big triangle, we consider the sub-triangle whose top is at this cell,</span></span><br><span class="line"><span class="comment">	 * calculate the maximum path sum when starting from this cell, and store the result</span></span><br><span class="line"><span class="comment">	 * in the corresponding cell of the blank triangle.</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * If we start at a particular cell, what is the maximum path total? If the cell is at the</span></span><br><span class="line"><span class="comment">	 * bottom of the big triangle, then it is simply the cell's value. Otherwise the answer is</span></span><br><span class="line"><span class="comment">	 * the cell's value plus either &#123;the maximum path total of the cell down and to the left&#125;</span></span><br><span class="line"><span class="comment">	 * or &#123;the maximum path total of the cell down and to the right&#125;, whichever is greater.</span></span><br><span class="line"><span class="comment">	 * By computing the blank triangle's values from bottom up, the dependent values are always</span></span><br><span class="line"><span class="comment">	 * computed before they are utilized. This technique is known as dynamic programming.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = triangle.length - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; triangle[i].length; j++)</span><br><span class="line">				triangle[i][j] += Math.max(triangle[i + <span class="number">1</span>][j], triangle[i + <span class="number">1</span>][j + <span class="number">1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> Integer.toString(triangle[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[][] triangle = &#123;  <span class="comment">// Mutable</span></span><br><span class="line">		&#123;<span class="number">75</span>&#125;,</span><br><span class="line">		&#123;<span class="number">95</span>,<span class="number">64</span>&#125;,</span><br><span class="line">		&#123;<span class="number">17</span>,<span class="number">47</span>,<span class="number">82</span>&#125;,</span><br><span class="line">		&#123;<span class="number">18</span>,<span class="number">35</span>,<span class="number">87</span>,<span class="number">10</span>&#125;,</span><br><span class="line">		&#123;<span class="number">20</span>, <span class="number">4</span>,<span class="number">82</span>,<span class="number">47</span>,<span class="number">65</span>&#125;,</span><br><span class="line">		&#123;<span class="number">19</span>, <span class="number">1</span>,<span class="number">23</span>,<span class="number">75</span>, <span class="number">3</span>,<span class="number">34</span>&#125;,</span><br><span class="line">		&#123;<span class="number">88</span>, <span class="number">2</span>,<span class="number">77</span>,<span class="number">73</span>, <span class="number">7</span>,<span class="number">63</span>,<span class="number">67</span>&#125;,</span><br><span class="line">		&#123;<span class="number">99</span>,<span class="number">65</span>, <span class="number">4</span>,<span class="number">28</span>, <span class="number">6</span>,<span class="number">16</span>,<span class="number">70</span>,<span class="number">92</span>&#125;,</span><br><span class="line">		&#123;<span class="number">41</span>,<span class="number">41</span>,<span class="number">26</span>,<span class="number">56</span>,<span class="number">83</span>,<span class="number">40</span>,<span class="number">80</span>,<span class="number">70</span>,<span class="number">33</span>&#125;,</span><br><span class="line">		&#123;<span class="number">41</span>,<span class="number">48</span>,<span class="number">72</span>,<span class="number">33</span>,<span class="number">47</span>,<span class="number">32</span>,<span class="number">37</span>,<span class="number">16</span>,<span class="number">94</span>,<span class="number">29</span>&#125;,</span><br><span class="line">		&#123;<span class="number">53</span>,<span class="number">71</span>,<span class="number">44</span>,<span class="number">65</span>,<span class="number">25</span>,<span class="number">43</span>,<span class="number">91</span>,<span class="number">52</span>,<span class="number">97</span>,<span class="number">51</span>,<span class="number">14</span>&#125;,</span><br><span class="line">		&#123;<span class="number">70</span>,<span class="number">11</span>,<span class="number">33</span>,<span class="number">28</span>,<span class="number">77</span>,<span class="number">73</span>,<span class="number">17</span>,<span class="number">78</span>,<span class="number">39</span>,<span class="number">68</span>,<span class="number">17</span>,<span class="number">57</span>&#125;,</span><br><span class="line">		&#123;<span class="number">91</span>,<span class="number">71</span>,<span class="number">52</span>,<span class="number">38</span>,<span class="number">17</span>,<span class="number">14</span>,<span class="number">91</span>,<span class="number">43</span>,<span class="number">58</span>,<span class="number">50</span>,<span class="number">27</span>,<span class="number">29</span>,<span class="number">48</span>&#125;,</span><br><span class="line">		&#123;<span class="number">63</span>,<span class="number">66</span>, <span class="number">4</span>,<span class="number">68</span>,<span class="number">89</span>,<span class="number">53</span>,<span class="number">67</span>,<span class="number">30</span>,<span class="number">73</span>,<span class="number">16</span>,<span class="number">69</span>,<span class="number">87</span>,<span class="number">40</span>,<span class="number">31</span>&#125;,</span><br><span class="line">		&#123; <span class="number">4</span>,<span class="number">62</span>,<span class="number">98</span>,<span class="number">27</span>,<span class="number">23</span>, <span class="number">9</span>,<span class="number">70</span>,<span class="number">98</span>,<span class="number">73</span>,<span class="number">93</span>,<span class="number">38</span>,<span class="number">53</span>,<span class="number">60</span>, <span class="number">4</span>,<span class="number">23</span>&#125;,</span><br><span class="line">	&#125;;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Mathematica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* </span></span><br><span class="line"><span class="comment"> * If we start at a particular cell in the triangle, what is the maximum path total?</span></span><br><span class="line"><span class="comment"> * If the cell is in the bottom row, then it is simply the cell's value. Otherwise the answer</span></span><br><span class="line"><span class="comment"> * is the cell's value plus either &#123;the maximum path total of the cell down and to the left&#125;</span></span><br><span class="line"><span class="comment"> * or &#123;the maximum path total of the cell down and to the right&#125;, whichever is greater.</span></span><br><span class="line"><span class="comment"> *)</span></span><br><span class="line"></span><br><span class="line">triangle = &#123;</span><br><span class="line">  &#123;75&#125;,</span><br><span class="line">  &#123;95,64&#125;,</span><br><span class="line">  &#123;17,47,82&#125;,</span><br><span class="line">  &#123;18,35,87,10&#125;,</span><br><span class="line">  &#123;20,04,82,47,65&#125;,</span><br><span class="line">  &#123;19,01,23,75,03,34&#125;,</span><br><span class="line">  &#123;88,02,77,73,07,63,67&#125;,</span><br><span class="line">  &#123;99,65,04,28,06,16,70,92&#125;,</span><br><span class="line">  &#123;41,41,26,56,83,40,80,70,33&#125;,</span><br><span class="line">  &#123;41,48,72,33,47,32,37,16,94,29&#125;,</span><br><span class="line">  &#123;53,71,44,65,25,43,91,52,97,51,14&#125;,</span><br><span class="line">  &#123;70,11,33,28,77,73,17,78,39,68,17,57&#125;,</span><br><span class="line">  &#123;91,71,52,38,17,14,91,43,58,50,27,29,48&#125;,</span><br><span class="line">  &#123;63,66,04,68,89,53,67,30,73,16,69,87,40,31&#125;,</span><br><span class="line">  &#123;04,62,98,27,23,09,70,98,73,93,38,53,60,04,23&#125;&#125;;</span><br><span class="line"></span><br><span class="line">MaxPath[i_, j_] := triangle[[i, j]] +</span><br><span class="line">  <span class="keyword">If</span>[i &lt; <span class="keyword">Length</span>[triangle], <span class="keyword">Max</span>[MaxPath[i + <span class="number">1</span>, j], MaxPath[i + <span class="number">1</span>, j + <span class="number">1</span>]], <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">MaxPath[<span class="number">1</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/03/13/Project-Euler-018/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../../index.html">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="page-number current">2</span><a class="page-number" href="../3/">3</a><a class="page-number" href="../4/">4</a><span class="space">&hellip;</span><a class="page-number" href="../17/">17</a><a class="extend next" rel="next" href="../3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="../../index.html">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="page-number current">2</span><a class="page-number" href="../3/">3</a><a class="page-number" href="../4/">4</a><span class="space">&hellip;</span><a class="page-number" href="../18/">18</a><a class="extend next" rel="next" href="../3/">Next &raquo;</a>
     </nav>
   
 
@@ -619,11 +597,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
