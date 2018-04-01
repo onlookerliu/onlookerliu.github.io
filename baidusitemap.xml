@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>onlookerliu.github.io/2018/03/29/Project-Euler-020/</loc>
+    <lastmod>2018-04-01T16:15:35.037Z</lastmod>
+    <data>
+        <display>
+        <title>Project-Euler-020</title>
+        <pubTime>2018-03-29T11:19:17.000Z</pubTime>
+        
+        <tag>euler</tag>
+         
+        <tag>multilingual</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>onlookerliu.github.io/2018/03/21/LeetCode-Notes-016/</loc>
     <lastmod>2018-04-01T16:00:57.068Z</lastmod>
     <data>
@@ -147,25 +166,6 @@
         <tag>leetcode</tag>
          
         <tag>javascript</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2018/03/29/Project-Euler-020/</loc>
-    <lastmod>2018-03-29T12:40:43.580Z</lastmod>
-    <data>
-        <display>
-        <title>Project Euler 020</title>
-        <pubTime>2018-03-29T11:19:17.000Z</pubTime>
-        
-        <tag>euler</tag>
-         
-        <tag>multilingual</tag>
          
          
            
@@ -479,6 +479,25 @@
 
     
   <url>
+    <loc>onlookerliu.github.io/2018/02/14/Project-Euler-007/</loc>
+    <lastmod>2018-03-05T03:57:01.717Z</lastmod>
+    <data>
+        <display>
+        <title>Project-Euler-007</title>
+        <pubTime>2018-02-14T14:08:11.000Z</pubTime>
+        
+        <tag>euler</tag>
+         
+        <tag>multilingual</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>onlookerliu.github.io/2018/02/09/Project-Euler-002/</loc>
     <lastmod>2018-03-05T03:57:01.717Z</lastmod>
     <data>
@@ -504,25 +523,6 @@
         <display>
         <title>Project-Euler-006</title>
         <pubTime>2018-02-13T13:59:55.000Z</pubTime>
-        
-        <tag>euler</tag>
-         
-        <tag>multilingual</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2018/02/14/Project-Euler-007/</loc>
-    <lastmod>2018-03-05T03:57:01.717Z</lastmod>
-    <data>
-        <display>
-        <title>Project-Euler-007</title>
-        <pubTime>2018-02-14T14:08:11.000Z</pubTime>
         
         <tag>euler</tag>
          
@@ -642,9 +642,9 @@
         <title>Assignment 2 of Advanced Computational Method</title>
         <pubTime>2017-11-13T16:01:20.000Z</pubTime>
         
-        <tag>statistics</tag>
-         
         <tag>r</tag>
+         
+        <tag>statistics</tag>
          
         <tag>computational method</tag>
          
@@ -677,50 +677,12 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 1 of Statistics.md</title>
-        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
-        
-        <tag>statistics</tag>
-         
-        <tag>r</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 2 of Statistics.md</title>
-        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
-        
-        <tag>statistics</tag>
-         
-        <tag>r</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 3 of Statistics.md</title>
-        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
+        <title>Project 4 of Statistics.md</title>
+        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
         
         <tag>r</tag>
          
@@ -751,12 +713,50 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 4 of Statistics.md</title>
-        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
+        <title>Project 1 of Statistics.md</title>
+        <pubTime>2017-11-03T12:36:27.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistics</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 2 of Statistics.md</title>
+        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistics</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 3 of Statistics.md</title>
+        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
         
         <tag>r</tag>
          
