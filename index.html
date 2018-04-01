@@ -259,6 +259,92 @@
 
 
   
+    <article id="post-LeetCode-Notes-016" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="2018/03/21/LeetCode-Notes-016/">LeetCode Notes 016</a>
+    </h1>
+  
+
+        
+        <a href="2018/03/21/LeetCode-Notes-016/" class="archive-article-date">
+  	<time datetime="2018-03-21T15:39:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Container-With-Most-Water"><a href="#Container-With-Most-Water" class="headerlink" title="Container With Most Water"></a>Container With Most Water</h3><p>Given $n$ non-negative integers $a_1, a_2, …, a_n$, where each represents a point at coordinate $(i, ai)$. $n$ vertical lines are drawn such that the two endpoints of line $i$ is at $(i, ai)$ and $(i, 0)$. Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
+<p>Note: You may not slant the container and $n$ is at least 2.</p>
+<p>O(nlogn) Version<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; height</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxArea = <span class="function"><span class="keyword">function</span>(<span class="params">height</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.max(fn(height), fn(height.concat().reverse()));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">height</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> len = height.length;</span><br><span class="line">  <span class="keyword">var</span> ans = [];</span><br><span class="line">  <span class="keyword">var</span> index = [];</span><br><span class="line">  <span class="keyword">var</span> maxn = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!i) &#123;</span><br><span class="line">      ans.push(height[i]);</span><br><span class="line">      index.push(i);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 找到 ans 数组中刚好 &gt;= height[i] 的元素位置</span></span><br><span class="line">      <span class="comment">// 返回其下标</span></span><br><span class="line">      <span class="keyword">var</span> pos = binarySearch(ans, height[i]);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (pos !== ans.length)</span><br><span class="line">        maxn = <span class="built_in">Math</span>.max(maxn, height[i] * (i - index[pos]));</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (height[i] &gt; ans[ans.length - <span class="number">1</span>]) &#123;</span><br><span class="line">        ans.push(height[i]);</span><br><span class="line">        index.push(i);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> maxn;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">binarySearch</span>(<span class="params">a, target</span>) </span>&#123;</span><br><span class="line">  target += <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">var</span> start = <span class="number">0</span></span><br><span class="line">    , end = a.length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span>(start &lt;= end) &#123;</span><br><span class="line">    <span class="keyword">var</span> mid = ~~((start + end) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (a[mid] &gt;= target)</span><br><span class="line">      end = mid - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      start = mid + <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (a[start - <span class="number">1</span>] === target - <span class="number">1</span>)</span><br><span class="line">    start -= <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>O(n) Version<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; height</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxArea = <span class="function"><span class="keyword">function</span>(<span class="params">height</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> start = <span class="number">0</span></span><br><span class="line">    , end = height.length - <span class="number">1</span></span><br><span class="line">    , maxn = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (start &lt;= end) &#123;</span><br><span class="line">    maxn = <span class="built_in">Math</span>.max(maxn, <span class="built_in">Math</span>.min(height[end], height[start]) * (end - start));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (height[end] &lt; height[start])</span><br><span class="line">      end --;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      start ++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> maxn;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Contains-Duplicates"><a href="#Contains-Duplicates" class="headerlink" title="Contains Duplicates"></a>Contains Duplicates</h3><p>Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> containsDuplicate = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> hash = &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = nums.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (hash[nums[i]]) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    hash[nums[i]] = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Contains-Duplicate-II"><a href="#Contains-Duplicate-II" class="headerlink" title="Contains Duplicate II"></a>Contains Duplicate II</h3><p>Given an array of integers and an integer $k$, find out whether there are two distinct indices $i$ and $j$ in the array such that $nums[i] = nums[j]$ and the absolute difference between $i$ and $j$ is at most $k$.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; k</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> containsNearbyDuplicate = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> pos = [];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = nums.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pos[nums[i]] === <span class="literal">undefined</span>) </span><br><span class="line">      pos[nums[i]] = i;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (i - pos[nums[i]] &lt;= k) </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      pos[nums[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Contains-Duplicate-III"><a href="#Contains-Duplicate-III" class="headerlink" title="Contains Duplicate III"></a>Contains Duplicate III</h3><p>Given an array of integers, find out whether there are two distinct indices $i$ and $j$ in the array such that the absolute difference between $nums[i]$ and $nums[j]$ is at most t and the absolute difference between $i$ and $j$ is at most $k$.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; k</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; t</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> containsNearbyAlmostDuplicate = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k, t</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> len = nums.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = i + <span class="number">1</span>; j &lt;= <span class="built_in">Math</span>.min(i + k, len - <span class="number">1</span>); j++)</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(nums[i] - nums[j]) &lt;= t) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="2018/03/21/LeetCode-Notes-016/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-Notes-015" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -327,101 +413,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="2018/03/20/LeetCode-Notes-015/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-Notes-014" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/03/19/LeetCode-Notes-014/">LeetCode Notes 014</a>
-    </h1>
-  
-
-        
-        <a href="2018/03/19/LeetCode-Notes-014/" class="archive-article-date">
-  	<time datetime="2018-03-19T15:08:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Combinations"><a href="#Combinations" class="headerlink" title="Combinations"></a>Combinations</h3><p>Given two integers $n$ and $k$, return all possible combinations of $k$ numbers out of 1 … $n$.</p>
-<p>For example:<br>If n = 4 and k = 2, a solution is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [2,4],</span><br><span class="line">  [3,4],</span><br><span class="line">  [2,3],</span><br><span class="line">  [1,2],</span><br><span class="line">  [1,3],</span><br><span class="line">  [1,4],</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; k</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// return an array of k numbers with 1 ~ n</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ans = []</span><br><span class="line">  , tmp = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">next, n, num, k</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (num === k) &#123;</span><br><span class="line">    <span class="keyword">var</span> res = tmp.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> item;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    ans.push(res);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = next; i &lt;= n; i++) &#123;</span><br><span class="line">    tmp.push(i);</span><br><span class="line">    dfs(i + <span class="number">1</span>, n, num + <span class="number">1</span>, k);</span><br><span class="line">    tmp.pop();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> combine = <span class="function"><span class="keyword">function</span>(<span class="params">n, k</span>) </span>&#123;</span><br><span class="line">  ans = []; </span><br><span class="line">  <span class="comment">// select the 1st number</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    tmp[<span class="number">0</span>] = i;</span><br><span class="line">    dfs(i + <span class="number">1</span>, n, <span class="number">1</span>, k);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="Compare-Version-Numbers"><a href="#Compare-Version-Numbers" class="headerlink" title="Compare Version Numbers"></a>Compare Version Numbers</h3><p>Compare two version numbers version1 and version2.<br>If version1 &gt; version2 return 1, if version1 &lt; version2 return -1, otherwise return 0.</p>
-<p>You may assume that the version strings are non-empty and contain only digits and the <code>.</code> character.<br>The <code>.</code> character does not represent a decimal point and is used to separate number sequences.<br>For instance, <code>2.5</code> is not “two and a half” or “half way to version three”, it is the fifth second-level revision of the second first-level revision.</p>
-<p>Here is an example of version numbers ordering:</p>
-<p>0.1 &lt; 1.1 &lt; 1.2 &lt; 13.37</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; version1</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; version2</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> compareVersion = <span class="function"><span class="keyword">function</span>(<span class="params">version1, version2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = version1.split(<span class="string">'.'</span>);</span><br><span class="line">  <span class="keyword">var</span> b = version2.split(<span class="string">'.'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> len1 = a.length;</span><br><span class="line">  <span class="keyword">var</span> len2 = b.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">Math</span>.max(len1, len2); i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> item1 = i &lt; len1 ? +a[i] : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> item2 = i &lt; len2 ? +b[i] : <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (item1 &gt; item2)</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (item1 &lt; item2)</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="Complex-Number-Multiplication"><a href="#Complex-Number-Multiplication" class="headerlink" title="Complex Number Multiplication"></a>Complex Number Multiplication</h3><p>Given two strings representing two complex numbers.</p>
-<p>You need to return a string representing their multiplication. Note $i^2 = -1$ according to the definition.</p>
-<p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;1+1i&quot;, &quot;1+1i&quot;</span><br><span class="line">Output: &quot;0+2i&quot;</span><br><span class="line">Explanation: (1 + i) * (1 + i) = 1 + i2 + 2 * i = 2i, and you need convert it to the form of 0+2i.</span><br></pre></td></tr></table></figure></p>
-<p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;1+-1i&quot;, &quot;1+-1i&quot;</span><br><span class="line">Output: &quot;0+-2i&quot;</span><br><span class="line">Explanation: (1 - i) * (1 - i) = 1 + i2 - 2 * i = -2i, and you need convert it to the form of 0+-2i.</span><br></pre></td></tr></table></figure></p>
-<p><strong>Note</strong></p>
-<ul>
-<li>The input strings will not have extra blank.</li>
-<li>The input strings will be given in the form of a+bi, where the integer a and b will both belong to the range of [-100, 100]. And the output should be also in this form.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">complexNumberMultiply</span><span class="params">(self, a, b)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type a: str</span></span><br><span class="line"><span class="string">        :type b: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        a = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> a[:<span class="number">-1</span>].split(<span class="string">'+'</span>)]</span><br><span class="line">        b = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> b[:<span class="number">-1</span>].split(<span class="string">'+'</span>)]</span><br><span class="line">        c = a[<span class="number">0</span>] * b[<span class="number">0</span>] - a[<span class="number">1</span>] * b[<span class="number">1</span>]</span><br><span class="line">        d = a[<span class="number">0</span>] * b[<span class="number">1</span>] + a[<span class="number">1</span>] * b[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> str(c) + <span class="string">'+'</span> + str(d) + <span class="string">'i'</span></span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/03/19/LeetCode-Notes-014/">展开全文 >></a>
         </p>
       
 
@@ -575,10 +566,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">r</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
@@ -588,6 +575,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">
