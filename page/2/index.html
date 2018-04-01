@@ -167,6 +167,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-Notes-011" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/03/16/LeetCode-Notes-011/">LeetCode Notes 011</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/03/16/LeetCode-Notes-011/" class="archive-article-date">
+  	<time datetime="2018-03-16T06:22:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Bulb-Switcher"><a href="#Bulb-Switcher" class="headerlink" title="Bulb Switcher"></a>Bulb Switcher</h3><p>There are n bulbs that are initially off. You first turn on all the bulbs. Then, you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it’s off or turning off if it’s on). For the ith round, you toggle every i bulb. For the nth round, you only toggle the last bulb. Find how many bulbs are on after n rounds.</p>
+<p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Given n = 3. </span><br><span class="line"></span><br><span class="line">At first, the three bulbs are [off, off, off].</span><br><span class="line">After first round, the three bulbs are [on, on, on].</span><br><span class="line">After second round, the three bulbs are [on, off, on].</span><br><span class="line">After third round, the three bulbs are [on, off, off]. </span><br><span class="line"></span><br><span class="line">So you should return 1, because there is only one bulb is on.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打表</span></span><br><span class="line"><span class="keyword">var</span> bulbSwitch = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ans = <span class="number">-1</span> + <span class="built_in">Math</span>.sqrt(<span class="number">1</span> + n);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.ceil(ans);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Bull-and-Cows"><a href="#Bull-and-Cows" class="headerlink" title="Bull and Cows"></a>Bull and Cows</h3><p>You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to guess what the number is. Each time your friend makes a guess, you provide a hint that indicates how many digits in said guess match your secret number exactly in both digit and position (called “bulls”) and how many digits match the secret number but locate in the wrong position (called “cows”). Your friend will use successive guesses and hints to eventually derive the secret number.</p>
+<p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Secret number:  &quot;1807&quot;</span><br><span class="line">Friend&apos;s guess: &quot;7810&quot;</span><br></pre></td></tr></table></figure></p>
+<p>Hint: <code>1</code> bull and <code>3</code> cows. (The bull is <code>8</code>, the cows are <code>0</code>, <code>1</code> and <code>7</code>.)<br>Write a function to return a hint according to the secret number and friend’s guess, use <code>A</code> to indicate the bulls and <code>B</code> to indicate the cows. In the above example, your function should return <code>&quot;1A3B&quot;</code>.</p>
+<p>Please note that both secret number and friend’s guess may contain duplicate digits, for example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Secret number:  &quot;1123&quot;</span><br><span class="line">Friend&apos;s guess: &quot;0111&quot;</span><br></pre></td></tr></table></figure></p>
+<p>In this case, the 1st <code>1</code> in friend’s guess is a bull, the 2nd or 3rd <code>1</code> is a cow, and your function should return <code>&quot;1A1B&quot;</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; secret</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; guess</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> getHint = <span class="function"><span class="keyword">function</span>(<span class="params">secret, guess</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = secret.split(<span class="string">''</span>);</span><br><span class="line">  <span class="keyword">var</span> b = guess.split(<span class="string">''</span>);</span><br><span class="line">  <span class="keyword">var</span> len = a.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> bullNum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> cowBum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> hash = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = len; i--; ) &#123;</span><br><span class="line">    <span class="keyword">if</span> (a[i] === b[i]) &#123;</span><br><span class="line">      a.splice(i, <span class="number">1</span>);</span><br><span class="line">      b.splice(i, <span class="number">1</span>);</span><br><span class="line">      bullNum++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!hash[a[i]])</span><br><span class="line">        hash[a[i]] = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">        hash[a[i]]++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; b.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> item = b[i];</span><br><span class="line">    <span class="keyword">if</span> (hash[item]) &#123;</span><br><span class="line">      cowBum++;</span><br><span class="line">      hash[item]--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> bullNum + <span class="string">'A'</span> + cowBum + <span class="string">'B'</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Climbing-Stairs"><a href="#Climbing-Stairs" class="headerlink" title="Climbing Stairs"></a>Climbing Stairs</h3><p>You are climbing a stair case. It takes n steps to reach to the top.</p>
+<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+<p><strong>Note</strong>: Given n will be a positive integer.</p>
+<p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: 2</span><br><span class="line">Output:  2</span><br><span class="line">Explanation:  There are two ways to climb to the top.</span><br><span class="line"></span><br><span class="line">1. 1 step + 1 step</span><br><span class="line">2. 2 steps</span><br></pre></td></tr></table></figure></p>
+<p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: 3</span><br><span class="line">Output:  3</span><br><span class="line">Explanation:  There are three ways to climb to the top.</span><br><span class="line"></span><br><span class="line">1. 1 step + 1 step + 1 step</span><br><span class="line">2. 1 step + 2 steps</span><br><span class="line">3. 2 steps + 1 step</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> climbStairs = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = [];</span><br><span class="line">  a[<span class="number">0</span>] = <span class="number">1</span>, a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">    a[i] = a[i - <span class="number">1</span>] + a[i - <span class="number">2</span>];</span><br><span class="line">  <span class="keyword">return</span> a[n];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/03/16/LeetCode-Notes-011/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-Notes-010" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -220,11 +311,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
@@ -311,11 +402,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
@@ -326,104 +417,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="../../2018/03/14/LeetCode-Notes-009/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Project-Euler-019" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2018/03/13/Project-Euler-019/">Project-Euler-019</a>
-    </h1>
-  
-
-        
-        <a href="../../2018/03/13/Project-Euler-019/" class="archive-article-date">
-  	<time datetime="2018-03-13T14:01:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>You are given the following information,<br>but you may prefer to do some research for yourself.</p>
-<pre><code>1 Jan 1900 was a Monday.
-Thirty days has September,
-April, June and November.
-All the rest have thirty-one,
-Saving February alone,
-Which has twenty-eight, rain or shine.
-And on leap years, twenty-nine.
-A leap year occurs on any year evenly divisible by 4, 
-but not on a century unless it is divisible by 400.
-</code></pre><p>How many Sundays fell on the first of the month during<br>the twentieth century (1 Jan 1901 to 31 Dec 2000)?</p>
-<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">171</span><br></pre></td></tr></table></figure>
-<hr>
-<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> calendar <span class="keyword">import</span> monthrange; <span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line">print(len([(year, month) <span class="keyword">for</span> year, month <span class="keyword">in</span> product(list(range(<span class="number">1901</span>, <span class="number">2001</span>)), list(range(<span class="number">1</span>, <span class="number">13</span>))) <span class="keyword">if</span> monthrange(year, month)[<span class="number">0</span>] == <span class="number">6</span>]))</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line">months = [</span><br><span class="line">    <span class="number">31</span>,</span><br><span class="line">    <span class="number">28</span>,</span><br><span class="line">    <span class="number">31</span>,</span><br><span class="line">    <span class="number">30</span>,</span><br><span class="line">    <span class="number">31</span>,</span><br><span class="line">    <span class="number">30</span>,</span><br><span class="line">    <span class="number">31</span>,</span><br><span class="line">    <span class="number">31</span>,</span><br><span class="line">    <span class="number">30</span>,</span><br><span class="line">    <span class="number">31</span>,</span><br><span class="line">    <span class="number">30</span>,</span><br><span class="line">    <span class="number">31</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">week = [<span class="string">'sun'</span>,</span><br><span class="line">        <span class="string">'mon'</span>,</span><br><span class="line">        <span class="string">'tue'</span>,</span><br><span class="line">        <span class="string">'wed'</span>,</span><br><span class="line">        <span class="string">'thu'</span>,</span><br><span class="line">        <span class="string">'fri'</span>,</span><br><span class="line">        <span class="string">'sat'</span></span><br><span class="line">       ]</span><br><span class="line"></span><br><span class="line">leapyears = [year <span class="keyword">for</span> year <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">101</span>) <span class="keyword">if</span> year % <span class="number">4</span> == <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">day = <span class="number">0</span> <span class="comment"># 1 Jan 1901</span></span><br><span class="line">month = <span class="number">0</span> <span class="comment"># January</span></span><br><span class="line">year = <span class="number">1</span> <span class="comment"># 1901</span></span><br><span class="line">weekday = <span class="number">2</span> <span class="comment"># Tuesday</span></span><br><span class="line"></span><br><span class="line">days = &#123;day: week[weekday]&#125; </span><br><span class="line"></span><br><span class="line">since_last_month = <span class="number">0</span></span><br><span class="line">since_last_year = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">first_of_months = &#123;&#125;</span><br><span class="line"><span class="keyword">while</span> year &lt;= <span class="number">100</span>:</span><br><span class="line">    <span class="comment">#print "%s/%s/%s - %s" % (month+1, since_last_month+1, year+1900, week[weekday])</span></span><br><span class="line">    <span class="comment"># if it's the first of the month, make a note </span></span><br><span class="line">    <span class="comment"># of the weekday.</span></span><br><span class="line">    <span class="keyword">if</span> since_last_month == <span class="number">0</span>:</span><br><span class="line">        first_of_months[<span class="string">"%s/%s/%s"</span> % (month+<span class="number">1</span>, since_last_month+<span class="number">1</span>, year+<span class="number">1900</span>)] = week[weekday]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># increment the counters..</span></span><br><span class="line">    day += <span class="number">1</span></span><br><span class="line">    since_last_month += <span class="number">1</span></span><br><span class="line">    since_last_year += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># check what year it is</span></span><br><span class="line">    days_of_year = <span class="number">365</span></span><br><span class="line">    <span class="keyword">if</span> year <span class="keyword">in</span> leapyears:</span><br><span class="line">        days_of_year += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> since_last_year &gt;= days_of_year:</span><br><span class="line">        year += <span class="number">1</span></span><br><span class="line">        since_last_year = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># check what month it is</span></span><br><span class="line">    days_of_month = months[month]</span><br><span class="line">    <span class="keyword">if</span> month == <span class="number">1</span> <span class="keyword">and</span> year <span class="keyword">in</span> leapyears: <span class="comment"># february</span></span><br><span class="line">        days_of_month += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> since_last_month &gt;= days_of_month:</span><br><span class="line">        month += <span class="number">1</span></span><br><span class="line">        since_last_month = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> month &gt; len(months)<span class="number">-1</span>:</span><br><span class="line">            month = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># check what day of the week it is</span></span><br><span class="line">    weekday += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> weekday &gt; len(week)<span class="number">-1</span>:</span><br><span class="line">        weekday = <span class="number">0</span></span><br><span class="line">    days[day] = week[weekday]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">date_sort</span><span class="params">(date)</span>:</span></span><br><span class="line">    date_str = date[<span class="number">0</span>]</span><br><span class="line">    month,day,year = date_str.split(<span class="string">'/'</span>)</span><br><span class="line">    <span class="keyword">return</span> int(month)*int(day)*int(year)</span><br><span class="line"></span><br><span class="line">print(len([weekday <span class="keyword">for</span> weekday <span class="keyword">in</span> list(first_of_months.values()) <span class="keyword">if</span> weekday == <span class="string">'sun'</span>]))</span><br></pre></td></tr></table></figure>
-<hr>
-<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'date'</span></span><br><span class="line">puts Date.new(<span class="number">1901</span>,<span class="number">1</span>,<span class="number">1</span>).upto(Date.new(<span class="number">2000</span>,<span class="number">12</span>,<span class="number">31</span>)).find_all &#123; <span class="params">|d|</span> d.mday == <span class="number">1</span> &amp;&amp; d.wday == <span class="number">0</span> &#125;.count</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p019</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p019().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * We use Zeller's congruence to compute the day of week when given the year, month, and day.</span></span><br><span class="line"><span class="comment">	 * Then we simply check the first day of all the months in the given range by brute force.</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * Zeller's congruence is well-known and a bit long to explain.</span></span><br><span class="line"><span class="comment">	 * See: https://en.wikipedia.org/wiki/Zeller%27s_congruence</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">1901</span>; y &lt;= <span class="number">2000</span>; y++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">1</span>; m &lt;= <span class="number">12</span>; m++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (dayOfWeek(y, m, <span class="number">1</span>) == <span class="number">0</span>)  <span class="comment">// Sunday</span></span><br><span class="line">					count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> Integer.toString(count);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Return value: 0 = Sunday, 1 = Monday, ..., 6 = Saturday.</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">dayOfWeek</span><span class="params">(<span class="keyword">int</span> year, <span class="keyword">int</span> month, <span class="keyword">int</span> day)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (year &lt; <span class="number">0</span> || year &gt; <span class="number">10000</span> || month &lt; <span class="number">1</span> || month &gt; <span class="number">12</span> || day &lt; <span class="number">1</span> || day &gt; <span class="number">31</span>)</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// Zeller's congruence algorithm</span></span><br><span class="line">		<span class="keyword">int</span> m = (month - <span class="number">3</span> + <span class="number">4800</span>) % <span class="number">4800</span>;</span><br><span class="line">		<span class="keyword">int</span> y = (year + m / <span class="number">12</span>) % <span class="number">400</span>;</span><br><span class="line">		m %= <span class="number">12</span>;</span><br><span class="line">		<span class="keyword">return</span> (y + y/<span class="number">4</span> - y/<span class="number">100</span> + (<span class="number">13</span> * m + <span class="number">2</span>) / <span class="number">5</span> + day + <span class="number">2</span>) % <span class="number">7</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Mathematica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* </span></span><br><span class="line"><span class="comment"> * We simply use Mathematica's built-in date library to compute the answer by brute force.</span></span><br><span class="line"><span class="comment"> *)</span></span><br><span class="line">&lt;&lt; Miscellaneous`Calendar`</span><br><span class="line"><span class="keyword">Sum</span>[<span class="keyword">Boole</span>[DayOfWeek[&#123;y, m, 1&#125;] === <span class="keyword">Sunday</span>], &#123;y, 1901, 2000&#125;, &#123;m, 1, 12&#125;]</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/03/13/Project-Euler-019/">展开全文 >></a>
         </p>
       
 
@@ -589,19 +582,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">computational method</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">

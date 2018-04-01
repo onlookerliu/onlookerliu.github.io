@@ -9,14 +9,14 @@
   <title>LeetCode Notes 012 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator for e">
-<meta name="keywords" content="javascript,leetcode">
+<meta name="keywords" content="leetcode,javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 012">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/17/LeetCode-Notes-012/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator for e">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T17:26:06.732Z">
+<meta property="og:updated_time" content="2018-03-31T17:30:00.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 012">
 <meta name="twitter:description" content="Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator for e">
@@ -189,11 +189,11 @@
       
         <h3 id="Clone-Graph"><a href="#Clone-Graph" class="headerlink" title="Clone Graph"></a>Clone Graph</h3><p>Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors.</p>
 <p><strong>OJ’s undirected graph serialization:</strong><br>Nodes are labeled uniquely.</p>
-<p>We use <code>#</code> as a separator for each node, and <code>,</code> as a separator for node label and each neighbor of the node.<br>As an example, consider the serialized graph {0,1,2#1,2#2,2}.</p>
+<p>We use <code>#</code> as a separator for each node, and <code>,</code> as a separator for node label and each neighbor of the node.<br>As an example, consider the serialized graph <code>{0,1,2#1,2#2,2}</code>.</p>
 <p>The graph has a total of three nodes, and therefore contains three parts as separated by <code>#</code>.</p>
 <ul>
 <li>First node is labeled as <code>0</code>. Connect node <code>0</code> to both nodes <code>1</code> and <code>2</code>.</li>
-<li>Second node is labeled as <code>1. Connect node</code>1<code>to node</code>2`.</li>
+<li>Second node is labeled as <code>1</code>. Connect node <code>1</code> to node <code>2</code>.</li>
 <li>Third node is labeled as <code>2</code>. Connect node <code>2</code> to node <code>2</code> (itself), thus forming a self-cycle.</li>
 </ul>
 <p>Visually, the graph looks like the following:</p>
@@ -201,7 +201,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for undirected graph.</span></span><br><span class="line"><span class="comment"> * function UndirectedGraphNode(label) &#123;</span></span><br><span class="line"><span class="comment"> *     this.label = label;</span></span><br><span class="line"><span class="comment"> *     this.neighbors = [];   // Array of UndirectedGraphNode</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;UndirectedGraphNode&#125; graph</span></span><br><span class="line"><span class="comment"> * @return &#123;UndirectedGraphNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> cloneGraph = <span class="function"><span class="keyword">function</span>(<span class="params">graph</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!graph)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> hash = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> dfs(graph);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> label = node.label;</span><br><span class="line">    <span class="keyword">var</span> newNode = <span class="keyword">new</span> UndirectedGraphNode(label);</span><br><span class="line">    hash[label] = newNode;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = node.neighbors.length; i &lt; len; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> item = node.neighbors[i];</span><br><span class="line">      <span class="keyword">if</span> (hash[item.label] !== <span class="literal">undefined</span>)</span><br><span class="line">        newNode.neighbors.push(hash[item.label]);</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        newNode.neighbors.push(dfs(item));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newNode;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Coin-Change"><a href="#Coin-Change" class="headerlink" title="Coin Change"></a>Coin Change</h3><p>You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return <code>-1</code>.</p>
 <p><strong>Example 1:</strong><br>coins = <code>[1, 2, 5]</code>, amount = <code>11</code><br>return <code>3</code> (11 = 5 + 5 + 1)</p>
-<p><strong>Example 2:</strong><br>coins = [2], amount = 3<br>return -1.</p>
+<p><strong>Example 2:</strong><br>coins = <code>[2]</code>, amount = <code>3</code><br>return <code>-1</code>.</p>
 <p><strong>Note:</strong><br>You may assume that you have an infinite number of each kind of coin.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; coins</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; amount</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> coinChange = <span class="function"><span class="keyword">function</span>(<span class="params">coins, amount</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ans = [];</span><br><span class="line">  ans[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = coins.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> item = coins[i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j + item &lt;= amount; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (ans[j] === <span class="literal">undefined</span>)</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      <span class="keyword">if</span> (ans[j + item] === <span class="literal">undefined</span>)</span><br><span class="line">        ans[j + item] = ans[j] + <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">        ans[j + item] = <span class="built_in">Math</span>.min(ans[j + item], ans[j] + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans[amount] === <span class="literal">undefined</span> ? <span class="number">-1</span> : ans[amount];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Combination-Sum"><a href="#Combination-Sum" class="headerlink" title="Combination Sum"></a>Combination Sum</h3><p>Given a set of candidate numbers (C) (without duplicates) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.</p>
@@ -257,11 +257,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
@@ -331,11 +331,11 @@
   
 <nav id="article-nav">
   
-    <a href="../../29/Project-Euler-020/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../LeetCode-Notes-013/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Project Euler 020
+          LeetCode Notes 013
         
       </div>
     </a>
@@ -527,19 +527,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">computational method</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">

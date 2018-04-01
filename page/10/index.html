@@ -167,6 +167,112 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Project-Euler-006" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/02/13/Project-Euler-006/">Project-Euler-006</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/02/13/Project-Euler-006/" class="archive-article-date">
+  	<time datetime="2018-02-13T13:59:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p><br>The sum of the squares of the first ten natural numbers is,<br></p>
+
+<p>$$1^2 + 2^2 + … + 10^2 = 385$$</p>
+<p><br>The square of the sum of the first ten natural numbers is,<br></p>
+
+<p>$$(1 + 2 + … + 10)^2 = 55^2 = 3025$$</p>
+<p><br>Hence the difference between the sum of the squares of the first ten natural<br>numbers and the square of the sum is $3025 - 385 = 2640$.<br></p>
+
+<p><br>Find the difference between the sum of the squares of the first one hundred<br>natural numbers and the square of the sum.<br></p>
+
+<h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">25164150</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line">print(sum(range(<span class="number">1</span>, <span class="number">101</span>))**<span class="number">2</span> - sum(x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">101</span>)))</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>JavaScript<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sum = <span class="number">0</span>, sumSquares = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">  sum += i</span><br><span class="line">  sumSquares += i * i</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(sum * sum - sumSquares)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Go<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	sumSquares, squareSum := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++ &#123;</span><br><span class="line">		sumSquares += i * i</span><br><span class="line">		squareSum += i</span><br><span class="line">	&#125;</span><br><span class="line">	squareSum *= squareSum</span><br><span class="line">	fmt.Println(squareSum - sumSquares)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line">puts ((<span class="number">1</span>..<span class="number">100</span>).inject(<span class="number">0</span>) &#123;<span class="params">|s,v|</span> s += v&#125;)**<span class="number">2</span> - ((<span class="number">1</span>..<span class="number">100</span>).collect &#123;<span class="params">|x|</span> x**<span class="number">2</span>&#125;.inject(<span class="number">0</span>) &#123; <span class="params">|s,v|</span> s += v&#125;)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">main</span> ::  <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ (s*s) - sqS <span class="keyword">where</span></span><br><span class="line">    s = sum [<span class="number">1.</span><span class="number">.100</span>]</span><br><span class="line">    sqS = sum [i * i | i &lt;- [<span class="number">1.</span><span class="number">.100</span>]]</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Clojure<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure</span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> square [x]</span><br><span class="line">  (<span class="name"><span class="builtin-name">*</span></span> x x))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> sum-squares [limit]</span><br><span class="line">  (<span class="name"><span class="builtin-name">apply</span></span> + (<span class="name"><span class="builtin-name">map</span></span> square (<span class="name"><span class="builtin-name">range</span></span> <span class="number">1</span> (<span class="name"><span class="builtin-name">+</span></span> limit <span class="number">1</span>)))))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> square-sum [limit]</span><br><span class="line">  (<span class="name">square</span> (<span class="name"><span class="builtin-name">apply</span></span> + (<span class="name"><span class="builtin-name">range</span></span> <span class="number">1</span> (<span class="name"><span class="builtin-name">+</span></span> limit <span class="number">1</span>)))))</span><br><span class="line"></span><br><span class="line">(<span class="name">println</span> (<span class="name"><span class="builtin-name">-</span></span> (<span class="name">square-sum</span> <span class="number">100</span>) (<span class="name">sum-squares</span> <span class="number">100</span>)))</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Rust<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> sum_squares = (<span class="number">1</span>..<span class="number">101</span>).map(|x| x*x).sum::&lt;<span class="built_in">u64</span>&gt;();</span><br><span class="line">    <span class="keyword">let</span> square_sum = (<span class="number">1</span>..<span class="number">101</span>).sum::&lt;<span class="built_in">u64</span>&gt;().pow(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, square_sum - sum_squares);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Mathemtica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* </span></span><br><span class="line"><span class="comment"> * Computers are fast, so we can implement this solution directly without any clever math.</span></span><br><span class="line"><span class="comment"> * However for the mathematically inclined, there are closed-form formulas:</span></span><br><span class="line"><span class="comment"> *   sum  = n(n + 1) / 2.</span></span><br><span class="line"><span class="comment"> *   sum2 = n(n + 1)(2n + 1) / 6.</span></span><br><span class="line"><span class="comment"> * Hence sum^2 - sum2 = (n^4 / 4) + (n^3 / 6) - (n^2 / 4) - (n / 6).</span></span><br><span class="line"><span class="comment"> *)</span></span><br><span class="line">n = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">Sum</span>[k, &#123;k, n&#125;]^<span class="number">2</span> - <span class="keyword">Sum</span>[k^<span class="number">2</span>, &#123;k, n&#125;]</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p006</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p006().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * Computers are fast, so we can implement this solution directly without any clever math.</span></span><br><span class="line"><span class="comment">	 * Note that sum^2 is bounded above by (100*100)^2 and sum2 is</span></span><br><span class="line"><span class="comment">	 * bounded above by 100*(100^2), both of which fit in a Java int type.</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * However for the mathematically inclined, there are closed-form formulas:</span></span><br><span class="line"><span class="comment">	 *   sum  = N(N + 1) / 2.</span></span><br><span class="line"><span class="comment">	 *   sum2 = N(N + 1)(2N + 1) / 6.</span></span><br><span class="line"><span class="comment">	 * Hence sum^2 - sum2 = (N^4 / 4) + (N^3 / 6) - (N^2 / 4) - (N / 6).</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">100</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> sum2 = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">			sum += i;</span><br><span class="line">			sum2 += i * i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> Integer.toString(sum * sum - sum2);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/02/13/Project-Euler-006/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Project-Euler-005" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -369,102 +475,6 @@
 
 
   
-    <article id="post-Project-Euler-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2018/02/10/Project-Euler-003/">Project-Euler-003</a>
-    </h1>
-  
-
-        
-        <a href="../../2018/02/10/Project-Euler-003/" class="archive-article-date">
-  	<time datetime="2018-02-10T12:59:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p>The prime factors of 13195 are 5, 7, 13 and 29.</p>
-<p>What is the largest prime factor of the number 600851475143 ?</p>
-<h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6857</span><br></pre></td></tr></table></figure>
-<hr>
-<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorize</span><span class="params">(n)</span>:</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="comment"># iterate over all even numbers first.</span></span><br><span class="line">    <span class="keyword">while</span> n % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        res.append(<span class="number">2</span>)</span><br><span class="line">        n //= <span class="number">2</span></span><br><span class="line">    <span class="comment"># try odd numbers up to sqrt(n)</span></span><br><span class="line">    limit = math.sqrt(n+<span class="number">1</span>)</span><br><span class="line">    i = <span class="number">3</span></span><br><span class="line">    <span class="keyword">while</span> i &lt;= limit:</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            res.append(i)</span><br><span class="line">            n //= i</span><br><span class="line">            limit = math.sqrt(n+i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            i += <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> n != <span class="number">1</span>:</span><br><span class="line">        res.append(n)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">print(max(factorize(<span class="number">600851475143</span>)))</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>JavaScript<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n = <span class="number">600851475143</span></span><br><span class="line"><span class="keyword">let</span> limit = <span class="built_in">Math</span>.ceil(<span class="built_in">Math</span>.sqrt(n))</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= limit; i += <span class="number">2</span>) &#123;</span><br><span class="line">  <span class="keyword">while</span> (n % i === <span class="number">0</span>) &#123;</span><br><span class="line">    n = <span class="built_in">Math</span>.floor(n / i)</span><br><span class="line">    limit = <span class="built_in">Math</span>.ceil(<span class="built_in">Math</span>.sqrt(n))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(n)</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorize</span><span class="params">(orig)</span></span></span><br><span class="line">  factors = &#123;&#125;</span><br><span class="line">  factors.default = <span class="number">0</span>     <span class="comment"># return 0 instead nil if key not found in hash</span></span><br><span class="line">  n = orig</span><br><span class="line">  i = <span class="number">2</span></span><br><span class="line">  sqi = <span class="number">4</span>                 <span class="comment"># square of i</span></span><br><span class="line">  <span class="keyword">while</span> sqi &lt;= n <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">while</span> n.modulo(i) == <span class="number">0</span> <span class="keyword">do</span></span><br><span class="line">      n /= i</span><br><span class="line">      factors[i] += <span class="number">1</span></span><br><span class="line">      <span class="comment"># puts "Found factor #&#123;i&#125;"</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="comment"># we take advantage of the fact that (i +1)**2 = i**2 + 2*i +1</span></span><br><span class="line">    sqi += <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (n != <span class="number">1</span>) &amp;&amp; (n != orig)</span><br><span class="line">    factors[n] += <span class="number">1</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  factors</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts factorize(<span class="number">600851475143</span>).keys.max</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Go<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"math"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"math/big"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">eratosthenes</span><span class="params">(max <span class="keyword">int</span>)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">	nums := <span class="built_in">make</span>([]<span class="keyword">int</span>, max)</span><br><span class="line"></span><br><span class="line">	p := <span class="number">2</span> <span class="comment">// first prime, 2</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		i := p - <span class="number">1</span></span><br><span class="line">		<span class="comment">// mark multiples not prime</span></span><br><span class="line">		<span class="keyword">for</span> i += p; i &lt; max; i += p &#123;</span><br><span class="line">			nums[i] = <span class="number">-1</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// find first unmarked number greater than p</span></span><br><span class="line">		<span class="keyword">for</span> i = p; i &lt; max; i++ &#123;</span><br><span class="line">			<span class="keyword">if</span> nums[i] != <span class="number">-1</span> &#123;</span><br><span class="line">				p = i + <span class="number">1</span></span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// no unmarked numbers greater than p found; finished</span></span><br><span class="line">		<span class="keyword">if</span> i == max &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// filter out all marked numbers</span></span><br><span class="line">	primes := <span class="built_in">make</span>([]<span class="keyword">int</span>, max)</span><br><span class="line">	j := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> nums &#123;</span><br><span class="line">		<span class="keyword">if</span> nums[i] == <span class="number">0</span> &#123;</span><br><span class="line">			primes[j] = i + <span class="number">1</span></span><br><span class="line">			j++</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> primes[:j]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	n := <span class="built_in">new</span>(big.Int)</span><br><span class="line">	n.SetString(<span class="string">"600851475143"</span>, <span class="number">10</span>)</span><br><span class="line">	m := <span class="built_in">new</span>(big.Int)</span><br><span class="line">	max := <span class="keyword">int</span>(math.Sqrt(<span class="number">600851475143</span>))</span><br><span class="line">	primes := eratosthenes(max)</span><br><span class="line">	<span class="comment">// find the largest prime factor of n</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="built_in">len</span>(primes) - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i-- &#123;</span><br><span class="line">		p := big.NewInt(<span class="keyword">int64</span>(primes[i]))</span><br><span class="line">		m.Mod(n, p)</span><br><span class="line">		<span class="keyword">if</span> m.Int64() == <span class="number">0</span> &#123;</span><br><span class="line">			fmt.Println(p)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">primes</span> :: [<span class="type">Integer</span>]</span><br><span class="line"><span class="title">primes</span> = sieve [<span class="number">2.</span>.] <span class="keyword">where</span></span><br><span class="line">    sieve (p:xs) = p : sieve [x | x &lt;- xs, x `mod` p &gt; <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="title">factorize</span> :: <span class="type">Integer</span> -&gt; [<span class="type">Integer</span>]</span><br><span class="line"><span class="title">factorize</span> n = primeFactors n primes <span class="keyword">where</span></span><br><span class="line">    primeFactors <span class="number">1</span> _ = []</span><br><span class="line">    primeFactors m (p:ps) | m &lt; p * p = [m]</span><br><span class="line">                          | r == <span class="number">0</span> = p : primeFactors q (p:ps)</span><br><span class="line">                          | otherwise = primeFactors m ps</span><br><span class="line">                          <span class="keyword">where</span> (q, r) = quotRem m p</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> :: <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ maximum $ factorize <span class="number">600851475143</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Rust<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> n: <span class="built_in">u64</span> = <span class="number">600851475143</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> limit = n / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut</span> i = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">while</span> i &lt; limit &#123;</span><br><span class="line">        <span class="keyword">while</span> n % i == <span class="number">0</span> &#123;</span><br><span class="line">            n = n / i;</span><br><span class="line">            limit = n / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i += <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"&#123;&#125;"</span>, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p003</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p003().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * By the fundamental theorem of arithmetic, every integer n &gt; 1 has a unique factorization as a product of prime numbers.</span></span><br><span class="line"><span class="comment">	 * In other words, the theorem says that n = p_0 * p_1 * ... * p_&#123;m-1&#125;, where each p_i &gt; 1 is prime but not necessarily unique.</span></span><br><span class="line"><span class="comment">	 * Now if we take the number n and repeatedly divide out its smallest factor (which must also be prime), then the last</span></span><br><span class="line"><span class="comment">	 * factor that we divide out must be the largest prime factor of n. For reference, 600851475143 = 71 * 839 * 1471 * 6857.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> n = <span class="number">600851475143L</span>;</span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="keyword">long</span> p = smallestFactor(n);</span><br><span class="line">			<span class="keyword">if</span> (p &lt; n)</span><br><span class="line">				n /= p;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="keyword">return</span> Long.toString(n);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Returns the smallest factor of n, which is in the range [2, n]. The result is always prime.</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">smallestFactor</span><span class="params">(<span class="keyword">long</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (n &lt;= <span class="number">1</span>)</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">2</span>, end = Library.sqrt(n); i &lt;= end; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (n % i == <span class="number">0</span>)</span><br><span class="line">				<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> n;  <span class="comment">// n itself is prime</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Mathematica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">First</span>[<span class="keyword">Last</span>[<span class="keyword">FactorInteger</span>[<span class="number">600851475143</span>]]]</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/02/10/Project-Euler-003/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="../9/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../8/">8</a><a class="page-number" href="../9/">9</a><span class="page-number current">10</span><a class="page-number" href="../11/">11</a><a class="page-number" href="../12/">12</a><span class="space">&hellip;</span><a class="page-number" href="../18/">18</a><a class="extend next" rel="next" href="../11/">Next &raquo;</a>
@@ -601,19 +611,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">computational method</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
