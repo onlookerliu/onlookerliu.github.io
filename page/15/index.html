@@ -167,6 +167,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Decision-Tree-Regression" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2017/12/29/Decision-Tree-Regression/">Decision_Tree_Regression</a>
+    </h1>
+  
+
+        
+        <a href="../../2017/12/29/Decision-Tree-Regression/" class="archive-article-date">
+  	<time datetime="2017-12-28T17:45:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Decision-Tree-Regression-using-DecisionTrees-jl"><a href="#Decision-Tree-Regression-using-DecisionTrees-jl" class="headerlink" title="Decision Tree Regression (using DecisionTrees.jl)"></a>Decision Tree Regression (using DecisionTrees.jl)</h1><p>Adapted from <a href="http://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html</a></p>
+<p>A 1D regression with decision tree.</p>
+<p>The decision trees is used to fit a sine curve with addition noisy observation. As a result, it learns local linear regressions approximating the sine curve.</p>
+<p>We can see that if the maximum depth of the tree (controlled by the max_depth parameter) is set too high, the decision trees learn too fine details of the training data and learn from the noise, i.e. they overfit.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> DecisionTree</span><br><span class="line"><span class="keyword">using</span> ScikitLearn</span><br><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a random dataset</span></span><br><span class="line">srand(<span class="number">42</span>)</span><br><span class="line">X = sort(<span class="number">5</span> * rand(<span class="number">80</span>))</span><br><span class="line">XX = reshape(X, <span class="number">80</span>, <span class="number">1</span>)</span><br><span class="line">y = sin(X)</span><br><span class="line">y[<span class="number">1</span>:<span class="number">5</span>:<span class="keyword">end</span>] += <span class="number">3</span> * (<span class="number">0.5</span> - rand(<span class="number">16</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fit regression model</span></span><br><span class="line">regr_1 = DecisionTreeRegressor()</span><br><span class="line">regr_2 = DecisionTreeRegressor(pruning_purity_threshold=<span class="number">0.05</span>)</span><br><span class="line">regr_3 = RandomForestRegressor(ntrees=<span class="number">20</span>)</span><br><span class="line">fit!(regr_1, XX, y)</span><br><span class="line">fit!(regr_2, XX, y)</span><br><span class="line">fit!(regr_3, XX, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Predict</span></span><br><span class="line">X_test = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">5.0</span></span><br><span class="line">y_1 = predict(regr_1, hcat(X_test))</span><br><span class="line">y_2 = predict(regr_2, hcat(X_test))</span><br><span class="line">y_3 = predict(regr_3, hcat(X_test))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot the results</span></span><br><span class="line">scatter(X, y, c=<span class="string">"k"</span>, label=<span class="string">"data"</span>)</span><br><span class="line">plot(X_test, y_1, c=<span class="string">"g"</span>, label=<span class="string">"no pruning"</span>, linewidth=<span class="number">2</span>)</span><br><span class="line">plot(X_test, y_2, c=<span class="string">"r"</span>, label=<span class="string">"pruning_purity_threshold=0.05"</span>, linewidth=<span class="number">2</span>)</span><br><span class="line">plot(X_test, y_3, c=<span class="string">"b"</span>, label=<span class="string">"RandomForestClassifier"</span>, linewidth=<span class="number">2</span>)</span><br><span class="line">xlabel(<span class="string">"data"</span>)</span><br><span class="line">ylabel(<span class="string">"target"</span>)</span><br><span class="line">title(<span class="string">"Decision Tree Regression"</span>)</span><br><span class="line">legend(prop=<span class="built_in">Dict</span>(<span class="string">"size"</span>=&gt;<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
+<p><img src="http://oye4atjxc.bkt.clouddn.com/leanote/Decision_Tree_Regression/output_3_0.png" alt="png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2017/12/29/Decision-Tree-Regression/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Classifier-Comparison" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -299,98 +378,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="../../2017/12/29/Cross-Validated-Predictions/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Clustering-Comparison" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2017/12/29/Clustering-Comparison/">Clustering_Comparison</a>
-    </h1>
-  
-
-        
-        <a href="../../2017/12/29/Clustering-Comparison/" class="archive-article-date">
-  	<time datetime="2017-12-28T17:39:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Comparing-different-clustering-algorithms-on-toy-datasets"><a href="#Comparing-different-clustering-algorithms-on-toy-datasets" class="headerlink" title="Comparing different clustering algorithms on toy datasets"></a>Comparing different clustering algorithms on toy datasets</h1><p>Adapted from <a href="http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html</a></p>
-<p>This example aims at showing characteristics of different clustering algorithms on datasets that are “interesting” but still in 2D. The last dataset is an example of a ‘null’ situation for clustering: the data is homogeneous, and there is no good clustering.</p>
-<p>While these examples give some intuition about the algorithms, this intuition might not apply to very high dimensional data.</p>
-<p>The results could be improved by tweaking the parameters for each clustering strategy, for instance setting the number of clusters for the methods that needs this parameter specified. Note that affinity propagation has a tendency to create many clusters. Thus in this example its two parameters (damping and per-point preference) were set to to mitigate this behavior.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> ScikitLearn</span><br><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line"></span><br><span class="line"><span class="meta">@sk_import</span> datasets: (make_circles, make_moons, make_blobs)</span><br><span class="line"><span class="meta">@sk_import</span> cluster: (estimate_bandwidth, MeanShift, MiniBatchKMeans, AgglomerativeClustering, SpectralClustering)</span><br><span class="line"><span class="meta">@sk_import</span> cluster: (DBSCAN, AffinityPropagation, Birch)</span><br><span class="line"><span class="meta">@sk_import</span> preprocessing: StandardScaler</span><br><span class="line"><span class="meta">@sk_import</span> neighbors: kneighbors_graph</span><br></pre></td></tr></table></figure>
-<pre><code>PyObject &lt;function kneighbors_graph at 0x1a30ba77d0&gt;
-</code></pre><figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">srand(<span class="number">33</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Generate datasets. We choose the size big enough to see the scalability</span></span><br><span class="line"><span class="comment"># of the algorithms, but not too big to avoid too long running times</span></span><br><span class="line">n_samples = <span class="number">1500</span></span><br><span class="line">noisy_circles = make_circles(n_samples=n_samples, factor=<span class="number">.5</span>, noise=<span class="number">.05</span>)</span><br><span class="line">noisy_moons = make_moons(n_samples=n_samples, noise=<span class="number">.05</span>)</span><br><span class="line">blobs = make_blobs(n_samples=n_samples, random_state=<span class="number">8</span>)</span><br><span class="line">no_structure = rand(n_samples, <span class="number">2</span>), <span class="literal">nothing</span></span><br><span class="line"></span><br><span class="line">colors0 = collect(<span class="string">"bgrcmykbgrcmykbgrcmykbgrcmyk"</span>)</span><br><span class="line">colors = vcat(fill(colors0, <span class="number">20</span>)...)</span><br><span class="line"></span><br><span class="line">clustering_names = [</span><br><span class="line">    <span class="string">"MiniBatchKMeans"</span>, <span class="string">"AffinityPropagation"</span>, <span class="string">"MeanShift"</span>,</span><br><span class="line">    <span class="string">"SpectralClustering"</span>, <span class="string">"Ward"</span>, <span class="string">"AgglomerativeClustering"</span>,</span><br><span class="line">    <span class="string">"DBSCAN"</span>, <span class="string">"Birch"</span>];</span><br></pre></td></tr></table></figure>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">figure(figsize=(length(clustering_names) * <span class="number">2</span> + <span class="number">3</span>, <span class="number">9.5</span>))</span><br><span class="line">subplots_adjust(left=<span class="number">.02</span>, right=<span class="number">.98</span>, bottom=<span class="number">.001</span>, top=<span class="number">.96</span>, wspace=<span class="number">.05</span>,</span><br><span class="line">                    hspace=<span class="number">.01</span>)</span><br><span class="line"></span><br><span class="line">plot_num = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">datasets = [noisy_circles, noisy_moons, blobs, no_structure]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i_dataset, dataset) <span class="keyword">in</span> enumerate(datasets)</span><br><span class="line"></span><br><span class="line">    X, y = dataset</span><br><span class="line">    <span class="comment"># normalize dataset for easier parameter selection</span></span><br><span class="line">    X = fit_transform!(StandardScaler(), X)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># estimate bandwidth for mean shift</span></span><br><span class="line">    bandwidth = estimate_bandwidth(X, quantile=<span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># connectivity matrix for structured Ward</span></span><br><span class="line">    connectivity = kneighbors_graph(X, n_neighbors=<span class="number">10</span>, include_self=<span class="literal">false</span>)[:todense]() <span class="comment"># PyCall does not support numpy sparse matrices</span></span><br><span class="line">    <span class="comment"># make connectivity symmetric</span></span><br><span class="line">    connectivity = <span class="number">0.5</span> * (connectivity + connectivity')</span><br><span class="line"></span><br><span class="line">    <span class="comment"># create clustering estimators</span></span><br><span class="line">    ms = MeanShift(bandwidth=bandwidth, bin_seeding=<span class="literal">true</span>)</span><br><span class="line">    two_means = MiniBatchKMeans(n_clusters=<span class="number">2</span>)</span><br><span class="line">    ward = AgglomerativeClustering(n_clusters=<span class="number">2</span>, linkage=<span class="string">"ward"</span>,</span><br><span class="line">                                   connectivity=connectivity)</span><br><span class="line">    spectral = SpectralClustering(n_clusters=<span class="number">2</span>,</span><br><span class="line">                                  eigen_solver=<span class="string">"arpack"</span>,</span><br><span class="line">                                  affinity=<span class="string">"nearest_neighbors"</span>)</span><br><span class="line">    dbscan = DBSCAN(eps=<span class="number">.2</span>)</span><br><span class="line">    affinity_propagation = AffinityPropagation(damping=<span class="number">.9</span>, preference=-<span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">    average_linkage = AgglomerativeClustering(</span><br><span class="line">        linkage=<span class="string">"average"</span>, affinity=<span class="string">"cityblock"</span>, n_clusters=<span class="number">2</span>,</span><br><span class="line">        connectivity=connectivity)</span><br><span class="line"></span><br><span class="line">    birch = Birch(n_clusters=<span class="number">2</span>)</span><br><span class="line">    clustering_algorithms = [</span><br><span class="line">        two_means, affinity_propagation, ms, spectral, ward, average_linkage,</span><br><span class="line">        dbscan, birch]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (name, algorithm) <span class="keyword">in</span> zip(clustering_names, clustering_algorithms)</span><br><span class="line">        fit!(algorithm, X)</span><br><span class="line">        y_pred = <span class="literal">nothing</span></span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">            y_pred = predict(algorithm, X)</span><br><span class="line">        <span class="keyword">catch</span> <span class="literal">e</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">isa</span>(<span class="literal">e</span>, <span class="built_in">KeyError</span>)</span><br><span class="line">                y_pred = map(<span class="built_in">Int</span>, algorithm[:labels_])</span><br><span class="line">                clamp!(y_pred, <span class="number">0</span>, <span class="number">27</span>) <span class="comment"># not sure why some algorithms return -1</span></span><br><span class="line">            <span class="keyword">else</span> rethrow() <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        subplot(<span class="number">4</span>, length(clustering_algorithms), plot_num)</span><br><span class="line">        <span class="keyword">if</span> i_dataset == <span class="number">1</span></span><br><span class="line">            title(name, size=<span class="number">18</span>)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> y_val <span class="keyword">in</span> unique(y_pred)</span><br><span class="line">            selected = y_pred.==y_val</span><br><span class="line">            scatter(X[selected, <span class="number">1</span>], X[selected, <span class="number">2</span>], color=string(colors0[y_val+<span class="number">1</span>]), s=<span class="number">10</span>)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">        xlim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">        ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">        xticks(())</span><br><span class="line">        yticks(())</span><br><span class="line">        plot_num += <span class="number">1</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/leanote/Classifier_Comparison/output_5_1.png" alt="png"></p>
-<pre><code>/Users/kay/.julia/v0.6/Conda/deps/usr/lib/python2.7/site-packages/sklearn/manifold/spectral_embedding_.py:234: UserWarning: Graph is not fully connected, spectral embedding may not work as expected.
-  warnings.warn(&quot;Graph is not fully connected, spectral embedding&quot;
-/Users/kay/.julia/v0.6/Conda/deps/usr/lib/python2.7/site-packages/sklearn/cluster/hierarchical.py:193: UserWarning: the number of connected components of the connectivity matrix is 2 &gt; 1. Completing it to avoid stopping the tree early.
-  affinity=&apos;euclidean&apos;)
-/Users/kay/.julia/v0.6/Conda/deps/usr/lib/python2.7/site-packages/sklearn/cluster/hierarchical.py:426: UserWarning: the number of connected components of the connectivity matrix is 2 &gt; 1. Completing it to avoid stopping the tree early.
-  affinity=affinity)
-/Users/kay/.julia/v0.6/Conda/deps/usr/lib/python2.7/site-packages/sklearn/cluster/hierarchical.py:193: UserWarning: the number of connected components of the connectivity matrix is 3 &gt; 1. Completing it to avoid stopping the tree early.
-  affinity=&apos;euclidean&apos;)
-/Users/kay/.julia/v0.6/Conda/deps/usr/lib/python2.7/site-packages/sklearn/cluster/hierarchical.py:426: UserWarning: the number of connected components of the connectivity matrix is 3 &gt; 1. Completing it to avoid stopping the tree early.
-  affinity=affinity)
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2017/12/29/Clustering-Comparison/">展开全文 >></a>
         </p>
       
 
@@ -564,11 +551,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">

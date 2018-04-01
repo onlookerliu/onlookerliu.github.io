@@ -167,6 +167,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Project-Euler-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/02/08/Project-Euler-001/">Project Euler 001</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/02/08/Project-Euler-001/" class="archive-article-date">
+  	<time datetime="2018-02-08T11:41:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we<br>get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
+<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
+<h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">233168</span><br></pre></td></tr></table></figure>
+<hr>
+<p>C</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">3</span> == <span class="number">0</span> || i % <span class="number">5</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// This forces every solution class to implement a common interface,</span></span><br><span class="line"><span class="comment">// which is helpful for unit testing like in the EulerTest implementation.</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p001</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p001().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * Computers are fast, so we can implement this solution directly without any clever math.</span></span><br><span class="line"><span class="comment">	 * A conservative upper bound for the sum is 1000 * 1000, which fits in a Java int type.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (i % <span class="number">3</span> == <span class="number">0</span> || i % <span class="number">5</span> == <span class="number">0</span>)</span><br><span class="line">				sum += i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> Integer.toString(sum);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Mathematica</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Total</span>[<span class="keyword">Select</span>[<span class="keyword">Range</span>[<span class="number">999</span>], <span class="keyword">Function</span>[x, <span class="keyword">Mod</span>[x, <span class="number">3</span>] == <span class="number">0</span> || <span class="keyword">Mod</span>[x, <span class="number">5</span>] == <span class="number">0</span>]]]</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Python</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line">print(sum(i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>) <span class="keyword">if</span> (i % <span class="number">3</span> == <span class="number">0</span>) <span class="keyword">or</span> (i % <span class="number">5</span> == <span class="number">0</span>)))</span><br></pre></td></tr></table></figure>
+<hr>
+<p>JavaScript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (i % <span class="number">3</span> === <span class="number">0</span> || i % <span class="number">5</span> === <span class="number">0</span>) &#123;</span><br><span class="line">    s += i</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(s)</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Ruby</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="number">1000</span>.times <span class="keyword">do</span> <span class="params">|i|</span></span><br><span class="line">  <span class="keyword">if</span> i % <span class="number">3</span> == <span class="number">0</span> <span class="keyword">or</span> i % <span class="number">5</span> == <span class="number">0</span></span><br><span class="line">    sum += i</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts sum</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	sum := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> i%<span class="number">3</span> == <span class="number">0</span> || i%<span class="number">5</span> == <span class="number">0</span> &#123;</span><br><span class="line">			sum += i</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Haskell</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">main</span> ::  <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ sum [n | n &lt;- [<span class="number">1.</span><span class="number">.999</span>], or [(n `mod` <span class="number">3</span> == <span class="number">0</span>), (n `mod` <span class="number">5</span> == <span class="number">0</span>)]]</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Clojure</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure</span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> multiple? [n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">or</span></span> (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">rem</span></span> n <span class="number">3</span>) <span class="number">0</span>) (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">rem</span></span> n <span class="number">5</span>) <span class="number">0</span>)))</span><br><span class="line"></span><br><span class="line">(<span class="name">println</span> (<span class="name"><span class="builtin-name">reduce</span></span> + (<span class="name"><span class="builtin-name">filter</span></span> multiple? (<span class="name"><span class="builtin-name">range</span></span> <span class="number">1000</span>))))</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Scheme</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">display</span></span></span><br><span class="line">  (<span class="name">reduce</span> + <span class="number">0</span></span><br><span class="line">          (<span class="name">filter</span></span><br><span class="line">            (<span class="name"><span class="builtin-name">lambda</span></span> (n)</span><br><span class="line">              (<span class="name"><span class="builtin-name">or</span></span> (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">remainder</span></span> n <span class="number">3</span>) <span class="number">0</span>) (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">remainder</span></span> n <span class="number">5</span>) <span class="number">0</span>)))</span><br><span class="line">            (<span class="name">iota</span> <span class="number">1000</span>))))</span><br><span class="line">(<span class="name"><span class="builtin-name">newline</span></span>)</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/02/08/Project-Euler-001/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-Notes-002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -218,11 +329,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
@@ -365,85 +476,6 @@ F-statistic: 748.3 on 1 and 29 DF,  p-value: &lt; 2.2e-16
       
         <p class="article-more-link">
           <a class="article-more-a" href="../../2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Decision-Tree-Regression" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2017/12/29/Decision-Tree-Regression/">Decision_Tree_Regression</a>
-    </h1>
-  
-
-        
-        <a href="../../2017/12/29/Decision-Tree-Regression/" class="archive-article-date">
-  	<time datetime="2017-12-28T17:45:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Decision-Tree-Regression-using-DecisionTrees-jl"><a href="#Decision-Tree-Regression-using-DecisionTrees-jl" class="headerlink" title="Decision Tree Regression (using DecisionTrees.jl)"></a>Decision Tree Regression (using DecisionTrees.jl)</h1><p>Adapted from <a href="http://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html</a></p>
-<p>A 1D regression with decision tree.</p>
-<p>The decision trees is used to fit a sine curve with addition noisy observation. As a result, it learns local linear regressions approximating the sine curve.</p>
-<p>We can see that if the maximum depth of the tree (controlled by the max_depth parameter) is set too high, the decision trees learn too fine details of the training data and learn from the noise, i.e. they overfit.</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> DecisionTree</span><br><span class="line"><span class="keyword">using</span> ScikitLearn</span><br><span class="line"><span class="keyword">using</span> PyPlot</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a random dataset</span></span><br><span class="line">srand(<span class="number">42</span>)</span><br><span class="line">X = sort(<span class="number">5</span> * rand(<span class="number">80</span>))</span><br><span class="line">XX = reshape(X, <span class="number">80</span>, <span class="number">1</span>)</span><br><span class="line">y = sin(X)</span><br><span class="line">y[<span class="number">1</span>:<span class="number">5</span>:<span class="keyword">end</span>] += <span class="number">3</span> * (<span class="number">0.5</span> - rand(<span class="number">16</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fit regression model</span></span><br><span class="line">regr_1 = DecisionTreeRegressor()</span><br><span class="line">regr_2 = DecisionTreeRegressor(pruning_purity_threshold=<span class="number">0.05</span>)</span><br><span class="line">regr_3 = RandomForestRegressor(ntrees=<span class="number">20</span>)</span><br><span class="line">fit!(regr_1, XX, y)</span><br><span class="line">fit!(regr_2, XX, y)</span><br><span class="line">fit!(regr_3, XX, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Predict</span></span><br><span class="line">X_test = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">5.0</span></span><br><span class="line">y_1 = predict(regr_1, hcat(X_test))</span><br><span class="line">y_2 = predict(regr_2, hcat(X_test))</span><br><span class="line">y_3 = predict(regr_3, hcat(X_test))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot the results</span></span><br><span class="line">scatter(X, y, c=<span class="string">"k"</span>, label=<span class="string">"data"</span>)</span><br><span class="line">plot(X_test, y_1, c=<span class="string">"g"</span>, label=<span class="string">"no pruning"</span>, linewidth=<span class="number">2</span>)</span><br><span class="line">plot(X_test, y_2, c=<span class="string">"r"</span>, label=<span class="string">"pruning_purity_threshold=0.05"</span>, linewidth=<span class="number">2</span>)</span><br><span class="line">plot(X_test, y_3, c=<span class="string">"b"</span>, label=<span class="string">"RandomForestClassifier"</span>, linewidth=<span class="number">2</span>)</span><br><span class="line">xlabel(<span class="string">"data"</span>)</span><br><span class="line">ylabel(<span class="string">"target"</span>)</span><br><span class="line">title(<span class="string">"Decision Tree Regression"</span>)</span><br><span class="line">legend(prop=<span class="built_in">Dict</span>(<span class="string">"size"</span>=&gt;<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
-<p><img src="http://oye4atjxc.bkt.clouddn.com/leanote/Decision_Tree_Regression/output_3_0.png" alt="png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">julia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2017/12/29/Decision-Tree-Regression/">展开全文 >></a>
         </p>
       
 
@@ -617,11 +649,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">

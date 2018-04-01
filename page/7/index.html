@@ -167,6 +167,124 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Project-Euler-015" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/03/10/Project-Euler-015/">Project-Euler-015</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/03/10/Project-Euler-015/" class="archive-article-date">
+  	<time datetime="2018-03-10T07:44:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p><br>Starting in the top left corner of a 2x2 grid, there are 6 routes (without backtracking) to the bottom right corner.<br></p>
+
+<div style="text-align: center;"><br><img src="http://projecteuler.net/project/images/p015.gif"><br></div>
+
+<p><br>How many routes are there through a 20x20 grid?<br></p>
+
+<p>The grid can be expressed as <a href="http://en.wikipedia.org/wiki/Pascal&#39;s_triangle" target="_blank" rel="noopener">Pascal’s Triangle</a>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">1 1</span><br><span class="line">1 (2) 1</span><br><span class="line">1 3 3 1</span><br><span class="line">1 4 (6) 4 1</span><br><span class="line">1 5 10 10 5 1</span><br><span class="line">1 6 15 (20) 15 6 1</span><br></pre></td></tr></table></figure>
+<p>Note that the solution for a 1x1 grid is 2, a 2x2 grid is 6, and a 3x3 grid is 20.</p>
+<p>If we compare these solutions to Pascal’s Triangle, we see that they correspond to<br>the 1st element in the 2nd row, the 2nd element in the 4th row, and the 3rd element<br>in the 6th row, respectively. (Note that Pascal’s Triangle is zero-indexed.)</p>
+<p>The <a href="http://en.wikipedia.org/wiki/Binomial_coefficient" target="_blank" rel="noopener">binomial coefficient</a><br>$\binom {n} {k}$ can be used to determine the $k$th element in the<br>$n$th row of Pascal’s Triangle. Thus, we could express the aforementioned solutions as<br>$\binom {2} {1}$, $\binom {4} {2}$, and $\binom {6} {3}$, respectively.</p>
+<p>Thus, a general solution for grids of size $x$ is </p>
+<p>$$routes = \binom {2x} {x}$$.</p>
+<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">137846528820</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> comb</span><br><span class="line">print(comb(<span class="number">2</span> * <span class="number">20</span>,<span class="number">20</span>))</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Integer</span> </span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">choose</span><span class="params">(k)</span></span> </span><br><span class="line">    (<span class="keyword">self</span>-k+<span class="number">1</span> .. <span class="keyword">self</span>).inject(<span class="number">1</span>, &amp;<span class="symbol">:*</span>) / (<span class="number">2</span> .. k).inject(<span class="number">1</span>, &amp;<span class="symbol">:*</span>) </span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts <span class="number">40</span>.choose(<span class="number">20</span>)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Clojure<br><figure class="highlight clj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure</span><br><span class="line"><span class="comment">; compute pascal's triangle</span></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> ** [x n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">.</span></span> (<span class="name"><span class="builtin-name">.</span></span> java.math.BigInteger (<span class="name">valueOf</span> x)) (<span class="name">pow</span> n)))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> pascal [n k]</span><br><span class="line">  (<span class="name"><span class="builtin-name">cond</span></span> </span><br><span class="line">    (<span class="name"><span class="builtin-name">=</span></span> k n) <span class="number">1</span></span><br><span class="line">    (<span class="name"><span class="builtin-name">or</span></span> (<span class="name"><span class="builtin-name">&lt;</span></span> n <span class="number">0</span>) (<span class="name"><span class="builtin-name">&lt;</span></span> k <span class="number">0</span>)) <span class="number">0</span></span><br><span class="line">    <span class="symbol">:else</span> </span><br><span class="line">    (<span class="name"><span class="builtin-name">+</span></span></span><br><span class="line">      (<span class="name">pascal</span> (<span class="name"><span class="builtin-name">-</span></span> n <span class="number">1</span>) (<span class="name"><span class="builtin-name">-</span></span> k <span class="number">1</span>))</span><br><span class="line">      (<span class="name">pascal</span> (<span class="name"><span class="builtin-name">-</span></span> n <span class="number">1</span>) k))))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> pascal-row [n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">map</span></span> #(<span class="name">pascal</span> n %) (<span class="name"><span class="builtin-name">range</span></span> (<span class="name"><span class="builtin-name">+</span></span> n <span class="number">1</span>))))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> pascal-triangle [num-rows]</span><br><span class="line">  (<span class="name"><span class="builtin-name">map</span></span> #(<span class="name">pascal-row</span> %) (<span class="name"><span class="builtin-name">range</span></span> num-rows)))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">dorun</span></span> (<span class="name"><span class="builtin-name">map</span></span> println (<span class="name">pascal-triangle</span> <span class="number">10</span>)))</span><br><span class="line">(<span class="name">println</span> (<span class="name">pascal</span> <span class="number">5</span> <span class="number">3</span>))</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">factorial</span> ::  <span class="type">Integer</span> -&gt; <span class="type">Integer</span></span><br><span class="line"><span class="title">factorial</span> n = product [<span class="number">1.</span>.n]</span><br><span class="line"></span><br><span class="line"><span class="title">choose</span> ::  <span class="type">Integer</span> -&gt; <span class="type">Integer</span> -&gt; <span class="type">Integer</span></span><br><span class="line"><span class="title">choose</span> n k = div (factorial n) $ factorial k * factorial (n - k)</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> ::  <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ choose <span class="number">40</span> <span class="number">20</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Java<br>``java<br>import java.math.BigInteger;</p>
+<p>public final class p016 implements EulerSolution {</p>
+<pre><code>public static void main(String[] args) {
+    System.out.println(new p016().run());
+}
+
+
+/* 
+ * We implement this solution in a straightforward way with help from BigInteger.
+ */
+public String run() {
+    String temp = BigInteger.ONE.shiftLeft(1000).toString();
+    int sum = 0;
+    for (int i = 0; i &lt; temp.length(); i++)
+        sum += temp.charAt(i) - &apos;0&apos;;
+    return Integer.toString(sum);
+}
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">________</span><br><span class="line">Mathematica</span><br><span class="line">```mathematica</span><br><span class="line">(* </span><br><span class="line"> * We implement this solution in a straightforward way thanks to</span><br><span class="line"> * Mathematica&apos;s built-in functions and arbitrary precision integer type.</span><br><span class="line"> *)</span><br><span class="line">Total[IntegerDigits[2^1000]]</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/03/10/Project-Euler-015/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Project-Euler-014" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -455,112 +573,6 @@
 
 
   
-    <article id="post-Project-Euler-012" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2018/03/07/Project-Euler-012/">Project-Euler-012</a>
-    </h1>
-  
-
-        
-        <a href="../../2018/03/07/Project-Euler-012/" class="archive-article-date">
-  	<time datetime="2018-03-07T07:24:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p><br>The sequence of triangle numbers is generated by adding<br>the natural numbers. So the 7th triangle number would be<br>$1 + 2 + 3 + 4 + 5 + 6 + 7 = 28$. The first ten terms would be:<br></p>
-
-<p>$$1, 3, 6, 10, 15, 21, 28, 36, 45, 55, …$$</p>
-<p><br>Let us list the factors of the first seven triangle numbers:<br></p>
-
-<pre><code>1:  1
-3:  1,3
-6:  1,2,3,6
-10: 1,2,5,10
-15: 1,3,5,15
-21: 1,3,7,21
-28: 1,2,4,7,14,28
-</code></pre>
-
-<p><br>We can see that 28 is the first triangle number to have over<br>five divisors. What is the value of the first triangle number<br>to have over five hundred divisors?<br></p>
-
-<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">76576500</span><br></pre></td></tr></table></figure>
-<hr>
-<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorize</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'fact() argument should be &gt;= 1'</span>)</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> []  <span class="comment"># special case</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="comment"># iterate over all even numbers first.</span></span><br><span class="line">    <span class="keyword">while</span> n % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        res.append(<span class="number">2</span>)</span><br><span class="line">        n //= <span class="number">2</span></span><br><span class="line">    <span class="comment"># try odd numbers up to sqrt(n)</span></span><br><span class="line">    limit = math.sqrt(n + <span class="number">1</span>)</span><br><span class="line">    i = <span class="number">3</span></span><br><span class="line">    <span class="keyword">while</span> i &lt;= limit:</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            res.append(i)</span><br><span class="line">            n //= i</span><br><span class="line">            limit = math.sqrt(n + i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            i += <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> n != <span class="number">1</span>:</span><br><span class="line">        res.append(n)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">_triangle_cache = &#123;<span class="number">1</span>: <span class="number">1</span>&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">triangle</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> _triangle_cache[n]</span><br><span class="line">    <span class="keyword">except</span> KeyError:</span><br><span class="line">        result = n + triangle(n - <span class="number">1</span>)</span><br><span class="line">        _triangle_cache[n] = result</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">num_divisors</span><span class="params">(n)</span>:</span></span><br><span class="line">    factors = sorted(factorize(n))</span><br><span class="line">    histogram = defaultdict(int)</span><br><span class="line">    <span class="keyword">for</span> factor <span class="keyword">in</span> factors:</span><br><span class="line">        histogram[factor] += <span class="number">1</span></span><br><span class="line">    <span class="comment"># number of divisors is equal to product of </span></span><br><span class="line">    <span class="comment"># incremented exponents of prime factors</span></span><br><span class="line">    <span class="keyword">from</span> operator <span class="keyword">import</span> mul</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> reduce(mul, [exponent + <span class="number">1</span> <span class="keyword">for</span> exponent <span class="keyword">in</span> list(histogram.values())])</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">triangles = (triangle(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">100000</span>))</span><br><span class="line">divisible_triangles = (i <span class="keyword">for</span> i <span class="keyword">in</span> triangles <span class="keyword">if</span> num_divisors(i) &gt; <span class="number">500</span>)</span><br><span class="line">print(next(divisible_triangles))</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'mathn'</span> </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Integer</span> </span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">divisors</span></span></span><br><span class="line">    <span class="keyword">return</span> [<span class="number">1</span>] <span class="keyword">if</span> <span class="keyword">self</span> == <span class="number">1</span></span><br><span class="line">    primes, powers = <span class="keyword">self</span>.prime_division.transpose </span><br><span class="line">    exponents = powers.map&#123;<span class="params">|i|</span> (<span class="number">0</span>..i).to_a&#125; </span><br><span class="line">    divisors = exponents.shift.product(*exponents).map <span class="keyword">do</span> <span class="params">|powers|</span> </span><br><span class="line">      primes.zip(powers).map&#123;<span class="params">|prime, power|</span> prime ** power&#125;.inject(<span class="symbol">:*</span>) </span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line">    divisors.sort.map&#123;<span class="params">|div|</span> [div, <span class="keyword">self</span> / div]&#125; </span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">triangles = Enumerator.new <span class="keyword">do</span> <span class="params">|yielder|</span></span><br><span class="line">  i = <span class="number">1</span></span><br><span class="line">  loop <span class="keyword">do</span></span><br><span class="line">    yielder.<span class="keyword">yield</span> i * (i + <span class="number">1</span>) / <span class="number">2</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts triangles.detect &#123; <span class="params">|t|</span> t.divisors.count &gt; <span class="number">500</span> &#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Data.List (<span class="title">group</span>)</span><br><span class="line"></span><br><span class="line"><span class="title">triangles</span> :: [<span class="type">Int</span>]</span><br><span class="line"><span class="title">triangles</span> = scanl1 (+) [<span class="number">1.</span>.]</span><br><span class="line"></span><br><span class="line"><span class="title">primes</span> :: [<span class="type">Int</span>]</span><br><span class="line"><span class="title">primes</span> = sieve [<span class="number">2.</span>.] <span class="keyword">where</span></span><br><span class="line">    sieve [] = []</span><br><span class="line">    sieve (p:xs) = p : sieve [x | x &lt;- xs, x `mod` p &gt; <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="title">factorize</span> :: <span class="type">Int</span> -&gt; [<span class="type">Int</span>]</span><br><span class="line"><span class="title">factorize</span> n = primeFactors n primes <span class="keyword">where</span></span><br><span class="line">    primeFactors <span class="number">1</span> _ = []</span><br><span class="line">    primeFactors _ [] = []</span><br><span class="line">    primeFactors m (p:ps) | m &lt; p * p = [m]</span><br><span class="line">                          | r == <span class="number">0</span> = p : primeFactors q (p:ps)</span><br><span class="line">                          | otherwise = primeFactors m ps</span><br><span class="line">                          <span class="keyword">where</span> (q, r) = quotRem m p</span><br><span class="line"></span><br><span class="line"><span class="title">primePowers</span> :: <span class="type">Int</span> -&gt; [(<span class="type">Int</span>, <span class="type">Int</span>)]</span><br><span class="line"><span class="title">primePowers</span> n = [(head x, length x) | x &lt;- group $ factorize n]</span><br><span class="line"></span><br><span class="line"><span class="title">numDivisors</span> :: <span class="type">Int</span> -&gt;  <span class="type">Int</span></span><br><span class="line"><span class="title">numDivisors</span> n = product [k + <span class="number">1</span> | (_, k) &lt;- primePowers n]</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> :: <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ head $ dropWhile (\n -&gt; numDivisors n &lt;= <span class="number">500</span>) triangles</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Clojure<br><figure class="highlight clj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure </span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> divisor? [b n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">rem</span></span> n b) <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> triangle-number [n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">cond</span></span> </span><br><span class="line">    (<span class="name"><span class="builtin-name">&lt;</span></span> n <span class="number">1</span>) <span class="literal">nil</span></span><br><span class="line">    (<span class="name"><span class="builtin-name">=</span></span> n <span class="number">1</span>) <span class="number">1</span></span><br><span class="line">    <span class="symbol">:else</span> (<span class="name"><span class="builtin-name">+</span></span> n (<span class="name">triangle-number</span> (<span class="name"><span class="builtin-name">dec</span></span> n)))))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> divisors [n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">cons</span></span> n (<span class="name"><span class="builtin-name">filter</span></span> #(<span class="name">divisor?</span> % n) (<span class="name"><span class="builtin-name">range</span></span> <span class="number">1</span> (<span class="name"><span class="builtin-name">inc</span></span> (/ n <span class="number">2</span>))))))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> num-divisors [n])</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">def</span></span> triangle-numbers (<span class="name"><span class="builtin-name">map</span></span> triangle-number (<span class="name"><span class="builtin-name">range</span></span> <span class="number">1</span> <span class="number">1000</span>)))</span><br><span class="line">(<span class="name">println</span> (<span class="name"><span class="builtin-name">first</span></span> (<span class="name"><span class="builtin-name">filter</span></span> #(<span class="name"><span class="builtin-name">&gt;</span></span> (<span class="name">num-divisors</span> %) <span class="number">500</span>) triangle-numbers)))</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p012</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p012().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * Computers are fast, so we can implement this solution directly without any clever math.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> triangle = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; ; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (Integer.MAX_VALUE - triangle &lt; i)</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Overflow"</span>);</span><br><span class="line">			triangle += i;  <span class="comment">// This is the ith triangle number, i.e. num = 1 + 2 + ... + i = i * (i + 1) / 2</span></span><br><span class="line">			<span class="keyword">if</span> (countDivisors(triangle) &gt; <span class="number">500</span>)</span><br><span class="line">				<span class="keyword">return</span> Integer.toString(triangle);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Returns the number of integers in the range [1, n] that divide n.</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">countDivisors</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> end = Library.sqrt(n);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; end; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (n % i == <span class="number">0</span>)</span><br><span class="line">				count += <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (end * end == n)  <span class="comment">// Perfect square</span></span><br><span class="line">			count++;</span><br><span class="line">		<span class="keyword">return</span> count;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Mathematica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* We do a straightforward search with some help from built-in functions. *)</span></span><br><span class="line">TriangleNumber[n_] = <span class="keyword">Sum</span>[i, &#123;i, n&#125;];</span><br><span class="line">i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">While</span>[<span class="keyword">DivisorSigma</span>[<span class="number">0</span>, TriangleNumber[i]] &lt;= <span class="number">500</span>, i++]</span><br><span class="line">TriangleNumber[i]</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/03/07/Project-Euler-012/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="../6/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../5/">5</a><a class="page-number" href="../6/">6</a><span class="page-number current">7</span><a class="page-number" href="../8/">8</a><a class="page-number" href="../9/">9</a><span class="space">&hellip;</span><a class="page-number" href="../20/">20</a><a class="extend next" rel="next" href="../8/">Next &raquo;</a>
@@ -705,11 +717,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
