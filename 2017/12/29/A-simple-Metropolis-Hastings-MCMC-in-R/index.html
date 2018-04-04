@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/machineLearning/MCMC/output_2_0.png">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/machineLearning/MCMC/output_5_0.png">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/machineLearning/MCMC/output_13_1.png">
-<meta property="og:updated_time" content="2018-04-04T03:30:32.140Z">
+<meta property="og:updated_time" content="2018-04-04T03:59:38.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A simple Metropolis-Hastings MCMC in R">
 <meta name="twitter:description" content="While there are certainly good software packages out there to do the job for you, notably BUGS or JAGS, it is instructive to program a simple MCMC yourself. In this post, I give an educational example">
@@ -396,6 +396,19 @@ F-statistic: 748.3 on 1 and 29 DF,  p-value: &lt; 2.2e-16
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Creating-test-data"><span class="toc-number">1.</span> <span class="toc-text">Creating test data</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Defining-the-statistical-model"><span class="toc-number">2.</span> <span class="toc-text">Defining the statistical model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Derive-the-likelihood-function-from-the-model"><span class="toc-number">3.</span> <span class="toc-text">Derive the likelihood function from the model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-we-work-with-logarithms"><span class="toc-number">4.</span> <span class="toc-text">Why we work with logarithms</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Defining-the-prior"><span class="toc-number">5.</span> <span class="toc-text">Defining the prior</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-posterior"><span class="toc-number">6.</span> <span class="toc-text">The posterior</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-MCMC"><span class="toc-number">7.</span> <span class="toc-text">The MCMC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References-for-further-reading"><span class="toc-number">8.</span> <span class="toc-text">References for further reading</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -561,10 +574,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">computational method</a>
               </li>
              
@@ -601,15 +610,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
             
             <div class="clearfix"></div>

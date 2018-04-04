@@ -2,6 +2,76 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>onlookerliu.github.io/2018/02/26/Simple-Perceptron-using-Processing/</loc>
+    
+    <lastmod>2018-04-04T04:00:52.085Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
+    
+    <lastmod>2018-04-04T04:00:20.166Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
+    
+    <lastmod>2018-04-04T04:00:13.509Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
+    
+    <lastmod>2018-04-04T04:00:07.089Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    
+    <lastmod>2018-04-04T04:00:00.785Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/28/dot%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</loc>
+    
+    <lastmod>2018-04-04T03:59:49.458Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
+    
+    <lastmod>2018-04-04T03:59:38.791Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/25/30-seconds-of-code/</loc>
+    
+    <lastmod>2018-04-04T03:59:23.872Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/11/14/Assignment-2-of-Advanced-Computational-Method/</loc>
+    
+    <lastmod>2018-04-04T03:58:58.773Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/10/30/Assignment-1-of-Advanced-Computational-Method/</loc>
+    
+    <lastmod>2018-04-04T03:58:48.753Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>onlookerliu.github.io/2017/12/27/%E5%89%91%E6%8C%87offer-JavaScript%E7%89%88III/</loc>
     
     <lastmod>2018-04-04T03:51:17.367Z</lastmod>
@@ -177,34 +247,6 @@
   </url>
   
   <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
-    
-    <lastmod>2018-04-04T03:37:53.404Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
-    
-    <lastmod>2018-04-04T03:37:45.048Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
-    
-    <lastmod>2018-04-04T03:37:36.487Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
-    
-    <lastmod>2018-04-04T03:37:25.431Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>onlookerliu.github.io/2018/02/08/Project-Euler-001/</loc>
     
     <lastmod>2018-04-04T03:37:06.519Z</lastmod>
@@ -352,13 +394,6 @@
   </url>
   
   <url>
-    <loc>onlookerliu.github.io/2017/12/28/dot%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</loc>
-    
-    <lastmod>2018-04-04T03:31:52.058Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>onlookerliu.github.io/2017/12/29/Decision-Tree-Regression/</loc>
     
     <lastmod>2018-04-04T03:31:33.190Z</lastmod>
@@ -390,41 +425,6 @@
     <loc>onlookerliu.github.io/2017/12/29/Classifier-Comparison/</loc>
     
     <lastmod>2018-04-04T03:31:04.305Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/11/14/Assignment-2-of-Advanced-Computational-Method/</loc>
-    
-    <lastmod>2018-04-04T03:30:55.684Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/10/30/Assignment-1-of-Advanced-Computational-Method/</loc>
-    
-    <lastmod>2018-04-04T03:30:46.584Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
-    
-    <lastmod>2018-04-04T03:30:32.140Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/12/25/30-seconds-of-code/</loc>
-    
-    <lastmod>2018-04-04T03:30:19.251Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/26/Simple-Perceptron-using-Processing/</loc>
-    
-    <lastmod>2018-02-28T16:53:54.160Z</lastmod>
     
   </url>
   
