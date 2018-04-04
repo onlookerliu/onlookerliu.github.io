@@ -167,6 +167,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-Notes-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/03/02/LeetCode-Notes-004/">LeetCode Notes 004</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/03/02/LeetCode-Notes-004/" class="archive-article-date">
+  	<time datetime="2018-03-02T15:00:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Arithmetic-Slices"><a href="#Arithmetic-Slices" class="headerlink" title="Arithmetic Slices"></a>Arithmetic Slices</h3><p>A sequence of number is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.</p>
+<p>For example, these are arithmetic sequence:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1, 3, 5, 7, 9</span><br><span class="line">7, 7, 7, 7</span><br><span class="line">3, -1, -5, -9</span><br></pre></td></tr></table></figure></p>
+<p>The following sequence is not arithmetic.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1, 1, 2, 5, 7</span><br></pre></td></tr></table></figure></p>
+<p>A zero-indexed array A consisting of N numbers is given. A slice of that array is any pair of integers (P, Q) such that 0 &lt;= P &lt; Q &lt; N.</p>
+<p>A slice (P, Q) of array A is called arithmetic if the sequence:<br>A[P], A[p + 1], …, A[Q - 1], A[Q] is arithmetic. In particular, this means that P + 1 &lt; Q.</p>
+<p>The function should return the number of arithmetic slices in the array A.</p>
+<p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A = [1, 2, 3, 4]</span><br><span class="line"></span><br><span class="line">return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; A</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numberOfArithmeticSlices = <span class="function"><span class="keyword">function</span>(<span class="params">A</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> len = A.length;</span><br><span class="line">  <span class="keyword">let</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> diff;</span><br><span class="line">    <span class="keyword">let</span> num = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i + <span class="number">1</span>; j &lt; len; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (j === i + <span class="number">1</span>)</span><br><span class="line">        diff = A[j] - A[i];</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (A[j] - A[j - <span class="number">1</span>] === diff)</span><br><span class="line">        num++;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ans += num - <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Arranging-Coins"><a href="#Arranging-Coins" class="headerlink" title="Arranging Coins"></a>Arranging Coins</h3><p>You have a total of n coins that you want to form in a staircase shape, where every k-th row must have exactly k coins.</p>
+<p>Given n, find the total number of full staircase rows that can be formed.</p>
+<p>n is a non-negative integer and fits within the range of a 32-bit signed integer.</p>
+<p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">n = 5</span><br><span class="line"></span><br><span class="line">The coins can form the following rows:</span><br><span class="line">¤</span><br><span class="line">¤ ¤</span><br><span class="line">¤ ¤</span><br><span class="line"></span><br><span class="line">Because the 3rd row is incomplete, we return 2.</span><br></pre></td></tr></table></figure></p>
+<p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">n = 8</span><br><span class="line"></span><br><span class="line">The coins can form the following rows:</span><br><span class="line">¤</span><br><span class="line">¤ ¤</span><br><span class="line">¤ ¤ ¤</span><br><span class="line">¤ ¤</span><br><span class="line"></span><br><span class="line">Because the 4th row is incomplete, we return 3.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> arrangeCoins = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> ans = <span class="built_in">Math</span>.sqrt(<span class="number">1</span> + <span class="number">8</span> * n) - <span class="number">1</span>;</span><br><span class="line">  ans /= <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ~~ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Assign-Cookies"><a href="#Assign-Cookies" class="headerlink" title="Assign Cookies"></a>Assign Cookies</h3><p>Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie. Each child $i$ has a greed factor $g_i$, which is the minimum size of a cookie that the child will be content with; and each cookie $j$ has a size $s_j$. If $s_j &gt;= g_i$, we can assign the cookie $j$ to the child $i$, and the child $i$ will be content. Your goal is to maximize the number of your content children and output the maximum number.</p>
+<p><strong>Note:</strong></p>
+<p>You may assume the greed factor is always positive. </p>
+<p>You cannot assign more than one cookie to one child.</p>
+<p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,2,3], [1,1]</span><br><span class="line"></span><br><span class="line">Output: 1</span><br><span class="line"></span><br><span class="line">Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3. </span><br><span class="line">And even though you have 2 cookies, since their size is both 1, you could only make the child whose greed factor is 1 content.</span><br><span class="line">You need to output 1.</span><br></pre></td></tr></table></figure></p>
+<p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,2], [1,2,3]</span><br><span class="line"></span><br><span class="line">Output: 2</span><br><span class="line"></span><br><span class="line">Explanation: You have 2 children and 3 cookies. The greed factors of 2 children are 1, 2. </span><br><span class="line">You have 3 cookies and their sizes are big enough to gratify all of the children, </span><br><span class="line">You need to output 2.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; g</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> findContentChildren = <span class="function"><span class="keyword">function</span>(<span class="params">g, s</span>) </span>&#123;</span><br><span class="line">  g.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;<span class="keyword">return</span> a - b;&#125;);</span><br><span class="line">  s.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;<span class="keyword">return</span> a - b;&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> sIndex = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> sLen = s.length;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// greedy</span></span><br><span class="line">  loop:</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = g.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> item = g[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = sIndex; j &lt; sLen; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (s[j] &gt;= item) &#123;</span><br><span class="line">        ans++;</span><br><span class="line">        sIndex = j + <span class="number">1</span>; <span class="comment">// the index next loop should be from</span></span><br><span class="line">        <span class="keyword">if</span> (sIndex === sLen) <span class="keyword">break</span> loop;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/03/02/LeetCode-Notes-004/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-Notes-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -362,108 +459,9 @@
 
 
   
-    <article id="post-Project-Euler-009" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2018/02/27/Project-Euler-009/">Project-Euler-009</a>
-    </h1>
-  
-
-        
-        <a href="../../2018/02/27/Project-Euler-009/" class="archive-article-date">
-  	<time datetime="2018-02-27T03:36:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>A Pythagorean triplet is a set of three natural numbers, $a \lt b \lt c$,<br>for which</p>
-<p>$$a^2 + b^2 = c^2$$</p>
-<p>For example, $3^2 + 4^2 = 9 + 16 = 25 = 5^2$.</p>
-<p>There exists exactly one Pythagorean triplet for which $a + b + c = 1000$.<br>Find the product $a \times b \times c$.</p>
-<h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">31875000</span><br></pre></td></tr></table></figure>
-<hr>
-<p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute</span><span class="params">()</span>:</span></span><br><span class="line">	PERIMETER = <span class="number">1000</span></span><br><span class="line">	<span class="keyword">for</span> a <span class="keyword">in</span> range(<span class="number">1</span>, PERIMETER + <span class="number">1</span>):</span><br><span class="line">		<span class="keyword">for</span> b <span class="keyword">in</span> range(a + <span class="number">1</span>, PERIMETER + <span class="number">1</span>):</span><br><span class="line">			c = PERIMETER - a - b</span><br><span class="line">			<span class="keyword">if</span> a * a + b * b == c * c:</span><br><span class="line">				<span class="comment"># It is now implied that b &lt; c, because we have a &gt; 0</span></span><br><span class="line">				<span class="keyword">return</span> str(a * b * c)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">	print(compute())</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>JavaScript</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> a = <span class="number">1</span>; a &lt; <span class="number">1000</span>; a++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> b = a, lb = <span class="number">1000</span> - a; b &lt; lb; b++) &#123;</span><br><span class="line">    <span class="keyword">const</span> c = <span class="number">1000</span> - (a + b)</span><br><span class="line">    <span class="keyword">if</span> (a * a + b * b === c * c) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">console</span>.log(a * b * c)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>Go<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a, b, c, lb <span class="keyword">int</span></span><br><span class="line">	max := <span class="number">1000</span></span><br><span class="line">	<span class="keyword">for</span> a = <span class="number">1</span>; a &lt; max; a++ &#123;</span><br><span class="line">		lb = max - a</span><br><span class="line">		<span class="keyword">for</span> b = a; b &lt; lb; b++ &#123;</span><br><span class="line">			c = max - (a + b)</span><br><span class="line">			<span class="keyword">if</span> a*a+b*b == c*c &#123;</span><br><span class="line">				fmt.Println(a * b * c)</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Ruby<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> (<span class="number">1</span>..<span class="number">500</span>)</span><br><span class="line">  <span class="keyword">for</span> b <span class="keyword">in</span> (a..<span class="number">500</span>)</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> (b..<span class="number">500</span>)</span><br><span class="line">      <span class="keyword">if</span> a**<span class="number">2</span> + b**<span class="number">2</span> == c**<span class="number">2</span> <span class="keyword">and</span> a+b+c == <span class="number">1000</span></span><br><span class="line">        puts a*b*c</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">main</span> ::  <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ head [a*b*c | a &lt;- [<span class="number">1.</span><span class="number">.500</span>], b &lt;- [a.<span class="number">.500</span>], c &lt;- [b.<span class="number">.500</span>],</span><br><span class="line">                             a+b+c == <span class="number">1000</span>, a*a + b*b == c*c]</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Clojure<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure</span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> square [n]</span><br><span class="line">  (<span class="name"><span class="builtin-name">*</span></span> n n))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> triple? [a b c]</span><br><span class="line">  (<span class="name"><span class="builtin-name">and</span></span></span><br><span class="line">    (<span class="name"><span class="builtin-name">and</span></span> (<span class="name"><span class="builtin-name">&gt;</span></span> a <span class="number">0</span>) (<span class="name"><span class="builtin-name">&gt;</span></span> b <span class="number">0</span>) (<span class="name"><span class="builtin-name">&gt;</span></span> c <span class="number">0</span>))</span><br><span class="line">    (<span class="name"><span class="builtin-name">and</span></span> (<span class="name"><span class="builtin-name">&lt;</span></span> a b) (<span class="name"><span class="builtin-name">&lt;</span></span> b c))</span><br><span class="line">    (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">+</span></span> (<span class="name">square</span> a) (<span class="name">square</span> b)) (<span class="name">square</span> c))))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">defn</span></span> candidates [limit]</span><br><span class="line">  (<span class="name"><span class="builtin-name">for</span></span> [a (<span class="name"><span class="builtin-name">range</span></span> <span class="number">1</span> (<span class="name"><span class="builtin-name">inc</span></span> limit)) </span><br><span class="line">        b (<span class="name"><span class="builtin-name">range</span></span> a (<span class="name"><span class="builtin-name">inc</span></span> limit)) </span><br><span class="line">        c (<span class="name"><span class="builtin-name">range</span></span> b (<span class="name"><span class="builtin-name">inc</span></span> limit))</span><br><span class="line">        <span class="symbol">:when</span> (<span class="name"><span class="builtin-name">and</span></span> </span><br><span class="line">                (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">+</span></span> a b c) <span class="number">1000</span>)</span><br><span class="line">                (<span class="name">triple?</span> a b c))] </span><br><span class="line">    (<span class="name"><span class="builtin-name">list</span></span> a b c)))</span><br><span class="line"></span><br><span class="line">(<span class="name">println</span> (<span class="name"><span class="builtin-name">reduce</span></span> * (<span class="name"><span class="builtin-name">first</span></span> (<span class="name">candidates</span> <span class="number">500</span>))))</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Mathematica<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">For</span>[a = <span class="number">1</span>, a &lt;= <span class="number">1000</span>, a++,</span><br><span class="line">  <span class="keyword">For</span>[b = a + <span class="number">1</span>, b &lt;= <span class="number">1000</span>, b++,</span><br><span class="line">    <span class="keyword">Block</span>[&#123;c = 1000 - a - b&#125;,</span><br><span class="line">      <span class="keyword">If</span>[a &lt; b &lt; c &amp;&amp; a^<span class="number">2</span> + b^<span class="number">2</span> == c^<span class="number">2</span>,</span><br><span class="line">        <span class="keyword">Print</span>[a, <span class="string">" "</span>, b, <span class="string">" "</span>, c, <span class="string">" "</span>, a * b * c]]]]]</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p009</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p009().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * Computers are fast, so we can implement a brute-force search to directly solve the problem.</span></span><br><span class="line"><span class="comment">	 * Note that a^2 + b^2 is bounded above by 2*(1000^2), which fits in a Java int type.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PERIMETER = <span class="number">1000</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> a = <span class="number">1</span>; a &lt; PERIMETER; a++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> b = a + <span class="number">1</span>; b &lt; PERIMETER; b++) &#123;</span><br><span class="line">				<span class="keyword">int</span> c = PERIMETER - a - b;</span><br><span class="line">				<span class="keyword">if</span> (a * a + b * b == c * c) &#123;</span><br><span class="line">					<span class="comment">// It is now implied that b &lt; c, because we have a &gt; 0</span></span><br><span class="line">					<span class="keyword">return</span> Integer.toString(a * b * c);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(<span class="string">"Not found"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/02/27/Project-Euler-009/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../9/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../8/">8</a><a class="page-number" href="../9/">9</a><span class="page-number current">10</span><a class="page-number" href="../11/">11</a><a class="page-number" href="../12/">12</a><span class="space">&hellip;</span><a class="page-number" href="../20/">20</a><a class="extend next" rel="next" href="../11/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="../9/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../8/">8</a><a class="page-number" href="../9/">9</a><span class="page-number current">10</span><a class="page-number" href="../11/">11</a><a class="page-number" href="../12/">12</a><span class="space">&hellip;</span><a class="page-number" href="../21/">21</a><a class="extend next" rel="next" href="../11/">Next &raquo;</a>
     </nav>
   
 
@@ -589,19 +587,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">computational method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">statistics</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">computational method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,6 +640,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
             
             <div class="clearfix"></div>

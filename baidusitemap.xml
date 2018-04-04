@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>onlookerliu.github.io/2018/03/26/Simple-Implement-of-Spring-MVC/</loc>
+    <lastmod>2018-04-04T03:23:23.724Z</lastmod>
+    <data>
+        <display>
+        <title>Simple Implement of Spring MVC</title>
+        <pubTime>2018-03-26T03:22:47.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>onlookerliu.github.io/2018/03/25/LeetCode-Notes-020/</loc>
     <lastmod>2018-04-01T17:03:21.438Z</lastmod>
     <data>
@@ -739,9 +756,9 @@
         <title>Assignment 1 of Advanced Computational Method</title>
         <pubTime>2017-10-30T15:59:42.000Z</pubTime>
         
-        <tag>statistics</tag>
-         
         <tag>julia</tag>
+         
+        <tag>statistics</tag>
          
         <tag>computationa method</tag>
          
@@ -753,31 +770,12 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 2 of Statistics.md</title>
-        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
-        
-        <tag>r</tag>
-         
-        <tag>statistics</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    <data>
-        <display>
-        <title>Project 4 of Statistics.md</title>
-        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
+        <title>Project 3 of Statistics.md</title>
+        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
         
         <tag>r</tag>
          
@@ -810,6 +808,25 @@
 
     
   <url>
+    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
+    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
+    <data>
+        <display>
+        <title>Project 2 of Statistics.md</title>
+        <pubTime>2017-11-17T08:38:31.000Z</pubTime>
+        
+        <tag>r</tag>
+         
+        <tag>statistics</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>onlookerliu.github.io/2017/12/29/A-simple-Metropolis-Hastings-MCMC-in-R/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
@@ -827,12 +844,12 @@
 
     
   <url>
-    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
     <lastmod>2018-02-28T15:55:23.796Z</lastmod>
     <data>
         <display>
-        <title>Project 3 of Statistics.md</title>
-        <pubTime>2017-12-01T12:39:50.000Z</pubTime>
+        <title>Project 4 of Statistics.md</title>
+        <pubTime>2017-12-15T09:40:41.000Z</pubTime>
         
         <tag>r</tag>
          
