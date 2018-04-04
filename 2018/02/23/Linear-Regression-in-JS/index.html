@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>Linear Regression in JS | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="This code is mainly based on the p5js library, which provide us an accessible sketchbook to interactive with HTML objects. In p5, we only need to make our own changes to the file named sketch.js. 1234">
+  <meta name="description" content="This code is mainly based on the p5js library, which provide us an accessible sketchbook to interactive with HTML objects.">
 <meta name="keywords" content="statistics,javascript,p5js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linear Regression in JS">
 <meta property="og:url" content="onlookerliu.github.io/2018/02/23/Linear-Regression-in-JS/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="This code is mainly based on the p5js library, which provide us an accessible sketchbook to interactive with HTML objects. In p5, we only need to make our own changes to the file named sketch.js. 1234">
+<meta property="og:description" content="This code is mainly based on the p5js library, which provide us an accessible sketchbook to interactive with HTML objects.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oxyywddt8.bkt.clouddn.com/p5js/OLS.gif">
-<meta property="og:updated_time" content="2018-02-28T16:52:10.408Z">
+<meta property="og:updated_time" content="2018-04-04T03:38:00.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression in JS">
-<meta name="twitter:description" content="This code is mainly based on the p5js library, which provide us an accessible sketchbook to interactive with HTML objects. In p5, we only need to make our own changes to the file named sketch.js. 1234">
+<meta name="twitter:description" content="This code is mainly based on the p5js library, which provide us an accessible sketchbook to interactive with HTML objects.">
 <meta name="twitter:image" content="http://oxyywddt8.bkt.clouddn.com/p5js/OLS.gif">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
@@ -190,6 +190,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>This code is mainly based on the <a href="https://p5js.org/" target="_blank" rel="noopener">p5js</a> library, which provide us an accessible sketchbook to interactive with HTML objects.</p>
+<a id="more"></a>
 <p>In p5, we only need to make our own changes to the file named sketch.js.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> m = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    createCanvas(<span class="number">400</span>, <span class="number">400</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">linearRegression</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xsum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> ysum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">        xsum += data[i].x;</span><br><span class="line">        ysum += data[i].y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> xmean = xsum / data.length;</span><br><span class="line">    <span class="keyword">var</span> ymean = ysum / data.length;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> den = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> x = data[i].x;</span><br><span class="line">        <span class="keyword">var</span> y = data[i].y;</span><br><span class="line">        num += (x - xmean) * (y - ymean);</span><br><span class="line">        den += (x - xmean) * (x - xmean);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    m = num / den;</span><br><span class="line">    b = ymean - m * xmean;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawLine</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> y1 = m * x1 + b;</span><br><span class="line">    <span class="keyword">var</span> x2 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> y2 = m * x2 + b;</span><br><span class="line"></span><br><span class="line">    x1 = map(x1, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, width);</span><br><span class="line">    y1 = map(y1, <span class="number">0</span>, <span class="number">1</span>, height, <span class="number">0</span>);</span><br><span class="line">    x2 = map(x2, <span class="number">0</span>, <span class="number">0</span>, width);</span><br><span class="line">    y2 = map(y2, <span class="number">0</span>, <span class="number">1</span>, height, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    stroke(<span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>);</span><br><span class="line">    line(x1, y1, x2, y2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mousePressed</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> x = map(mouseX, <span class="number">0</span>, width, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">var</span> y = map(mouseY, <span class="number">0</span>, height, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">var</span> point = createVector(x, y);</span><br><span class="line">    data.push(point);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    background(<span class="number">51</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> x = map(data[i].x, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, width);</span><br><span class="line">        <span class="keyword">var</span> y = map(data[i].y, <span class="number">0</span>, <span class="number">1</span>, height, <span class="number">0</span>);</span><br><span class="line">        fill(<span class="number">255</span>);</span><br><span class="line">        stroke(<span class="number">255</span>);</span><br><span class="line">        ellipse(x, y, <span class="number">8</span>, <span class="number">8</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (data.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        linearRegression();</span><br><span class="line">        drawLine();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Click on the index.html file, and we can make our regression on any browser support javascript. Here is the design sketch.</p>
@@ -505,15 +506,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,11 +514,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -9,14 +9,14 @@
   <title>LeetCode Notes 011 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Bulb SwitcherThere are n bulbs that are initially off. You first turn on all the bulbs. Then, you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it’s off or">
-<meta name="keywords" content="leetcode,javascript">
+<meta name="keywords" content="javascript,leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 011">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/16/LeetCode-Notes-011/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Bulb SwitcherThere are n bulbs that are initially off. You first turn on all the bulbs. Then, you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it’s off or">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-30T06:45:53.474Z">
+<meta property="og:updated_time" content="2018-04-04T03:39:54.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 011">
 <meta name="twitter:description" content="Bulb SwitcherThere are n bulbs that are initially off. You first turn on all the bulbs. Then, you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it’s off or">
@@ -189,6 +189,7 @@
       
         <h3 id="Bulb-Switcher"><a href="#Bulb-Switcher" class="headerlink" title="Bulb Switcher"></a>Bulb Switcher</h3><p>There are n bulbs that are initially off. You first turn on all the bulbs. Then, you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it’s off or turning off if it’s on). For the ith round, you toggle every i bulb. For the nth round, you only toggle the last bulb. Find how many bulbs are on after n rounds.</p>
 <p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Given n = 3. </span><br><span class="line"></span><br><span class="line">At first, the three bulbs are [off, off, off].</span><br><span class="line">After first round, the three bulbs are [on, on, on].</span><br><span class="line">After second round, the three bulbs are [on, off, on].</span><br><span class="line">After third round, the three bulbs are [on, off, off]. </span><br><span class="line"></span><br><span class="line">So you should return 1, because there is only one bulb is on.</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打表</span></span><br><span class="line"><span class="keyword">var</span> bulbSwitch = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ans = <span class="number">-1</span> + <span class="built_in">Math</span>.sqrt(<span class="number">1</span> + n);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.ceil(ans);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Bull-and-Cows"><a href="#Bull-and-Cows" class="headerlink" title="Bull and Cows"></a>Bull and Cows</h3><p>You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to guess what the number is. Each time your friend makes a guess, you provide a hint that indicates how many digits in said guess match your secret number exactly in both digit and position (called “bulls”) and how many digits match the secret number but locate in the wrong position (called “cows”). Your friend will use successive guesses and hints to eventually derive the secret number.</p>
 <p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Secret number:  &quot;1807&quot;</span><br><span class="line">Friend&apos;s guess: &quot;7810&quot;</span><br></pre></td></tr></table></figure></p>
@@ -245,11 +246,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -507,15 +508,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,11 +516,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

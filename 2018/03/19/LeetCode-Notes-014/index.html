@@ -9,14 +9,14 @@
   <title>LeetCode Notes 014 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="CombinationsGiven two integers $n$ and $k$, return all possible combinations of $k$ numbers out of 1 … $n$. For example:If n = 4 and k = 2, a solution is:12345678[  [2,4],  [3,4],  [2,3],  [1,2],  [1,">
-<meta name="keywords" content="leetcode,javascript">
+<meta name="keywords" content="javascript,leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 014">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/19/LeetCode-Notes-014/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="CombinationsGiven two integers $n$ and $k$, return all possible combinations of $k$ numbers out of 1 … $n$. For example:If n = 4 and k = 2, a solution is:12345678[  [2,4],  [3,4],  [2,3],  [1,2],  [1,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-01T15:24:53.502Z">
+<meta property="og:updated_time" content="2018-04-04T03:39:21.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 014">
 <meta name="twitter:description" content="CombinationsGiven two integers $n$ and $k$, return all possible combinations of $k$ numbers out of 1 … $n$. For example:If n = 4 and k = 2, a solution is:12345678[  [2,4],  [3,4],  [2,3],  [1,2],  [1,">
@@ -189,6 +189,7 @@
       
         <h3 id="Combinations"><a href="#Combinations" class="headerlink" title="Combinations"></a>Combinations</h3><p>Given two integers $n$ and $k$, return all possible combinations of $k$ numbers out of 1 … $n$.</p>
 <p>For example:<br>If n = 4 and k = 2, a solution is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [2,4],</span><br><span class="line">  [3,4],</span><br><span class="line">  [2,3],</span><br><span class="line">  [1,2],</span><br><span class="line">  [1,3],</span><br><span class="line">  [1,4],</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; k</span></span><br><span class="line"><span class="comment"> * @return &#123;number[][]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// return an array of k numbers with 1 ~ n</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ans = []</span><br><span class="line">  , tmp = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">next, n, num, k</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (num === k) &#123;</span><br><span class="line">    <span class="keyword">var</span> res = tmp.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> item;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    ans.push(res);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = next; i &lt;= n; i++) &#123;</span><br><span class="line">    tmp.push(i);</span><br><span class="line">    dfs(i + <span class="number">1</span>, n, num + <span class="number">1</span>, k);</span><br><span class="line">    tmp.pop();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> combine = <span class="function"><span class="keyword">function</span>(<span class="params">n, k</span>) </span>&#123;</span><br><span class="line">  ans = []; </span><br><span class="line">  <span class="comment">// select the 1st number</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    tmp[<span class="number">0</span>] = i;</span><br><span class="line">    dfs(i + <span class="number">1</span>, n, <span class="number">1</span>, k);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Compare-Version-Numbers"><a href="#Compare-Version-Numbers" class="headerlink" title="Compare Version Numbers"></a>Compare Version Numbers</h3><p>Compare two version numbers version1 and version2.<br>If version1 &gt; version2 return 1, if version1 &lt; version2 return -1, otherwise return 0.</p>
 <p>You may assume that the version strings are non-empty and contain only digits and the <code>.</code> character.<br>The <code>.</code> character does not represent a decimal point and is used to separate number sequences.<br>For instance, <code>2.5</code> is not “two and a half” or “half way to version three”, it is the fifth second-level revision of the second first-level revision.</p>
@@ -249,11 +250,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -511,15 +512,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -527,11 +520,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

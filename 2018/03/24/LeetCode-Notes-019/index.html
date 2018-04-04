@@ -9,14 +9,14 @@
   <title>LeetCode Notes 019 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Count And SayThe count-and-say sequence is the sequence of integers with the first five terms as following: 123451.     12.     113.     214.     12115.     111221 1 is read off as &amp;quot;one 1&amp;quot; o">
-<meta name="keywords" content="leetcode,javascript">
+<meta name="keywords" content="javascript,leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 019">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/24/LeetCode-Notes-019/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Count And SayThe count-and-say sequence is the sequence of integers with the first five terms as following: 123451.     12.     113.     214.     12115.     111221 1 is read off as &amp;quot;one 1&amp;quot; o">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-01T16:43:54.103Z">
+<meta property="og:updated_time" content="2018-04-04T03:38:36.021Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 019">
 <meta name="twitter:description" content="Count And SayThe count-and-say sequence is the sequence of integers with the first five terms as following: 123451.     12.     113.     214.     12115.     111221 1 is read off as &amp;quot;one 1&amp;quot; o">
@@ -194,6 +194,7 @@
 <p>Note: Each term of the sequence of integers will be represented as a string.</p>
 <p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: 1</span><br><span class="line">Output: &quot;1&quot;</span><br></pre></td></tr></table></figure></p>
 <p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: 4</span><br><span class="line">Output: &quot;1211&quot;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// hash answer</span></span><br><span class="line"><span class="keyword">var</span> hash = &#123;&#125;;</span><br><span class="line">hash[<span class="number">1</span>] = <span class="string">'1'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> countAndSay = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> hashPos;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = n; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">if</span> (hash[i]) hashPos = i;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> str = hash[hashPos];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = hashPos + <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> _str = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> target = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>, len = str.length; j &lt; len; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (target === <span class="string">''</span>) </span><br><span class="line">        target = str[j], num = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (str[j] === target)</span><br><span class="line">        num++;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        _str += num + target;</span><br><span class="line">        target = str[j];</span><br><span class="line">        num = <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (num)</span><br><span class="line">      _str += num + target;</span><br><span class="line">    str = _str;</span><br><span class="line"></span><br><span class="line">    hash[i] = str;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Count-Complete-Tree-Nodes"><a href="#Count-Complete-Tree-Nodes" class="headerlink" title="Count Complete Tree Nodes"></a>Count Complete Tree Nodes</h3><p>Given a complete binary tree, count the number of nodes.</p>
 <p>In a complete binary tree every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as possible. It can have between $1$ and $2^h$ nodes inclusive at the last level h.</p>
@@ -246,11 +247,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -508,15 +509,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -524,11 +517,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

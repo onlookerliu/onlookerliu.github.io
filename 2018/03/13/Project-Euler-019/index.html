@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="ProblemYou are given the following information,but you may prefer to do some research for yourself. 1 Jan 1900 was a Monday. Thirty days has September, April, June and November. All the rest have thir">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-19T14:05:45.626Z">
+<meta property="og:updated_time" content="2018-04-04T03:34:38.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Project-Euler-019">
 <meta name="twitter:description" content="ProblemYou are given the following information,but you may prefer to do some research for yourself. 1 Jan 1900 was a Monday. Thirty days has September, April, June and November. All the rest have thir">
@@ -198,6 +198,7 @@ And on leap years, twenty-nine.
 A leap year occurs on any year evenly divisible by 4, 
 but not on a century unless it is divisible by 400.
 </code></pre><p>How many Sundays fell on the first of the month during<br>the twentieth century (1 Jan 1901 to 31 Dec 2000)?</p>
+<a id="more"></a>
 <h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">171</span><br></pre></td></tr></table></figure>
 <hr>
 <p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> calendar <span class="keyword">import</span> monthrange; <span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line">print(len([(year, month) <span class="keyword">for</span> year, month <span class="keyword">in</span> product(list(range(<span class="number">1901</span>, <span class="number">2001</span>)), list(range(<span class="number">1</span>, <span class="number">13</span>))) <span class="keyword">if</span> monthrange(year, month)[<span class="number">0</span>] == <span class="number">6</span>]))</span><br></pre></td></tr></table></figure></p>
@@ -514,15 +515,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,11 +523,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

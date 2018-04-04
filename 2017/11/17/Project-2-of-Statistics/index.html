@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>Project 2 of Statistics.md | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="摘要本次大作业按章节依次展示了岭估计、主成分估计、逐步回归和带示性变量的回归分析。 主要使用 dplyr 和 readxl 包导入数据并获得数据框视图；利用 MASS 和 car 包作岭迹图、主成分估计和逐步回归分析； dummies 包提供了将示性变量转换为特殊矩阵的可能；bootstrap 包帮助我们实现了 $k$ 重交叉验证。 所有文献和数据集均可在文末的参考文献链接中下载获得。 12345">
+  <meta name="description" content="摘要本次大作业按章节依次展示了岭估计、主成分估计、逐步回归和带示性变量的回归分析。 主要使用 dplyr 和 readxl 包导入数据并获得数据框视图；利用 MASS 和 car 包作岭迹图、主成分估计和逐步回归分析； dummies 包提供了将示性变量转换为特殊矩阵的可能；bootstrap 包帮助我们实现了 $k$ 重交叉验证。">
 <meta name="keywords" content="r,statistics">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project 2 of Statistics.md">
 <meta property="og:url" content="onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="摘要本次大作业按章节依次展示了岭估计、主成分估计、逐步回归和带示性变量的回归分析。 主要使用 dplyr 和 readxl 包导入数据并获得数据框视图；利用 MASS 和 car 包作岭迹图、主成分估计和逐步回归分析； dummies 包提供了将示性变量转换为特殊矩阵的可能；bootstrap 包帮助我们实现了 $k$ 重交叉验证。 所有文献和数据集均可在文末的参考文献链接中下载获得。 12345">
+<meta property="og:description" content="摘要本次大作业按章节依次展示了岭估计、主成分估计、逐步回归和带示性变量的回归分析。 主要使用 dplyr 和 readxl 包导入数据并获得数据框视图；利用 MASS 和 car 包作岭迹图、主成分估计和逐步回归分析； dummies 包提供了将示性变量转换为特殊矩阵的可能；bootstrap 包帮助我们实现了 $k$ 重交叉验证。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistic/project2/output_8_0.png">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistic/project2/output_37_1.png">
-<meta property="og:updated_time" content="2018-02-28T15:55:23.796Z">
+<meta property="og:updated_time" content="2018-04-04T03:37:45.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Project 2 of Statistics.md">
-<meta name="twitter:description" content="摘要本次大作业按章节依次展示了岭估计、主成分估计、逐步回归和带示性变量的回归分析。 主要使用 dplyr 和 readxl 包导入数据并获得数据框视图；利用 MASS 和 car 包作岭迹图、主成分估计和逐步回归分析； dummies 包提供了将示性变量转换为特殊矩阵的可能；bootstrap 包帮助我们实现了 $k$ 重交叉验证。 所有文献和数据集均可在文末的参考文献链接中下载获得。 12345">
+<meta name="twitter:description" content="摘要本次大作业按章节依次展示了岭估计、主成分估计、逐步回归和带示性变量的回归分析。 主要使用 dplyr 和 readxl 包导入数据并获得数据框视图；利用 MASS 和 car 包作岭迹图、主成分估计和逐步回归分析； dummies 包提供了将示性变量转换为特殊矩阵的可能；bootstrap 包帮助我们实现了 $k$ 重交叉验证。">
 <meta name="twitter:image" content="http://oye4atjxc.bkt.clouddn.com/statistic/project2/output_8_0.png">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
@@ -192,6 +192,7 @@
       
         <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>本次大作业按章节依次展示了岭估计、主成分估计、逐步回归和带示性变量的回归分析。</p>
 <p>主要使用 <code>dplyr</code> 和 <code>readxl</code> 包导入数据并获得数据框视图；利用 <code>MASS</code> 和 <code>car</code> 包作岭迹图、主成分估计和逐步回归分析； <code>dummies</code> 包提供了将示性变量转换为特殊矩阵的可能；<code>bootstrap</code> 包帮助我们实现了 $k$ 重交叉验证。</p>
+<a id="more"></a>
 <p>所有文献和数据集均可在文末的参考文献链接中下载获得。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(dplyr)</span><br><span class="line"><span class="keyword">library</span>(readxl)</span><br><span class="line"><span class="keyword">library</span>(MASS)</span><br><span class="line"><span class="keyword">library</span>(car)</span><br><span class="line"><span class="keyword">library</span>(dummies)</span><br><span class="line"><span class="keyword">library</span>(bootstrap)</span><br></pre></td></tr></table></figure>
 <h3 id="岭估计"><a href="#岭估计" class="headerlink" title="岭估计"></a>岭估计</h3><p>对《线性模型与回归分析》(王松桂)书习题3.19数据进行回归分析，十次试验得到的观测数据如下</p>
@@ -924,15 +925,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -940,11 +933,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

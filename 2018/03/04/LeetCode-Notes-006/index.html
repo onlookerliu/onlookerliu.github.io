@@ -9,14 +9,14 @@
   <title>LeetCode Notes 006 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Basic Calculator IIImplement a basic calculator to evaluate a simple expression string. The expression string contains only non-negative integers, +, -, *, / operators and empty spaces . The integer d">
-<meta name="keywords" content="leetcode,javascript">
+<meta name="keywords" content="javascript,leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 006">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/04/LeetCode-Notes-006/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Basic Calculator IIImplement a basic calculator to evaluate a simple expression string. The expression string contains only non-negative integers, +, -, *, / operators and empty spaces . The integer d">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-06T04:35:43.450Z">
+<meta property="og:updated_time" content="2018-04-04T03:40:28.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 006">
 <meta name="twitter:description" content="Basic Calculator IIImplement a basic calculator to evaluate a simple expression string. The expression string contains only non-negative integers, +, -, *, / operators and empty spaces . The integer d">
@@ -191,6 +191,7 @@
 <p>The expression string contains only non-negative integers, +, -, *, / operators and empty spaces . The integer division should truncate toward zero.</p>
 <p>You may assume that the given expression is always valid.</p>
 <p>Some examples:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;3+2*2&quot; = 7</span><br><span class="line">&quot; 3/2 &quot; = 1</span><br><span class="line">&quot; 3+5 / 2 &quot; = 5</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p><strong>Note:</strong> Do not use the eval built-in library function.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> calculate = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  s = s.replace(<span class="regexp">/\s/g</span>, <span class="string">''</span>);</span><br><span class="line">  <span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> numStack = [];</span><br><span class="line">  <span class="keyword">var</span> sym = <span class="string">'+'</span>;  <span class="comment">// 前一个符号，默认可为 '+'</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = s.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> item = s[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (~<span class="string">'+-*/'</span>.indexOf(item) || i === len - <span class="number">1</span>) &#123;</span><br><span class="line">      (i === len - <span class="number">1</span>) &amp;&amp; (num = num * <span class="number">10</span> + (+item));</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (sym === <span class="string">'-'</span>)</span><br><span class="line">        numStack.push(-num);</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (sym === <span class="string">'+'</span>)</span><br><span class="line">        numStack.push(+num);</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (sym === <span class="string">'*'</span>)</span><br><span class="line">        numStack.push(numStack.pop() * num);</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        numStack.push(~~(numStack.pop() / num));</span><br><span class="line"></span><br><span class="line">      num = <span class="number">0</span>;</span><br><span class="line">      sym = item;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      num = num * <span class="number">10</span> + (+item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> ans = <span class="number">0</span>;</span><br><span class="line">  numStack.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    ans += item;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Battleships-in-a-Board"><a href="#Battleships-in-a-Board" class="headerlink" title="Battleships in a Board"></a>Battleships in a Board</h3><p>Given an 2D board, count how many battleships are in it. The battleships are represented with <code>&#39;X&#39;</code>s, empty slots are represented with <code>&#39;.&#39;</code>s. You may assume the following rules:</p>
@@ -267,11 +268,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -529,15 +530,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,11 +538,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

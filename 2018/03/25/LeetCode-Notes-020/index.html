@@ -9,14 +9,14 @@
   <title>LeetCode Notes 020 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Count of Range SumGiven an integer array nums, return the number of range sums that lie in [lower, upper] inclusive.Range sum S(i, j) is defined as the sum of the elements in nums between indices i an">
-<meta name="keywords" content="leetcode,javascript">
+<meta name="keywords" content="javascript,leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 020">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/25/LeetCode-Notes-020/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Count of Range SumGiven an integer array nums, return the number of range sums that lie in [lower, upper] inclusive.Range sum S(i, j) is defined as the sum of the elements in nums between indices i an">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-01T17:03:21.438Z">
+<meta property="og:updated_time" content="2018-04-04T03:38:20.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 020">
 <meta name="twitter:description" content="Count of Range SumGiven an integer array nums, return the number of range sums that lie in [lower, upper] inclusive.Range sum S(i, j) is defined as the sum of the elements in nums between indices i an">
@@ -191,6 +191,7 @@
 <p><strong>Note:</strong><br>A naive algorithm of $O(n^2)$ is trivial. You MUST do better than that.</p>
 <p><strong>Example:</strong><br>Given <code>nums = [-2, 5, -1]</code>, <code>lower = -2</code>, <code>upper = 2</code>,</p>
 <p>Return <code>3</code>.<br>The three ranges are : <code>[0, 0], [2, 2], [0, 2]</code> and their respective sums are: <code>-2, -1, 2</code>.</p>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> wlower, wupper;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  ans += getAns(left, right);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> tmp = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (left.length &amp;&amp; right.length) &#123;</span><br><span class="line">    <span class="keyword">if</span> (left[<span class="number">0</span>] &lt; right[<span class="number">0</span>])</span><br><span class="line">      tmp.push(left.shift());</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      tmp.push(right.shift());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tmp.concat(left, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeSort</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (a.length === <span class="number">1</span>) </span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> mid = ~~(a.length / <span class="number">2</span>)</span><br><span class="line">    , left = a.slice(<span class="number">0</span>, mid)</span><br><span class="line">    , right = a.slice(mid);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; lower</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; upper</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> countRangeSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, lower, upper</span>) </span>&#123;</span><br><span class="line">  wlower = lower;</span><br><span class="line">  wupper = upper;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> arr = [];</span><br><span class="line"></span><br><span class="line">  arr.push(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  nums.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> last = arr[arr.length - <span class="number">1</span>];</span><br><span class="line">    arr.push(last + item);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  mergeSort(arr);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回 b[j] - a[i] 值在 [wlower, wupper] 范围内组数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAns</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> lena = a.length; </span><br><span class="line">  <span class="keyword">var</span> lenb = b.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> start = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> end = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lenb; i++) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// to get start</span></span><br><span class="line">    <span class="keyword">while</span> (b[i] - a[start] &gt;= wlower) &#123;</span><br><span class="line">      start++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// to get end</span></span><br><span class="line">    <span class="keyword">while</span> (b[i] - a[end] &gt; wupper) &#123;</span><br><span class="line">      end++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sum += start - end;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Count-of-Smaller-Numbers-After-Self"><a href="#Count-of-Smaller-Numbers-After-Self" class="headerlink" title="Count of Smaller Numbers After Self"></a>Count of Smaller Numbers After Self</h3><p>You are given an integer array nums and you have to return a new counts array. The counts array has the property where <code>counts[i]</code> is the number of smaller elements to the right of <code>nums[i]</code>.</p>
 <p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Given nums = [5, 2, 6, 1]</span><br><span class="line"></span><br><span class="line">To the right of 5 there are 2 smaller elements (2 and 1).</span><br><span class="line">To the right of 2 there is only 1 smaller element (1).</span><br><span class="line">To the right of 6 there is 1 smaller element (1).</span><br><span class="line">To the right of 1 there is 0 smaller element.</span><br></pre></td></tr></table></figure></p>
@@ -242,11 +243,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -504,15 +505,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,11 +513,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

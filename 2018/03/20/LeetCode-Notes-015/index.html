@@ -9,14 +9,14 @@
   <title>LeetCode Notes 015 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Construct Binary Tree from Inorder and Postorder TraversalGiven inorder and postorder traversal of a tree, construct the binary tree. Note:You may assume that duplicates do not exist in the tree. For">
-<meta name="keywords" content="leetcode,javascript">
+<meta name="keywords" content="javascript,leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 015">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/20/LeetCode-Notes-015/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Construct Binary Tree from Inorder and Postorder TraversalGiven inorder and postorder traversal of a tree, construct the binary tree. Note:You may assume that duplicates do not exist in the tree. For">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-01T15:38:22.756Z">
+<meta property="og:updated_time" content="2018-04-04T03:39:12.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 015">
 <meta name="twitter:description" content="Construct Binary Tree from Inorder and Postorder TraversalGiven inorder and postorder traversal of a tree, construct the binary tree. Note:You may assume that duplicates do not exist in the tree. For">
@@ -191,6 +191,7 @@
 <p><strong>Note:</strong><br>You may assume that duplicates do not exist in the tree.</p>
 <p>For example, given<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inorder = [9,3,15,20,7]</span><br><span class="line">postorder = [9,15,7,20,3]</span><br></pre></td></tr></table></figure></p>
 <p>Return the following binary tree:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * function TreeNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.left = this.right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; inorder</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; postorder</span></span><br><span class="line"><span class="comment"> * @return &#123;TreeNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> buildTree = <span class="function"><span class="keyword">function</span>(<span class="params">inorder, postorder</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> dfs(inorder.length - <span class="number">1</span>, <span class="number">0</span>, inorder.length - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">index, startPos, endPos</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (startPos &gt; endPos)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> node = <span class="keyword">new</span> TreeNode(postorder[index]);</span><br><span class="line">    <span class="keyword">var</span> pos = inorder.indexOf(postorder[index], startPos);</span><br><span class="line"></span><br><span class="line">    node.left = dfs(index - (endPos - pos) - <span class="number">1</span>, startPos, pos - <span class="number">1</span>);</span><br><span class="line">    node.right = dfs(index - <span class="number">1</span>, pos + <span class="number">1</span>, endPos);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal-1"><a href="#Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal-1" class="headerlink" title="Construct Binary Tree from Inorder and Postorder Traversal"></a>Construct Binary Tree from Inorder and Postorder Traversal</h3><p>Given preorder and inorder traversal of a tree, construct the binary tree.</p>
 <p><strong>Note:</strong><br>You may assume that duplicates do not exist in the tree.</p>
@@ -251,11 +252,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -513,15 +514,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,11 +522,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

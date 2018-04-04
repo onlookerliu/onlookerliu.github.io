@@ -2,6 +2,314 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>onlookerliu.github.io/2017/11/29/julia%E5%9F%BA%E4%BA%8EGLM%E5%8C%85%E7%9A%84%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</loc>
+    
+    <lastmod>2018-04-04T03:41:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/30/LeetCode-Notes-002/</loc>
+    
+    <lastmod>2018-04-04T03:40:57.329Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/01/LeetCode-Notes-003/</loc>
+    
+    <lastmod>2018-04-04T03:40:51.157Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/02/LeetCode-Notes-004/</loc>
+    
+    <lastmod>2018-04-04T03:40:45.353Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/03/LeetCode-Notes-005/</loc>
+    
+    <lastmod>2018-04-04T03:40:36.184Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/04/LeetCode-Notes-006/</loc>
+    
+    <lastmod>2018-04-04T03:40:28.964Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/06/LeetCode-Notes-007/</loc>
+    
+    <lastmod>2018-04-04T03:40:19.796Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/12/LeetCode-Notes-008/</loc>
+    
+    <lastmod>2018-04-04T03:40:14.828Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/14/LeetCode-Notes-009/</loc>
+    
+    <lastmod>2018-04-04T03:40:06.123Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/15/LeetCode-Notes-010/</loc>
+    
+    <lastmod>2018-04-04T03:40:00.159Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/16/LeetCode-Notes-011/</loc>
+    
+    <lastmod>2018-04-04T03:39:54.019Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/17/LeetCode-Notes-012/</loc>
+    
+    <lastmod>2018-04-04T03:39:47.215Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/18/LeetCode-Notes-013/</loc>
+    
+    <lastmod>2018-04-04T03:39:32.719Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/19/LeetCode-Notes-014/</loc>
+    
+    <lastmod>2018-04-04T03:39:21.210Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/20/LeetCode-Notes-015/</loc>
+    
+    <lastmod>2018-04-04T03:39:12.282Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/21/LeetCode-Notes-016/</loc>
+    
+    <lastmod>2018-04-04T03:39:04.518Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/22/LeetCode-Notes-017/</loc>
+    
+    <lastmod>2018-04-04T03:38:57.922Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/23/LeetCode-Notes-018/</loc>
+    
+    <lastmod>2018-04-04T03:38:46.085Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/24/LeetCode-Notes-019/</loc>
+    
+    <lastmod>2018-04-04T03:38:36.021Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/25/LeetCode-Notes-020/</loc>
+    
+    <lastmod>2018-04-04T03:38:20.889Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/23/Linear-Regression-in-JS/</loc>
+    
+    <lastmod>2018-04-04T03:38:00.728Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
+    
+    <lastmod>2018-04-04T03:37:53.404Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
+    
+    <lastmod>2018-04-04T03:37:45.048Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
+    
+    <lastmod>2018-04-04T03:37:36.487Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
+    
+    <lastmod>2018-04-04T03:37:25.431Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/08/Project-Euler-001/</loc>
+    
+    <lastmod>2018-04-04T03:37:06.519Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/09/Project-Euler-002/</loc>
+    
+    <lastmod>2018-04-04T03:36:59.854Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/10/Project-Euler-003/</loc>
+    
+    <lastmod>2018-04-04T03:36:55.470Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/11/Project-Euler-004/</loc>
+    
+    <lastmod>2018-04-04T03:36:52.094Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/12/Project-Euler-005/</loc>
+    
+    <lastmod>2018-04-04T03:36:45.686Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/13/Project-Euler-006/</loc>
+    
+    <lastmod>2018-04-04T03:36:40.986Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/14/Project-Euler-007/</loc>
+    
+    <lastmod>2018-04-04T03:36:33.374Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/14/Project-Euler-008/</loc>
+    
+    <lastmod>2018-04-04T03:36:27.610Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/02/27/Project-Euler-009/</loc>
+    
+    <lastmod>2018-04-04T03:36:21.725Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/01/Project-Euler-010/</loc>
+    
+    <lastmod>2018-04-04T03:36:15.017Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/05/Project-Euler-011/</loc>
+    
+    <lastmod>2018-04-04T03:36:07.089Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/07/Project-Euler-012/</loc>
+    
+    <lastmod>2018-04-04T03:35:56.717Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/08/Project-Euler-013/</loc>
+    
+    <lastmod>2018-04-04T03:35:45.528Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/09/Project-Euler-014/</loc>
+    
+    <lastmod>2018-04-04T03:35:32.444Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/10/Project-Euler-015/</loc>
+    
+    <lastmod>2018-04-04T03:35:18.176Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/11/Project-Euler-016/</loc>
+    
+    <lastmod>2018-04-04T03:35:05.775Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/12/Project-Euler-017/</loc>
+    
+    <lastmod>2018-04-04T03:35:00.711Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/13/Project-Euler-018/</loc>
+    
+    <lastmod>2018-04-04T03:34:53.435Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>onlookerliu.github.io/2018/03/13/Project-Euler-019/</loc>
+    
+    <lastmod>2018-04-04T03:34:38.163Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>onlookerliu.github.io/2018/03/29/Project-Euler-020/</loc>
     
     <lastmod>2018-04-04T03:32:35.363Z</lastmod>
@@ -12,13 +320,6 @@
     <loc>onlookerliu.github.io/2017/12/28/LeetCode-Notes-001/</loc>
     
     <lastmod>2018-04-04T03:32:18.079Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/11/29/julia%E5%9F%BA%E4%BA%8EGLM%E5%8C%85%E7%9A%84%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</loc>
-    
-    <lastmod>2018-04-04T03:32:03.154Z</lastmod>
     
   </url>
   
@@ -100,244 +401,6 @@
   </url>
   
   <url>
-    <loc>onlookerliu.github.io/2018/03/25/LeetCode-Notes-020/</loc>
-    
-    <lastmod>2018-04-01T17:03:21.438Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/24/LeetCode-Notes-019/</loc>
-    
-    <lastmod>2018-04-01T16:43:54.103Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/21/LeetCode-Notes-016/</loc>
-    
-    <lastmod>2018-04-01T16:35:26.474Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/23/LeetCode-Notes-018/</loc>
-    
-    <lastmod>2018-04-01T16:33:17.074Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/22/LeetCode-Notes-017/</loc>
-    
-    <lastmod>2018-04-01T16:28:06.736Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/20/LeetCode-Notes-015/</loc>
-    
-    <lastmod>2018-04-01T15:38:22.756Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/19/LeetCode-Notes-014/</loc>
-    
-    <lastmod>2018-04-01T15:24:53.502Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/18/LeetCode-Notes-013/</loc>
-    
-    <lastmod>2018-04-01T15:08:24.184Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/17/LeetCode-Notes-012/</loc>
-    
-    <lastmod>2018-03-31T17:30:00.501Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/16/LeetCode-Notes-011/</loc>
-    
-    <lastmod>2018-03-30T06:45:53.474Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/15/LeetCode-Notes-010/</loc>
-    
-    <lastmod>2018-03-30T06:18:32.601Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/14/LeetCode-Notes-009/</loc>
-    
-    <lastmod>2018-03-30T06:10:23.208Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/12/LeetCode-Notes-008/</loc>
-    
-    <lastmod>2018-03-19T16:22:16.687Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/13/Project-Euler-019/</loc>
-    
-    <lastmod>2018-03-19T14:05:45.626Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/13/Project-Euler-018/</loc>
-    
-    <lastmod>2018-03-19T13:57:53.854Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/10/Project-Euler-015/</loc>
-    
-    <lastmod>2018-03-19T08:41:46.561Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/12/Project-Euler-017/</loc>
-    
-    <lastmod>2018-03-19T08:41:25.811Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/11/Project-Euler-016/</loc>
-    
-    <lastmod>2018-03-19T07:54:54.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/09/Project-Euler-014/</loc>
-    
-    <lastmod>2018-03-19T07:40:59.984Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/07/Project-Euler-012/</loc>
-    
-    <lastmod>2018-03-19T07:39:10.729Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/08/Project-Euler-013/</loc>
-    
-    <lastmod>2018-03-19T07:36:21.603Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/06/LeetCode-Notes-007/</loc>
-    
-    <lastmod>2018-03-06T15:24:04.066Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/05/Project-Euler-011/</loc>
-    
-    <lastmod>2018-03-06T08:29:01.876Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/04/LeetCode-Notes-006/</loc>
-    
-    <lastmod>2018-03-06T04:35:43.450Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/03/LeetCode-Notes-005/</loc>
-    
-    <lastmod>2018-03-06T04:19:37.394Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/02/LeetCode-Notes-004/</loc>
-    
-    <lastmod>2018-03-05T15:14:22.210Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/01/LeetCode-Notes-003/</loc>
-    
-    <lastmod>2018-03-05T13:47:29.008Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/03/01/Project-Euler-010/</loc>
-    
-    <lastmod>2018-03-05T05:39:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/09/Project-Euler-002/</loc>
-    
-    <lastmod>2018-03-05T03:57:01.717Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/14/Project-Euler-007/</loc>
-    
-    <lastmod>2018-03-05T03:57:01.717Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/13/Project-Euler-006/</loc>
-    
-    <lastmod>2018-03-05T03:57:01.717Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/12/Project-Euler-005/</loc>
-    
-    <lastmod>2018-03-05T03:56:52.329Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/27/Project-Euler-009/</loc>
-    
-    <lastmod>2018-03-05T03:43:44.782Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/14/Project-Euler-008/</loc>
-    
-    <lastmod>2018-03-05T03:37:59.880Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>onlookerliu.github.io/2018/02/26/Simple-Perceptron-using-Processing/</loc>
     
     <lastmod>2018-02-28T16:53:54.160Z</lastmod>
@@ -345,72 +408,9 @@
   </url>
   
   <url>
-    <loc>onlookerliu.github.io/2018/02/23/Linear-Regression-in-JS/</loc>
-    
-    <lastmod>2018-02-28T16:52:10.408Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/11/17/Project-2-of-Statistics/</loc>
-    
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/12/01/Project-3-of-Statistics/</loc>
-    
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/12/15/Project-4-of-Statistics/</loc>
-    
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/</loc>
-    
-    <lastmod>2018-02-28T15:55:23.796Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/11/Project-Euler-004/</loc>
-    
-    <lastmod>2018-02-28T13:44:41.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/10/Project-Euler-003/</loc>
-    
-    <lastmod>2018-02-28T13:07:01.226Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2018/02/08/Project-Euler-001/</loc>
-    
-    <lastmod>2018-02-28T12:54:53.043Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>onlookerliu.github.io/about/index.html</loc>
     
     <lastmod>2018-02-28T12:35:49.119Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>onlookerliu.github.io/2017/12/30/LeetCode-Notes-002/</loc>
-    
-    <lastmod>2018-02-28T11:50:15.840Z</lastmod>
     
   </url>
   

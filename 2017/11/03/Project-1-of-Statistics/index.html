@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>Project 1 of Statistics.md | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、准备阶段本次实验主要考虑影响大倪体重各体型指标的因素。我们的数据收集了112组大鲵的体重(weight)、全长(tl)、体长(bl)、头长(hl)、体高(h)、体宽(w)、尾柄长(cl)和肠长(sl)。 利用统计软件R来实现，其中用到的包有readxl, dplyr, ggplot2, car。 1234library(readxl)library(dplyr)library(ggplot2)">
+  <meta name="description" content="一、准备阶段本次实验主要考虑影响大倪体重各体型指标的因素。我们的数据收集了112组大鲵的体重(weight)、全长(tl)、体长(bl)、头长(hl)、体高(h)、体宽(w)、尾柄长(cl)和肠长(sl)。 利用统计软件R来实现，其中用到的包有readxl, dplyr, ggplot2, car。">
 <meta name="keywords" content="r,statistics">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project 1 of Statistics.md">
 <meta property="og:url" content="onlookerliu.github.io/2017/11/03/Project-1-of-Statistics/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="一、准备阶段本次实验主要考虑影响大倪体重各体型指标的因素。我们的数据收集了112组大鲵的体重(weight)、全长(tl)、体长(bl)、头长(hl)、体高(h)、体宽(w)、尾柄长(cl)和肠长(sl)。 利用统计软件R来实现，其中用到的包有readxl, dplyr, ggplot2, car。 1234library(readxl)library(dplyr)library(ggplot2)">
+<meta property="og:description" content="一、准备阶段本次实验主要考虑影响大倪体重各体型指标的因素。我们的数据收集了112组大鲵的体重(weight)、全长(tl)、体长(bl)、头长(hl)、体高(h)、体宽(w)、尾柄长(cl)和肠长(sl)。 利用统计软件R来实现，其中用到的包有readxl, dplyr, ggplot2, car。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_8_0.png">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_17_1.png">
@@ -27,10 +27,10 @@
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_44_1.png">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_50_1.png">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_52_0.png">
-<meta property="og:updated_time" content="2018-02-28T15:55:23.796Z">
+<meta property="og:updated_time" content="2018-04-04T03:37:53.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Project 1 of Statistics.md">
-<meta name="twitter:description" content="一、准备阶段本次实验主要考虑影响大倪体重各体型指标的因素。我们的数据收集了112组大鲵的体重(weight)、全长(tl)、体长(bl)、头长(hl)、体高(h)、体宽(w)、尾柄长(cl)和肠长(sl)。 利用统计软件R来实现，其中用到的包有readxl, dplyr, ggplot2, car。 1234library(readxl)library(dplyr)library(ggplot2)">
+<meta name="twitter:description" content="一、准备阶段本次实验主要考虑影响大倪体重各体型指标的因素。我们的数据收集了112组大鲵的体重(weight)、全长(tl)、体长(bl)、头长(hl)、体高(h)、体宽(w)、尾柄长(cl)和肠长(sl)。 利用统计软件R来实现，其中用到的包有readxl, dplyr, ggplot2, car。">
 <meta name="twitter:image" content="http://oye4atjxc.bkt.clouddn.com/statistic/hw3/output_8_0.png">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
@@ -201,6 +201,7 @@
       
         <h2 id="一、准备阶段"><a href="#一、准备阶段" class="headerlink" title="一、准备阶段"></a>一、准备阶段</h2><p>本次实验主要考虑影响大倪体重各体型指标的因素。我们的数据收集了112组大鲵的体重(weight)、全长(tl)、体长(bl)、头长(hl)、体高(h)、体宽(w)、尾柄长(cl)和肠长(sl)。</p>
 <p>利用统计软件R来实现，其中用到的包有<code>readxl</code>, <code>dplyr</code>, <code>ggplot2</code>, <code>car</code>。</p>
+<a id="more"></a>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(readxl)</span><br><span class="line"><span class="keyword">library</span>(dplyr)</span><br><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(car)</span><br></pre></td></tr></table></figure>
 <p>首先，利用<code>read_excel</code>语句导入数据为新的数据框，并利用<code>str()</code>函数展示一下大致的数据结构。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = tbl_df(read_excel(<span class="string">"/path/to/data.xls"</span>))</span><br><span class="line">str(df)</span><br></pre></td></tr></table></figure>
@@ -746,15 +747,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -762,11 +755,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

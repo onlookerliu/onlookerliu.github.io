@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>Project-Euler-010 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ProblemThe sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.  Find the sum of all the primes below two million.  Answer1142913828922  Python123456789101112131415161718#!/usr/bin/env pythonfrom itert">
+  <meta name="description" content="ProblemThe sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.  Find the sum of all the primes below two million.">
 <meta name="keywords" content="euler,multilingual">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project-Euler-010">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/01/Project-Euler-010/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="ProblemThe sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.  Find the sum of all the primes below two million.  Answer1142913828922  Python123456789101112131415161718#!/usr/bin/env pythonfrom itert">
+<meta property="og:description" content="ProblemThe sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.  Find the sum of all the primes below two million.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-05T05:39:15.000Z">
+<meta property="og:updated_time" content="2018-04-04T03:36:15.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Project-Euler-010">
-<meta name="twitter:description" content="ProblemThe sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.  Find the sum of all the primes below two million.  Answer1142913828922  Python123456789101112131415161718#!/usr/bin/env pythonfrom itert">
+<meta name="twitter:description" content="ProblemThe sum of the primes below 10 is $2 + 3 + 5 + 7 = 17$.  Find the sum of all the primes below two million.">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -191,6 +191,7 @@
 
 <p><br>Find the sum of all the primes below two million.<br></p>
 
+<a id="more"></a>
 <h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">142913828922</span><br></pre></td></tr></table></figure>
 <hr>
 <p>Python<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> takewhile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eratosthenes</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''Yields the sequence of prime numbers via the Sieve of Eratosthenes.'''</span></span><br><span class="line">    D = &#123;&#125;  <span class="comment"># map composite integers to primes witnessing their compositeness</span></span><br><span class="line">    q = <span class="number">2</span>   <span class="comment"># first integer to test for primality</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> q <span class="keyword">not</span> <span class="keyword">in</span> D:</span><br><span class="line">            <span class="keyword">yield</span> q        <span class="comment"># not marked composite, must be prime</span></span><br><span class="line">            D[q*q] = [q]   <span class="comment"># first multiple of q not already marked</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> D[q]: <span class="comment"># move each witness to its next multiple</span></span><br><span class="line">                D.setdefault(p+q,[]).append(p)</span><br><span class="line">            <span class="keyword">del</span> D[q]       <span class="comment"># no longer need D[q], free memory</span></span><br><span class="line">        q += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(sum(takewhile(<span class="keyword">lambda</span> x: x &lt; <span class="number">2000000</span>, eratosthenes())))</span><br></pre></td></tr></table></figure></p>
@@ -514,15 +515,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,11 +523,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">

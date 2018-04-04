@@ -9,14 +9,14 @@
   <title>LeetCode Notes 012 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator for e">
-<meta name="keywords" content="leetcode,javascript">
+<meta name="keywords" content="javascript,leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 012">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/17/LeetCode-Notes-012/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator for e">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T17:30:00.501Z">
+<meta property="og:updated_time" content="2018-04-04T03:39:47.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 012">
 <meta name="twitter:description" content="Clone GraphClone an undirected graph. Each node in the graph contains a label and a list of its neighbors. OJ’s undirected graph serialization:Nodes are labeled uniquely. We use # as a separator for e">
@@ -198,6 +198,7 @@
 </ul>
 <p>Visually, the graph looks like the following:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   1</span><br><span class="line">  / \</span><br><span class="line"> /   \</span><br><span class="line">0 --- 2</span><br><span class="line">     / \</span><br><span class="line">     \_/</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for undirected graph.</span></span><br><span class="line"><span class="comment"> * function UndirectedGraphNode(label) &#123;</span></span><br><span class="line"><span class="comment"> *     this.label = label;</span></span><br><span class="line"><span class="comment"> *     this.neighbors = [];   // Array of UndirectedGraphNode</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;UndirectedGraphNode&#125; graph</span></span><br><span class="line"><span class="comment"> * @return &#123;UndirectedGraphNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> cloneGraph = <span class="function"><span class="keyword">function</span>(<span class="params">graph</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!graph)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> hash = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> dfs(graph);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">dfs</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> label = node.label;</span><br><span class="line">    <span class="keyword">var</span> newNode = <span class="keyword">new</span> UndirectedGraphNode(label);</span><br><span class="line">    hash[label] = newNode;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = node.neighbors.length; i &lt; len; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> item = node.neighbors[i];</span><br><span class="line">      <span class="keyword">if</span> (hash[item.label] !== <span class="literal">undefined</span>)</span><br><span class="line">        newNode.neighbors.push(hash[item.label]);</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        newNode.neighbors.push(dfs(item));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newNode;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Coin-Change"><a href="#Coin-Change" class="headerlink" title="Coin Change"></a>Coin Change</h3><p>You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return <code>-1</code>.</p>
 <p><strong>Example 1:</strong><br>coins = <code>[1, 2, 5]</code>, amount = <code>11</code><br>return <code>3</code> (11 = 5 + 5 + 1)</p>
@@ -257,11 +258,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -519,15 +520,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,11 +528,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
