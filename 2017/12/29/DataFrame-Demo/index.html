@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>DataFrame_Demo | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Credits: this code and documentation was adapted from Paul Butler’s sklearn-pandas DataFramesIt is possible to use a dataframe as a training set, but it needs to be converted to an array first. DataFr">
+  <meta name="description" content="Credits: this code and documentation was adapted from Paul Butler’s sklearn-pandas">
 <meta name="keywords" content="julia">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DataFrame_Demo">
 <meta property="og:url" content="onlookerliu.github.io/2017/12/29/DataFrame-Demo/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="Credits: this code and documentation was adapted from Paul Butler’s sklearn-pandas DataFramesIt is possible to use a dataframe as a training set, but it needs to be converted to an array first. DataFr">
+<meta property="og:description" content="Credits: this code and documentation was adapted from Paul Butler’s sklearn-pandas">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/leanote/iris/output_4_1.png">
-<meta property="og:updated_time" content="2018-02-28T15:55:12.000Z">
+<meta property="og:updated_time" content="2018-04-04T03:31:26.913Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DataFrame_Demo">
-<meta name="twitter:description" content="Credits: this code and documentation was adapted from Paul Butler’s sklearn-pandas DataFramesIt is possible to use a dataframe as a training set, but it needs to be converted to an array first. DataFr">
+<meta name="twitter:description" content="Credits: this code and documentation was adapted from Paul Butler’s sklearn-pandas">
 <meta name="twitter:image" content="http://oye4atjxc.bkt.clouddn.com/leanote/iris/output_4_1.png">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
@@ -190,6 +190,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Credits: this code and documentation was adapted from Paul Butler’s <a href="https://github.com/paulgb/sklearn-pandas" target="_blank" rel="noopener">sklearn-pandas</a></p>
+<a id="more"></a>
 <h1 id="DataFrames"><a href="#DataFrames" class="headerlink" title="DataFrames"></a>DataFrames</h1><p>It is possible to use a dataframe as a training set, but it needs to be converted to an array first. <code>DataFrameMapper</code> is used to specify how this conversion proceeds. For example, PCA might be applied to some numerical dataframe columns, and one-hot-encoding to a categorical column.</p>
 <h2 id="Transformation-Mapping"><a href="#Transformation-Mapping" class="headerlink" title="Transformation Mapping"></a>Transformation Mapping</h2><p>Consider this dataset:</p>
 <figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> ScikitLearn</span><br><span class="line"><span class="keyword">using</span> DataFrames: DataFrame, NA, DataArray</span><br><span class="line"><span class="keyword">using</span> DataArrays: <span class="meta">@data</span></span><br><span class="line"><span class="meta">@sk_import</span> preprocessing: (LabelBinarizer, StandardScaler)</span><br><span class="line"></span><br><span class="line">data = DataFrame(pet=[<span class="string">"cat"</span>, <span class="string">"dog"</span>, <span class="string">"dog"</span>, <span class="string">"fish"</span>, <span class="string">"cat"</span>, <span class="string">"dog"</span>, <span class="string">"cat"</span>, <span class="string">"fish"</span>],</span><br><span class="line">                 children=[<span class="number">4.</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">4</span>],</span><br><span class="line">                 salary=[<span class="number">90</span>, <span class="number">24</span>, <span class="number">44</span>, <span class="number">27</span>, <span class="number">32</span>, <span class="number">59</span>, <span class="number">36</span>, <span class="number">27</span>])</span><br></pre></td></tr></table></figure>

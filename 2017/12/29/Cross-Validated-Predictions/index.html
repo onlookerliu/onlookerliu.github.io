@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>Cross_Validated_Predictions | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Plotting Cross-Validated PredictionsAdapted from http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html This example shows how to use cross_val_predict to visualize prediction errors. 12345">
+  <meta name="description" content="Plotting Cross-Validated PredictionsAdapted from http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html">
 <meta name="keywords" content="julia">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cross_Validated_Predictions">
 <meta property="og:url" content="onlookerliu.github.io/2017/12/29/Cross-Validated-Predictions/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="Plotting Cross-Validated PredictionsAdapted from http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html This example shows how to use cross_val_predict to visualize prediction errors. 12345">
+<meta property="og:description" content="Plotting Cross-Validated PredictionsAdapted from http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/leanote/Cross_Validated_Predictions/output_4_0.png">
-<meta property="og:updated_time" content="2017-12-28T17:43:24.000Z">
+<meta property="og:updated_time" content="2018-04-04T03:31:20.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cross_Validated_Predictions">
-<meta name="twitter:description" content="Plotting Cross-Validated PredictionsAdapted from http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html This example shows how to use cross_val_predict to visualize prediction errors. 12345">
+<meta name="twitter:description" content="Plotting Cross-Validated PredictionsAdapted from http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html">
 <meta name="twitter:image" content="http://oye4atjxc.bkt.clouddn.com/leanote/Cross_Validated_Predictions/output_4_0.png">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
@@ -190,6 +190,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Plotting-Cross-Validated-Predictions"><a href="#Plotting-Cross-Validated-Predictions" class="headerlink" title="Plotting Cross-Validated Predictions"></a>Plotting Cross-Validated Predictions</h1><p>Adapted from <a href="http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html" target="_blank" rel="noopener">http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html</a></p>
+<a id="more"></a>
 <p>This example shows how to use cross_val_predict to visualize prediction errors.</p>
 <figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> ScikitLearn</span><br><span class="line"><span class="keyword">using</span> ScikitLearn.CrossValidation: cross_val_predict</span><br><span class="line"></span><br><span class="line"><span class="meta">@sk_import</span> datasets: load_boston</span><br><span class="line"><span class="meta">@sk_import</span> linear_model: LinearRegression</span><br><span class="line"><span class="keyword">using</span> PyPlot</span><br></pre></td></tr></table></figure>
 <figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">lr = LinearRegression()</span><br><span class="line">boston = load_boston()</span><br><span class="line">y = boston[<span class="string">"target"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># cross_val_predict returns an array of the same size as `y` where each entry</span></span><br><span class="line"><span class="comment"># is a prediction obtained by cross validated:</span></span><br><span class="line">predicted = cross_val_predict(lr, boston[<span class="string">"data"</span>], y, cv=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">scatter(y, predicted)</span><br><span class="line">plot([minimum(y), maximum(y)], [minimum(y), maximum(y)], <span class="string">"k--"</span>, lw=<span class="number">4</span>)</span><br><span class="line">xlabel(<span class="string">"Measured"</span>)</span><br><span class="line">ylabel(<span class="string">"Predicted"</span>);</span><br></pre></td></tr></table></figure>

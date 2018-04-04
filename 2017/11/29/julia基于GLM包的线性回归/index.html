@@ -8,23 +8,23 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>julia基于GLM包的线性回归 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文利用GLM包进行简单线性回归分析，同时对模型检验以及置信区间作图。 1using GLM,DataFrames 先随机生成一组数据用于回归分析。 123456789101112# 设置截距α = 100# 设置系数β = 5# 设置随机数个数n = 50# 设置误差项ε = rand(Normal(),n) * 11# 生成数据x = randn(n)*3y = α + β * x + εda">
+  <meta name="description" content="本文利用GLM包进行简单线性回归分析，同时对模型检验以及置信区间作图。 1using GLM,DataFrames">
 <meta name="keywords" content="julia">
 <meta property="og:type" content="article">
 <meta property="og:title" content="julia基于GLM包的线性回归">
 <meta property="og:url" content="onlookerliu.github.io/2017/11/29/julia基于GLM包的线性回归/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="本文利用GLM包进行简单线性回归分析，同时对模型检验以及置信区间作图。 1using GLM,DataFrames 先随机生成一组数据用于回归分析。 123456789101112# 设置截距α = 100# 设置系数β = 5# 设置随机数个数n = 50# 设置误差项ε = rand(Normal(),n) * 11# 生成数据x = randn(n)*3y = α + β * x + εda">
+<meta property="og:description" content="本文利用GLM包进行简单线性回归分析，同时对模型检验以及置信区间作图。 1using GLM,DataFrames">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_17_0.svg">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_19_0.svg">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_20_0.svg">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_21_0.svg">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_22_0.svg">
-<meta property="og:updated_time" content="2017-12-28T17:50:24.085Z">
+<meta property="og:updated_time" content="2018-04-04T03:32:03.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="julia基于GLM包的线性回归">
-<meta name="twitter:description" content="本文利用GLM包进行简单线性回归分析，同时对模型检验以及置信区间作图。 1using GLM,DataFrames 先随机生成一组数据用于回归分析。 123456789101112# 设置截距α = 100# 设置系数β = 5# 设置随机数个数n = 50# 设置误差项ε = rand(Normal(),n) * 11# 生成数据x = randn(n)*3y = α + β * x + εda">
+<meta name="twitter:description" content="本文利用GLM包进行简单线性回归分析，同时对模型检验以及置信区间作图。 1using GLM,DataFrames">
 <meta name="twitter:image" content="http://oye4atjxc.bkt.clouddn.com/julia/GLM/output_17_0.svg">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
@@ -195,6 +195,7 @@
       
         <p>本文利用GLM包进行简单线性回归分析，同时对模型检验以及置信区间作图。</p>
 <figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> GLM,DataFrames</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>先随机生成一组数据用于回归分析。</p>
 <figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置截距</span></span><br><span class="line">α = <span class="number">100</span></span><br><span class="line"><span class="comment"># 设置系数</span></span><br><span class="line">β = <span class="number">5</span></span><br><span class="line"><span class="comment"># 设置随机数个数</span></span><br><span class="line">n = <span class="number">50</span></span><br><span class="line"><span class="comment"># 设置误差项</span></span><br><span class="line">ε = rand(Normal(),n) * <span class="number">11</span></span><br><span class="line"><span class="comment"># 生成数据</span></span><br><span class="line">x = randn(n)*<span class="number">3</span></span><br><span class="line">y = α + β * x + ε</span><br><span class="line">dataForRegression = DataFrame(x = x, y = y)</span><br></pre></td></tr></table></figure>
 <table class="data-frame"><thead><tr><th></th><th>x</th><th>y</th></tr></thead><tbody><tr><th>1</th><td>-0.2945844765867794</td><td>95.47303779965895</td></tr><tr><th>2</th><td>-1.3440842917796316</td><td>100.32164951469537</td></tr><tr><th>3</th><td>1.3037018863265355</td><td>109.57629236830104</td></tr><tr><th>4</th><td>4.012507916775679</td><td>106.46933242509654</td></tr><tr><th>5</th><td>-1.7321051747524616</td><td>89.55844065579969</td></tr><tr><th>6</th><td>-1.4253325394154235</td><td>92.72629790575935</td></tr><tr><th>7</th><td>-0.9042631229720477</td><td>87.93522916305417</td></tr><tr><th>8</th><td>3.4865202058421714</td><td>127.92951823278281</td></tr><tr><th>9</th><td>-2.134433785764415</td><td>94.20802706899649</td></tr><tr><th>10</th><td>3.322020816866826</td><td>118.04216195389577</td></tr><tr><th>11</th><td>2.203086430462482</td><td>105.55320230669415</td></tr><tr><th>12</th><td>-5.281962503754427</td><td>82.8888784146054</td></tr><tr><th>13</th><td>2.001897730730764</td><td>108.02467262087006</td></tr><tr><th>14</th><td>-2.7543838829327565</td><td>88.76348948674855</td></tr><tr><th>15</th><td>6.101614682211077</td><td>128.6239736717972</td></tr><tr><th>16</th><td>0.6888033886810481</td><td>111.17457991815601</td></tr><tr><th>17</th><td>0.7010819245192449</td><td>107.39681268065465</td></tr><tr><th>18</th><td>3.1116548996809783</td><td>113.4549225848041</td></tr><tr><th>19</th><td>-1.8511960189357837</td><td>83.79388935398916</td></tr><tr><th>20</th><td>-0.962664244723129</td><td>91.41543924802386</td></tr><tr><th>21</th><td>0.5608348467513868</td><td>90.8605217368299</td></tr><tr><th>22</th><td>2.1522594774515786</td><td>93.8105103626811</td></tr><tr><th>23</th><td>-0.31022032825520746</td><td>101.53069848453823</td></tr><tr><th>24</th><td>1.6256993827235733</td><td>104.12765249398367</td></tr><tr><th>25</th><td>3.3214081526457813</td><td>118.46644563889394</td></tr><tr><th>26</th><td>0.43501963025212675</td><td>95.810320259296</td></tr><tr><th>27</th><td>2.59876092609342</td><td>121.9741328977443</td></tr><tr><th>28</th><td>-1.0290269848902651</td><td>113.72423797098067</td></tr><tr><th>29</th><td>-0.21404769863190354</td><td>92.43405156194733</td></tr><tr><th>30</th><td>3.5537714568100016</td><td>99.06513391626848</td></tr><tr><th>&vellip;</th><td>&vellip;</td><td>&vellip;</td></tr></tbody></table>

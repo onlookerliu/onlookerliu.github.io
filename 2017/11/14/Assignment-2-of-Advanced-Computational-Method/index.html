@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/ada_best.svg">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/samples.svg">
 <meta property="og:image" content="http://oye4atjxc.bkt.clouddn.com/advancedComputation/assignment2/density.svg">
-<meta property="og:updated_time" content="2018-02-28T16:02:48.000Z">
+<meta property="og:updated_time" content="2018-04-04T03:30:55.684Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Assignment 2 of Advanced Computational Method">
 <meta name="twitter:description" content="Homework 3The Metropolis–Hastings algorithm works by generating a sequence of sample values in such a way that, as more and more sample values are produced, the distribution of values more closely app">
@@ -198,6 +198,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Homework-3"><a href="#Homework-3" class="headerlink" title="Homework 3"></a>Homework 3</h2><p>The Metropolis–Hastings algorithm works by generating a sequence of sample values in such a way that, as more and more sample values are produced, the distribution of values more closely approximates the desired distribution, $P(x)$. These sample values are produced iteratively, with the distribution of the next sample being dependent only on the current sample value (thus making the sequence of samples into a Markov chain). Specifically, at each iteration, the algorithm picks a candidate for the next sample value based on the current sample value. Then, with some probability, the candidate is either accepted (in which case the candidate value is used in the next iteration) or rejected (in which case the candidate value is discarded, and current value is reused in the next iteration)−the probability of acceptance is determined by comparing the values of the function $f(x)$ of the current and candidate sample values with respect to the desired distribution $P(x)$.</p>
+<a id="more"></a>
 <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><blockquote>
 <p>Draw samples from the distribution $p(x, y) = \mathrm{e}^{-(x-1)^2-100(y-x)^2}$</p>
 <ol>
