@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>onlookerliu.github.io/2017/04/04/Numerical-Examples-in-Java/</loc>
+    <lastmod>2018-04-04T04:13:47.844Z</lastmod>
+    <data>
+        <display>
+        <title>Numerical Examples in Java</title>
+        <pubTime>2017-04-04T04:10:56.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>onlookerliu.github.io/2018/02/26/Simple-Perceptron-using-Processing/</loc>
     <lastmod>2018-04-04T04:00:52.085Z</lastmod>
     <data>
@@ -11,11 +28,11 @@
         <title>Simple Perceptron using Processing</title>
         <pubTime>2018-02-25T16:22:03.000Z</pubTime>
         
+        <tag>Java</tag>
+         
         <tag>machine learning</tag>
          
         <tag>processing</tag>
-         
-        <tag>Java</tag>
          
          
            
