@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>剑指offer--JavaScript版III | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="51.请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。 1234function isNumeric(s) &amp;#123;    var reg = /^[+-]?(?:(\d+)(\.\d+)?|(\">
+  <meta name="description" content="51.请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指offer--JavaScript版III">
 <meta property="og:url" content="onlookerliu.github.io/2017/12/27/剑指offer-JavaScript版III/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="51.请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。 1234function isNumeric(s) &amp;#123;    var reg = /^[+-]?(?:(\d+)(\.\d+)?|(\">
+<meta property="og:description" content="51.请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-27T16:58:23.922Z">
+<meta property="og:updated_time" content="2018-04-04T03:51:17.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer--JavaScript版III">
-<meta name="twitter:description" content="51.请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。 1234function isNumeric(s) &amp;#123;    var reg = /^[+-]?(?:(\d+)(\.\d+)?|(\">
+<meta name="twitter:description" content="51.请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -188,6 +188,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>51.<br>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。</p>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNumeric</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> reg = <span class="regexp">/^[+-]?(?:(\d+)(\.\d+)?|(\.\d+))([eE][+-]?\d+)?$/</span>;</span><br><span class="line">    <span class="keyword">return</span> reg.test(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>52.<br>请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从字符流中只读出前两个字符”go”时，第一个只出现一次的字符是”g”。当从该字符流中读出前六个字符“google”时，第一个只出现一次的字符是”l”。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    streamNums = [];</span><br><span class="line">    streamNumsLen = <span class="number">256</span>;</span><br><span class="line">    streamNumsIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; streamNumsLen; i++) &#123;</span><br><span class="line">        streamNums[i] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Insert</span>(<span class="params">ch</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> code = ch.charCodeAt();</span><br><span class="line">    <span class="keyword">if</span> (streamNums[code] == <span class="number">-1</span>) &#123;</span><br><span class="line">        streamNums[code] = streamNumsIndex;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (streamNums[code] &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        streamNums[code] = <span class="number">-2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    streamNumsIndex++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FirstAppearingOnce</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    result = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> ch = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> minIndex = <span class="literal">Infinity</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; streamNumsLen; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (streamNums[i] &gt;= <span class="number">0</span> &amp;&amp; streamNums[i] &lt; minIndex) &#123;</span><br><span class="line">            ch = <span class="built_in">String</span>.fromCharCode(i);</span><br><span class="line">            minIndex = streamNums[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ch == <span class="string">""</span> ? <span class="string">'#'</span> : ch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -530,19 +531,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">computational method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">statistics</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">computational method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -558,15 +559,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">euler</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">multilingual</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
               </li>
              
               <li class="article-tag-list-item">

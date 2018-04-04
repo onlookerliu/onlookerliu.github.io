@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>剑指offer--JavaScript版II | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="26.输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。 1234567891011121314151617181920212223242526272829function Convert(pRootOfTree) &amp;#123;    if (!pRootOfTree) &amp;#">
+  <meta name="description" content="26.输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指offer--JavaScript版II">
 <meta property="og:url" content="onlookerliu.github.io/2017/12/27/剑指offer-JavaScript版II/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="26.输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。 1234567891011121314151617181920212223242526272829function Convert(pRootOfTree) &amp;#123;    if (!pRootOfTree) &amp;#">
+<meta property="og:description" content="26.输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-27T16:58:42.386Z">
+<meta property="og:updated_time" content="2018-04-04T03:51:12.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer--JavaScript版II">
-<meta name="twitter:description" content="26.输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。 1234567891011121314151617181920212223242526272829function Convert(pRootOfTree) &amp;#123;    if (!pRootOfTree) &amp;#">
+<meta name="twitter:description" content="26.输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -188,6 +188,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>26.<br>输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Convert</span>(<span class="params">pRootOfTree</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!pRootOfTree) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> lastNode = <span class="literal">null</span>;</span><br><span class="line">    lastNode = ConvertNode(pRootOfTree);</span><br><span class="line">    <span class="keyword">var</span> head = lastNode;</span><br><span class="line">    <span class="keyword">while</span> (head &amp;&amp; head.left) &#123;</span><br><span class="line">        head = head.left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ConvertNode</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!node) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.left) &#123;</span><br><span class="line">            lastNode = ConvertNode(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">        node.left = lastNode;</span><br><span class="line">        <span class="keyword">if</span> (lastNode) &#123;</span><br><span class="line">            lastNode.right = node;</span><br><span class="line">        &#125;</span><br><span class="line">        lastNode = node;</span><br><span class="line">        <span class="keyword">if</span> (node.right) &#123;</span><br><span class="line">            lastNode = ConvertNode(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> lastNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>27.<br>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MoreThanHalfNum_Solution</span>(<span class="params">numbers</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!numbers || numbers.length === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> arr = [];</span><br><span class="line">    <span class="keyword">var</span> len = numbers.length, index;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> index = numbers[i];</span><br><span class="line">        arr[index] !== <span class="literal">undefined</span> ? arr[index]++ : arr[index] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> index = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">var</span> arrLen = arr.length;</span><br><span class="line">    <span class="keyword">var</span> max = -<span class="literal">Infinity</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arrLen; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!arr[i]) <span class="keyword">continue</span>;</span><br><span class="line">        max = arr[i] &gt; max ? (index = i, arr[i]) : max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max &gt; len / <span class="number">2</span> ? index : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -537,19 +538,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">statistics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">computational method</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">statistics</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">computationa method</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">computational method</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -565,15 +566,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">euler</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">multilingual</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
               </li>
              
               <li class="article-tag-list-item">
