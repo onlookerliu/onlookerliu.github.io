@@ -9,14 +9,14 @@
   <title>LeetCode Notes 021 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Counting BitsGiven a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1’s in their binary representation and return them as an array. Example:For n">
-<meta name="keywords" content="javascript,leetcode">
+<meta name="keywords" content="leetcode,javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 021">
 <meta property="og:url" content="onlookerliu.github.io/2018/03/30/LeetCode-Notes-021/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Counting BitsGiven a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1’s in their binary representation and return them as an array. Example:For n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-08T17:58:30.361Z">
+<meta property="og:updated_time" content="2018-04-08T17:59:02.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 021">
 <meta name="twitter:description" content="Counting BitsGiven a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1’s in their binary representation and return them as an array. Example:For n">
@@ -205,6 +205,7 @@
 <li>Space complexity should be $O(n)$.</li>
 <li>Can you do it like a boss? Do it without using any builtin function like __builtin_popcount in c++ or in any other language.</li>
 </ul>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; num</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> countBits = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ans = <span class="built_in">Array</span>(num + <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= num; i++)</span><br><span class="line">  	ans[i] = hammingWeight(i);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hammingWeight = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  n = ((n &amp; <span class="number">0xAAAAAAAA</span>) &gt;&gt;&gt; <span class="number">1</span>) + (n &amp; <span class="number">0x55555555</span>);</span><br><span class="line">  n = ((n &amp; <span class="number">0xCCCCCCCC</span>) &gt;&gt;&gt; <span class="number">2</span>) + (n &amp; <span class="number">0x33333333</span>);</span><br><span class="line">  n = ((n &amp; <span class="number">0xF0F0F0F0</span>) &gt;&gt;&gt; <span class="number">4</span>) + (n &amp; <span class="number">0x0F0F0F0F</span>);</span><br><span class="line">  n = ((n &amp; <span class="number">0xFF00FF00</span>) &gt;&gt;&gt; <span class="number">8</span>) + (n &amp; <span class="number">0x00FF00FF</span>);</span><br><span class="line">  n = ((n &amp; <span class="number">0xFFFF0000</span>) &gt;&gt;&gt; <span class="number">16</span>) + (n &amp; <span class="number">0x0000FFFF</span>);</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Course-Schedule"><a href="#Course-Schedule" class="headerlink" title="Course Schedule"></a>Course Schedule</h3><p>There are a total of n courses you have to take, labeled from $0$ to $n - 1$.</p>
 <p>Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: $[0,1]$</p>
@@ -282,11 +283,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
@@ -569,11 +570,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
