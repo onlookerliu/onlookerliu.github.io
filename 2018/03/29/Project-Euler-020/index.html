@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Problem$n!$ means $n \times (n - 1) \times … \times 3 \times 2 \times 1$.Find the sum of the digits in the number $100!$.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-04T03:32:35.363Z">
+<meta property="og:updated_time" content="2018-04-08T17:34:23.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Project-Euler-020">
 <meta name="twitter:description" content="Problem$n!$ means $n \times (n - 1) \times … \times 3 \times 2 \times 1$.Find the sum of the digits in the number $100!$.">
@@ -208,7 +208,7 @@
 <hr>
 <p>Haskell<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">sumDigits</span> ::  <span class="type">Integer</span> -&gt; <span class="type">Integer</span></span><br><span class="line"><span class="title">sumDigits</span> n = sumDigits' n <span class="number">0</span></span><br><span class="line">    <span class="keyword">where</span> sumDigits' <span class="number">0</span> acc = acc</span><br><span class="line">          sumDigits' n acc = sumDigits' (div n <span class="number">10</span>) (acc + (mod n <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="title">factorial</span> ::  <span class="type">Integer</span> -&gt; <span class="type">Integer</span></span><br><span class="line"><span class="title">factorial</span> n = foldr (*) <span class="number">1</span> [<span class="number">1.</span>.n]</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> = print $ sumDigits $ factorial <span class="number">100</span></span><br></pre></td></tr></table></figure></p>
 <hr>
-<p>Clojure<br><figure class="highlight clj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure</span><br><span class="line">(<span class="name">println</span> (<span class="name"><span class="builtin-name">reduce</span></span> + (<span class="name"><span class="builtin-name">map</span></span> #(<span class="name"><span class="builtin-name">-</span></span> (<span class="name"><span class="builtin-name">int</span></span> %) <span class="number">48</span>) (<span class="name"><span class="builtin-name">str</span></span> (<span class="name"><span class="builtin-name">reduce</span></span> * (<span class="name"><span class="builtin-name">range</span></span> BigInteger/ONE <span class="number">100</span>))))))</span><br></pre></td></tr></table></figure></p>
+<p>Clojure<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env clojure</span><br><span class="line">(<span class="name">println</span> (<span class="name"><span class="builtin-name">reduce</span></span> + (<span class="name"><span class="builtin-name">map</span></span> #(<span class="name"><span class="builtin-name">-</span></span> (<span class="name"><span class="builtin-name">int</span></span> %) <span class="number">48</span>) (<span class="name"><span class="builtin-name">str</span></span> (<span class="name"><span class="builtin-name">reduce</span></span> * (<span class="name"><span class="builtin-name">range</span></span> BigInteger/ONE <span class="number">100</span>))))))</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p>Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p020</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="keyword">new</span> p020().run());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * We do a straightforward product with help from Java's BigInteger type.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		String temp = Library.factorial(<span class="number">100</span>).toString();</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; temp.length(); i++)</span><br><span class="line">			sum += temp.charAt(i) - <span class="string">'0'</span>;</span><br><span class="line">		<span class="keyword">return</span> Integer.toString(sum);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
@@ -330,6 +330,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="../../30/LeetCode-Notes-021/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          LeetCode Notes 021
+        
+      </div>
+    </a>
   
   
     <a href="../../26/Simple-Implement-of-Spring-MVC/" id="article-nav-older" class="article-nav-link-wrap">
@@ -506,10 +515,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">r</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
@@ -522,11 +527,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
