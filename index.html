@@ -177,6 +177,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode-Notes-022" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="2018/04/02/LeetCode-Notes-022/">LeetCode Notes 022</a>
+    </h1>
+  
+
+        
+        <a href="2018/04/02/LeetCode-Notes-022/" class="archive-article-date">
+  	<time datetime="2018-04-01T16:54:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Decode-String"><a href="#Decode-String" class="headerlink" title="Decode String"></a>Decode String</h3><p>Given an encoded string, return it’s decoded string.</p>
+<p>The encoding rule is: <code>k[encoded_string]</code>, where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.</p>
+<p>You may assume that the input string is always valid; No extra white spaces, square brackets are well-formed, etc.</p>
+<p>Furthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there won’t be input like <code>3a</code> or <code>2[4]</code>.</p>
+<p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;3[a]2[bc]&quot;, return &quot;aaabcbc&quot;.</span><br><span class="line">s = &quot;3[a2[c]]&quot;, return &quot;accaccacc&quot;.</span><br><span class="line">s = &quot;2[abc]3[cd]ef&quot;, return &quot;abcabccdcdcdef&quot;.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">let</span> decodeString = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> nums = []; <span class="comment">// 保存数字</span></span><br><span class="line">  <span class="keyword">let</span> ss   = []; <span class="comment">// 保存需要 repeat 的字符串</span></span><br><span class="line">  <span class="keyword">let</span> str  = <span class="string">''</span>; <span class="comment">// 当前字符串</span></span><br><span class="line">  <span class="keyword">let</span> ans  = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = s.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> item = s[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="regexp">/[0-9]/</span>.test(item)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (i === <span class="number">0</span> || <span class="regexp">/[0-9]/</span>.test(s[i - <span class="number">1</span>])) &#123;</span><br><span class="line">        str += item;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// s =&gt; 2[2[b]]</span></span><br><span class="line">        <span class="keyword">if</span> (str || s[i - <span class="number">1</span>] === <span class="string">'['</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (nums.length)</span><br><span class="line">            ss.push(str);</span><br><span class="line">          <span class="keyword">else</span></span><br><span class="line">            ans += str;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        str = item;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (item === <span class="string">'['</span>) &#123;</span><br><span class="line">      nums.push(+str);</span><br><span class="line">      str = <span class="string">''</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (item === <span class="string">']'</span>) &#123;</span><br><span class="line">      str &amp;&amp; ss.push(str);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">let</span> count = nums.pop();</span><br><span class="line">      <span class="keyword">let</span> a     = ss.pop();</span><br><span class="line">      <span class="keyword">let</span> tmp   = a.repeat(count);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (ss.length) &#123;  <span class="comment">// 当前有 ss[] 栈</span></span><br><span class="line">        <span class="keyword">let</span> last = ss.pop();</span><br><span class="line">        ss.push(last + tmp);</span><br><span class="line">      &#125; <span class="keyword">else</span></span><br><span class="line">        ans += tmp;</span><br><span class="line"></span><br><span class="line">      str = <span class="string">''</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      str += item;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans + str;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Decode-Ways"><a href="#Decode-Ways" class="headerlink" title="Decode Ways"></a>Decode Ways</h3><p>A message containing letters from <code>A-Z</code> is being encoded to numbers using the following mapping:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&apos;A&apos; -&gt; 1</span><br><span class="line">&apos;B&apos; -&gt; 2</span><br><span class="line">...</span><br><span class="line">&apos;Z&apos; -&gt; 26</span><br></pre></td></tr></table></figure>
+<p>Given an encoded message containing digits, determine the total number of ways to decode it.</p>
+<p>For example,<br>Given encoded message <code>&quot;12&quot;</code>, it could be decoded as <code>&quot;AB&quot;</code> (1 2) or <code>&quot;L&quot;</code> (12).</p>
+<p>The number of ways decoding <code>&quot;12&quot;</code> is 2.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numDecodings = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!s.length) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> (s[<span class="number">0</span>] === <span class="string">'0'</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> len = s.length</span><br><span class="line">    , dp = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    dp[i] = [];</span><br><span class="line">    <span class="keyword">if</span> (i === <span class="number">0</span>) &#123;</span><br><span class="line">      dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">      dp[i][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      dp[i][<span class="number">0</span>] = dp[i - <span class="number">1</span>][<span class="number">1</span>],</span><br><span class="line">      dp[i][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (s[i] !== <span class="string">'0'</span>)</span><br><span class="line">        dp[i][<span class="number">1</span>] += dp[i - <span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (s[i - <span class="number">1</span>] !== <span class="string">'0'</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> num = <span class="built_in">Number</span>(s[i - <span class="number">1</span>] + s[i]);</span><br><span class="line">        <span class="keyword">if</span> (num &gt;= <span class="number">1</span> &amp;&amp; num &lt;= <span class="number">26</span>)</span><br><span class="line">          dp[i][<span class="number">1</span>] += dp[i - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> dp[len - <span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Delete-Node-in-a-Linked-List"><a href="#Delete-Node-in-a-Linked-List" class="headerlink" title="Delete Node in a Linked List"></a>Delete Node in a Linked List</h3><p>Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.</p>
+<p>Supposed the linked list is <code>1 -&gt; 2 -&gt; 3 -&gt; 4</code> and you are given the third node with value <code>3</code>, the linked list should become <code>1 -&gt; 2 -&gt; 4</code> after calling your function.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; node</span></span><br><span class="line"><span class="comment"> * @return &#123;void&#125; Do not return anything, modify node in-place instead.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> deleteNode = <span class="function"><span class="keyword">function</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">  node.val = node.next.val;</span><br><span class="line">  <span class="keyword">var</span> tmp = node.next;</span><br><span class="line">  node.next = node.next.next;</span><br><span class="line">  tmp = <span class="literal">null</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Detect-Capital"><a href="#Detect-Capital" class="headerlink" title="Detect Capital"></a>Detect Capital</h3><p>Given a word, you need to judge whether the usage of capitals in it is right or not.</p>
+<p>We define the usage of capitals in a word to be right when one of the following cases holds:</p>
+<ol>
+<li>All letters in this word are capitals, like “USA”.</li>
+<li>All letters in this word are not capitals, like “leetcode”.</li>
+<li>Only the first letter in this word is capital if it has more than one letter, like “Google”.</li>
+</ol>
+<p>Otherwise, we define that this word doesn’t use capitals in a right way.</p>
+<p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;USA&quot;</span><br><span class="line">Output: True</span><br></pre></td></tr></table></figure></p>
+<p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;FlaG&quot;</span><br><span class="line">Output: False</span><br></pre></td></tr></table></figure></p>
+<p>Note: The input will be a non-empty word consisting of uppercase and lowercase latin letters.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; word</span></span><br><span class="line"><span class="comment"> * @return &#123;boolean&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> detectCapitalUse = <span class="function"><span class="keyword">function</span>(<span class="params">word</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> p = <span class="regexp">/^([a-z]+|[A-Z]+|[A-Z]&#123;1&#125;[a-z]+)$/</span>;</span><br><span class="line">  <span class="keyword">return</span> p.test(word);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="2018/04/02/LeetCode-Notes-022/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Reading-Challenge-April-2018" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -311,6 +414,88 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="2018/03/31/Project-Euler-021/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Project-Euler-022" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="2018/03/31/Project-Euler-022/">Project-Euler-022</a>
+    </h1>
+  
+
+        
+        <a href="2018/03/31/Project-Euler-022/" class="archive-article-date">
+  	<time datetime="2018-03-30T16:41:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>Using <a href="http://p6xgwpfbb.bkt.clouddn.com/euler/names.txt" target="_blank" rel="noopener">names.txt</a>, a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order. Then working out the alphabetical value for each name, multiply this value by its alphabetical position in the list to obtain a name score.</p>
+<p>For example, when the list is sorted into alphabetical order, COLIN, which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list. So, COLIN would obtain a score of 938 * 53 = 49714.</p>
+<p>What is the total of all the name scores in the file?</p>
+        
+          <a class="article-more-a" href="2018/03/31/Project-Euler-022/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="2018/03/31/Project-Euler-022/">展开全文 >></a>
         </p>
       
 
@@ -507,170 +692,9 @@
 
 
   
-    <article id="post-Simple-Implement-of-Spring-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/03/26/Simple-Implement-of-Spring-MVC/">Simple Implement of Spring MVC</a>
-    </h1>
-  
-
-        
-        <a href="2018/03/26/Simple-Implement-of-Spring-MVC/" class="archive-article-date">
-  	<time datetime="2018-03-26T03:22:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="简单模拟Spring-MVC"><a href="#简单模拟Spring-MVC" class="headerlink" title="简单模拟Spring MVC"></a>简单模拟Spring MVC</h2><p>在Spring MVC中，将一个普通的java类标注上Controller注解之后，再将类中的方法使用RequestMapping注解标注，那么这个普通的java类就够处理Web请求，示例代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用Controller注解标注LoginUI类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginUI</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//使用RequestMapping注解指明forward1方法的访问路径  </span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"LoginUI/Login2"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">forward1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//执行完forward1方法之后返回的视图</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> View(<span class="string">"/login2.jsp"</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//使用RequestMapping注解指明forward2方法的访问路径  </span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"LoginUI/Login3"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">forward2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//执行完forward2方法之后返回的视图</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> View(<span class="string">"/login3.jsp"</span>);  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>spring通过java annotation就可以注释一个类为action ，在方法上添加上一个java annotation 就可以配置请求的路径了，那么这种机制是如何实现的呢，今天我们使用”自定义注解+Servlet”来简单模拟一下Spring MVC中的这种注解配置方式。</p>
-        
-          <a class="article-more-a" href="2018/03/26/Simple-Implement-of-Spring-MVC/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/03/26/Simple-Implement-of-Spring-MVC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-Notes-020" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/03/25/LeetCode-Notes-020/">LeetCode Notes 020</a>
-    </h1>
-  
-
-        
-        <a href="2018/03/25/LeetCode-Notes-020/" class="archive-article-date">
-  	<time datetime="2018-03-24T16:45:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Count-of-Range-Sum"><a href="#Count-of-Range-Sum" class="headerlink" title="Count of Range Sum"></a>Count of Range Sum</h3><p>Given an integer array <code>nums</code>, return the number of range sums that lie in <code>[lower, upper]</code> inclusive.<br>Range sum <code>S(i, j)</code> is defined as the sum of the elements in <code>nums</code> between indices <code>i</code> and <code>j</code> (<code>i</code> ≤ <code>j</code>), inclusive.</p>
-<p><strong>Note:</strong><br>A naive algorithm of $O(n^2)$ is trivial. You MUST do better than that.</p>
-<p><strong>Example:</strong><br>Given <code>nums = [-2, 5, -1]</code>, <code>lower = -2</code>, <code>upper = 2</code>,</p>
-<p>Return <code>3</code>.<br>The three ranges are : <code>[0, 0], [2, 2], [0, 2]</code> and their respective sums are: <code>-2, -1, 2</code>.</p>
-        
-          <a class="article-more-a" href="2018/03/25/LeetCode-Notes-020/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/03/25/LeetCode-Notes-020/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><a class="page-number" href="page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="page/11/">11</a><a class="extend next" rel="next" href="page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><a class="page-number" href="page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="page/12/">12</a><a class="extend next" rel="next" href="page/2/">Next &raquo;</a>
     </nav>
   
 
