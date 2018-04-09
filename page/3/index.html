@@ -177,31 +177,39 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-LeetCode-Notes-018" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LeetCode-Notes-012" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="../../2018/03/23/LeetCode-Notes-018/">LeetCode Notes 018</a>
+      <a class="article-title" href="../../2018/03/17/LeetCode-Notes-012/">LeetCode Notes 012</a>
     </h1>
   
 
         
-        <a href="../../2018/03/23/LeetCode-Notes-018/" class="archive-article-date">
-  	<time datetime="2018-03-22T16:28:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-23</time>
+        <a href="../../2018/03/17/LeetCode-Notes-012/" class="archive-article-date">
+  	<time datetime="2018-03-16T17:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Convert-Sorted-Array-to-Binary-Search-Tree"><a href="#Convert-Sorted-Array-to-Binary-Search-Tree" class="headerlink" title="Convert Sorted Array to Binary Search Tree"></a>Convert Sorted Array to Binary Search Tree</h3><p>Given an array where elements are sorted in ascending order, convert it to a height balanced BST.</p>
-<p>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.</p>
-<p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Given the sorted array: [-10,-3,0,5,9],</span><br><span class="line"></span><br><span class="line">One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:</span><br><span class="line"></span><br><span class="line">      0</span><br><span class="line">     / \</span><br><span class="line">   -3   9</span><br><span class="line">   /   /</span><br><span class="line"> -10  5</span><br></pre></td></tr></table></figure></p>
+        <h3 id="Clone-Graph"><a href="#Clone-Graph" class="headerlink" title="Clone Graph"></a>Clone Graph</h3><p>Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors.</p>
+<p><strong>OJ’s undirected graph serialization:</strong><br>Nodes are labeled uniquely.</p>
+<p>We use <code>#</code> as a separator for each node, and <code>,</code> as a separator for node label and each neighbor of the node.<br>As an example, consider the serialized graph <code>{0,1,2#1,2#2,2}</code>.</p>
+<p>The graph has a total of three nodes, and therefore contains three parts as separated by <code>#</code>.</p>
+<ul>
+<li>First node is labeled as <code>0</code>. Connect node <code>0</code> to both nodes <code>1</code> and <code>2</code>.</li>
+<li>Second node is labeled as <code>1</code>. Connect node <code>1</code> to node <code>2</code>.</li>
+<li>Third node is labeled as <code>2</code>. Connect node <code>2</code> to node <code>2</code> (itself), thus forming a self-cycle.</li>
+</ul>
+<p>Visually, the graph looks like the following:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   1</span><br><span class="line">  / \</span><br><span class="line"> /   \</span><br><span class="line">0 --- 2</span><br><span class="line">     / \</span><br><span class="line">     \_/</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="../../2018/03/23/LeetCode-Notes-018/#more">more >></a>
+          <a class="article-more-a" href="../../2018/03/17/LeetCode-Notes-012/#more">more >></a>
         
       
 
@@ -229,7 +237,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/03/23/LeetCode-Notes-018/">展开全文 >></a>
+          <a class="article-more-a" href="../../2018/03/17/LeetCode-Notes-012/">展开全文 >></a>
         </p>
       
 
@@ -259,36 +267,30 @@
 
 
   
-    <article id="post-LeetCode-Notes-017" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LeetCode-Notes-011" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="../../2018/03/22/LeetCode-Notes-017/">LeetCode Notes 017</a>
+      <a class="article-title" href="../../2018/03/16/LeetCode-Notes-011/">LeetCode Notes 011</a>
     </h1>
   
 
         
-        <a href="../../2018/03/22/LeetCode-Notes-017/" class="archive-article-date">
-  	<time datetime="2018-03-21T16:18:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-22</time>
+        <a href="../../2018/03/16/LeetCode-Notes-011/" class="archive-article-date">
+  	<time datetime="2018-03-16T06:22:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Continuous-Subarray-Sum"><a href="#Continuous-Subarray-Sum" class="headerlink" title="Continuous Subarray Sum"></a>Continuous Subarray Sum</h3><p>Given a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums up to n*k where n is also an integer.</p>
-<p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [23, 2, 4, 6, 7],  k=6</span><br><span class="line">Output: True</span><br><span class="line">Explanation: Because [2, 4] is a continuous subarray of size 2 and sums up to 6.</span><br></pre></td></tr></table></figure></p>
-<p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [23, 2, 6, 4, 7],  k=6</span><br><span class="line">Output: True</span><br><span class="line">Explanation: Because [23, 2, 6, 4, 7] is an continuous subarray of size 5 and sums up to 42.</span><br></pre></td></tr></table></figure></p>
-<p><strong>Note:</strong></p>
-<ol>
-<li>The length of the array won’t exceed 10,000.</li>
-<li>You may assume the sum of all the numbers is in the range of a signed 32-bit integer.</li>
-</ol>
+        <h3 id="Bulb-Switcher"><a href="#Bulb-Switcher" class="headerlink" title="Bulb Switcher"></a>Bulb Switcher</h3><p>There are n bulbs that are initially off. You first turn on all the bulbs. Then, you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it’s off or turning off if it’s on). For the ith round, you toggle every i bulb. For the nth round, you only toggle the last bulb. Find how many bulbs are on after n rounds.</p>
+<p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Given n = 3. </span><br><span class="line"></span><br><span class="line">At first, the three bulbs are [off, off, off].</span><br><span class="line">After first round, the three bulbs are [on, on, on].</span><br><span class="line">After second round, the three bulbs are [on, off, on].</span><br><span class="line">After third round, the three bulbs are [on, off, off]. </span><br><span class="line"></span><br><span class="line">So you should return 1, because there is only one bulb is on.</span><br></pre></td></tr></table></figure></p>
         
-          <a class="article-more-a" href="../../2018/03/22/LeetCode-Notes-017/#more">more >></a>
+          <a class="article-more-a" href="../../2018/03/16/LeetCode-Notes-011/#more">more >></a>
         
       
 
@@ -316,7 +318,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/03/22/LeetCode-Notes-017/">展开全文 >></a>
+          <a class="article-more-a" href="../../2018/03/16/LeetCode-Notes-011/">展开全文 >></a>
         </p>
       
 
@@ -346,30 +348,31 @@
 
 
   
-    <article id="post-LeetCode-Notes-016" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LeetCode-Notes-010" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="../../2018/03/21/LeetCode-Notes-016/">LeetCode Notes 016</a>
+      <a class="article-title" href="../../2018/03/15/LeetCode-Notes-010/">LeetCode Notes 010</a>
     </h1>
   
 
         
-        <a href="../../2018/03/21/LeetCode-Notes-016/" class="archive-article-date">
-  	<time datetime="2018-03-21T15:39:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-21</time>
+        <a href="../../2018/03/15/LeetCode-Notes-010/" class="archive-article-date">
+  	<time datetime="2018-03-15T06:10:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Container-With-Most-Water"><a href="#Container-With-Most-Water" class="headerlink" title="Container With Most Water"></a>Container With Most Water</h3><p>Given $n$ non-negative integers $a_1, a_2, …, a_n$, where each represents a point at coordinate $(i, a_i)$. $n$ vertical lines are drawn such that the two endpoints of line $i$ is at $(i, a_i)$ and $(i, 0)$. Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
-<p>Note: You may not slant the container and $n$ is at least 2.</p>
+        <h3 id="Binary-Tree-Zigzag-Level-Order-Traversal"><a href="#Binary-Tree-Zigzag-Level-Order-Traversal" class="headerlink" title="Binary Tree Zigzag Level Order Traversal"></a>Binary Tree Zigzag Level Order Traversal</h3><p>Given a binary tree, return the zigzag level order traversal of its nodes’ values. (ie, from left to right, then right to left for the next level and alternate between).</p>
+<p>For example:<br>Given binary tree <code>[3,9,20,null,null,15,7]</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure></p>
+<p>return its zigzag level order traversal as:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [20,9],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
         
-          <a class="article-more-a" href="../../2018/03/21/LeetCode-Notes-016/#more">more >></a>
+          <a class="article-more-a" href="../../2018/03/15/LeetCode-Notes-010/#more">more >></a>
         
       
 
@@ -397,7 +400,287 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/03/21/LeetCode-Notes-016/">展开全文 >></a>
+          <a class="article-more-a" href="../../2018/03/15/LeetCode-Notes-010/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-LeetCode-Notes-009" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/03/14/LeetCode-Notes-009/">LeetCode Notes 009</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/03/14/LeetCode-Notes-009/" class="archive-article-date">
+  	<time datetime="2018-03-14T03:19:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Binary-Tree-Postorder-Traversal"><a href="#Binary-Tree-Postorder-Traversal" class="headerlink" title="Binary Tree Postorder Traversal"></a>Binary Tree Postorder Traversal</h3><p>Given a binary tree, return the postorder traversal of its nodes’ values.</p>
+<p>For example:<br>Given binary tree <code>[1,null,2,3]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> /</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<p>return <code>[3,2,1]</code></p>
+        
+          <a class="article-more-a" href="../../2018/03/14/LeetCode-Notes-009/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/03/14/LeetCode-Notes-009/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Project-Euler-019" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/03/13/Project-Euler-019/">Project-Euler-019</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/03/13/Project-Euler-019/" class="archive-article-date">
+  	<time datetime="2018-03-13T14:01:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>You are given the following information,<br>but you may prefer to do some research for yourself.</p>
+<pre><code>1 Jan 1900 was a Monday.
+Thirty days has September,
+April, June and November.
+All the rest have thirty-one,
+Saving February alone,
+Which has twenty-eight, rain or shine.
+And on leap years, twenty-nine.
+A leap year occurs on any year evenly divisible by 4, 
+but not on a century unless it is divisible by 400.
+</code></pre><p>How many Sundays fell on the first of the month during<br>the twentieth century (1 Jan 1901 to 31 Dec 2000)?</p>
+        
+          <a class="article-more-a" href="../../2018/03/13/Project-Euler-019/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/03/13/Project-Euler-019/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Project-Euler-018" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../2018/03/13/Project-Euler-018/">Project-Euler-018</a>
+    </h1>
+  
+
+        
+        <a href="../../2018/03/13/Project-Euler-018/" class="archive-article-date">
+  	<time datetime="2018-03-13T13:50:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p><br>By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.<br></p>
+
+<pre><code>3
+7 4
+2 4 6
+8 5 9 3
+</code></pre>
+
+<p><br>That is, $3 + 7 + 4 + 9 = 23$.<br></p>
+
+<p><br>Find the maximum total from top to bottom of the triangle below:<br></p>
+
+<pre><code>75
+95 64
+17 47 82
+18 35 87 10
+20 04 82 47 65
+19 01 23 75 03 34
+88 02 77 73 07 63 67
+99 65 04 28 06 16 70 92
+41 41 26 56 83 40 80 70 33
+41 48 72 33 47 32 37 16 94 29
+53 71 44 65 25 43 91 52 97 51 14
+70 11 33 28 77 73 17 78 39 68 17 57
+91 71 52 38 17 14 91 43 58 50 27 29 48
+63 66 04 68 89 53 67 30 73 16 69 87 40 31
+04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
+</code></pre>
+        
+          <a class="article-more-a" href="../../2018/03/13/Project-Euler-018/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="../../2018/03/13/Project-Euler-018/">展开全文 >></a>
         </p>
       
 
@@ -429,7 +712,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../2/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><a class="page-number" href="../2/">2</a><span class="page-number current">3</span><a class="page-number" href="../4/">4</a><a class="page-number" href="../5/">5</a><span class="space">&hellip;</span><a class="page-number" href="../22/">22</a><a class="extend next" rel="next" href="../4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="../2/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><a class="page-number" href="../2/">2</a><span class="page-number current">3</span><a class="page-number" href="../4/">4</a><a class="page-number" href="../5/">5</a><span class="space">&hellip;</span><a class="page-number" href="../11/">11</a><a class="extend next" rel="next" href="../4/">Next &raquo;</a>
     </nav>
   
 
@@ -659,7 +942,7 @@ MathJax.Hub.Queue(function() {
             </li>
           
             <li class="search-li">
-              <a href="http://jamesmwh.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>同学的博客</a>
+              <a href="http://jamesmwh.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>James MWH的博客</a>
             </li>
           
             <li class="search-li">
