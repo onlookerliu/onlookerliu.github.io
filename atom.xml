@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="onlookerliu.github.io/"/>
-  <updated>2018-04-10T16:39:49.706Z</updated>
+  <updated>2018-04-10T16:56:42.000Z</updated>
   <id>onlookerliu.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Project-Euler-026</title>
+    <link href="onlookerliu.github.io/2018/04/11/Project-Euler-026/"/>
+    <id>onlookerliu.github.io/2018/04/11/Project-Euler-026/</id>
+    <published>2018-04-10T16:50:12.000Z</published>
+    <updated>2018-04-10T16:56:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>A unit fraction contains 1 in the numerator. The decimal representation of the unit fractions with denominators 2 to 10 are given:</p><p>$$<br>\begin{aligned}<br>\frac{1}{2}&amp;=0.5 \\<br>\frac{1}{3}&amp;=0.\overline{3} \\<br>\frac{1}{4}&amp;=0.25 \\<br>\frac{1}{5}&amp;=0.2 \\<br>\frac{1}{6}&amp;=0.1\overline{6} \\<br>\frac{1}{7}&amp;=0.\overline{142857} \\<br>\frac{1}{8}&amp;=0.125 \\<br>\frac{1}{9}&amp;=0.\overline{1} \\<br>\frac{1}{10}&amp;=0.1<br>\end{aligned}<br>$$</p><p>Where $0.1\overline{6}$ means $0.1666…$, and has a 1-digit recurring cycle. It can be seen that $\frac{1}{7}$ has a 6-digit recurring cycle.</p><p>Find the value of $d &lt; 1000$ for which $\frac{1}{d}$ contains the longest recurring cycle in its decimal fraction part.</p><a id="more"></a><h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">983</span><br></pre></td></tr></table></figure><h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recurring_cycle</span><span class="params">(n, d)</span>:</span></span><br><span class="line">    <span class="comment"># solve 10^s % d == 10^(s+t) % d</span></span><br><span class="line">    <span class="comment"># where t is length and s is start</span></span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">1</span>, d):</span><br><span class="line">        <span class="keyword">if</span> <span class="number">1</span> == <span class="number">10</span>**t % d:</span><br><span class="line">            <span class="keyword">return</span> t</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">longest = max(recurring_cycle(<span class="number">1</span>, i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">1001</span>))</span><br><span class="line">print([i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">1001</span>) <span class="keyword">if</span> recurring_cycle(<span class="number">1</span>, i) == longest][<span class="number">0</span>])</span><br></pre></td></tr></table></figure><h4 id="Ruby"><a href="#Ruby" class="headerlink" title="Ruby"></a>Ruby</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env ruby</span></span><br><span class="line">puts (<span class="number">0</span>..<span class="number">1000</span>).map &#123; <span class="params">|d|</span> </span><br><span class="line">  (<span class="number">1</span>..d).detect(lambda&#123;<span class="number">0</span>&#125;) &#123; <span class="params">|t|</span> (<span class="number">10</span>**t % d) == <span class="number">1</span> &#125; </span><br><span class="line">&#125;.each_with_index.max[<span class="number">1</span>]</span><br></pre></td></tr></table></figure><h4 id="Haskell"><a href="#Haskell" class="headerlink" title="Haskell"></a>Haskell</h4><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Data.List (<span class="title">maximumBy</span>)</span><br><span class="line"><span class="keyword">import</span> Data.Function (<span class="title">on</span>)</span><br><span class="line"></span><br><span class="line"><span class="title">cycleLength</span> :: <span class="type">Integer</span> -&gt; <span class="type">Integer</span></span><br><span class="line"><span class="title">cycleLength</span> n | even n = <span class="number">0</span></span><br><span class="line">              | n `rem` <span class="number">5</span> == <span class="number">0</span> = <span class="number">0</span></span><br><span class="line">              | otherwise = head [p | p &lt;- [<span class="number">1.</span>.], (<span class="number">10</span>^p - <span class="number">1</span>) `rem` n == <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="title">main</span> :: <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = print $ maximumBy (compare `on` cycleLength) [<span class="number">1</span>,<span class="number">3.</span><span class="number">.1000</span>]</span><br></pre></td></tr></table></figure><h4 id="Mathematica"><a href="#Mathematica" class="headerlink" title="Mathematica"></a>Mathematica</h4><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CycleLength[x_] := <span class="keyword">Length</span>[<span class="keyword">Last</span>[<span class="keyword">First</span>[<span class="keyword">RealDigits</span>[x]]]]</span><br><span class="line">d = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">For</span>[i = <span class="number">1</span>, i &lt; <span class="number">1000</span>, i++,</span><br><span class="line">  <span class="keyword">If</span>[CycleLength[<span class="number">1</span> / i] &gt; CycleLength[<span class="number">1</span> / d], d = i]]</span><br><span class="line">d</span><br></pre></td></tr></table></figure><h4 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">p026</span> <span class="keyword">implements</span> <span class="title">EulerSolution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">System.out.println(<span class="keyword">new</span> p026().run());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> bestNumber = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> bestLength = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">1000</span>; i++) &#123;</span><br><span class="line"><span class="keyword">int</span> len = getCycleLength(i);</span><br><span class="line"><span class="keyword">if</span> (len &gt; bestLength) &#123;</span><br><span class="line">bestNumber = i;</span><br><span class="line">bestLength = len;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> Integer.toString(bestNumber);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getCycleLength</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">Map&lt;Integer,Integer&gt; stateToIter = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"><span class="keyword">int</span> state = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> iter = <span class="number">0</span>; ; iter++) &#123;</span><br><span class="line"><span class="keyword">if</span> (stateToIter.containsKey(state))</span><br><span class="line"><span class="keyword">return</span> iter - stateToIter.get(state);</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">stateToIter.put(state, iter);</span><br><span class="line">state = state * <span class="number">10</span> % n;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Problem&quot;&gt;&lt;a href=&quot;#Problem&quot; class=&quot;headerlink&quot; title=&quot;Problem&quot;&gt;&lt;/a&gt;Problem&lt;/h3&gt;&lt;p&gt;A unit fraction contains 1 in the numerator. The decimal representation of the unit fractions with denominators 2 to 10 are given:&lt;/p&gt;
+&lt;p&gt;$$&lt;br&gt;\begin{aligned}&lt;br&gt;\frac{1}{2}&amp;amp;=0.5 \\&lt;br&gt;\frac{1}{3}&amp;amp;=0.\overline{3} \\&lt;br&gt;\frac{1}{4}&amp;amp;=0.25 \\&lt;br&gt;\frac{1}{5}&amp;amp;=0.2 \\&lt;br&gt;\frac{1}{6}&amp;amp;=0.1\overline{6} \\&lt;br&gt;\frac{1}{7}&amp;amp;=0.\overline{142857} \\&lt;br&gt;\frac{1}{8}&amp;amp;=0.125 \\&lt;br&gt;\frac{1}{9}&amp;amp;=0.\overline{1} \\&lt;br&gt;\frac{1}{10}&amp;amp;=0.1&lt;br&gt;\end{aligned}&lt;br&gt;$$&lt;/p&gt;
+&lt;p&gt;Where $0.1\overline{6}$ means $0.1666…$, and has a 1-digit recurring cycle. It can be seen that $\frac{1}{7}$ has a 6-digit recurring cycle.&lt;/p&gt;
+&lt;p&gt;Find the value of $d &amp;lt; 1000$ for which $\frac{1}{d}$ contains the longest recurring cycle in its decimal fraction part.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="euler" scheme="onlookerliu.github.io/tags/euler/"/>
+    
+      <category term="multilingual" scheme="onlookerliu.github.io/tags/multilingual/"/>
+    
+  </entry>
   
   <entry>
     <title>Project-Euler-025</title>
@@ -111,9 +136,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -213,9 +238,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -282,9 +307,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -310,9 +335,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -334,9 +359,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -363,9 +388,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -386,9 +411,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -411,9 +436,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -434,9 +459,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -463,9 +488,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
+    
+      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
     
   </entry>
   
@@ -495,32 +520,9 @@
     </summary>
     
     
-      <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
       <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
     
-  </entry>
-  
-  <entry>
-    <title>LeetCode Notes 011</title>
-    <link href="onlookerliu.github.io/2018/03/16/LeetCode-Notes-011/"/>
-    <id>onlookerliu.github.io/2018/03/16/LeetCode-Notes-011/</id>
-    <published>2018-03-16T06:22:16.000Z</published>
-    <updated>2018-04-08T17:48:49.759Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Bulb-Switcher"><a href="#Bulb-Switcher" class="headerlink" title="Bulb Switcher"></a>Bulb Switcher</h3><p>There are n bulbs that are initially off. You first turn on all the bulbs. Then, you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it’s off or turning off if it’s on). For the ith round, you toggle every i bulb. For the nth round, you only toggle the last bulb. Find how many bulbs are on after n rounds.</p><p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Given n = 3. </span><br><span class="line"></span><br><span class="line">At first, the three bulbs are [off, off, off].</span><br><span class="line">After first round, the three bulbs are [on, on, on].</span><br><span class="line">After second round, the three bulbs are [on, off, on].</span><br><span class="line">After third round, the three bulbs are [on, off, off]. </span><br><span class="line"></span><br><span class="line">So you should return 1, because there is only one bulb is on.</span><br></pre></td></tr></table></figure></p><a id="more"></a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打表</span></span><br><span class="line"><span class="keyword">var</span> bulbSwitch = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ans = <span class="number">-1</span> + <span class="built_in">Math</span>.sqrt(<span class="number">1</span> + n);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.ceil(ans);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="Bull-and-Cows"><a href="#Bull-and-Cows" class="headerlink" title="Bull and Cows"></a>Bull and Cows</h3><p>You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to guess what the number is. Each time your friend makes a guess, you provide a hint that indicates how many digits in said guess match your secret number exactly in both digit and position (called “bulls”) and how many digits match the secret number but locate in the wrong position (called “cows”). Your friend will use successive guesses and hints to eventually derive the secret number.</p><p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Secret number:  &quot;1807&quot;</span><br><span class="line">Friend&apos;s guess: &quot;7810&quot;</span><br></pre></td></tr></table></figure></p><p>Hint: <code>1</code> bull and <code>3</code> cows. (The bull is <code>8</code>, the cows are <code>0</code>, <code>1</code> and <code>7</code>.)<br>Write a function to return a hint according to the secret number and friend’s guess, use <code>A</code> to indicate the bulls and <code>B</code> to indicate the cows. In the above example, your function should return <code>&quot;1A3B&quot;</code>.</p><p>Please note that both secret number and friend’s guess may contain duplicate digits, for example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Secret number:  &quot;1123&quot;</span><br><span class="line">Friend&apos;s guess: &quot;0111&quot;</span><br></pre></td></tr></table></figure></p><p>In this case, the 1st <code>1</code> in friend’s guess is a bull, the 2nd or 3rd <code>1</code> is a cow, and your function should return <code>&quot;1A1B&quot;</code>.</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; secret</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; guess</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> getHint = <span class="function"><span class="keyword">function</span>(<span class="params">secret, guess</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = secret.split(<span class="string">''</span>);</span><br><span class="line">  <span class="keyword">var</span> b = guess.split(<span class="string">''</span>);</span><br><span class="line">  <span class="keyword">var</span> len = a.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> bullNum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> cowBum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> hash = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = len; i--; ) &#123;</span><br><span class="line">    <span class="keyword">if</span> (a[i] === b[i]) &#123;</span><br><span class="line">      a.splice(i, <span class="number">1</span>);</span><br><span class="line">      b.splice(i, <span class="number">1</span>);</span><br><span class="line">      bullNum++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!hash[a[i]])</span><br><span class="line">        hash[a[i]] = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">        hash[a[i]]++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; b.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> item = b[i];</span><br><span class="line">    <span class="keyword">if</span> (hash[item]) &#123;</span><br><span class="line">      cowBum++;</span><br><span class="line">      hash[item]--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> bullNum + <span class="string">'A'</span> + cowBum + <span class="string">'B'</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="Climbing-Stairs"><a href="#Climbing-Stairs" class="headerlink" title="Climbing Stairs"></a>Climbing Stairs</h3><p>You are climbing a stair case. It takes n steps to reach to the top.</p><p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p><p><strong>Note</strong>: Given n will be a positive integer.</p><p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: 2</span><br><span class="line">Output:  2</span><br><span class="line">Explanation:  There are two ways to climb to the top.</span><br><span class="line"></span><br><span class="line">1. 1 step + 1 step</span><br><span class="line">2. 2 steps</span><br></pre></td></tr></table></figure></p><p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: 3</span><br><span class="line">Output:  3</span><br><span class="line">Explanation:  There are three ways to climb to the top.</span><br><span class="line"></span><br><span class="line">1. 1 step + 1 step + 1 step</span><br><span class="line">2. 1 step + 2 steps</span><br><span class="line">3. 2 steps + 1 step</span><br></pre></td></tr></table></figure></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; n</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> climbStairs = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = [];</span><br><span class="line">  a[<span class="number">0</span>] = <span class="number">1</span>, a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">    a[i] = a[i - <span class="number">1</span>] + a[i - <span class="number">2</span>];</span><br><span class="line">  <span class="keyword">return</span> a[n];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;Bulb-Switcher&quot;&gt;&lt;a href=&quot;#Bulb-Switcher&quot; class=&quot;headerlink&quot; title=&quot;Bulb Switcher&quot;&gt;&lt;/a&gt;Bulb Switcher&lt;/h3&gt;&lt;p&gt;There are n bulbs that are initially off. You first turn on all the bulbs. Then, you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it’s off or turning off if it’s on). For the ith round, you toggle every i bulb. For the nth round, you only toggle the last bulb. Find how many bulbs are on after n rounds.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Given n = 3. &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;At first, the three bulbs are [off, off, off].&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;After first round, the three bulbs are [on, on, on].&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;After second round, the three bulbs are [on, off, on].&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;After third round, the three bulbs are [on, off, off]. &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;So you should return 1, because there is only one bulb is on.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
       <category term="leetcode" scheme="onlookerliu.github.io/tags/leetcode/"/>
-    
-      <category term="javascript" scheme="onlookerliu.github.io/tags/javascript/"/>
     
   </entry>
   
