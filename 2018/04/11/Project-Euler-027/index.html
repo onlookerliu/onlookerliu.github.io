@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>Project-Euler-027 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ProblemEuler published the remarkable quadratic formula: $$n^2 + n + 41$$ It turns out that the formula will produce 40 primesfor the consecutive values n = 0 to 39. However, whenn = 40, $40^2 + 40 +">
+  <meta name="description" content="ProblemEuler published the remarkable quadratic formula: $$n^2 + n + 41$$ It turns out that the formula will produce 40 primes for the consecutive values n = 0 to 39. However, when n = 40, $40^2 + 40">
 <meta name="keywords" content="euler,multilingual">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Project-Euler-027">
 <meta property="og:url" content="onlookerliu.github.io/2018/04/11/Project-Euler-027/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="ProblemEuler published the remarkable quadratic formula: $$n^2 + n + 41$$ It turns out that the formula will produce 40 primesfor the consecutive values n = 0 to 39. However, whenn = 40, $40^2 + 40 +">
+<meta property="og:description" content="ProblemEuler published the remarkable quadratic formula: $$n^2 + n + 41$$ It turns out that the formula will produce 40 primes for the consecutive values n = 0 to 39. However, when n = 40, $40^2 + 40">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-11T16:51:15.788Z">
+<meta property="og:updated_time" content="2018-04-12T01:18:32.553Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Project-Euler-027">
-<meta name="twitter:description" content="ProblemEuler published the remarkable quadratic formula: $$n^2 + n + 41$$ It turns out that the formula will produce 40 primesfor the consecutive values n = 0 to 39. However, whenn = 40, $40^2 + 40 +">
+<meta name="twitter:description" content="ProblemEuler published the remarkable quadratic formula: $$n^2 + n + 41$$ It turns out that the formula will produce 40 primes for the consecutive values n = 0 to 39. However, when n = 40, $40^2 + 40">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -190,7 +190,7 @@
 
         
         <a href="" class="archive-article-date">
-  	<time datetime="2018-04-10T16:38:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
+  	<time datetime="2018-04-11T00:38:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
 </a>
         
       </header>
@@ -199,11 +199,11 @@
       
         <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>Euler published the remarkable quadratic formula:</p>
 <p>$$<br>n^2 + n + 41<br>$$</p>
-<p>It turns out that the formula will produce 40 primes<br>for the consecutive values n = 0 to 39. However, when<br>n = 40, $40^2 + 40 + 41 = 40(40 + 1) + 41$ is divisible<br>by 41, and certainly when n = 41, $41^2 + 41 + 41$ is<br>clearly divisible by 41.</p>
-<p>Using computers, the incredible formula  $n^2 - 79n + 1601$<br>was discovered, which produces 80 primes for the<br>consecutive values n = 0 to 79. The product of the<br>coefficients, 79 and 1601, is 126479.</p>
+<p>It turns out that the formula will produce 40 primes for the consecutive values n = 0 to 39. However, when n = 40, $40^2 + 40 + 41 = 40(40 + 1) + 41$ is divisible by 41, and certainly when n = 41, $41^2 + 41 + 41$ is clearly divisible by 41.</p>
+<p>Using computers, the incredible formula  $n^2 - 79n + 1601$ was discovered, which produces 80 primes for the consecutive values n = 0 to 79. The product of the coefficients, 79 and 1601, is 126479.</p>
 <p>Considering quadratics of the form:</p>
 <p>$$<br>n^2 + an + b, \text{ where } |a| \lt 1000 \text{ and } |b| \lt 1000<br>$$</p>
-<p>Find the product of the coefficients, a and b, for<br>the quadratic expression that produces the maximum<br>number of primes for consecutive values of n,<br>starting with n = 0.</p>
+<p>Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.</p>
 <a id="more"></a>
 <h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-59231</span><br></pre></td></tr></table></figure>
 <h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> mul</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorize</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'fact() argument should be &gt;= 1'</span>)</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> []  <span class="comment"># special case</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="comment"># iterate over all even numbers first.</span></span><br><span class="line">    <span class="keyword">while</span> n % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        res.append(<span class="number">2</span>)</span><br><span class="line">        n //= <span class="number">2</span></span><br><span class="line">    <span class="comment"># try odd numbers up to sqrt(n)</span></span><br><span class="line">    limit = math.sqrt(n+<span class="number">1</span>)</span><br><span class="line">    i = <span class="number">3</span></span><br><span class="line">    <span class="keyword">while</span> i &lt;= limit:</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            res.append(i)</span><br><span class="line">            n //= i</span><br><span class="line">            limit = math.sqrt(n+i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            i += <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> n != <span class="number">1</span>:</span><br><span class="line">        res.append(n)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">num_divisors</span><span class="params">(n)</span>:</span></span><br><span class="line">    factors = sorted(factorize(n))</span><br><span class="line">    histogram = defaultdict(int)</span><br><span class="line">    <span class="keyword">for</span> factor <span class="keyword">in</span> factors:</span><br><span class="line">        histogram[factor] += <span class="number">1</span></span><br><span class="line">    <span class="comment"># number of divisors is equal to product of </span></span><br><span class="line">    <span class="comment"># incremented exponents of prime factors</span></span><br><span class="line">    <span class="keyword">from</span> operator <span class="keyword">import</span> mul</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> reduce(mul, [exponent + <span class="number">1</span> <span class="keyword">for</span> exponent <span class="keyword">in</span> list(histogram.values())])</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">num_primes</span><span class="params">(formula)</span>:</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">        res = formula(n)</span><br><span class="line">        <span class="keyword">if</span> res &lt; <span class="number">1</span> <span class="keyword">or</span> <span class="keyword">not</span> is_prime(res):</span><br><span class="line">            <span class="keyword">return</span> num</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> num_divisors(num) == <span class="number">2</span> <span class="keyword">and</span> num &gt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    most = <span class="number">0</span></span><br><span class="line">    best = (<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span> a, b <span class="keyword">in</span> product(list(range(<span class="number">-999</span>,<span class="number">1000</span>)), list(range(<span class="number">-999</span>, <span class="number">1000</span>))):</span><br><span class="line">        formula = <span class="keyword">lambda</span> n: n**<span class="number">2</span> + a*n + b</span><br><span class="line">        num = num_primes(formula) </span><br><span class="line">        <span class="keyword">if</span> num &gt; most:</span><br><span class="line">            most = num</span><br><span class="line">            best = (a, b)</span><br><span class="line">    print(mul(*best))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
@@ -328,18 +328,18 @@
   
 <nav id="article-nav">
   
-    <a href="../Project-Euler-026/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../../12/Project-Euler-028/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Project-Euler-026
+          Project-Euler-028
         
       </div>
     </a>
   
   
-    <a href="../../09/Project-Euler-025/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Project-Euler-025</div>
+    <a href="../Project-Euler-026/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Project-Euler-026</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -549,14 +549,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">p5js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">perceptron</a>
               </li>
              
@@ -566,6 +558,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">deep learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">p5js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,7 +581,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">dot</a>
+                <a href="javascript:void(0)" class="js-tag color3">reading</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,7 +589,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">reading</a>
+                <a href="javascript:void(0)" class="js-tag color4">dot</a>
               </li>
             
             <div class="clearfix"></div>
