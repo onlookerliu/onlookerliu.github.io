@@ -4,6 +4,27 @@
 
     
   <url>
+    <loc>onlookerliu.github.io/2018/04/13/ML-Lectures-Perceptron/</loc>
+    <lastmod>2018-04-13T06:02:26.327Z</lastmod>
+    <data>
+        <display>
+        <title>ML-Lectures Perceptron</title>
+        <pubTime>2018-04-13T06:01:47.000Z</pubTime>
+        
+        <tag>machine learning</tag>
+         
+        <tag>deep learning</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>onlookerliu.github.io/2018/04/04/LeetCode-Note-023/</loc>
     <lastmod>2018-04-12T03:50:56.962Z</lastmod>
     <data>
@@ -708,9 +729,9 @@
         <title>Simple Perceptron using Processing</title>
         <pubTime>2018-02-25T16:22:03.000Z</pubTime>
         
-        <tag>machine learning</tag>
-         
         <tag>Java</tag>
+         
+        <tag>machine learning</tag>
          
         <tag>processing</tag>
          
@@ -877,11 +898,11 @@
         <title>Assignment 1 of Advanced Computational Method</title>
         <pubTime>2017-10-30T15:59:42.000Z</pubTime>
         
-        <tag>julia</tag>
-         
         <tag>statistics</tag>
          
         <tag>computational method</tag>
+         
+        <tag>julia</tag>
          
          
            

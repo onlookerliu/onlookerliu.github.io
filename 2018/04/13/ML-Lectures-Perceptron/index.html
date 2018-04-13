@@ -6,18 +6,54 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="onlookerliu.github.io">
-  <title>Code@浮生记</title>
+  <title>ML-Lectures Perceptron | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Life is beautiful!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Code@浮生记">
-<meta property="og:url" content="onlookerliu.github.io/index.html">
+  <meta name="description" content="从感知机到简单神经网络近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。 在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。 0. 什么是感知机？感知机是二分类的线性">
+<meta name="keywords" content="machine learning,deep learning,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ML-Lectures Perceptron">
+<meta property="og:url" content="onlookerliu.github.io/2018/04/13/ML-Lectures-Perceptron/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="Life is beautiful!">
+<meta property="og:description" content="从感知机到简单神经网络近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。 在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。 0. 什么是感知机？感知机是二分类的线性">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/perceptron-2.1.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/seperating.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/640.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/svm.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/large_margin_intuition.jpg">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/noNorm.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/hasNorm.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/update-1.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/update-2.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/tune.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/perceptron-2.2.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/alg.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/iris_1.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/iris_2.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/10/neuron.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/10/neuron_model.jpeg">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/10/linearly-separable.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/AND_OR_1.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/AND_OR_2.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/AND_OR_3.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/11/xor_0.png?w=666&h=240">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/11/xor_11.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/xor_2.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/feed_forward.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/11/xor_3.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/xor_41.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/xor_6.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/mlp2_2.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/mlp2_mnist_vis.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/mlp2_model.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/mlp2_loss.png">
+<meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/mlp2_accuracy.png">
+<meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/noLinearSep.png">
+<meta property="og:updated_time" content="2018-04-13T06:02:26.327Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code@浮生记">
-<meta name="twitter:description" content="Life is beautiful!">
+<meta name="twitter:title" content="ML-Lectures Perceptron">
+<meta name="twitter:description" content="从感知机到简单神经网络近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。 在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。 0. 什么是感知机？感知机是二分类的线性">
+<meta name="twitter:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/perceptron-2.1.png">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -56,11 +92,11 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="index.html">主页</a></li>
+				<li><a href="../../../../index.html">主页</a></li>
 	        
-				<li><a href="/tags/life/">生活</a></li>
+				<li><a href="../../../../tags/life/">生活</a></li>
 	        
-				<li><a href="/tags/reading/">读书</a></li>
+				<li><a href="../../../../tags/reading/">读书</a></li>
 	        
 			</ul>
 		</nav>
@@ -92,7 +128,7 @@
 		        
 					<a class="qq" target="_blank" href="mailto:2237595948@qq.com" title="qq"><i class="icon-qq"></i></a>
 		        
-					<a class="weixin" target="_blank" href="onlookerliu" title="weixin"><i class="icon-weixin"></i></a>
+					<a class="weixin" target="_blank" href="../../../../onlookerliu" title="weixin"><i class="icon-weixin"></i></a>
 		        
 					<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/43b0ad7b3696" title="jianshu"><i class="icon-jianshu"></i></a>
 		        
@@ -143,7 +179,7 @@
 			        
 						<a class="qq" target="_blank" href="mailto:2237595948@qq.com" title="qq"><i class="icon-qq"></i></a>
 			        
-						<a class="weixin" target="_blank" href="onlookerliu" title="weixin"><i class="icon-weixin"></i></a>
+						<a class="weixin" target="_blank" href="../../../../onlookerliu" title="weixin"><i class="icon-weixin"></i></a>
 			        
 						<a class="jianshu" target="_blank" href="https://www.jianshu.com/u/43b0ad7b3696" title="jianshu"><i class="icon-jianshu"></i></a>
 			        
@@ -156,11 +192,11 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="index.html">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="../../../../index.html">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/life/">生活</a></li>
+					<li style="width: 33.333333333333336%"><a href="../../../../tags/life/">生活</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/reading/">读书</a></li>
+					<li style="width: 33.333333333333336%"><a href="../../../../tags/reading/">读书</a></li>
 		        
 				</ul>
 			</nav>
@@ -175,21 +211,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-ML-Lectures-Perceptron" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-ML-Lectures-Perceptron" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/04/13/ML-Lectures-Perceptron/">ML-Lectures Perceptron</a>
+    <h1 class="article-title" itemprop="name">
+      ML-Lectures Perceptron
     </h1>
   
 
         
-        <a href="2018/04/13/ML-Lectures-Perceptron/" class="archive-article-date">
+        <a href="" class="archive-article-date">
   	<time datetime="2018-04-13T06:01:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-13</time>
 </a>
         
@@ -887,6 +921,37 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果～<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oxyywddt8.bkt.clouddn.com/qrcode/ali-qrcode.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://oxyywddt8.bkt.clouddn.com/qrcode/Wechat.jpeg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -913,16 +978,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/04/13/ML-Lectures-Perceptron/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:onlookerliu.github.io/2018/04/13/ML-Lectures-Perceptron/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="../Project-Euler-029/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Project-Euler-029</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -937,427 +1061,52 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Project-Euler-029" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/04/13/Project-Euler-029/">Project-Euler-029</a>
-    </h1>
-  
-
-        
-        <a href="2018/04/13/Project-Euler-029/" class="archive-article-date">
-  	<time datetime="2018-04-12T16:47:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>Consider all integer combinations of $a^b$ for $2 \leq a \leq 5$ and $2 \leq b \leq 5$:</p>
-<p>$$\begin{aligned}<br>&amp; 2^2 = 4\text{, } 2^3 = 8\text{, } 2^4 = 16\text{, } 2^5 = 32 \<br>&amp; 3^2 = 9\text{, } 3^3 = 27\text{, } 3^4 = 81\text{, } 3^5 = 243 \<br>&amp; 4^2 = 16\text{, } 4^3 = 64\text{, } 4^4 = 256\text{, } 4^5 = 1024 \<br>&amp; 5^2 = 25\text{, } 5^3 = 125\text{, } 5^4 = 625\text{, } 5^5 = 3125<br>\end{aligned}$$</p>
-<p>If they are then placed in numerical order, with any repeats removed, we<br>get the following sequence of 15 distinct terms:</p>
-<p>$$4\text{, } 8\text{, } 9\text{, } 16\text{, } 25\text{, } 27\text{, } 32\text{, } 64\text{, } 81\text{, } 125\text{, } 243\text{, } 256\text{, } 625\text{, } 1024\text{, } 3125$$</p>
-<p>How many distinct terms are in the sequence generated by $a^b$ for<br>$2 \leq a \leq 100$ and $2 \leq b \leq 100$?</p>
-        
-          <a class="article-more-a" href="2018/04/13/Project-Euler-029/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/04/13/Project-Euler-029/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#从感知机到简单神经网络"><span class="toc-number">1.</span> <span class="toc-text">从感知机到简单神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-什么是感知机？"><span class="toc-number">1.1.</span> <span class="toc-text">0. 什么是感知机？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-感知机模型"><span class="toc-number">1.2.</span> <span class="toc-text">1. 感知机模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-感知机学习策略"><span class="toc-number">1.3.</span> <span class="toc-text">2. 感知机学习策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-感知机学习算法"><span class="toc-number">1.4.</span> <span class="toc-text">3. 感知机学习算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-感知机学习算法的原始形式"><span class="toc-number">1.4.1.</span> <span class="toc-text">3.1 感知机学习算法的原始形式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Algorithm-1"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">Algorithm 1:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-算法收敛性"><span class="toc-number">1.4.2.</span> <span class="toc-text">3.2 算法收敛性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-感知机学习算法的对偶形式"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.3 感知机学习算法的对偶形式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Algorithm-2"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">Algorithm 2:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-感知机学习算法应用实例"><span class="toc-number">1.5.</span> <span class="toc-text">4. 感知机学习算法应用实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-鸢尾花数据集分类"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.1. 鸢尾花数据集分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#python源码实现感知机"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">python源码实现感知机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用sklearn实现感知机方法"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">利用sklearn实现感知机方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-从感知机到人工神经网络ANN"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.2. 从感知机到人工神经网络ANN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-单层感知机求解AND-OR问题"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.3. 单层感知机求解AND/OR问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原始解法"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">原始解法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用TensorFlow求解single-perceptron"><span class="toc-number">1.5.3.2.</span> <span class="toc-text">利用TensorFlow求解single-perceptron</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多层感知机求解XOR问题"><span class="toc-number">1.5.3.3.</span> <span class="toc-text">多层感知机求解XOR问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-利用多层感知机训练MNIST数据集"><span class="toc-number">1.5.4.</span> <span class="toc-text">4.4. 利用多层感知机训练MNIST数据集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Exercise"><span class="toc-number">1.6.</span> <span class="toc-text">5. Exercise:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Reference"><span class="toc-number">1.7.</span> <span class="toc-text">6. Reference</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-Project-Euler-028" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/04/12/Project-Euler-028/">Project-Euler-028</a>
-    </h1>
-  
-
-        
-        <a href="2018/04/12/Project-Euler-028/" class="archive-article-date">
-  	<time datetime="2018-04-11T16:43:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:</p>
-<pre><code>21 22 23 24 25
-20  7  8  9 10
-19  6  1  2 11
-18  5  4  3 12
-17 16 15 14 13
-</code></pre><p>It can be verified that the sum of the numbers on the diagonals is 101.</p>
-<p>What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?</p>
-        
-          <a class="article-more-a" href="2018/04/12/Project-Euler-028/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/04/12/Project-Euler-028/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Project-Euler-027" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/04/11/Project-Euler-027/">Project-Euler-027</a>
-    </h1>
-  
-
-        
-        <a href="2018/04/11/Project-Euler-027/" class="archive-article-date">
-  	<time datetime="2018-04-11T00:38:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>Euler published the remarkable quadratic formula:</p>
-<p>$$<br>n^2 + n + 41<br>$$</p>
-<p>It turns out that the formula will produce 40 primes for the consecutive values n = 0 to 39. However, when n = 40, $40^2 + 40 + 41 = 40(40 + 1) + 41$ is divisible by 41, and certainly when n = 41, $41^2 + 41 + 41$ is clearly divisible by 41.</p>
-<p>Using computers, the incredible formula  $n^2 - 79n + 1601$ was discovered, which produces 80 primes for the consecutive values n = 0 to 79. The product of the coefficients, 79 and 1601, is 126479.</p>
-<p>Considering quadratics of the form:</p>
-<p>$$<br>n^2 + an + b, \text{ where } |a| \lt 1000 \text{ and } |b| \lt 1000<br>$$</p>
-<p>Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.</p>
-        
-          <a class="article-more-a" href="2018/04/11/Project-Euler-027/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/04/11/Project-Euler-027/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Project-Euler-026" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/04/11/Project-Euler-026/">Project-Euler-026</a>
-    </h1>
-  
-
-        
-        <a href="2018/04/11/Project-Euler-026/" class="archive-article-date">
-  	<time datetime="2018-04-10T16:50:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>A unit fraction contains 1 in the numerator. The decimal representation of the unit fractions with denominators 2 to 10 are given:</p>
-<p>$$<br>\begin{aligned}<br>\frac{1}{2}&amp;=0.5 \\<br>\frac{1}{3}&amp;=0.\overline{3} \\<br>\frac{1}{4}&amp;=0.25 \\<br>\frac{1}{5}&amp;=0.2 \\<br>\frac{1}{6}&amp;=0.1\overline{6} \\<br>\frac{1}{7}&amp;=0.\overline{142857} \\<br>\frac{1}{8}&amp;=0.125 \\<br>\frac{1}{9}&amp;=0.\overline{1} \\<br>\frac{1}{10}&amp;=0.1<br>\end{aligned}<br>$$</p>
-<p>Where $0.1\overline{6}$ means $0.1666…$, and has a 1-digit recurring cycle. It can be seen that $\frac{1}{7}$ has a 6-digit recurring cycle.</p>
-<p>Find the value of $d &lt; 1000$ for which $\frac{1}{d}$ contains the longest recurring cycle in its decimal fraction part.</p>
-        
-          <a class="article-more-a" href="2018/04/11/Project-Euler-026/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/04/11/Project-Euler-026/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Project-Euler-025" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/04/09/Project-Euler-025/">Project-Euler-025</a>
-    </h1>
-  
-
-        
-        <a href="2018/04/09/Project-Euler-025/" class="archive-article-date">
-  	<time datetime="2018-04-08T16:35:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>The Fibonacci sequence is defined by the recurrence relation:</p>
-<p>$$<br>F<em>n = F</em>{n-1} + F_{n-2} \text{ where } F_1 = 1 \text{ and } F_2 = 1<br>$$</p>
-<p>Hence the first 12 terms will be:</p>
-<p>$$<br>\begin{split}<br>F_1 &amp;= 1 \<br>F_2 &amp;= 1 \<br>F_3 &amp;= 2 \<br>F_4 &amp;= 3 \<br>F_5 &amp;= 5 \<br>F_6 &amp;= 8 \<br>F_7 &amp;= 13 \<br>F_8 &amp;= 21 \<br>F<em>9 &amp;= 34 \<br>F</em>{10} &amp;= 55 \<br>F<em>{11} &amp;= 89 \<br>F</em>{12} &amp;= 144<br>\end{split}<br>$$</p>
-<p>The 12th term, $F_{12}$, is the first term to contain three digits.</p>
-<p>What is the first term in the Fibonacci sequence to contain 1000 digits?</p>
-        
-          <a class="article-more-a" href="2018/04/09/Project-Euler-025/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/04/09/Project-Euler-025/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ML-Lectures-Perceptron" data-title="ML-Lectures Perceptron" data-url="onlookerliu.github.io"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><a class="page-number" href="page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="page/13/">13</a><a class="extend next" rel="next" href="page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1386,8 +1135,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
