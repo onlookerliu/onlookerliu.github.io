@@ -9,14 +9,14 @@
   <title>LeetCode Notes 024 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Excel Sheet Column NumberRelated to question Excel Sheet Column Title Given a column title as appear in an Excel sheet, return its corresponding column number. For example:1234567A -&amp;gt; 1B -&amp;gt; 2C -">
-<meta name="keywords" content="leetcode,javascript">
+<meta name="keywords" content="javascript,leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Notes 024">
 <meta property="og:url" content="onlookerliu.github.io/2018/04/05/LeetCode-Notes-024/index.html">
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Excel Sheet Column NumberRelated to question Excel Sheet Column Title Given a column title as appear in an Excel sheet, return its corresponding column number. For example:1234567A -&amp;gt; 1B -&amp;gt; 2C -">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-13T17:49:53.584Z">
+<meta property="og:updated_time" content="2018-04-13T18:04:08.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 024">
 <meta name="twitter:description" content="Excel Sheet Column NumberRelated to question Excel Sheet Column Title Given a column title as appear in an Excel sheet, return its corresponding column number. For example:1234567A -&amp;gt; 1B -&amp;gt; 2C -">
@@ -200,6 +200,7 @@
         <h3 id="Excel-Sheet-Column-Number"><a href="#Excel-Sheet-Column-Number" class="headerlink" title="Excel Sheet Column Number"></a>Excel Sheet Column Number</h3><p>Related to question Excel <a href="https://leetcode.com/problems/excel-sheet-column-title/" target="_blank" rel="noopener">Sheet Column Title</a></p>
 <p>Given a column title as appear in an Excel sheet, return its corresponding column number.</p>
 <p>For example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A -&gt; 1</span><br><span class="line">B -&gt; 2</span><br><span class="line">C -&gt; 3</span><br><span class="line">...</span><br><span class="line">Z -&gt; 26</span><br><span class="line">AA -&gt; 27</span><br><span class="line">AB -&gt; 28</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> titleToNumber = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = s.split(<span class="string">''</span>).reverse();</span><br><span class="line">  s = a.join(<span class="string">''</span>);</span><br><span class="line">  <span class="keyword">var</span> ans = a.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">pre, item, index</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> pre + <span class="built_in">Math</span>.pow(<span class="number">26</span>, index) * (s.charCodeAt(index) - <span class="number">64</span>);</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Excel-Sheet-Column-Title"><a href="#Excel-Sheet-Column-Title" class="headerlink" title="Excel Sheet Column Title"></a>Excel Sheet Column Title</h3><p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
 <p>For example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1 -&gt; A</span><br><span class="line">2 -&gt; B</span><br><span class="line">3 -&gt; C</span><br><span class="line">...</span><br><span class="line">26 -&gt; Z</span><br><span class="line">27 -&gt; AA</span><br><span class="line">28 -&gt; AB</span><br></pre></td></tr></table></figure></p>
@@ -261,11 +262,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -519,11 +520,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">r</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,11 +536,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,10 +564,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">euler</a>
               </li>
              
@@ -575,7 +572,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">reading</a>
+                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,6 +581,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">reading</a>
               </li>
              
               <li class="article-tag-list-item">
