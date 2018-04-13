@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>ML-Lectures Perceptron | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="从感知机到简单神经网络近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。 在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。 0. 什么是感知机？感知机是二分类的线性">
+  <meta name="description" content="从感知机到简单神经网络近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。 在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。">
 <meta name="keywords" content="machine learning,deep learning,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ML-Lectures Perceptron">
 <meta property="og:url" content="onlookerliu.github.io/2018/04/13/ML-Lectures-Perceptron/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="从感知机到简单神经网络近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。 在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。 0. 什么是感知机？感知机是二分类的线性">
+<meta property="og:description" content="从感知机到简单神经网络近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。 在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/perceptron-2.1.png">
 <meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/seperating.png">
@@ -50,10 +50,10 @@
 <meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/mlp2_loss.png">
 <meta property="og:image" content="https://nasirml.files.wordpress.com/2017/12/mlp2_accuracy.png">
 <meta property="og:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/noLinearSep.png">
-<meta property="og:updated_time" content="2018-04-13T09:54:00.152Z">
+<meta property="og:updated_time" content="2018-04-13T17:04:48.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Lectures Perceptron">
-<meta name="twitter:description" content="从感知机到简单神经网络近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。 在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。 0. 什么是感知机？感知机是二分类的线性">
+<meta name="twitter:description" content="从感知机到简单神经网络近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。 在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。">
 <meta name="twitter:image" content="http://p6xgwpfbb.bkt.clouddn.com/perceptron/perceptron-2.1.png">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
@@ -234,6 +234,7 @@
       
         <h1 id="从感知机到简单神经网络"><a href="#从感知机到简单神经网络" class="headerlink" title="从感知机到简单神经网络"></a>从感知机到简单神经网络</h1><p>近年来，人工神经网络在深度学习的推动下获得了关注。什么是人造神经网络，它是由什么构成的？我想我们可能需要从感知器开始学起。</p>
 <p>在这个讲座中，我们将严格推导感知机学习算法及其对偶理论，掌握一般的人工神经网络，并对单层甚至多层感知器进行编码实现。在几个实战例子中，我们采用人工神经元的最基本版本——感知器，来在超平面上对我们的数据集进行分类。</p>
+<a id="more"></a>
 <h2 id="0-什么是感知机？"><a href="#0-什么是感知机？" class="headerlink" title="0. 什么是感知机？"></a>0. 什么是感知机？</h2><p>感知机是<strong>二分类</strong>的线性分类模型，输入为实例的特征向量，输出为实例的类别（取+1和-1）。感知机对应于输入空间中<strong>将实例划分为两类</strong>的分离超平面。感知机属于判别模型(classifier)。</p>
 <p>感知机旨在求出该超平面，为求得超平面导入了<strong>基于误分类的损失函数</strong>，利用<strong>梯度下降法</strong>对损失函数进行最优化。</p>
 <h2 id="1-感知机模型"><a href="#1-感知机模型" class="headerlink" title="1. 感知机模型"></a>1. 感知机模型</h2><p>假设输入空间（特征向量）是 $\mathcal{X} \subseteq \mathbb{R}^n$，输出空间为 $\mathcal{Y} = {-1，+1}$. 输入 $X$ 表示实例的特征向量，对应于输入空间的点，输出 $y\in\mathcal{Y}$ 表示实例的类别，则由输入空间到输出空间的表达形式为：</p>
@@ -1287,11 +1288,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">reading</a>
+                <a href="javascript:void(0)" class="js-tag color1">processing</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">processing</a>
+                <a href="javascript:void(0)" class="js-tag color3">reading</a>
               </li>
              
               <li class="article-tag-list-item">
