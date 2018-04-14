@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="Find All Numbers Disappeared in an ArrayGiven an array of integers where $1 ≤ a[i] ≤ n$ (n = size of array), some elements appear twice and others appear once. Find all the elements of $[1, n]$ inclus">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T17:53:37.569Z">
+<meta property="og:updated_time" content="2018-04-14T17:59:28.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Notes 025">
 <meta name="twitter:description" content="Find All Numbers Disappeared in an ArrayGiven an array of integers where $1 ≤ a[i] ≤ n$ (n = size of array), some elements appear twice and others appear once. Find all the elements of $[1, n]$ inclus">
@@ -200,6 +200,7 @@
         <h3 id="Find-All-Numbers-Disappeared-in-an-Array"><a href="#Find-All-Numbers-Disappeared-in-an-Array" class="headerlink" title="Find All Numbers Disappeared in an Array"></a>Find All Numbers Disappeared in an Array</h3><p>Given an array of integers where $1 ≤ a[i] ≤ n$ (n = size of array), some elements appear twice and others appear once.</p>
 <p>Find all the elements of $[1, n]$ inclusive that do not appear in this array.</p>
 <p>Could you do it without extra space and in $O(n)$ runtime? You may assume the returned list does not count as extra space.</p>
+<a id="more"></a>
 <p><strong>Example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">[4,3,2,7,8,2,3,1]</span><br><span class="line"></span><br><span class="line">Output:</span><br><span class="line">[5,6]</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number[]&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> findDisappearedNumbers = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> len = nums.length;</span><br><span class="line">  <span class="keyword">let</span> hash = &#123;&#125;;</span><br><span class="line">  <span class="keyword">let</span> ans = [];</span><br><span class="line"></span><br><span class="line">  nums.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    hash[item] = <span class="literal">true</span>;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= len; i++)</span><br><span class="line">    !hash[i] &amp;&amp; (ans.push(i));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="Find-Bottom-Left-Tree-Value"><a href="#Find-Bottom-Left-Tree-Value" class="headerlink" title="Find Bottom Left Tree Value"></a>Find Bottom Left Tree Value</h3><p>Given a binary tree, find the leftmost value in the last row of the tree.</p>
@@ -528,11 +529,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">r</a>
+                <a href="javascript:void(0)" class="js-tag color1">julia</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">julia</a>
+                <a href="javascript:void(0)" class="js-tag color2">r</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,15 +585,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">processing</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">reading</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">processing</a>
               </li>
              
               <li class="article-tag-list-item">
