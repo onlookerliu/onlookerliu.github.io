@@ -177,31 +177,31 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Project-Euler-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Numerical-Examples-in-Java" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="../../2018/02/11/Project-Euler-004/">Project-Euler-004</a>
+      <a class="article-title" href="../../2017/04/04/Numerical-Examples-in-Java/">Numerical Examples in Java</a>
     </h1>
   
 
         
-        <a href="../../2018/02/11/Project-Euler-004/" class="archive-article-date">
-  	<time datetime="2018-02-11T14:37:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-11</time>
+        <a href="../../2017/04/04/Numerical-Examples-in-Java/" class="archive-article-date">
+  	<time datetime="2017-04-04T04:10:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>A palindromic number reads the same both ways. The largest palindrome<br>made from the product of two 2-digit numbers is $9009 = 91 \times 99$.</p>
-<p>Find the largest palindrome made from the product of two 3-digit numbers.</p>
-        
-          <a class="article-more-a" href="../../2018/02/11/Project-Euler-004/#more">more >></a>
-        
+        <p>Some algorithms from the textbook Numerical Analysis by Richard L. Burden and J.Douglas Fairs (9th ed)..</p>
+<p><strong>DividedDifference.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Langrange;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DividedDifference</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">dividedDiffHelp</span><span class="params">(<span class="keyword">double</span>[] x, <span class="keyword">double</span>[] y, <span class="keyword">int</span> n, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//compute the nth divided difference</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (y[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (dividedDiffHelp(x, y, n - <span class="number">1</span>, i + <span class="number">1</span>) - dividedDiffHelp(x, y, n - <span class="number">1</span>, i)) / (x[i + n] - x[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span>[] dividedDiff(<span class="keyword">double</span>[] x, <span class="keyword">double</span>[] y) &#123;</span><br><span class="line">        <span class="comment">//compute divided diff needed for each coefficient</span></span><br><span class="line">        <span class="keyword">double</span>[] coef = <span class="keyword">new</span> <span class="keyword">double</span>[x.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x.length; i++) &#123;</span><br><span class="line">            coef[i] = dividedDiffHelp(x, y, i, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> coef;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">dividedOut</span><span class="params">(<span class="keyword">double</span>[] x, <span class="keyword">double</span>[] y)</span> </span>&#123;</span><br><span class="line">        String out = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">double</span>[] coef = dividedDiff(x, y);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; coef.length; i++) &#123;</span><br><span class="line">            String temp = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">                temp = <span class="string">""</span> + coef[<span class="number">0</span>];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                    temp = temp + <span class="string">"(x-"</span> + x[j] + <span class="string">")"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                temp = coef[i] + temp;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i != coef.length - <span class="number">1</span>) &#123;</span><br><span class="line">                temp = temp + <span class="string">"+"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            out = out + temp;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> out;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">printTable</span><span class="params">(<span class="keyword">double</span>[] x, <span class="keyword">double</span>[] y)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//print line by line</span></span><br><span class="line">        <span class="comment">// number of columns will be the number of points -1+2</span></span><br><span class="line">        String out = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> row = <span class="number">0</span>; row &lt; x.length; row++) &#123;</span><br><span class="line">            out = out + row + <span class="string">"  "</span> + x[row] + <span class="string">"\t"</span> + y[row] + <span class="string">"\t"</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> col = <span class="number">1</span>; col &lt;= row; col++) &#123;</span><br><span class="line">                out = out + dividedDiffHelp(x, y, col, row - col) + <span class="string">"\t"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//new row</span></span><br><span class="line">            out = out + <span class="string">"\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> out;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">interpolate</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span>[] coef, <span class="keyword">double</span>[] data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; coef.length; i++) &#123;</span><br><span class="line">            <span class="keyword">double</span> product = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                product = product * (x - data[j]);</span><br><span class="line">            &#125;</span><br><span class="line">            y = y + product * coef[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//PROBLEM 8</span></span><br><span class="line">        <span class="comment">//test dividedDiff</span></span><br><span class="line">        <span class="keyword">double</span>[] x = &#123; <span class="number">0</span>, <span class="number">0.1</span>, <span class="number">0.3</span>, <span class="number">0.6</span>, <span class="number">1.0</span>, <span class="number">1.1</span> &#125;;</span><br><span class="line">        <span class="keyword">double</span>[] y = &#123; -<span class="number">6</span>, -<span class="number">5.89483</span>, -<span class="number">5.65014</span>, -<span class="number">5.17788</span>, -<span class="number">4.28172</span>, -<span class="number">3.99583</span> &#125;;</span><br><span class="line">        <span class="comment">//System.out.println(dividedDiffHelp(x,y,4,0));</span></span><br><span class="line">        <span class="comment">//	double[] coef = dividedDiff(x,y);</span></span><br><span class="line">        <span class="comment">//System.out.println(Arrays.toString(coef));</span></span><br><span class="line">        System.out.println(dividedOut(x, y));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//PROBLEM 9</span></span><br><span class="line">        <span class="keyword">double</span>[] x9 = &#123; <span class="number">0</span>, <span class="number">0.4</span>, <span class="number">0.7</span> &#125;;</span><br><span class="line">        <span class="keyword">double</span>[] y9 = &#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">6</span> &#125;;</span><br><span class="line">        System.out.println(dividedOut(x9, y9));</span><br><span class="line">        System.out.println(printTable(x9, y9));</span><br><span class="line">        System.out.println(interpolate(<span class="number">0</span>, dividedDiff(x9, y9), x9));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>NaturalCubicSpline.java</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> CubicSpline;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NaturalCubicSpline</span> </span>&#123;</span><br><span class="line">    <span class="comment">//this class file will compute the natural cubic spline</span></span><br><span class="line">    <span class="comment">//we are interpolating over data array x with values y</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span>[][] fitSpline(<span class="keyword">double</span>[] x, <span class="keyword">double</span>[] y) &#123;</span><br><span class="line">        <span class="comment">//compute hi=xi+1-xi</span></span><br><span class="line">        <span class="keyword">double</span>[] h = <span class="keyword">new</span> <span class="keyword">double</span>[x.length - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; h.length; i++) &#123;</span><br><span class="line">            h[i] = x[i + <span class="number">1</span>] - x[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">double</span>[] a = <span class="keyword">new</span> <span class="keyword">double</span>[h.length];</span><br><span class="line">        <span class="comment">//a[0] left empty</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            a[i] = <span class="number">3</span> / h[i] * (y[i + <span class="number">1</span>] - y[i]) - <span class="number">3</span> / h[i - <span class="number">1</span>] * (y[i] - y[i - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//create extra arrays</span></span><br><span class="line">        <span class="keyword">double</span>[] l = <span class="keyword">new</span> <span class="keyword">double</span>[x.length];</span><br><span class="line">        <span class="keyword">double</span>[] u = <span class="keyword">new</span> <span class="keyword">double</span>[x.length];</span><br><span class="line">        <span class="keyword">double</span>[] z = <span class="keyword">new</span> <span class="keyword">double</span>[x.length];</span><br><span class="line">        l[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        z[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; x.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            l[i] = <span class="number">2</span> * (x[i + <span class="number">1</span>] - x[i - <span class="number">1</span>]) - h[i - <span class="number">1</span>] * u[i - <span class="number">1</span>];</span><br><span class="line">            u[i] = h[i] / l[i];</span><br><span class="line">            z[i] = (a[i] - h[i - <span class="number">1</span>] * z[i - <span class="number">1</span>]) / l[i];</span><br><span class="line">        &#125;</span><br><span class="line">        l[l.length - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        z[z.length - <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">double</span>[] c = <span class="keyword">new</span> <span class="keyword">double</span>[x.length];</span><br><span class="line">        c[c.length - <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span>[] b = <span class="keyword">new</span> <span class="keyword">double</span>[x.length - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">double</span>[] d = <span class="keyword">new</span> <span class="keyword">double</span>[x.length - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = x.length - <span class="number">2</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            c[j] = z[j] - u[j] * c[j + <span class="number">1</span>];</span><br><span class="line">            b[j] = (y[j + <span class="number">1</span>] - y[j]) / h[j] - h[j] * (c[j + <span class="number">1</span>] + <span class="number">2</span> * c[j]) / <span class="number">3</span>;</span><br><span class="line">            d[j] = (c[j + <span class="number">1</span>] - c[j]) / <span class="number">3</span> / h[j];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span>[][] coef = <span class="keyword">new</span> <span class="keyword">double</span>[x.length - <span class="number">1</span>][<span class="number">4</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; x.length - <span class="number">1</span>; j++) &#123;</span><br><span class="line">            coef[j][<span class="number">0</span>] = y[j];</span><br><span class="line">            coef[j][<span class="number">1</span>] = b[j];</span><br><span class="line">            coef[j][<span class="number">2</span>] = c[j];</span><br><span class="line">            coef[j][<span class="number">3</span>] = d[j];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> coef;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">interpolate</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span>[] coef, <span class="keyword">double</span> xdat)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> val = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; coef.length; i++) &#123;</span><br><span class="line">            val = val + coef[i] * Math.pow((x - xdat), i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span>[] x = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">        <span class="keyword">double</span>[] y = &#123; <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span> &#125;;</span><br><span class="line">        <span class="keyword">double</span>[][] coef = fitSpline(x, y);</span><br><span class="line">        System.out.println(Arrays.toString(coef[<span class="number">1</span>]));</span><br><span class="line">        System.out.println(interpolate((<span class="keyword">double</span>) <span class="number">2</span>, coef[<span class="number">0</span>], x[<span class="number">0</span>]));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Assignment numerical 7</span></span><br><span class="line">        <span class="keyword">double</span>[] years = &#123; <span class="number">1950</span>, <span class="number">1960</span>, <span class="number">1970</span>, <span class="number">1980</span>, <span class="number">1990</span>, <span class="number">2000</span> &#125;;</span><br><span class="line">        <span class="keyword">double</span>[] pop = &#123; <span class="number">151326</span>, <span class="number">179323</span>, <span class="number">203302</span>, <span class="number">226542</span>, <span class="number">249633</span>, <span class="number">281422</span> &#125;;</span><br><span class="line">        <span class="keyword">double</span>[][] coef2 = fitSpline(years, pop);</span><br><span class="line">        System.out.println(Arrays.toString(coef2[<span class="number">0</span>]));</span><br><span class="line">        System.out.println(interpolate(<span class="number">1940.0</span>, coef2[<span class="number">0</span>], years[<span class="number">0</span>]));</span><br><span class="line">        System.out.println(Arrays.toString(coef2[<span class="number">2</span>]));</span><br><span class="line">        System.out.println(interpolate(<span class="number">1975</span>, coef2[<span class="number">2</span>], years[<span class="number">2</span>]));</span><br><span class="line">        System.out.println(Arrays.toString(coef2[<span class="number">4</span>]));</span><br><span class="line">        System.out.println(interpolate(<span class="number">2020</span>, coef2[<span class="number">4</span>], years[<span class="number">4</span>]));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
 
       
@@ -214,11 +214,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -228,170 +224,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/02/11/Project-Euler-004/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Project-Euler-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2018/02/10/Project-Euler-003/">Project-Euler-003</a>
-    </h1>
-  
-
-        
-        <a href="../../2018/02/10/Project-Euler-003/" class="archive-article-date">
-  	<time datetime="2018-02-10T12:59:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p>The prime factors of 13195 are 5, 7, 13 and 29.</p>
-<p>What is the largest prime factor of the number 600851475143 ?</p>
-        
-          <a class="article-more-a" href="../../2018/02/10/Project-Euler-003/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/02/10/Project-Euler-003/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Project-Euler-002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../2018/02/09/Project-Euler-002/">Project-Euler-002</a>
-    </h1>
-  
-
-        
-        <a href="../../2018/02/09/Project-Euler-002/" class="archive-article-date">
-  	<time datetime="2018-02-09T12:42:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be:</p>
-<p>$$<br>1, 2, 3, 5, 8, 13, 21, 34, 55, 89, …<br>$$</p>
-<p>Find the sum of all the even-valued terms in the sequence which do not exceed four million.</p>
-        
-          <a class="article-more-a" href="../../2018/02/09/Project-Euler-002/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">euler</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">multilingual</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="../../2018/02/09/Project-Euler-002/">展开全文 >></a>
+          <a class="article-more-a" href="../../2017/04/04/Numerical-Examples-in-Java/">展开全文 >></a>
         </p>
       
 
@@ -423,7 +256,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="../13/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../12/">12</a><a class="page-number" href="../13/">13</a><span class="page-number current">14</span><a class="page-number" href="../15/">15</a><a class="page-number" href="../16/">16</a><span class="space">&hellip;</span><a class="page-number" href="../22/">22</a><a class="extend next" rel="next" href="../15/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="../13/">&laquo; Prev</a><a class="page-number" href="../../index.html">1</a><span class="space">&hellip;</span><a class="page-number" href="../12/">12</a><a class="page-number" href="../13/">13</a><span class="page-number current">14</span>
     </nav>
   
 
@@ -577,6 +410,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">perceptron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">machine learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">deep learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">statistic</a>
               </li>
              
@@ -589,15 +434,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">machine learning</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">processing</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">reading</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
             <div class="clearfix"></div>
@@ -653,7 +502,7 @@ MathJax.Hub.Queue(function() {
             </li>
           
             <li class="search-li">
-              <a href="http://jamesmwh.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>同学的博客</a>
+              <a href="http://jamesmwh.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>James MWH的博客</a>
             </li>
           
             <li class="search-li">
