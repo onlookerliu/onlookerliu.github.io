@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Code@浮生记">
 <meta property="og:description" content="这里指的遍历方法包括：map、reduce、reduceRight、forEach、filter、some、every 因为最近要进行了一些数据汇总，node版本已经是8.11.1了，所以直接写了个async/await的脚本。但是在对数组进行一些遍历操作时，发现有些遍历方法对Promise的反馈并不是我们想要的结果。  当然，有些严格来讲并不能算是遍历，比如说some，every这些的。但确实">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-07T08:42:52.734Z">
+<meta property="og:updated_time" content="2018-05-07T08:51:58.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Promise版本的数组遍历">
 <meta name="twitter:description" content="这里指的遍历方法包括：map、reduce、reduceRight、forEach、filter、some、every 因为最近要进行了一些数据汇总，node版本已经是8.11.1了，所以直接写了个async/await的脚本。但是在对数组进行一些遍历操作时，发现有些遍历方法对Promise的反馈并不是我们想要的结果。  当然，有些严格来讲并不能算是遍历，比如说some，every这些的。但确实">
@@ -202,6 +202,7 @@
 </blockquote>
 <p>当然，有些严格来讲并不能算是遍历，比如说some，every这些的。<br>但确实，这些都会根据我们数组的元素来进行多次的调用传入的回调。</p>
 <p>这些方法都是比较常见的，但是当你的回调函数是一个Promise时，一切都变了。</p>
+<a id="more"></a>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>async/await</code>为<code>Promise</code>的语法糖,文中会直接使用<code>async/await</code>替换<code>Promise</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = <span class="keyword">await</span> func()</span><br><span class="line"><span class="comment">// =&gt; 等价于</span></span><br><span class="line">func().then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// code here</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ======</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">func</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// =&gt; 等价与</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> resolve(<span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p><code>map</code>可以说是对<code>Promise</code>最友好的一个函数了。<br>我们都知道，<code>map</code>接收两个参数：</p>
@@ -620,11 +621,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">perceptron</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">perceptron</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,6 +637,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">euler</a>
               </li>
              
@@ -644,15 +649,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">reading</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
               </li>
              
               <li class="article-tag-list-item">

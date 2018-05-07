@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="onlookerliu.github.io">
   <title>Vue中的双向数据绑定 | Code@浮生记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 原理Vue的双线数据绑定的原理主要是通过Object对象的defineProperty属性，重写data的set和get函数来实现的，这里通过一个实例来说明。主要实现v-model，v-bind和v-click三个命令，其他命令也可以自行补充。 添加网上的一张图 2. 实现页面结构很简单，如下 123456&amp;lt;div id=&quot;app&quot;&amp;gt;    &amp;lt;form&amp;gt;      &amp;">
+  <meta name="description" content="1. 原理Vue的双线数据绑定的原理主要是通过Object对象的defineProperty属性，重写data的set和get函数来实现的，这里通过一个实例来说明。主要实现v-model，v-bind和v-click三个命令，其他命令也可以自行补充。">
 <meta name="keywords" content="javascript,vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue中的双向数据绑定">
 <meta property="og:url" content="onlookerliu.github.io/2018/05/03/Vue中的双向数据绑定/index.html">
 <meta property="og:site_name" content="Code@浮生记">
-<meta property="og:description" content="1. 原理Vue的双线数据绑定的原理主要是通过Object对象的defineProperty属性，重写data的set和get函数来实现的，这里通过一个实例来说明。主要实现v-model，v-bind和v-click三个命令，其他命令也可以自行补充。 添加网上的一张图 2. 实现页面结构很简单，如下 123456&amp;lt;div id=&quot;app&quot;&amp;gt;    &amp;lt;form&amp;gt;      &amp;">
+<meta property="og:description" content="1. 原理Vue的双线数据绑定的原理主要是通过Object对象的defineProperty属性，重写data的set和get函数来实现的，这里通过一个实例来说明。主要实现v-model，v-bind和v-click三个命令，其他命令也可以自行补充。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-07T07:04:24.350Z">
+<meta property="og:updated_time" content="2018-05-07T08:51:45.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue中的双向数据绑定">
-<meta name="twitter:description" content="1. 原理Vue的双线数据绑定的原理主要是通过Object对象的defineProperty属性，重写data的set和get函数来实现的，这里通过一个实例来说明。主要实现v-model，v-bind和v-click三个命令，其他命令也可以自行补充。 添加网上的一张图 2. 实现页面结构很简单，如下 123456&amp;lt;div id=&quot;app&quot;&amp;gt;    &amp;lt;form&amp;gt;      &amp;">
+<meta name="twitter:description" content="1. 原理Vue的双线数据绑定的原理主要是通过Object对象的defineProperty属性，重写data的set和get函数来实现的，这里通过一个实例来说明。主要实现v-model，v-bind和v-click三个命令，其他命令也可以自行补充。">
   
     <link rel="alternative" href="/atom.xml" title="Code@浮生记" type="application/atom+xml">
   
@@ -198,6 +198,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-原理"><a href="#1-原理" class="headerlink" title="1. 原理"></a>1. 原理</h2><p>Vue的双线数据绑定的原理主要是通过<code>Object</code>对象的<code>defineProperty</code>属性，重写<code>data</code>的<code>set</code>和<code>get</code>函数来实现的，这里通过一个实例来说明。主要实现v-model，v-bind和v-click三个命令，其他命令也可以自行补充。</p>
+<a id="more"></a>
 <p>添加网上的一张图</p>
 <h2 id="2-实现"><a href="#2-实现" class="headerlink" title="2. 实现"></a>2. 实现</h2><p>页面结构很简单，如下</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"number"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">v-click</span>=<span class="string">"increment"</span>&gt;</span>增加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -553,11 +554,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">perceptron</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">perceptron</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,6 +570,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">euler</a>
               </li>
              
@@ -577,15 +582,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">statistic</a>
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">reading</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
               </li>
              
               <li class="article-tag-list-item">
